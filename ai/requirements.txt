@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+sentence-transformers
+chromadb
