@@ -13,34 +13,40 @@ export const Navbar = () => {
     return (
         <div className="flex flex-col pt-4 sm:pt-8 items-center min-h-screen bg-[#FAF9F6]">
             <div className="w-full max-w-6xl px-4 sm:px-6 mx-auto">
-                <div className="rounded-2xl border border-gray-200 bg-white shadow-sm">
-                    <div className="flex flex-col sm:flex-row items-center p-4 sm:p-6 space-y-4 sm:space-y-0 sm:justify-between">
+                <div className="rounded-2xl border border-gray-200/60 bg-white/95 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl hover:border-gray-300">
+                    <div className="flex flex-col sm:flex-row items-center p-5 sm:p-7 space-y-4 sm:space-y-0 sm:justify-between relative">
                         {/* Logo and Title Section */}
-                        <div className="flex items-center space-x-3 sm:space-x-4">
-                            <img 
-                                src={vinayaLogo} 
-                                alt="Vinaya Journal Logo" 
-                                className="h-12 sm:h-16 w-auto"
-                            />
+                        <div className="flex items-center space-x-4 sm:space-x-5">
+                            <div className="relative">
+                                <img 
+                                    src={vinayaLogo} 
+                                    alt="Vinaya Journal Logo" 
+                                    className="h-14 sm:h-18 w-auto transform transition-transform duration-300 hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-full blur-2xl"></div>
+                            </div>
                             <div className="flex flex-col">
-                                <h1 className="font-serif text-lg sm:text-xl font-semibold tracking-wide text-gray-900">
-                                    VINAYA JOURNAL
+                                <h1 className=" text-xl sm:text-2xl font-semibold tracking-wide text-gray-900">
+                                    VINAYA 
                                 </h1>
-                                <p className="text-xs sm:text-sm text-gray-500">
-                                    Your intelligent writing companion
+                                <p className="text-sm sm:text-base text-gray-500/90 font-medium italic tracking-wide">
+                                    <span className="text-purple-600 font-semibold">yours truly</span>,  intelligent journaling companion
                                 </p>
                             </div>
                         </div>
 
                         {/* Download Buttons Section */}
-                        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 w-full sm:w-auto">
-                            <button className="w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium flex items-center justify-center gap-2">
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                            <button className="w-full sm:w-auto px-6 py-2.5 bg-gray-900 text-white rounded-xl hover:bg-gray-800 active:bg-gray-950 transition-all duration-200 font-medium flex items-center justify-center gap-3 group">
+                                <svg className="w-5 h-5 transform transition-transform group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                                 </svg>
-                                Download for {currentOS}
+                                <span className="relative">
+                                    Download for {currentOS}
+                                    <span className="absolute inset-x-0 -bottom-px h-px bg-white/50 transform origin-left transition-transform group-hover:scale-x-100 scale-x-0"></span>
+                                </span>
                             </button>
-                            <button className="w-full sm:w-auto px-4 py-2 sm:py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <button className="w-full sm:w-auto px-5 py-2.5 border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 hover:border-gray-300 active:bg-gray-100 transition-all duration-200 font-medium">
                                 All downloads
                             </button>
                         </div>
