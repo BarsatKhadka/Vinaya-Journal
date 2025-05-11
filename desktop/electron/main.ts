@@ -1,10 +1,20 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow , Menu } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+const menuTemplate = [
+  {
+    label: 'Quit',
+    accelerator: 'Command+Q',
+    click: () => {
+      app.quit()
+    },
+  }
+]
 
 // The built directory structure
 //
@@ -27,6 +37,8 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 
 let win: BrowserWindow | null
 
 function createWindow() {
+  const menu = Menu.buildFromTemplate(menuTemplate)
+  Menu.setApplicationMenu(menu)
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
