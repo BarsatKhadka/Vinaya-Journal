@@ -1,4 +1,4 @@
-import { BeforeLoginHome } from "./HomePage/BeforeLoginHome"
+import { BeforeLoginHome } from "./HomePage/BeforeLogin/BeforeLoginHome"
 
 function App() {
 

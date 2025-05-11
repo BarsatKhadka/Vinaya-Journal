@@ -26,7 +26,7 @@ export const Navbar = () => {
                                 <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-full blur-2xl"></div>
                             </div>
                             <div className="flex flex-col">
-                                <h1 className="text-xl sm:text-2xl font-serif tracking-wide text-gray-900" style={{ fontFamily: 'Times New Roman, serif' }}>
+                                <h1 className="text-xl sm:text-2xl font-serif tracking-wide text-gray-900 bg-gradient-to-r from-teal-700 to-slate-700 bg-clip-text text-transparent" style={{ fontFamily: 'Times New Roman, serif' }}>
                                     VINAYA 
                                 </h1>
                                 <p className="text-sm sm:text-base text-gray-500/90 font-serif italic tracking-wide">
