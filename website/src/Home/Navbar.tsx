@@ -2,7 +2,7 @@ import vinayaLogo from '../assets/vinayaJournal-removebg.png';
 
 export const Navbar = () => {
     const getOS = () => {
-        const platform = window.navigator.platform.toLowerCase();
+        const platform = window.navigator.userAgent.toLowerCase();
         if (platform.includes('mac')) return 'macOS';
         if (platform.includes('linux')) return 'Linux';
         return 'Windows';
