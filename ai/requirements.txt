@@ -2,3 +2,6 @@ fastapi
 uvicorn
 sentence-transformers
 chromadb
+ollama
+python-dotenv
+requests
