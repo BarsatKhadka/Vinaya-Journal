@@ -1,9 +1,11 @@
+import { BeforeLoginHome } from "./HomePage/BeforeLoginHome"
+
 function App() {
 
 
   return (
     <>
-     <div>Vinaya</div>
+     <BeforeLoginHome/>
     </>
   )
 }
