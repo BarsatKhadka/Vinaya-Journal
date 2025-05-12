@@ -1,6 +1,7 @@
 import { TopBar } from "./TopBar"
 import { motion } from "framer-motion"
 import fallingLeaf from "../../assets/falling_leaf.png"
+import floralLine from "../../assets/floralLine.png"
 
 
 export const BeforeLoginHome = () => {
@@ -10,7 +11,7 @@ export const BeforeLoginHome = () => {
 
             {/* Welcome to Vinaya Journal */}
             <main className="container mx-auto px-4 relative">
-                <div className="flex flex-col items-center justify-center min-h-[20vh] text-center relative">
+                <div className="flex flex-col items-center justify-center lg:min-h-[30vh] text-center relative">
                     <motion.h1 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -30,7 +31,7 @@ export const BeforeLoginHome = () => {
                             ease: "easeOut",
                             delay: 0.2 
                         }}
-                        className="text-lg md:text-sm lg:text-xl text-slate-600 font-light tracking-wide"
+                        className="text-lg md:text-sm lg:text-xl text-slate-600 font-light tracking-wide "
                         style={{
                         fontFamily: '"Playfair Display", serif',
                         }}
@@ -38,8 +39,16 @@ export const BeforeLoginHome = () => {
                         your private local AI journaling app
                     </motion.p>
 
+                    {/* Floral Line */}
+                    <img
+                        src={floralLine}
+                        alt="Floral Line"
+                        className="w-32 md:w-32 lg:w-60 "
+                    />
+
                 </div>
             </main>
+            
 
             {/* Falling Leaf */}
             <img
