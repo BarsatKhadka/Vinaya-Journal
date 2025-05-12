@@ -6,11 +6,11 @@ import { FeatureCard } from "./FeatureCard"
 
 export const BeforeLoginHome = () => {
     return (
-        <>
+        <div className="min-h-screen w-full overflow-x-hidden bg-[#F7F4F0]">
             <TopBar />
 
             {/* Welcome to Vinaya Journal */}
-            <main className="container mx-auto px-4 relative">
+            <main className="container mx-auto px-4 relative pb-24">
                 <div className="flex flex-col items-center justify-center lg:min-h-[30vh] text-center relative">
                     <motion.h1 
                         initial={{ opacity: 0, y: 20 }}
@@ -51,22 +51,26 @@ export const BeforeLoginHome = () => {
                 {/* Feature Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                     <FeatureCard />
-                    {/* <FeatureCard />
-                    <FeatureCard /> */}
                 </div>
             </main>
 
-            {/* Falling Leaves */}
+            {/* Falling Leaves - Updated positioning */}
             <img
                 src={fallingLeaf}
                 alt="Falling Leaf"
-                className="absolute w-16 md:w-20 lg:w-50 top-1/2 right-40 lg:right-70 transform -translate-y-1/90 opacity-50"
+                className="fixed w-16 md:w-20 lg:w-24 
+                         top-1/3 right-[5%] md:right-[10%] lg:right-[15%] 
+                         transform -translate-y-1/2 opacity-50
+                         pointer-events-none select-none"
             />
             <img
                 src={fallingLeaf}
                 alt="Fallen Leaf"
-                className="absolute w-12 md:w-16 lg:w-40 bottom-10 right-100 lg:right-150 transform -translate-x-1/2 opacity-70"
+                className="fixed w-12 md:w-16 lg:w-20 
+                         bottom-[10%] right-[15%] md:right-[35%] lg:right-[35%] 
+                         transform -translate-x-1/2 opacity-70
+                         pointer-events-none select-none"
             />
-        </>
+        </div>
     )
 }
