@@ -21,6 +21,7 @@ export const BeforeLoginHome = () => {
                             Welcome to Vinaya
                         </span>
                     </motion.h1>
+
                     <motion.p 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -29,10 +30,14 @@ export const BeforeLoginHome = () => {
                             ease: "easeOut",
                             delay: 0.2 
                         }}
-                        className="text-lg md:text-sm lg:text-2xl text-slate-600 font-light tracking-wide"
+                        className="text-lg md:text-sm lg:text-xl text-slate-600 font-light tracking-wide"
+                        style={{
+                        fontFamily: '"Playfair Display", serif',
+                        }}
                     >
                         your private local AI journaling app
                     </motion.p>
+
                 </div>
             </main>
 
