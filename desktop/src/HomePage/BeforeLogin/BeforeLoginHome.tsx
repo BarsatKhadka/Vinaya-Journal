@@ -2,6 +2,7 @@ import { TopBar } from "./TopBar"
 import { motion } from "framer-motion"
 import fallingLeaf from "../../assets/falling_leaf.png"
 import floralLine from "../../assets/floralLine.png"
+import { FeatureCard } from "./FeatureCard"
 
 
 export const BeforeLoginHome = () => {
@@ -49,6 +50,13 @@ export const BeforeLoginHome = () => {
                 </div>
             </main>
             
+        {/* Feature Cards Grid */}
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8 lg:px-16 ">
+            <FeatureCard />
+            <FeatureCard/>
+            <FeatureCard/>
+        </div>
+            
 
             {/* Falling Leaf */}
             <img
@@ -63,6 +71,7 @@ export const BeforeLoginHome = () => {
                 alt="Fallen Leaf"
                 className="absolute w-12 md:w-16 lg:w-40 bottom-10 right-100 lg:right-150 transform -translate-x-1/2 opacity-70"
             />
+
         </>
     )
 }
