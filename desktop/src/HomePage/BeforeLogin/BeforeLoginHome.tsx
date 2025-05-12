@@ -2,6 +2,7 @@ import { TopBar } from "./TopBar"
 import { motion } from "framer-motion"
 import fallingLeaf from "../../assets/falling_leaf.png"
 
+
 export const BeforeLoginHome = () => {
     return (
         <>
@@ -39,7 +40,14 @@ export const BeforeLoginHome = () => {
             <img
                 src={fallingLeaf}
                 alt="Falling Leaf"
-                className="absolute w-16 md:w-20 lg:w-50 top-1/2 right-40 lg:right-70 transform -translate-y-1/2 opacity-50"
+                className="absolute w-16 md:w-20 lg:w-50 top-1/2 right-40 lg:right-70 transform -translate-y-1/90 opacity-50"
+            />
+
+            {/*Falling Leaf 2 */}
+            <img
+                src={fallingLeaf}
+                alt="Fallen Leaf"
+                className="absolute w-12 md:w-16 lg:w-40 bottom-10 right-100 lg:right-150 transform -translate-x-1/2 opacity-70"
             />
         </>
     )
