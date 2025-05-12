@@ -1,13 +1,14 @@
 import { TopBar } from "./TopBar"
 import { motion } from "framer-motion"
 
+
 export const BeforeLoginHome = () => {
     return (
         <>
             <TopBar />
 
-            {/* Welcome to Vinaya Journal*/}
-            <main className="container mx-auto px-4">
+            {/* Welcome to Vinaya Journal */}
+            <main className="container mx-auto px-4 relative">
                 <div className="flex flex-col items-center justify-center min-h-[20vh] text-center">
                     <motion.h1 
                         initial={{ opacity: 0, y: 20 }}
