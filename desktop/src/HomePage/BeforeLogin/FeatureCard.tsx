@@ -1,49 +1,34 @@
 interface Feature {
-    icon: string;
+    icon: any;
     title: string;
-    description: React.ReactNode;
+    mainText: string;
+    emphasisText: string;
 }
 
 const features: Feature[] = [
     {
         icon: "/icons/memory.png",
         title: "Local AI Memory",
-        description: (
-            <>
-                Vinaya surfaces your past entries using on-device ollama AI.<br />—
-                Nothing leaves your machine.
-            </>
-        )
+        mainText: "Vinaya surfaces your past entries using locally setup ollama AI.",
+        emphasisText: "Nothing leaves your machine."
     },
     {
         icon: "/icons/search.png",
         title: "Private RAG Semantic Search",
-        description: (
-            <>
-                Search journal entries with meaning-aware local AI.<br />—
-                No APIs. No tracking.
-            </>
-        )
+        mainText: "Search journal entries with meaning-aware local AI.",
+        emphasisText: "No APIs. No tracking."
     },
     {
         icon: "/icons/lock.png",
         title: "Zero Cloud Dependency",
-        description: (
-            <>
-                All data is stored locally and optionally encrypted.<br />—
-                Ultimate Privacy.
-            </>
-        )
+        mainText: "All data is stored locally and optionally encrypted.",
+        emphasisText: "Ultimate Privacy."
     },
     {
-        icon: "/icons/chart.png",
+        icon: "./s.d/s",
         title: "Insightful Mood Tracking",
-        description: (
-            <>
-                See how your tone, focus, and patterns evolve over time.<br />—
-                Gradually know thyself.
-            </>
-        )
+        mainText: "See how your tone, focus, and patterns evolve over time.",
+        emphasisText: "Gradually know thyself."
     }
 ];
 
@@ -72,11 +57,14 @@ export const FeatureCard = () => {
                             {feature.title}
                         </h3>
                         <p className="text-[10px] md:text-xs lg:text-base text-gray-600 leading-relaxed">
-                            {feature.description}
+                            {feature.mainText}<br />—
+                            <span style={{ fontFamily: '"Playfair Display", serif' }} className="">
+                                {feature.emphasisText}
+                            </span>
                         </p>
                     </div>
                 </div>
             ))}
         </div>
     );
-};
+};``
