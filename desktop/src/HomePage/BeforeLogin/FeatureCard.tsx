@@ -49,16 +49,16 @@ const features: Feature[] = [
 
 export const FeatureCard = () => {
     return (
-        <div className="flex flex-col space-y-4 md:space-y-6 lg:space-y-8">
+        <div className="flex flex-col space-y-2 md:space-y-3 lg:space-y-6">
             {features.map((feature, index) => (
                 <div 
                     key={index}
-                    className="flex items-start gap-3 md:gap-4 lg:gap-6 p-3 md:p-3  
+                    className="flex items-start gap-1.5 md:gap-2 lg:gap-4 p-1.5 md:p-2 lg:p-4  
                              hover:bg-white/10 rounded-lg transition-colors
                              transform hover:scale-102 hover:shadow-lg"
                 >
                     {/* Icon */}
-                    <div className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 mt-1 flex-shrink-0">
+                    <div className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-6 lg:h-6 mt-0.5 flex-shrink-0">
                         <img
                             src={feature.icon}
                             alt={`${feature.title} icon`}
@@ -68,10 +68,10 @@ export const FeatureCard = () => {
                     
                     {/* Content */}
                     <div className="flex flex-col">
-                        <h3 className="text-base md:text-lg lg:text-xl font-medium text-gray-800 mb-1 md:mb-2">
+                        <h3 className="text-xs md:text-sm lg:text-lg font-medium text-gray-800 mb-0.5">
                             {feature.title}
                         </h3>
-                        <p className="text-xs md:text-sm lg:text-base text-gray-600 leading-relaxed">
+                        <p className="text-[10px] md:text-xs lg:text-base text-gray-600 leading-relaxed">
                             {feature.description}
                         </p>
                     </div>
