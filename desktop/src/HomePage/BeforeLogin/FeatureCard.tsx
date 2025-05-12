@@ -1,3 +1,8 @@
+import LocalAiMemory from  "../../assets/FeatureCardIcons/LocalAiMemory.png";
+import PrivateSemantic from "../../assets/FeatureCardIcons/PrivateSemanticSearch.png";
+import CloudIcon from "../../assets/FeatureCardIcons/CloudIcon.png";
+import MoodIcon from "../../assets/FeatureCardIcons/MoodIcon.png";
+
 interface Feature {
     icon: any;
     title: string;
@@ -7,25 +12,25 @@ interface Feature {
 
 const features: Feature[] = [
     {
-        icon: "/icons/memory.png",
+        icon: LocalAiMemory,
         title: "Local AI Memory",
         mainText: "Vinaya surfaces your past entries using locally setup ollama AI.",
         emphasisText: "Nothing leaves your machine."
     },
     {
-        icon: "/icons/search.png",
+        icon: PrivateSemantic,
         title: "Private RAG Semantic Search",
         mainText: "Search journal entries with meaning-aware local AI.",
         emphasisText: "No APIs. No tracking."
     },
     {
-        icon: "/icons/lock.png",
+        icon: CloudIcon,
         title: "Zero Cloud Dependency",
         mainText: "All data is stored locally and optionally encrypted.",
         emphasisText: "Ultimate Privacy."
     },
     {
-        icon: "./s.d/s",
+        icon: MoodIcon,
         title: "Insightful Mood Tracking",
         mainText: "See how your tone, focus, and patterns evolve over time.",
         emphasisText: "Gradually know thyself."
