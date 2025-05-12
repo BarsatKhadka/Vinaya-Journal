@@ -2,12 +2,12 @@ import vinayaWithout from '../../assets/vinayaWithout.png';
 
 export const TopBar = () => {
   return (
-    <header className="w-full bg-white shadow-sm border-b border-slate-100 sticky top-0 z-50">
+    <header className="w-full bg-[#F7F4F0] shadow-sm sticky top-0 z-50">
       <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           
           <div className="flex items-center md:gap-4 group">
-            <div className=" rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div className="rounded-full transition-transform duration-300 group-hover:scale-105">
               <img
                 src={vinayaWithout}
                 alt="Vinaya Logo"
@@ -23,6 +23,7 @@ export const TopBar = () => {
           </div>
           
         </div>
+  
       </div>
     </header>
   );
