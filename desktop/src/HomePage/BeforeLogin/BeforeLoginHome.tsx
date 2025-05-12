@@ -1,6 +1,6 @@
 import { TopBar } from "./TopBar"
 import { motion } from "framer-motion"
-
+import fallingLeaf from "../../assets/falling_leaf.png"
 
 export const BeforeLoginHome = () => {
     return (
@@ -9,7 +9,7 @@ export const BeforeLoginHome = () => {
 
             {/* Welcome to Vinaya Journal */}
             <main className="container mx-auto px-4 relative">
-                <div className="flex flex-col items-center justify-center min-h-[20vh] text-center">
+                <div className="flex flex-col items-center justify-center min-h-[20vh] text-center relative">
                     <motion.h1 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -35,8 +35,12 @@ export const BeforeLoginHome = () => {
                 </div>
             </main>
 
-
-
+            {/* Falling Leaf */}
+            <img
+                src={fallingLeaf}
+                alt="Falling Leaf"
+                className="absolute w-16 md:w-20 lg:w-50 top-1/2 right-40 lg:right-70 transform -translate-y-1/2 opacity-50"
+            />
         </>
     )
 }
