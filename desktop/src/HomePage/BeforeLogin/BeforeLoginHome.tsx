@@ -4,7 +4,6 @@ import fallingLeaf from "../../assets/falling_leaf.png"
 import floralLine from "../../assets/floralLine.png"
 import { FeatureCard } from "./FeatureCard"
 
-
 export const BeforeLoginHome = () => {
     return (
         <>
@@ -48,30 +47,26 @@ export const BeforeLoginHome = () => {
                     />
 
                 </div>
+                  
+                {/* Feature Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                    <FeatureCard />
+                    {/* <FeatureCard />
+                    <FeatureCard /> */}
+                </div>
             </main>
-            
-        {/* Feature Cards Grid */}
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8 lg:px-16 ">
-            <FeatureCard />
-            <FeatureCard/>
-            <FeatureCard/>
-        </div>
-            
 
-            {/* Falling Leaf */}
+            {/* Falling Leaves */}
             <img
                 src={fallingLeaf}
                 alt="Falling Leaf"
                 className="absolute w-16 md:w-20 lg:w-50 top-1/2 right-40 lg:right-70 transform -translate-y-1/90 opacity-50"
             />
-
-            {/*Falling Leaf 2 */}
             <img
                 src={fallingLeaf}
                 alt="Fallen Leaf"
                 className="absolute w-12 md:w-16 lg:w-40 bottom-10 right-100 lg:right-150 transform -translate-x-1/2 opacity-70"
             />
-
         </>
     )
 }
