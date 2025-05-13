@@ -45,21 +45,29 @@ export const LocalAIFeature = () => {
 
             {/* Ollama Detected Locally  */}
             <div className="flex items-center gap-2 pl-2 mt-8">
-                <div className="flex items-center gap-2">
+                <div className={`
+                    flex items-center gap-2 px-3 py-2 rounded-lg
+                    ${ollamaRunning 
+                        ? 'bg-green-50/50 border border-[#E6E2DD]' 
+                        : 'bg-red-50/50 border border-red-200'
+                    }
+                    transition-colors duration-200
+                `}>
                     {ollamaRunning ? (
-                        <div className="w-7 h-7 rounded-full bg-[#d4e3d3] flex items-center justify-center border border-gray-400">
+                        <div className="w-5 h-5 rounded-full bg-[#d4e3d3] flex items-center justify-center">
                             <svg className="w-3 h-3 text-green-600" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
                     ) : (
-                        <div className="w-4 h-4 rounded-full bg-red-100 flex items-center justify-center">
+                        <div className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center">
                             <svg className="w-3 h-3 text-red-600" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </div>
                     )}
-                    <span className="text-xs md:text-sm lg:text-base pl-2" style={{ fontFamily: '"Roboto Mono", sans-serif', fontWeight: '400' }}>
+                    <span className="text-xs md:text-sm lg:text-base" 
+                          style={{ fontFamily: '"Roboto Mono", sans-serif', fontWeight: '400' }}>
                         {ollamaRunning ? "Ollama detected and running locally" : "Ollama not running locally"}
                     </span>
                 </div>
