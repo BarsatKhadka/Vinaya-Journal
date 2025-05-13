@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from "electron";
+import { app, BrowserWindow, globalShortcut, Menu } from "electron";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -48,7 +48,12 @@ app.on("activate", () => {
     createWindow();
   }
 });
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+  globalShortcut.register("CommandOrControl+Shift+I", () => {
+    win == null ? void 0 : win.webContents.openDevTools();
+  });
+});
 export {
   MAIN_DIST,
   RENDERER_DIST,

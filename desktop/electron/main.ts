@@ -1,4 +1,4 @@
-import { app, BrowserWindow , Menu } from 'electron'
+import { app, BrowserWindow , Menu, globalShortcut } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -77,4 +77,11 @@ app.on('activate', () => {
   }
 })
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow()
+  
+  // For dev tools (console)
+  globalShortcut.register('CommandOrControl+Shift+I', () => {
+    win?.webContents.openDevTools();
+  });
+})
