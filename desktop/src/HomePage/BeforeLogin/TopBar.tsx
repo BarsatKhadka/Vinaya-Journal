@@ -18,7 +18,7 @@ export const TopBar = () => {
             />
 
             {/* Top Bar Content */}
-            <div className="max-w-screen-xl bg-[#F7F4F0] mx-auto px-4 md:px-6 lg:px-8">
+            <div className="max-w-screen-xl bg-[#F7F4F0]  mx-auto px-4 md:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     <div className="flex items-center md:gap-4 group">
                         <div className="rounded-full transition-transform duration-300 group-hover:scale-105">
