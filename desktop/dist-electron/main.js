@@ -53,6 +53,9 @@ app.whenReady().then(() => {
   globalShortcut.register("CommandOrControl+Shift+I", () => {
     win == null ? void 0 : win.webContents.openDevTools();
   });
+  globalShortcut.register("CommandOrControl+R", () => {
+    win == null ? void 0 : win.webContents.reload();
+  });
 });
 export {
   MAIN_DIST,

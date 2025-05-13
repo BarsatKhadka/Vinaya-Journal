@@ -84,4 +84,9 @@ app.whenReady().then(() => {
   globalShortcut.register('CommandOrControl+Shift+I', () => {
     win?.webContents.openDevTools();
   });
+
+  // Add refresh shortcut
+  globalShortcut.register('CommandOrControl+R', () => {
+    win?.webContents.reload();
+  });
 })
