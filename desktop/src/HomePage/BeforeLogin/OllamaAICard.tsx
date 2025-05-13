@@ -1,33 +1,30 @@
-import LocalAiMemory from  "../../assets/FeatureCardIcons/LocalAiMemory.png";
+import LocalAiMemory from "../../assets/FeatureCardIcons/LocalAiMemory.png";
 
 export const LocalAIFeature = () => {
     return (
-        <div className="flex items-start gap-1.5 md:gap-2 lg:gap-4 p-1.5 md:p-2 lg:p-4  
-                    hover:bg-white/10 rounded-lg transition-colors
-                    transform hover:scale-102 hover:shadow-lg"
-        >
-            {/* Icon */}
-            <div className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-6 lg:h-6 mt-0.5 flex-shrink-0">
-                <img
-                    src={LocalAiMemory}
-                    alt="Local AI Memory icon"
-                    className="w-full h-full object-contain opacity-80"
-                />
+        <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 p-3 md:p-4 lg:p-6 
+                    hover:bg-white/10 rounded-lg transition-colors">
+            {/* Icon and Title Row */}
+            <div className="flex items-center gap-3 md:gap-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 flex-shrink-0 
+                            transition-transform duration-200 group-hover:scale-110">
+                    <img
+                        src={LocalAiMemory}
+                        alt="Local AI Memory icon"
+                        className="w-full h-full object-contain opacity-90 hover:opacity-100"
+                    />
+                </div>
+                <h3 className="text-base md:text-lg lg:text-2xl font-medium text-gray-800">
+                    Locally Setup Ollama AI
+                </h3>
             </div>
             
-            {/* Content */}
-            <div className="flex flex-col">
-                <div className="flex items-baseline gap-2">
-                    <h3 className="text-xs md:text-sm lg:text-lg font-medium text-gray-800">
-                        Locally Setup Ollama AI
-                    </h3>
-                    <span className="text-[10px] md:text-xs lg:text-base text-gray-600">
-                        — <span style={{ fontFamily: '"Playfair Display", serif' }} className="">
-                            cause here nothing leaves your machine
-                        </span>
-                    </span>
-                </div>
-            </div>
+            {/* Description Below */}
+            <p className="text-xs md:text-sm lg:text-base text-gray-600 pl-11 md:pl-14 lg:pl-16">
+                <span style={{ fontFamily: '"Playfair Display", serif' }} >
+                    cause here nothing leaves your machine
+                </span>
+            </p>
         </div>
     );
 };
