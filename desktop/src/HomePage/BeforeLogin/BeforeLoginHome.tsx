@@ -27,7 +27,7 @@ export const BeforeLoginHome = () => {
                         className="text-4xl md:text-3xl lg:text-6xl font-serif font-medium tracking-tight mb-2 lg:mb-4"
                     >
                         <span className="bg-gradient-to-r from-teal-700 to-slate-700 bg-clip-text text-transparent">
-                            Welcome to Vinaya
+                            Write with gentle focus
                         </span>
                     </motion.h1>
 
