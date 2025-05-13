@@ -1,8 +1,26 @@
+import { useState , useEffect } from "react";
+import axios from "axios";
 import LocalAiMemory from "../../assets/FeatureCardIcons/LocalAiMemory.png";
 
 
 export const LocalAIFeature = () => {
-    
+    const [ollamaRunning, setOllamaRunning] = useState<boolean>(false);
+
+    const checkOllamaRunning = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/ollama");
+            setOllamaRunning(response?.data);
+        } catch (error) {
+            console.error("Error checking Ollama status:", error);
+            setOllamaRunning(false);
+        }
+    };
+
+    // Check if Ollama is running when the component mounts
+    useEffect(() => {
+        checkOllamaRunning();
+    }, []);
+
     return (
         <div className="flex flex-col  p-3 md:p-4 lg:p-2 
                     hover:bg-white/10 rounded-lg transition-colors">
@@ -26,6 +44,7 @@ export const LocalAIFeature = () => {
                     cause here nothing leaves your machine
                 </span>
             </p>
+            <p>{ollamaRunning ? "running" : "not running"}</p>
         </div>
     );
 };
