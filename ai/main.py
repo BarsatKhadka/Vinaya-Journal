@@ -1,7 +1,13 @@
 from fastapi import FastAPI
+
+
 import ollama
 
 app = FastAPI()
+
+
+
+
 
 @app.get("/models")
 def get_models():
