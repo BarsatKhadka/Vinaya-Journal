@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+import requests
 import ollama
 
 app = FastAPI()
@@ -14,6 +14,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.get("/ollama")
+def is_ollama_running():
+    try:
+        response = requests.get("http://localhost:11434")
+        return response.status_code == 200
+    except requests.exceptions.RequestException:
+        return False
 
 @app.get("/models")
 def get_models():
