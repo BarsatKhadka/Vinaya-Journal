@@ -39,9 +39,9 @@ export const LocalAIFeature = () => {
                 </h3>
             </div>
 
-            <p className="text-xs md:text-sm lg:text-base text-gray-600 pl-11 md:pl-14 lg:pl-14">
-                <span style={{ fontFamily: '"Playfair Display", serif', color: 'inherit' }}>
-                    all processing happens <span style={{ color: '#4caf50' }}>locally on your device</span>
+            <p className="text-xs md:text-sm lg:text-base text-gray-600 pl-11 md:pl-12 lg:pl-14">
+                <span style={{ fontFamily: '"Playfair Display", serif', color: 'inherit' , fontWeight: '500' }}>
+                    all processing happens <span style={{ color: '#4caf50',fontWeight: '600' }}>locally on your device</span>
                 </span>
             </p>
 

@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const RamBadge = ({ ram }: { ram: string }) => (
+    <span className="px-3 py-0.5 bg-[#E6E2DD] border border-[#CFCAC2] rounded-lg 
+                   text-gray-700 text-[11px] tracking-wide ml-4" 
+          style={{fontFamily: '"Fira Sans", sans-serif'}}>
+        {ram}
+    </span>
+);
+
 export const OllamaRunningCard = () => {
     const [ollamaModels, setOllamaModels] = useState<string[]>([]);
     
@@ -29,11 +37,18 @@ export const OllamaRunningCard = () => {
                     <div className="p-4 border-b border-gray-200">
                         <div className="flex justify-between items-start">
                             <div>
-                                <h3 className="text-lg font-serif text-gray-800">Mistral</h3>
-                                <p className="text-xs text-gray-500 mt-1 italic" style={{fontFamily: 'Fira Sans'}}>Editor's choice - a top pick for everyday user.</p>
+                                <div className="flex items-center">
+                                    <h3 className="text-lg font-serif text-gray-800 mr-10">Mistral</h3>
+                                    <RamBadge ram="8GB+ RAM" />
+                                </div>
+                                <p className="text-xs text-gray-500 mt-1 italic" 
+                                   style={{fontFamily: 'Fira Sans'}}>
+                                    Editor's choice - a top pick for everyday user.
+                                </p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" style ={{ fontFamily: "serif" }}>
+                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
+                                    style={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
@@ -43,11 +58,18 @@ export const OllamaRunningCard = () => {
                     <div className="p-4 border-b border-gray-200">
                         <div className="flex justify-between items-start">
                             <div>
-                                <h3 className="text-lg font-serif text-gray-800">Phi</h3>
-                                <p className="text-xs text-gray-500 mt-1 italic" style={{fontFamily: 'Fira Sans'}}>great for reasoning and quick response</p>
+                                <div className="flex items-center">
+                                    <h3 className="text-lg font-serif text-gray-800 mr-16">Phi</h3>
+                                    <RamBadge ram="4-8GB RAM" />
+                                </div>
+                                <p className="text-xs text-gray-500 mt-1 italic" 
+                                   style={{fontFamily: 'Fira Sans'}}>
+                                    great for reasoning and quick response
+                                </p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" style ={{ fontFamily: "serif" }}>
+                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
+                                    style={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
@@ -57,11 +79,18 @@ export const OllamaRunningCard = () => {
                     <div className="p-4">
                         <div className="flex justify-between items-start">
                             <div>
-                                <h3 className="text-lg font-serif text-gray-800">TinyLlama</h3>
-                                <p className="text-xs text-gray-500 mt-1 italic" style={{fontFamily: 'Fira Sans'}}>ideal for low-resource setups.</p>
+                                <div className="flex items-center">
+                                    <h3 className="text-lg font-serif text-gray-800 mr-2">TinyLlama</h3>
+                                    <RamBadge ram="2-4GB RAM" />
+                                </div>
+                                <p className="text-xs text-gray-500 mt-1 italic" 
+                                   style={{fontFamily: 'Fira Sans'}}>
+                                    ideal for low-resource setups.
+                                </p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" style ={{ fontFamily: "serif" }}>
+                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
+                                    style={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
