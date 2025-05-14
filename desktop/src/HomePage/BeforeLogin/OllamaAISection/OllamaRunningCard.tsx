@@ -38,7 +38,7 @@ export const OllamaRunningCard = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <div className="flex items-center">
-                                    <h3 className="text-lg font-serif text-gray-800 mr-10">Mistral</h3>
+                                    <h3 className="text-lg font-serif text-gray-800 mr-5">mistral:7b</h3>
                                     <RamBadge ram="8GB+ RAM" />
                                 </div>
                                 <p className="text-xs text-gray-500 mt-1 italic" 
@@ -59,7 +59,7 @@ export const OllamaRunningCard = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <div className="flex items-center">
-                                    <h3 className="text-lg font-serif text-gray-800 mr-16">Phi</h3>
+                                    <h3 className="text-lg font-serif text-gray-800 mr-8">phi:2.7b</h3>
                                     <RamBadge ram="4-8GB RAM" />
                                 </div>
                                 <p className="text-xs text-gray-500 mt-1 italic" 
