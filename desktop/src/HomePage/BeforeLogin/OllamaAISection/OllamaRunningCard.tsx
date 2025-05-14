@@ -30,10 +30,10 @@ export const OllamaRunningCard = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">Mistral</h3>
-                                <p className="text-sm text-gray-600 mt-1">an open-wreight assistant</p>
+                                <p className="text-xs text-gray-500 mt-1 italic">Editor's choice - a top pick for everyday user.</p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors">
+                                           text-sm hover:bg-[#1F3F3F] transition-colors" style ={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
@@ -44,10 +44,10 @@ export const OllamaRunningCard = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">Phi</h3>
-                                <p className="text-sm text-gray-600 mt-1">a capatle smia langul language model</p>
+                                <p className="text-xs text-gray-500 mt-1 italic">great for reasoning and quick response</p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors">
+                                           text-sm hover:bg-[#1F3F3F] transition-colors" style ={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
@@ -58,11 +58,10 @@ export const OllamaRunningCard = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">TinyLlama</h3>
-                                <p className="text-sm text-gray-600 mt-1">a tiny yet expressive model</p>
-                                <p className="text-xs text-gray-500 mt-1 italic">Recommended for low memory</p>
+                                <p className="text-xs text-gray-500 mt-1 italic">ideal for low-resource setups.</p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors">
+                                           text-sm hover:bg-[#1F3F3F] transition-colors" style ={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
