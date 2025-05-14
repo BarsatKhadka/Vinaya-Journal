@@ -2,7 +2,7 @@ import { TopBar } from "./TopBar"
 import { motion } from "framer-motion"
 import fallingLeaf from "../../assets/falling_leaf.png"
 import floralLine from "../../assets/floralLine.png"
-import { LocalAIFeature } from "./OllamaAICard"
+import { LocalAIFeature } from "./OllamaAISection/OllamaAICard"
 
 export const BeforeLoginHome = () => {
     return (

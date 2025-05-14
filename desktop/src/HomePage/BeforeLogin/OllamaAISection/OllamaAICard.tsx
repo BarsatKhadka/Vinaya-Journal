@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import LocalAiMemory from "../../assets/FeatureCardIcons/LocalAiMemory.png";
+import {OllamaRunningCard} from "./OllamaRunningCard";
+import {OllamaNotRunningCard} from "./OllamaNotRunningCard";
+import LocalAiMemory from "../../../assets/FeatureCardIcons/LocalAiMemory.png"; 
 
 export const LocalAIFeature = () => {
     const [ollamaRunning, setOllamaRunning] = useState<boolean>(false);
@@ -71,6 +73,12 @@ export const LocalAIFeature = () => {
                         {ollamaRunning ? "Ollama detected and running locally" : "Ollama not running locally"}
                     </span>
                 </div>
+            </div>
+
+            <div>
+                {ollamaRunning ? (
+                    <OllamaRunningCard/>
+                ) : <OllamaNotRunningCard/>}
             </div>
 
         </div>
