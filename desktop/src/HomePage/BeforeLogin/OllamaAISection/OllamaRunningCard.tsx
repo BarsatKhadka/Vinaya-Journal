@@ -17,16 +17,20 @@ export const OllamaRunningCard = () => {
     }, []);
 
     return (
-        <div className="px-4">
+        <div className="px-2 py-2">
             {ollamaModels.length === 0 ? (
-                <div className="flex flex-col gap-3">
-                    <p className="text-gray-600 text-sm mb-2">No models found. Let's setup your first local AI companion.</p>
+                <div className="bg-[#F7F4F0] border border-gray-400 rounded-lg">
+                    <p className="p-6 text-gray-700 text-base font-serif border-b border-gray-200 
+                              tracking-wide text-center">
+                        Let's setup your first local AI companion.
+                    </p>
+
                     {/* Mistral Card */}
-                    <div className="bg-[#F7F4F0] border border-gray-200 rounded-lg p-4">
+                    <div className="p-4 border-b border-gray-200">
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">Mistral</h3>
-                                <p className="text-sm text-gray-600 mt-1">a large model</p>
+                                <p className="text-sm text-gray-600 mt-1">an open-wreight assistant</p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
                                            text-sm hover:bg-[#1F3F3F] transition-colors">
@@ -36,11 +40,11 @@ export const OllamaRunningCard = () => {
                     </div>
 
                     {/* Phi Card */}
-                    <div className="bg-[#F7F4F0] border border-gray-200 rounded-lg p-4">
+                    <div className="p-4 border-b border-gray-200">
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">Phi</h3>
-                                <p className="text-sm text-gray-600 mt-1">a middle model</p>
+                                <p className="text-sm text-gray-600 mt-1">a capatle smia langul language model</p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
                                            text-sm hover:bg-[#1F3F3F] transition-colors">
@@ -50,7 +54,7 @@ export const OllamaRunningCard = () => {
                     </div>
 
                     {/* TinyLlama Card */}
-                    <div className="bg-[#F7F4F0] border border-gray-200 rounded-lg p-4">
+                    <div className="p-4">
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">TinyLlama</h3>
@@ -62,6 +66,36 @@ export const OllamaRunningCard = () => {
                                 Install
                             </button>
                         </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="border-t border-gray-200 mt-2"></div>
+
+                    {/* Explore More Section */}
+                    <div className="p-4 text-center">
+                        <p className="text-sm text-gray-600 mb-2">Looking for different models?</p>
+                        <a
+                            href="https://ollama.ai/library"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-[#2F4F4F] hover:text-[#1F3F3F] 
+                                     text-sm font-medium transition-colors"
+                        >
+                            Explore Ollama Model Library
+                            <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             ) : (
