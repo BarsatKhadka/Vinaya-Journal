@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const OllamaRunningCard = () => {
     const [ollamaModels, setOllamaModels] = useState<any[]>([]);
+    
     useEffect(() => {
         const checkOllamaModels = async () => {
             try {
@@ -16,8 +17,20 @@ export const OllamaRunningCard = () => {
     }, []);
         return (
         <div>
-            {ollamaModels}
-            Ollama AI is running.
+            
+            {ollamaModels.length == 0 ?
+                <div className="text-red-500">
+                    No models found. Please pull a model
+                    </div>
+                    :
+                    <div className="text-green-500">
+                        {ollamaModels.map((model, index) => (
+                            <div key={index} className="text-black">
+                                {model}
+                            </div>
+                        ))}
+                    </div>
+            }
         </div>
 
     );
