@@ -9,6 +9,46 @@ const RamBadge = ({ ram }: { ram: string }) => (
     </span>
 );
 
+const ExploreMoreSection = () => (
+    <>
+        {/* Divider */}
+        <div className="border-t border-gray-200 mt-2"></div>
+
+        {/* Explore More Section */}
+        <div className="p-4 text-center">
+            <p className="text-sm text-gray-600 mb-2" 
+               style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+                Looking for different models?
+            </p>
+            <a
+                href="https://ollama.ai/library"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#2F4F4F] hover:text-[#1F3F3F] 
+                         text-sm font-medium transition-all duration-200 ease-in-out
+                         underline decoration-[#2F4F4F] decoration-1 underline-offset-2 
+                         hover:decoration-[#1F3F3F] hover:scale-105 transform"
+                style={{ fontFamily: '"Fira Sans", sans-serif' }}
+            >
+                Explore Ollama Model Library
+                <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                </svg>
+            </a>
+        </div>
+    </>
+);
+
 export const OllamaRunningCard = () => {
     const [ollamaModels, setOllamaModels] = useState<string[]>([]);
     
@@ -96,39 +136,7 @@ export const OllamaRunningCard = () => {
                         </div>
                     </div>
 
-                    {/* Divider */}
-                    <div className="border-t border-gray-200 mt-2"></div>
-
-                    {/* Explore More Section */}
-                    <div className="p-4 text-center">
-                        <p className="text-sm text-gray-600 mb-2" style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                            Looking for different models?
-                        </p>
-                        <a
-                            href="https://ollama.ai/library"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-[#2F4F4F] hover:text-[#1F3F3F] 
-                                     text-sm font-medium transition-colors underline decoration-[#2F4F4F] 
-                                     decoration-1 underline-offset-2 hover:decoration-[#1F3F3F]"
-                            style={{ fontFamily: '"Fira Sans", sans-serif' }}
-                        >
-                            Explore Ollama Model Library
-                            <svg
-                                className="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                />
-                            </svg>
-                        </a>
-                    </div>
+                    <ExploreMoreSection />
                 </div>
             ) : (
                 <div className="bg-[#F7F4F0] border border-gray-400 rounded-lg">
@@ -161,41 +169,7 @@ export const OllamaRunningCard = () => {
                         </div>
                     ))}
 
-                    {/* Divider */}
-                    <div className="border-t border-gray-200 mt-2"></div>
-
-                    {/* Explore More Section */}
-                    <div className="p-4 text-center">
-                        <p className="text-sm text-gray-600 mb-2" 
-                           style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                            Looking for different models?
-                        </p>
-                        <a
-                            href="https://ollama.ai/library"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-[#2F4F4F] hover:text-[#1F3F3F] 
-                                     text-sm font-medium transition-all duration-200 ease-in-out
-                                     underline decoration-[#2F4F4F] decoration-1 underline-offset-2 
-                                     hover:decoration-[#1F3F3F] hover:scale-105 transform"
-                            style={{ fontFamily: '"Fira Sans", sans-serif' }}
-                        >
-                            Explore Ollama Model Library
-                            <svg
-                                className="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                />
-                            </svg>
-                        </a>
-                    </div>
+                    <ExploreMoreSection />
                 </div>
             )}
         </div>
