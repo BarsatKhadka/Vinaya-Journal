@@ -1,15 +1,4 @@
 import { ipcRenderer, contextBridge } from 'electron'
-import * as os from 'os'
-
-
-
-contextBridge.exposeInMainWorld('vinayaSystem', {
-  getSystemInfo: () => ({
-    ram: os.totalmem(),
-    cpu: os.cpus()[0].model,
-    cores: os.cpus().length
-  })
-});
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
