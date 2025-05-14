@@ -63,7 +63,7 @@ export const BeforeLoginHome = () => {
             </main>
 
             {/* Bottom gradient overlay */}
-            <div className="absolute bottom-0 left-0 right-0 h-[40vh] bg-gradient-to-t from-[#d4e3d3]/60 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-[10vh] bg-gradient-to-t from-[#d4e3d3]/60 to-transparent pointer-events-none" />
 
             {/* Falling Leaves */}
             <img
