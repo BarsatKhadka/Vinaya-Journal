@@ -109,7 +109,8 @@ export const OllamaRunningCard = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-[#2F4F4F] hover:text-[#1F3F3F] 
-                                     text-sm font-medium transition-colors"
+                                     text-sm font-medium transition-colors underline decoration-[#2F4F4F] 
+                                     decoration-1 underline-offset-2 hover:decoration-[#1F3F3F]"
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}
                         >
                             Explore Ollama Model Library
