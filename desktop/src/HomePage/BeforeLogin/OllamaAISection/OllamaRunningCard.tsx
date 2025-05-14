@@ -30,10 +30,10 @@ export const OllamaRunningCard = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">Mistral</h3>
-                                <p className="text-xs text-gray-500 mt-1 italic">Editor's choice - a top pick for everyday user.</p>
+                                <p className="text-xs text-gray-500 mt-1 italic" style={{fontFamily: 'Fira Sans'}}>Editor's choice - a top pick for everyday user.</p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors" style ={{ fontFamily: "serif" }}>
+                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" style ={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
@@ -44,10 +44,10 @@ export const OllamaRunningCard = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">Phi</h3>
-                                <p className="text-xs text-gray-500 mt-1 italic">great for reasoning and quick response</p>
+                                <p className="text-xs text-gray-500 mt-1 italic" style={{fontFamily: 'Fira Sans'}}>great for reasoning and quick response</p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors" style ={{ fontFamily: "serif" }}>
+                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" style ={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
@@ -58,10 +58,10 @@ export const OllamaRunningCard = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-serif text-gray-800">TinyLlama</h3>
-                                <p className="text-xs text-gray-500 mt-1 italic">ideal for low-resource setups.</p>
+                                <p className="text-xs text-gray-500 mt-1 italic" style={{fontFamily: 'Fira Sans'}}>ideal for low-resource setups.</p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors" style ={{ fontFamily: "serif" }}>
+                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" style ={{ fontFamily: "serif" }}>
                                 Install
                             </button>
                         </div>
@@ -72,13 +72,16 @@ export const OllamaRunningCard = () => {
 
                     {/* Explore More Section */}
                     <div className="p-4 text-center">
-                        <p className="text-sm text-gray-600 mb-2">Looking for different models?</p>
+                        <p className="text-sm text-gray-600 mb-2" style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+                            Looking for different models?
+                        </p>
                         <a
                             href="https://ollama.ai/library"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-[#2F4F4F] hover:text-[#1F3F3F] 
                                      text-sm font-medium transition-colors"
+                            style={{ fontFamily: '"Fira Sans", sans-serif' }}
                         >
                             Explore Ollama Model Library
                             <svg
