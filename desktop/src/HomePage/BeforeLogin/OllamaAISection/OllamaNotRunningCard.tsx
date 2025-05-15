@@ -157,7 +157,7 @@ const WindowsCard = () => (
 );
 
 export const OllamaNotRunningCard = () => {
-    const [osName, setOsName] = useState<string>("win32");
+    const [osName, setOsName] = useState<string>("");
 
     useEffect(() => {
         const getOsName = async () => {
@@ -182,14 +182,42 @@ export const OllamaNotRunningCard = () => {
             default:
                 return (
                     <div className="p-4">
-                        <p className="text-sm text-gray-600" style={{fontFamily: 'Fira Sans'}}>
-                            Visit <a href="https://ollama.ai/download" 
-                                   className="text-[#2F4F4F] hover:text-[#1F3F3F] underline"
-                                   target="_blank" 
-                                   rel="noopener noreferrer">
-                                ollama.ai
-                            </a> for installation instructions
-                        </p>
+                        <div className="w-full">
+                            <h3 className="text-lg font-serif text-gray-800 mb-4">
+                                System OS detection failed
+                            </h3>
+                            
+                            <p className="text-sm text-gray-600 mb-4" style={{fontFamily: 'Fira Sans'}}>
+                                Please choose your operating system below to get installation instructions:
+                            </p>
+
+                            <div className="space-y-4">
+                                <a href="https://ollama.com/download/mac"
+                                   className="block text-[#2F4F4F] hover:text-[#1F3F3F] underline"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   style={{fontFamily: 'Fira Sans'}}
+                                >
+                                    → Download for macOS
+                                </a>
+                                <a href="https://ollama.com/download/linux"
+                                   className="block text-[#2F4F4F] hover:text-[#1F3F3F] underline"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   style={{fontFamily: 'Fira Sans'}}
+                                >
+                                    → Download for Linux
+                                </a>
+                                <a href="https://ollama.com/download/windows"
+                                   className="block text-[#2F4F4F] hover:text-[#1F3F3F] underline"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   style={{fontFamily: 'Fira Sans'}}
+                                >
+                                    → Download for Windows (Beta)
+                                </a>
+                            </div>
+                        </div>
                         <ReportBrokenLink />
                     </div>
                 );
