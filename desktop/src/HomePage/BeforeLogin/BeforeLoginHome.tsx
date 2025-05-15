@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import fallingLeaf from "../../assets/falling_leaf.png"
 import floralLine from "../../assets/floralLine.png"
 import { LocalAIFeature } from "./OllamaAISection/OllamaAICard"
+import { RagAndMoodCard } from "./RAGandMoodSection/RagAndMoodCard"
 
 export const BeforeLoginHome = () => {
     return (
@@ -66,9 +67,7 @@ export const BeforeLoginHome = () => {
                     
                     <div className="flex flex-col gap-6 order-2 lg:order-2 lg:col-span-2">
                         <div className="bg-white rounded-lg shadow p-6 h-full flex-1 min-w-0">
-                            {/* Card 1 content */}
-                            <h2 className="text-xl font-semibold mb-2">Feature 2</h2>
-                            <p className="text-gray-600">Description for feature 2.</p>
+                            <RagAndMoodCard/>
                         </div>
                         <div className="bg-white rounded-lg shadow p-6 h-full flex-1 min-w-0">
                             {/* Card 2 content */}
