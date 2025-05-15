@@ -34,7 +34,7 @@ const MacOSCard = () => {
                                 Download and install manually
                             </p>
                             <a
-                                href="https://ollama.ai/download/mac"
+                                href="https://ollama.com/download/Ollama-darwin.zip"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="mt-2 inline-flex items-center text-[#2F4F4F] hover:text-[#1F3F3F] 
