@@ -76,27 +76,41 @@ const MacOSCard = () => {
 const LinuxCard = () => (
     <div className="p-4">
         <div className="flex justify-between items-start">
-            <div>
-                <div className="flex items-center">
-                    <h3 className="text-lg font-serif text-gray-800">Linux Installation</h3>
-                </div>
-                <p className="text-xs text-gray-500 mt-1 italic" style={{fontFamily: 'Fira Sans'}}>
-                    Install using the official shell script
-                </p>
-                <div className="mt-3 p-2 bg-gray-100 rounded font-mono text-sm">
-                    curl https://ollama.ai/install.sh | sh
+            <div className="w-full">
+                <h3 className="text-lg font-serif text-gray-800 mb-4">Linux Installation</h3>
+                
+                <div className="space-y-6">
+                    {/* Snap Option */}
+                    <div className="border-l-2 border-[#2F4F4F] pl-4">
+                        <h4 className="text-sm font-medium text-gray-700" 
+                            style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+                            Via Snap (Recommended)
+                        </h4>
+                        <p className="text-xs text-gray-500 mt-1 italic" 
+                           style={{fontFamily: 'Fira Sans'}}>
+                            Install using Snap package manager
+                        </p>
+                        <div className="mt-2 p-2 bg-gray-100 rounded font-mono text-sm">
+                            sudo snap install ollama
+                        </div>
+                    </div>
+
+                    {/* Shell Script Option */}
+                    <div className="border-l-2 border-[#2F4F4F] pl-4">
+                        <h4 className="text-sm font-medium text-gray-700"
+                            style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+                            Via Shell Script
+                        </h4>
+                        <p className="text-xs text-gray-500 mt-1 italic" 
+                           style={{fontFamily: 'Fira Sans'}}>
+                            Install using the official install script
+                        </p>
+                        <div className="mt-2 p-2 bg-gray-100 rounded font-mono text-sm">
+                            curl https://ollama.ai/install.sh | sh
+                        </div>
+                    </div>
                 </div>
             </div>
-            <a
-                href="https://ollama.ai/download/linux"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                       text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
-                style={{ fontFamily: "serif" }}
-            >
-                View Guide
-            </a>
         </div>
         <ReportBrokenLink />
     </div>
@@ -129,19 +143,19 @@ const WindowsCard = () => (
 );
 
 export const OllamaNotRunningCard = () => {
-    const [osName, setOsName] = useState<string>("darwin");
+    const [osName, setOsName] = useState<string>("");
 
-    // useEffect(() => {
-    //     const getOsName = async () => {
-    //         try {
-    //             const osName = await window.ipcRenderer.invoke("get-os");
-    //             setOsName(osName);
-    //         } catch (error) {
-    //             console.error("Error Getting os name: ", error);
-    //         }
-    //     };
-    //     getOsName();
-    // }, []);
+    useEffect(() => {
+        const getOsName = async () => {
+            try {
+                const osName = await window.ipcRenderer.invoke("get-os");
+                setOsName(osName);
+            } catch (error) {
+                console.error("Error Getting os name: ", error);
+            }
+        };
+        getOsName();
+    }, []);
 
     const renderOSCard = () => {
         switch (osName) {
