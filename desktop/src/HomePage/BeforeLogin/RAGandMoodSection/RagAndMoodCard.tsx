@@ -3,12 +3,12 @@ import { MoodCard } from "./MoodCard"
 
 export const RagAndMoodCard = () => { 
     return(
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", gap: "16px" }}>
             <div style={{ flex: 1 }}>
-                <RagCard />
+            <RagCard />
             </div>
             <div style={{ flex: 1 }}>
-                <MoodCard />
+            <MoodCard />
             </div>
         </div>
     )

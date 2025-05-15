@@ -1,7 +1,7 @@
 export const MoodCard = () => {
     return (
         <>
-        This is mood card 
+        This is mood card
         </>
     );
 }
