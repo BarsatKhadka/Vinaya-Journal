@@ -1,5 +1,21 @@
 import { useEffect, useState } from "react";
 
+const ReportBrokenLink = () => (
+    <div className="text-center mt-4 pt-4 border-t border-gray-200">
+        <p className="text-xs text-gray-500" style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+            Found a broken link?{' '}
+            <a
+                href="https://github.com/BarsatKhadka/Vinaya-Journal/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2F4F4F] hover:text-[#1F3F3F] underline decoration-dotted"
+            >
+                Report it
+            </a>
+        </p>
+    </div>
+);
+
 const MacOSCard = () => {
     return (
         <div className="p-4">
@@ -52,6 +68,7 @@ const MacOSCard = () => {
                     </div>
                 </div>
             </div>
+            <ReportBrokenLink />
         </div>
     );
 };
@@ -81,6 +98,7 @@ const LinuxCard = () => (
                 View Guide
             </a>
         </div>
+        <ReportBrokenLink />
     </div>
 );
 
@@ -106,6 +124,7 @@ const WindowsCard = () => (
                 Download
             </a>
         </div>
+        <ReportBrokenLink />
     </div>
 );
 
@@ -143,6 +162,7 @@ export const OllamaNotRunningCard = () => {
                                 ollama.ai
                             </a> for installation instructions
                         </p>
+                        <ReportBrokenLink />
                     </div>
                 );
         }
