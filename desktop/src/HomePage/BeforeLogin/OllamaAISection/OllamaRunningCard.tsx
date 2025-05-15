@@ -67,7 +67,7 @@ export const OllamaRunningCard = () => {
     return (
         <div className="px-2 py-2">
             {ollamaModels.length === 0 ? (
-                <div className="bg-[#F7F4F0] border border-gray-400 rounded-lg">
+                <div className="bg-[#F7F4F0] border border-gray-400 rounded-lg bg-[#FCFBFA]">
                     <p className="p-6 text-gray-700 text-base font-serif border-b border-gray-200 
                               tracking-wide text-center">
                         Let's setup your first local AI companion.
