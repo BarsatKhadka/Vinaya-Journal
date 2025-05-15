@@ -214,7 +214,7 @@ export const OllamaNotRunningCard = () => {
                                    rel="noopener noreferrer"
                                    style={{fontFamily: 'Fira Sans'}}
                                 >
-                                    → Download for Windows (Beta)
+                                    → Download for Windows 
                                 </a>
                             </div>
                         </div>

@@ -58,7 +58,22 @@ export const BeforeLoginHome = () => {
                   
                 {/* Feature Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+
                     <LocalAIFeature />
+
+
+                    <div className="col-span-2 flex flex-col gap-6">
+                        <div className="bg-white rounded-lg shadow p-6 h-full flex-1 min-w-0">
+                            {/* Card 1 content */}
+                            <h2 className="text-xl font-semibold mb-2">Feature 2</h2>
+                            <p className="text-gray-600">Description for feature 2.</p>
+                        </div>
+                        <div className="bg-white rounded-lg shadow p-6 h-full flex-1 min-w-0">
+                            {/* Card 2 content */}
+                            <h2 className="text-xl font-semibold mb-2">Feature 3</h2>
+                            <p className="text-gray-600">Description for feature 3.</p>
+                        </div>
+                    </div>
                 </div>
             </main>
 
