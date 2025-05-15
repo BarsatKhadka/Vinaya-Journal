@@ -1,7 +1,8 @@
-import { app, BrowserWindow, globalShortcut, Menu } from "electron";
+import { app, BrowserWindow, ipcMain, globalShortcut, Menu } from "electron";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import os from "os";
 createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const menuTemplate = [
@@ -47,6 +48,9 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+ipcMain.handle("get-os", () => {
+  return os.platform();
 });
 app.whenReady().then(() => {
   createWindow();
