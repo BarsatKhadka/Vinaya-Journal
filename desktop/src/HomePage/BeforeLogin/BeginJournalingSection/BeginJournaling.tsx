@@ -78,7 +78,7 @@ export const BeginJournaling = () => {
                     <img
                         src={BeginJournalingImage}
                         alt="Begin journaling illustration"
-                        className="w-full h-full object-contain drop-shadow-md"
+                        className="w-full h-full object-contain drop-shadow-md "
                     />
                 </div>
 
