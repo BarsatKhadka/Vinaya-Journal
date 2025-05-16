@@ -4,6 +4,7 @@ import fallingLeaf from "../../assets/falling_leaf.png"
 import floralLine from "../../assets/floralLine.png"
 import { LocalAIFeature } from "./OllamaAISection/OllamaAICard"
 import { RagAndMoodCard } from "./RAGandMoodSection/RagAndMoodCard"
+import { BeginJournaling } from "./BeginJournalingSection/BeginJournaling"
 
 export const BeforeLoginHome = () => {
     return (
@@ -70,9 +71,7 @@ export const BeforeLoginHome = () => {
                             <RagAndMoodCard/>
                         </div>
                         <div className="bg-white rounded-lg shadow p-6 h-full flex-1 min-w-0">
-                            {/* Card 2 content */}
-                            <h2 className="text-xl font-semibold mb-2">Feature 3</h2>
-                            <p className="text-gray-600">Description for feature 3.</p>
+                            <BeginJournaling/>
                         </div>
                     </div>
                 </div>
