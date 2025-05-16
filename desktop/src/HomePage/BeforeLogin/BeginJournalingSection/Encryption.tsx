@@ -7,7 +7,7 @@ export const Encryption = () => {
     const [passwordHint, setPasswordHint] = useState("");
 
     return (
-        <div className="flex flex-col space-y-4 w-[300px] ">
+        <div className="flex flex-col space-y-4 w-[300px] mt-8 ">
             {/* Encryption Toggle */}
             <label className="flex items-center space-x-2 cursor-pointer">
                 <div className={`w-11 h-6 rounded-full p-1 transition-colors
