@@ -4,7 +4,7 @@ export const MoodCard = () => {
     return (
         <div className="flex flex-col items-center rounded-xl 
                      shadow-sm transition hover:shadow-md"
-             style={{ backgroundColor: "#FBFCFA" }}>
+             style={{ backgroundColor: "#FBFCFA" }} >
             
             <div className="-mt-3 w-[50%]">
                 <img

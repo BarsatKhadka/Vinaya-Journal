@@ -1,35 +1,64 @@
 import BeginJournalingImage from "../../../assets/BeginJournalingPen.png";
 import ZeroCloudImage from "../../../assets/FeatureCardIcons/CloudIcon.png";
-import VinayaLogo from "../../../assets/vinayaLogoWhite.png";
-import { Encryption } from "./Encryption";
 import { Github } from "lucide-react";
+import { Encryption } from "./Encryption";
+
+const DhammaWheel = () => (
+    <svg 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        className="relative w-7 h-7 transform 
+                   group-hover:rotate-180 transition-transform duration-1000
+                   group-hover:text-white text-white/90"
+        stroke="currentColor"
+        strokeWidth="1.5"
+    >
+        {/* Outer rim */}
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="8" />
+        
+        {/* Eight spokes */}
+        <line x1="12" y1="2" x2="12" y2="22" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+        <line x1="19.07" y1="4.93" x2="4.93" y2="19.07" />
+        
+        {/* Hub */}
+        <circle cx="12" cy="12" r="2" fill="currentColor" />
+    </svg>
+);
 
 export const BeginJournaling = () => {
     return (
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm">
+        <div className="backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm">
             <div className="p-6 space-y-6">
                 {/* Top Section with Zero Cloud and Open Source */}
-                <div className="flex items-center justify-start gap-6">
-                    <div className="flex items-center gap-2">
+                <div className="flex items-center justify-start gap-3">
+                    <div className="flex items-center gap-2 px-3 py-1.5 
+                                  text-gray-600 hover:text-gray-800
+                                  rounded-lg border border-gray-200
+                                  hover:border-gray-300 hover:bg-gray-50/50
+                                  transition-all duration-200">
                         <img
                             src={ZeroCloudImage}
                             alt="Zero cloud dependency"
-                            className="w-5 h-5"
+                            className="w-4 h-4"
                         />
-                        <span className="text-xs text-gray-700 font-medium" 
+                        <span className="text-xs tracking-wide" 
                               style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                             Zero Cloud Dependency
                         </span>
                     </div>
-                    <span className="text-gray-300">|</span>
                     <a href="https://github.com/BarsatKhadka/Vinaya-Journal"
                        target="_blank"
                        rel="noopener noreferrer"
-                       className="flex items-center gap-2 px-3 py-1.5 bg-[#2F4F4F] 
-                                rounded-lg shadow-sm hover:bg-[#1F3F3F] 
-                                transition-colors duration-200">
-                        <Github className="w-4 h-4 text-white" />
-                        <span className="text-xs text-white tracking-wide"
+                       className="flex items-center gap-2 px-3 py-1.5 
+                                text-gray-600 hover:text-gray-800
+                                rounded-lg border border-gray-200
+                                hover:border-gray-300 hover:bg-gray-50/50
+                                transition-all duration-200">
+                        <Github className="w-4 h-4" />
+                        <span className="text-xs tracking-wide"
                               style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                             Open Source Contribute
                         </span>
@@ -56,34 +85,31 @@ export const BeginJournaling = () => {
 
                     {/* Right Content - Begin Journey */}
                     <div className="col-span-5 pl-4">
-                        <div className="space-y-4">
-                            <div className="space-y-2">
+                        <div className="space-y-2">
+                            <div className="space-y-1">
                                 <h4 className="text-3xl font-serif text-gray-800 leading-tight">
                                     Begin your Journey with
                                     <span className="text-[#2F4F4F]"> Vinaya</span>
                                 </h4>
-                                <p className="text-xs text-gray-500 italic" 
+                                <p className="text-xs text-gray-500 italic mb-3" 
                                    style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                                     Not to become someone but to understand yourself
                                 </p>
                             </div>
 
-                            <button className="group flex items-center px-4 py-2 bg-[#2F4F4F] 
-                                             text-white rounded-lg shadow-sm relative 
-                                             overflow-hidden hover:shadow-md
-                                             transition-all duration-200 cursor-pointer"
+                            <button className="group flex items-center justify-center gap-3 px-7 py-3.5 
+                                             bg-[#2F4F4F] text-white rounded-xl 
+                                             shadow-md hover:shadow-xl
+                                             transition-all duration-300 ease-out cursor-pointer
+                                             hover:bg-[#1F3F3F] relative
+                                             border border-white/5 w-full max-w-[300px]"
                                     style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                                <div className="absolute inset-0 bg-[#1F3F3F] transform origin-left 
-                                              scale-x-0 group-hover:scale-x-100 transition-transform 
-                                              duration-200">
-                                </div>
-                                <img
-                                    src={VinayaLogo}
-                                    alt="Vinaya Logo"
-                                    className="relative w-12 h-10 transform 
-                                             group-hover:rotate-6 transition-transform"
-                                />
-                                <span className="relative text-sm font-medium tracking-wide" 
+                                <div className="absolute inset-0 rounded-xl bg-white/5 
+                                              opacity-0 group-hover:opacity-100 
+                                              transition-opacity duration-300" />
+                                <DhammaWheel />
+                                <span className="relative text-[15px] font-medium tracking-wider 
+                                               text-white/90 group-hover:text-white" 
                                       style={{ fontFamily: '"PlayFair Display", sans-serif' }}>
                                     Start Writing
                                 </span>
