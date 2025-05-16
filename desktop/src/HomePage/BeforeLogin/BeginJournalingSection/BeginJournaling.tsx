@@ -37,25 +37,25 @@ export const BeginJournaling = () => {
                 </div>
 
                 {/* Main Content Grid */}
-                <div className="grid grid-cols-12 gap-4 items-start">
+                <div className="grid grid-cols-12 items-start">
                     {/* Left Content - Encryption */}
-                    <div className="col-span-4">
+                    <div className="col-span-4 pr-4">
                         <Encryption />
                     </div>
 
                     {/* Center Image */}
-                    <div className="col-span-4 pr-0">
+                    <div className="col-span-3 flex justify-end items-center">
                         <div className="transform hover:scale-105 transition-transform duration-300">
                             <img
                                 src={BeginJournalingImage}
                                 alt="Begin journaling illustration"
-                                className="w-full h-full object-contain drop-shadow-md"
+                                className="w-[150px] h-[150px] object-contain drop-shadow-md"
                             />
                         </div>
                     </div>
 
                     {/* Right Content - Begin Journey */}
-                    <div className="col-span-4 pl-0">
+                    <div className="col-span-5 pl-4">
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <h4 className="text-3xl font-serif text-gray-800 leading-tight">
@@ -64,7 +64,7 @@ export const BeginJournaling = () => {
                                 </h4>
                                 <p className="text-xs text-gray-500 italic" 
                                    style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                                    Not to become but to understand 
+                                    Not to become someone but to understand yourself
                                 </p>
                             </div>
 
