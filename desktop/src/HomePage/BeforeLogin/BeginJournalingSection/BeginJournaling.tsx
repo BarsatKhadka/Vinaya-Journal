@@ -1,12 +1,12 @@
 import BeginJournalingImage from "../../../assets/BeginJournalingPen.png";
 import ZeroCloudImage from "../../../assets/FeatureCardIcons/CloudIcon.png";
+import VinayaLogo from "../../../assets/vinayaLogoWhite.png";
 import { Encryption } from "./Encryption";
-import { Github, BookOpen } from "lucide-react";
+import { Github } from "lucide-react";
 
 export const BeginJournaling = () => {
     return (
         <div className="flex flex-col p-4">
-            
             {/* Top Section with Zero Cloud and Open Source */}
             <div className="flex items-center justify-end gap-6 mb-8">
                 <div className="flex items-center gap-2">
@@ -25,8 +25,8 @@ export const BeginJournaling = () => {
                    target="_blank"
                    rel="noopener noreferrer"
                    className="flex items-center gap-2 px-3 py-1.5 bg-[#2F4F4F] 
-                          rounded-lg shadow-sm hover:bg-[#1F3F3F] 
-                          transition-colors duration-200">
+                            rounded-lg shadow-sm hover:bg-[#1F3F3F] 
+                            transition-colors duration-200">
                     <Github className="w-4 h-4 text-white" />
                     <span className="text-xs text-white tracking-wide"
                           style={{ fontFamily: '"Fira Sans", sans-serif' }}>
@@ -51,25 +51,30 @@ export const BeginJournaling = () => {
                     </div>
 
                     <button className="group flex items-center px-4 py-2 bg-[#2F4F4F] 
-                text-white rounded-lg shadow-sm relative 
-                overflow-hidden hover:shadow-md
-                transition-all duration-200 cursor-pointer"
-        style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-    <div className="absolute inset-0 bg-[#1F3F3F] transform origin-left 
-                  scale-x-0 group-hover:scale-x-100 transition-transform 
-                  duration-200">
-    </div>
-    <BookOpen className="relative w-4 h-4 mr-2 transform 
-                      group-hover:rotate-6 transition-transform" />
-    <span className="relative text-sm font-medium tracking-wide">
-        Start Writing
-    </span>
-</button>
+                                     text-white rounded-lg shadow-sm relative 
+                                     overflow-hidden hover:shadow-md
+                                     transition-all duration-200 cursor-pointer"
+                            style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+                        <div className="absolute inset-0 bg-[#1F3F3F] transform origin-left 
+                                      scale-x-0 group-hover:scale-x-100 transition-transform 
+                                      duration-200">
+                        </div>
+                        <img
+                            src={VinayaLogo}
+                            alt="Vinaya Logo"
+                            className="relative w-12 h-10 transform 
+                                     group-hover:rotate-6 transition-transform"
+                        />
+                        <span className="relative text-sm font-medium tracking-wide" 
+                              style={{ fontFamily: '"PlayFair Display", sans-serif' }}>
+                            Start Writing
+                        </span>
+                    </button>
                 </div>
 
                 {/* Center image */}
                 <div className="w-1/3 flex-shrink-0 transform 
-                            hover:scale-105 transition-transform duration-300">
+                              hover:scale-105 transition-transform duration-300">
                     <img
                         src={BeginJournalingImage}
                         alt="Begin journaling illustration"
@@ -79,7 +84,7 @@ export const BeginJournaling = () => {
 
                 {/* Right side encryption */}
                 <div className="flex-shrink-0 bg-white/60 backdrop-blur-sm 
-                            p-6 rounded-xl border border-gray-200 shadow-sm">
+                              p-6 rounded-xl border border-gray-200 shadow-sm">
                     <Encryption />
                 </div>
             </div>
