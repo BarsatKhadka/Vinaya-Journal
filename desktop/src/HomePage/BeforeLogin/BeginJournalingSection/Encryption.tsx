@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Lock, LockKeyhole } from "lucide-react";
 
 export const Encryption = () => {
