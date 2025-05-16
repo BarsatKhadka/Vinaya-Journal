@@ -1,4 +1,5 @@
 import BeginJournalingImage from "../../../assets/BeginJournalingPen.png";
+import { Encryption } from "./Encryption";
 
 export const BeginJournaling = () => {
     return (
@@ -33,6 +34,9 @@ export const BeginJournaling = () => {
                     Start Writing
                 </button>
             </div>
+
+            <Encryption/>
+            
         </div>
     );
 };
