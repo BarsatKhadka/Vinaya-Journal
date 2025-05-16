@@ -39,18 +39,32 @@ export const BeginJournaling = () => {
             <div className="flex items-start justify-between gap-8">
                 {/* Left side content */}
                 <div className="flex-1 max-w-md space-y-6">
-                    <h2 className="text-3xl font-serif text-gray-800 leading-tight">
-                        Begin Your Journey of 
-                        <span className="text-[#2F4F4F]"> Mindful Writing</span>
-                    </h2>
+                    <div className="space-y-2">
+                        <h4 className="text-3xl font-serif text-gray-800 leading-tight">
+                            Begin your Journey of 
+                            <span className="text-[#2F4F4F]"> Vinaya</span>
+                        </h4>
+                        <p className="text-xs text-gray-500 italic" 
+                           style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+                            crafted with care by mindful developers
+                        </p>
+                    </div>
 
-                    <button className="flex items-center px-6 py-2.5 bg-[#2F4F4F] 
-                                   text-white rounded-lg shadow-sm 
-                                   hover:bg-[#1F3F3F] transition-all duration-200"
-                            style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                        <BookOpen className="w-4 h-4 mr-2" />
-                        <span className="text-sm">Start Writing</span>
-                    </button>
+                    <button className="group flex items-center px-4 py-2 bg-[#2F4F4F] 
+                text-white rounded-lg shadow-sm relative 
+                overflow-hidden hover:shadow-md
+                transition-all duration-200 cursor-pointer"
+        style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+    <div className="absolute inset-0 bg-[#1F3F3F] transform origin-left 
+                  scale-x-0 group-hover:scale-x-100 transition-transform 
+                  duration-200">
+    </div>
+    <BookOpen className="relative w-4 h-4 mr-2 transform 
+                      group-hover:rotate-6 transition-transform" />
+    <span className="relative text-sm font-medium tracking-wide">
+        Start Writing
+    </span>
+</button>
                 </div>
 
                 {/* Center image */}
