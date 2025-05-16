@@ -46,7 +46,7 @@ export const BeginJournaling = () => {
                         </h4>
                         <p className="text-xs text-gray-500 italic" 
                            style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                            crafted with care by mindful developers
+                            Not to become but to understand
                         </p>
                     </div>
 
