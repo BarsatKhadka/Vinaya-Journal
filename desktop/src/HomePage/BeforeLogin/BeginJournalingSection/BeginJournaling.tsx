@@ -3,7 +3,7 @@ import BeginJournalingImage from "../../../assets/BeginJournalingPen.png";
 export const BeginJournaling = () => {
     return (
         <div className="flex items-center px-6 py-8 rounded-xl 
-                    border border-gray-400 shadow-sm transition hover:shadow-md"
+                    shadow-sm transition hover:shadow-md"
              style={{ backgroundColor: "#FCFBFA" }}>
             
             {/* Left side image */}

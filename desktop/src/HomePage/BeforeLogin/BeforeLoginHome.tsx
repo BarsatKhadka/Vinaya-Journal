@@ -70,7 +70,7 @@ export const BeforeLoginHome = () => {
                         <div className="flex-1 min-w-0">
                             <RagAndMoodCard/>
                         </div>
-                        <div className="bg-white rounded-lg shadow p-6 h-full flex-1 min-w-0">
+                        <div className=" flex-1 min-w-0">
                             <BeginJournaling/>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ export const BeforeLoginHome = () => {
                 src={fallingLeaf}
                 alt="Fallen Leaf"
                 className="fixed w-12 md:w-16 lg:w-20 
-                         bottom-[10%] right-[15%] md:right-[35%] lg:right-[35%] 
+                         bottom-[3%] right-[15%] md:right-[35%] lg:right-[40%] 
                          transform -translate-x-1/2 opacity-70
                          pointer-events-none select-none z-10"
             />
