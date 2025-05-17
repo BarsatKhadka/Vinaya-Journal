@@ -23,8 +23,9 @@ export const LocalAIFeature = () => {
     }, []);
 
     return (
-        <div className="flex flex-col p-3 md:p-4 lg:p-2 
-                    hover:bg-white/10 rounded-lg transition-colors">
+        <div className="flex flex-col p-6 rounded-xl
+                    bg-white/40 backdrop-blur-[2px] border border-white/20
+                    shadow-sm transition hover:shadow-md">
             {/* Icon and Title Row */}
             <div className="flex items-center gap-2">
                 <div className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 flex-shrink-0">

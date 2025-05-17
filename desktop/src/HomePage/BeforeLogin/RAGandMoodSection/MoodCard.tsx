@@ -3,8 +3,8 @@ import MoodIcon from '../../../assets/FeatureCardIcons/MoodIcon.png'
 export const MoodCard = () => {
     return (
         <div className="flex flex-col items-center rounded-xl 
-                     shadow-sm transition hover:shadow-md"
-             style={{ backgroundColor: "#FBFCFA" }} >
+                     shadow-sm transition hover:shadow-md
+                     bg-white/40 backdrop-blur-[2px] border border-white/20" >
             
             <div className="-mt-3 w-[50%]">
                 <img

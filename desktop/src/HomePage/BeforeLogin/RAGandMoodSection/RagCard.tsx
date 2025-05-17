@@ -3,8 +3,8 @@ import PrivateSemanticSearch from "../../../assets/FeatureCardIcons/PrivateSeman
 export const RagCard = () => {
     return (
         <div className="flex flex-col items-center px-6 py-8 rounded-xl 
-                        shadow-sm transition hover:shadow-md"
-             style={{ backgroundColor: "#FCFBFA" }}>
+                        shadow-sm transition hover:shadow-md
+                        bg-white/40 backdrop-blur-[2px] border border-white/20">
             <div className="w-24 h-24 mb-6 transform transition-transform 
                         hover:scale-110 hover:rotate-3">
                 <img
