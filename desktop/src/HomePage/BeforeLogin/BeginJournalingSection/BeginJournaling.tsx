@@ -2,6 +2,7 @@ import BeginJournalingImage from "../../../assets/BeginJournalingPen.png";
 import ZeroCloudImage from "../../../assets/FeatureCardIcons/CloudIcon.png";
 import { Github } from "lucide-react";
 import { Encryption } from "./Encryption";
+import { Link } from "react-router-dom";
 
 const DhammaWheel = () => (
     <svg 
@@ -97,13 +98,14 @@ export const BeginJournaling = () => {
                                 </p>
                             </div>
 
-                            <button className="group flex items-center justify-center gap-3 px-7 py-3.5 
-                                             bg-[#2F4F4F] text-white rounded-xl 
-                                             shadow-md hover:shadow-xl
-                                             transition-all duration-300 ease-out cursor-pointer
-                                             hover:bg-[#1F3F3F] relative
-                                             border border-white/5 w-full max-w-[300px]"
-                                    style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+                            <Link to="/app" 
+                                  className="group flex items-center justify-center gap-3 px-7 py-3.5 
+                                           bg-[#2F4F4F] text-white rounded-xl 
+                                           shadow-md hover:shadow-xl
+                                           transition-all duration-300 ease-out cursor-pointer
+                                           hover:bg-[#1F3F3F] relative
+                                           border border-white/5 w-full max-w-[300px]"
+                                  style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                                 <div className="absolute inset-0 rounded-xl bg-white/5 
                                               opacity-0 group-hover:opacity-100 
                                               transition-opacity duration-300" />
@@ -113,7 +115,7 @@ export const BeginJournaling = () => {
                                       style={{ fontFamily: '"PlayFair Display", sans-serif' }}>
                                     Start Writing
                                 </span>
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
