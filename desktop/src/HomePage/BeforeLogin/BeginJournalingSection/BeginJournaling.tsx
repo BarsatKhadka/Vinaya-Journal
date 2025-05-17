@@ -31,14 +31,14 @@ const DhammaWheel = () => (
 export const BeginJournaling = () => {
     return (
         <div className="bg-white/40 backdrop-blur-[2px] rounded-xl border border-white/20 shadow-sm">
-            <div className="p-6 space-y-6">
+            <div className="p-4 md:p-6 space-y-4 md:space-y-6">
                 {/* Top Section with Zero Cloud and Open Source */}
-                <div className="flex items-center justify-start gap-3">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
                     <div className="flex items-center gap-2 px-3 py-1.5 
                                   text-gray-600 hover:text-gray-800
                                   rounded-lg border border-gray-200
                                   hover:border-gray-300 hover:bg-gray-50/50
-                                  transition-all duration-200">
+                                  transition-all duration-200 w-full sm:w-auto">
                         <img
                             src={ZeroCloudImage}
                             alt="Zero cloud dependency"
@@ -56,7 +56,7 @@ export const BeginJournaling = () => {
                                 text-gray-600 hover:text-gray-800
                                 rounded-lg border border-gray-200
                                 hover:border-gray-300 hover:bg-gray-50/50
-                                transition-all duration-200">
+                                transition-all duration-200 w-full sm:w-auto">
                         <Github className="w-4 h-4" />
                         <span className="text-xs tracking-wide"
                               style={{ fontFamily: '"Fira Sans", sans-serif' }}>
@@ -66,28 +66,28 @@ export const BeginJournaling = () => {
                 </div>
 
                 {/* Main Content Grid */}
-                <div className="grid grid-cols-12 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 items-center md:items-start">
                     {/* Left Content - Encryption */}
-                    <div className="col-span-4 pr-4">
+                    <div className="md:col-span-4 md:pr-4 flex justify-center md:justify-start">
                         <Encryption />
                     </div>
 
                     {/* Center Image */}
-                    <div className="col-span-3 flex justify-end items-center">
+                    <div className="md:col-span-3 flex justify-center md:justify-end items-center">
                         <div className="transform hover:scale-105 transition-transform duration-300">
                             <img
                                 src={BeginJournalingImage}
                                 alt="Begin journaling illustration"
-                                className="w-[150px] h-[150px] object-contain drop-shadow-md"
+                                className="w-[120px] h-[120px] md:w-[150px] md:h-[150px] object-contain drop-shadow-md"
                             />
                         </div>
                     </div>
 
                     {/* Right Content - Begin Journey */}
-                    <div className="col-span-5 pl-4">
-                        <div className="space-y-2">
+                    <div className="md:col-span-5 md:pl-4 flex flex-col items-center md:items-start">
+                        <div className="space-y-2 text-center md:text-left">
                             <div className="space-y-1">
-                                <h4 className="text-3xl font-serif text-gray-800 leading-tight">
+                                <h4 className="text-2xl md:text-3xl font-serif text-gray-800 leading-tight">
                                     Begin your Journey with
                                     <span className="text-[#2F4F4F]"> Vinaya</span>
                                 </h4>
