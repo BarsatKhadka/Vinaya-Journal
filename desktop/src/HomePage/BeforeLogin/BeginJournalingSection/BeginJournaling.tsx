@@ -30,7 +30,7 @@ const DhammaWheel = () => (
 
 export const BeginJournaling = () => {
     return (
-        <div className="backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm">
+        <div className="bg-white/40 backdrop-blur-[2px] rounded-xl border border-white/20 shadow-sm">
             <div className="p-6 space-y-6">
                 {/* Top Section with Zero Cloud and Open Source */}
                 <div className="flex items-center justify-start gap-3">
