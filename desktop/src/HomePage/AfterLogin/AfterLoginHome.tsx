@@ -1,7 +1,10 @@
+import { TextEditor } from "./TextEditor/TextEditor";
+
 export const AfterLoginHome = () => {
     return (
-        <div>
-            <h1>After Login Home</h1>
+        <div className="grid grid-cols-2 h-screen">
+            <div></div>
+            <TextEditor />
         </div>
     );
 };
