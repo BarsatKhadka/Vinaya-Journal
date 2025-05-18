@@ -1,5 +1,6 @@
 import vinayaWithout from '../../../assets/vinayaWithout.png';
 import { Home, History, Settings } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const AfterLoginRightTopBar = () => {
     return (
@@ -24,13 +25,15 @@ export const AfterLoginRightTopBar = () => {
 
                     {/* Navigation Icons */}
                     <div className="flex items-center gap-6">
-                        <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                        <Link to="/">
+                        <button className="p-2 text-gray-600 hover:text-white rounded-lg transition-all duration-200 hover:bg-[#2F4F4F] cursor-pointer">
                             <Home size={20} strokeWidth={1.5} />
                         </button>
-                        <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                        </Link>
+                        <button className="p-2 text-gray-600 hover:text-white rounded-lg transition-all duration-200 hover:bg-[#2F4F4F] cursor-pointer">
                             <History size={20} strokeWidth={1.5} />
                         </button>
-                        <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                        <button className="p-2 text-gray-600 hover:text-white rounded-lg transition-all duration-200 hover:bg-[#2F4F4F] cursor-pointer">
                             <Settings size={20} strokeWidth={1.5} />
                         </button>
                     </div>
