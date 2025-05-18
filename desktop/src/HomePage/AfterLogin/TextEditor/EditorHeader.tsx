@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import { getRandomQuote } from './quotes'
 
 export const EditorHeader = () => {
   const [currentDate, setCurrentDate] = useState('')
+  const [quote, setQuote] = useState('')
 
   useEffect(() => {
     const date = new Date()
@@ -12,6 +14,7 @@ export const EditorHeader = () => {
       day: 'numeric'
     }
     setCurrentDate(date.toLocaleDateString('en-US', options))
+    setQuote(getRandomQuote())
   }, [])
 
   return (
@@ -25,7 +28,7 @@ export const EditorHeader = () => {
           </h1>
           <p className="text-sm text-gray-600 font-light tracking-wide mt-1" 
              style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-            A moment of clarity in the stream of thoughts
+            {quote}
           </p>
         </div>
         
@@ -35,7 +38,6 @@ export const EditorHeader = () => {
             Today is 
           </p>
           <p className="text-lg font-serif text-[#2F4F4F]">{currentDate}</p>
-
         </div>
       </div>
     </div>
