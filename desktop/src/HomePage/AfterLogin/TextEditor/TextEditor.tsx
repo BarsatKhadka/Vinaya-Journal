@@ -44,7 +44,7 @@ export const TextEditor = () => {
           onPaste={handlePaste}
           onKeyDown={handleKeyDown}
           data-placeholder="Begin writing..."
-          className="w-full max-w-3xl p-8 focus:outline-none 
+          className="w-full max-w-full p-8 focus:outline-none 
                    prose prose-slate empty:before:content-[attr(data-placeholder)]
                    empty:before:text-gray-400 empty:before:pointer-events-none
                    prose-p:text-gray-700 prose-p:leading-relaxed prose-p:font-['Fira_Sans']
