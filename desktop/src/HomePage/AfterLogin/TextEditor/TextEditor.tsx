@@ -1,22 +1,12 @@
 import { useTextEditor } from "./TextEditorHandles"
+import { EditorHeader } from "./EditorHeader"
 
 export const TextEditor = () => {
   const { editorRef, handlePaste, handleKeyDown, handleContainerClick } = useTextEditor()
   
   return (
     <div className="h-screen flex flex-col">
-      {/* Editor Header */}
-      <div className="bg-white/40 backdrop-blur-[2px] border-b border-white/20 px-6 py-4">
-        <h1 className="text-2xl font-serif text-gray-800">
-          <span className="bg-gradient-to-r from-teal-700 to-slate-700 bg-clip-text text-transparent">
-            Write with gentle focus
-          </span>
-        </h1>
-        <p className="text-sm text-gray-600 font-light tracking-wide mt-1" 
-           style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-          Your thoughts, securely stored on your device
-        </p>
-      </div>
+      <EditorHeader />
 
       {/* Editor Content */}
       <div 
@@ -41,7 +31,7 @@ export const TextEditor = () => {
           style={{
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
-            fontFamily: '"serif'
+            fontFamily: 'serif'
           }}
         />
       </div>
