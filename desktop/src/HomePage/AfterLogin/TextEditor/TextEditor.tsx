@@ -33,10 +33,13 @@ export const TextEditor = () => {
   }, [])
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-[calc(100vh)] flex flex-col">
       <div 
-        className="flex-1 bg-white/40 backdrop-blur-[2px] overflow-auto"
+        className="flex-1 bg-white/40 backdrop-blur-[2px] overflow-y-auto"
         onClick={handleContainerClick}
+        style={{
+          maxHeight: '100%'
+        }}
       >
         <div 
           ref={editorRef}
@@ -51,8 +54,7 @@ export const TextEditor = () => {
                    font-serif text-lg cursor-text"
           style={{
             whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            minHeight: '100%'
+            wordBreak: 'break-word'
           }}
         />
       </div>
