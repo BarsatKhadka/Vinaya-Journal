@@ -23,13 +23,20 @@ export const TextEditor = () => {
   }, [])
   
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col bg-[#FDFBF7]">
       <EditorHeader />
 
       {/* Editor Content */}
       <div 
-        className="flex-1 bg-white/40 backdrop-blur-[2px] overflow-y-auto"
+        className="flex-1 bg-[#FDFBF7] overflow-y-auto"
         onClick={handleContainerClick}
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #00000008 1px, transparent 1px),
+            linear-gradient(to bottom, #00000008 1px, transparent 1px)
+          `,
+          backgroundSize: '24px 24px'
+        }}
       >
         <div 
           ref={editorRef}

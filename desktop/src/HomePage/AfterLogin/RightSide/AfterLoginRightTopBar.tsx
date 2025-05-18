@@ -3,7 +3,7 @@ import vinayaWithout from '../../../assets/vinayaWithout.png';
 export const AfterLoginRightTopBar = () => {
     return (
         <div className="flex flex-col">
-            <div className=" backdrop-blur-[2px] px-6">
+            <div className="backdrop-blur-[2px] px-6 py-1 border-b border-gray-200/90 bg-[#FDFBF7]">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Logo and Title */}
                     <div className="flex items-center md:gap-4 group">
@@ -19,16 +19,6 @@ export const AfterLoginRightTopBar = () => {
                                 VINAYA
                             </span>
                         </h1>
-                    </div>
-
-                    {/* Settings and Profile */}
-                    <div className="flex items-center gap-6">
-                        <button className="text-sm text-gray-600 hover:text-gray-800 transition-colors">
-                            Settings
-                        </button>
-                        <button className="text-sm text-gray-600 hover:text-gray-800 transition-colors">
-                            Profile
-                        </button>
                     </div>
                 </div>
             </div>
