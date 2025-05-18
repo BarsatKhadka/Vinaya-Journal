@@ -16,6 +16,28 @@ export const useTextEditor = () => {
       e.preventDefault()
       document.execCommand('insertText', false, '    ')
     }
+    
+    // Format shortcuts (Ctrl/Cmd + key)
+    if (e.ctrlKey || e.metaKey) {
+      switch (e.key.toLowerCase()) {
+        case 'b':
+          e.preventDefault()
+          document.execCommand('bold', false)
+          break
+        case 'i':
+          e.preventDefault()
+          document.execCommand('italic', false)
+          break
+        case 'u':
+          e.preventDefault()
+          document.execCommand('underline', false)
+          break
+        case 's':  
+          e.preventDefault()
+          document.execCommand('strikethrough', false)
+          break
+      }
+    }
   }, [])
 
   // Handle click anywhere to focus
