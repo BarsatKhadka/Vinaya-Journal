@@ -1,8 +1,26 @@
 import { useTextEditor } from "./TextEditorHandles"
 import { EditorHeader } from "./EditorHeader"
+import { EditorFooter } from "./EditorFooter"
+import { useState, useEffect } from "react"
 
 export const TextEditor = () => {
   const { editorRef, handlePaste, handleKeyDown, handleContainerClick } = useTextEditor()
+  const [content, setContent] = useState("")
+
+  // Update content when editor changes
+  useEffect(() => {
+    const updateContent = () => {
+      if (editorRef.current) {
+        setContent(editorRef.current.innerText || "")
+      }
+    }
+
+    const editor = editorRef.current
+    if (editor) {
+      editor.addEventListener('input', updateContent)
+      return () => editor.removeEventListener('input', updateContent)
+    }
+  }, [])
   
   return (
     <div className="h-screen flex flex-col">
@@ -27,7 +45,7 @@ export const TextEditor = () => {
                    prose-blockquote:border-l-[#2F4F4F]/20 prose-blockquote:text-gray-600
                    prose-pre:bg-[#2F4F4F]/5 prose-pre:text-gray-700
                    prose-strong:text-[#2F4F4F] prose-em:text-gray-600
-                   text-lg cursor-text min-h-[calc(100vh-8rem)]"
+                   text-lg cursor-text min-h-[calc(100vh-12rem)]"
           style={{
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
@@ -35,6 +53,7 @@ export const TextEditor = () => {
           }}
         />
       </div>
+      <EditorFooter content={content} />
     </div>
   )
 }
