@@ -48,8 +48,6 @@ export const TextEditor = () => {
                    prose prose-slate empty:before:content-[attr(data-placeholder)]
                    empty:before:text-gray-400 empty:before:pointer-events-none
                    prose-p:text-gray-700 prose-p:leading-relaxed prose-p:font-['Fira_Sans']
-                   prose-headings:font-serif prose-headings:text-gray-800
-                   prose-blockquote:border-l-[#2F4F4F]/20 prose-blockquote:text-gray-600
                    prose-pre:bg-[#2F4F4F]/5 prose-pre:text-gray-700
                    prose-strong:text-[#2F4F4F] prose-em:text-gray-600
                    text-lg cursor-text min-h-[calc(100vh-12rem)]"

@@ -1,4 +1,5 @@
 import vinayaWithout from '../../../assets/vinayaWithout.png';
+import { Home, History, Settings } from 'lucide-react';
 
 export const AfterLoginRightTopBar = () => {
     return (
@@ -19,6 +20,19 @@ export const AfterLoginRightTopBar = () => {
                                 VINAYA
                             </span>
                         </h1>
+                    </div>
+
+                    {/* Navigation Icons */}
+                    <div className="flex items-center gap-6">
+                        <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                            <Home size={20} strokeWidth={1.5} />
+                        </button>
+                        <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                            <History size={20} strokeWidth={1.5} />
+                        </button>
+                        <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                            <Settings size={20} strokeWidth={1.5} />
+                        </button>
                     </div>
                 </div>
             </div>
