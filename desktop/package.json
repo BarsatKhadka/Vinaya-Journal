@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.6",
     "axios": "^1.9.0",
+    "better-sqlite3": "^11.10.0",
     "framer-motion": "^12.10.5",
     "lucide-react": "^0.509.0",
     "react": "^18.2.0",
