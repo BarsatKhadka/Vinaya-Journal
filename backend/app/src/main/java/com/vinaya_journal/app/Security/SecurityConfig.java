@@ -37,11 +37,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
 
-
-
         //enabling this makes you require to pass authorization header with base64 code
         http.httpBasic(withDefaults());
-
 
         //return this by building it.
         return http.build();
