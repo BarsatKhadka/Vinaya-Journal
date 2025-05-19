@@ -56,7 +56,7 @@ export const BeforeLoginHome = () => {
                             <div className="flex-1 min-w-0">
                                 <RagAndMoodCard/>
                             </div>
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 mb-6">
                                 <BeginJournaling/>
                             </div>
                         </div>
