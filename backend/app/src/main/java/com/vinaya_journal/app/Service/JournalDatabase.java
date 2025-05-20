@@ -1,9 +1,13 @@
 package com.vinaya_journal.app.Service;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class JournalDatabase {
-    private static String DBFolder = System.getProperty("user.home") + "/.vinaya";
+    private static String DBFolder = System.getProperty("user.home") + "/vinayadb";
     private static String DBFile = DBFolder + "/journalEntries.db";
     private static String finalDbUrl = "jdbc:sqlite:" + DBFile;
 
@@ -13,11 +17,36 @@ public class JournalDatabase {
             if(!folder.exists()){
                 folder.mkdirs();
             }
+            try(Connection conn = DriverManager.getConnection(finalDbUrl)){
+                if(conn !=null){
+                    System.out.println("Connected to sql lite" + finalDbUrl);
+                    createTables(conn);
+                }
+            }
         }
         catch(Exception e){
             System.out.println(e);
         }
         System.out.println(finalDbUrl);
+    }
+
+    public static void createTables(Connection conn) throws SQLException {
+        String sql = """
+                CREATE TABLE IF NOT EXISTS entries(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT,
+                content TEXT,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                modified_at TEXT
+                );
+                """;
+        try(Statement stmt = conn.createStatement()){
+                stmt.execute(sql);
+        }
+    }
+
+    public static Connection getConnection() throws SQLException{
+        return DriverManager.getConnection(finalDbUrl);
     }
 
 }
