@@ -37,7 +37,7 @@ public class JournalDatabase {
                 content TEXT,
                 entry_date TEXT UNIQUE DEFAULT CURRENT_DATE,
                 created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-                modified_at TEXT
+                modified_at TEXT DEFAULT CURRENT_TIMESTAMP
                 );
                 """;
         try(Statement stmt = conn.createStatement()){

@@ -10,7 +10,8 @@ public class JournalInsertService {
         String sql = """
         INSERT INTO entries (content) VALUES(?)
         ON CONFLICT(entry_date) DO UPDATE SET
-            content = excluded.content
+            content = excluded.content,
+            modified_at = datetime('now')
         """;
         try(Connection conn = JournalDatabase.getConnection()){
             PreparedStatement pstmt = conn.prepareStatement(sql);
