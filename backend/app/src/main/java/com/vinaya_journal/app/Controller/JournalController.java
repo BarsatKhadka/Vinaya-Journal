@@ -1,5 +1,6 @@
 package com.vinaya_journal.app.Controller;
 
+import com.vinaya_journal.app.DTO.InsertServiceResultDTO;
 import com.vinaya_journal.app.DTO.JournalEntryDTO;
 import com.vinaya_journal.app.Service.JournalInsertService;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class JournalController {
     @PostMapping("/journalEntry")
     public ResponseEntity<String> journalEntry(@RequestBody JournalEntryDTO journalEntryDTO){
-        String result = JournalInsertService.insertJournal(journalEntryDTO);
-        if (result.equals("success")) {
-            return ResponseEntity.ok("Journal entry inserted successfully.");
+        InsertServiceResultDTO result = JournalInsertService.insertJournal(journalEntryDTO);
+        if (result.isSuccess()) {
+            return ResponseEntity.ok(result.getModified_at());
         } else {
-            return ResponseEntity.status(500).body("Error inserting journal entry: " + result);
+            return ResponseEntity.status(500).body(result.getModified_at());
         }
     }
 }

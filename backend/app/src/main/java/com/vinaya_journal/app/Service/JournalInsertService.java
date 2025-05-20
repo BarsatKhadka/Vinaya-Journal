@@ -1,12 +1,14 @@
 package com.vinaya_journal.app.Service;
 
+import com.vinaya_journal.app.DTO.InsertServiceResultDTO;
 import com.vinaya_journal.app.DTO.JournalEntryDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
 
 public class JournalInsertService {
-    public static String insertJournal(JournalEntryDTO journalEntryDTO){
+    public static InsertServiceResultDTO insertJournal(JournalEntryDTO journalEntryDTO){
         String sql = """
         INSERT INTO entries (content) VALUES(?)
         ON CONFLICT(entry_date) DO UPDATE SET
@@ -17,10 +19,10 @@ public class JournalInsertService {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,journalEntryDTO.getContent());
             pstmt.executeUpdate();
-            return "success";
+            return new InsertServiceResultDTO(true, LocalDateTime.now().toString());
         }
         catch(Exception e){
-            return e.getMessage();
+            return new InsertServiceResultDTO(false, e.getMessage());
         }
     }
 }
