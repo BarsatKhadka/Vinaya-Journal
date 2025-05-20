@@ -34,8 +34,8 @@ public class JournalDatabase {
         String sql = """
                 CREATE TABLE IF NOT EXISTS entries(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                title TEXT,
                 content TEXT,
+                entry_date TEXT UNIQUE DEFAULT CURRENT_DATE,
                 created_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 modified_at TEXT
                 );

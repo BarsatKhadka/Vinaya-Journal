@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class JournalController {
-    @PostMapping("/jounralEntry")
+    @PostMapping("/journalEntry")
     public ResponseEntity<String> journalEntry(@RequestBody JournalEntryDTO journalEntryDTO){
         String result = JournalInsertService.insertJournal(journalEntryDTO);
         if (result.equals("success")) {
