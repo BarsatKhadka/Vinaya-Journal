@@ -2,10 +2,11 @@ import { useTextEditor } from "./TextEditorHandles"
 import { EditorHeader } from "./EditorHeader"
 import { EditorFooter } from "./EditorFooter"
 import { useState, useEffect } from "react"
+import axios from "axios"
 
 export const TextEditor = () => {
   const { editorRef, handlePaste, handleKeyDown, handleContainerClick } = useTextEditor()
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState<string>("")
 
   // Update content when editor changes
   useEffect(() => {
@@ -21,6 +22,16 @@ export const TextEditor = () => {
       return () => editor.removeEventListener('input', updateContent)
     }
   }, [])
+
+  useEffect(() => {
+    const backendSave = async () => {
+      const response = await axios.post("http://localhost:8080/journalEntry", {
+        content: content,
+    })
+    console.log(response)
+    }
+    backendSave()
+  }, [content])
   
   return (
     <div className="h-screen flex flex-col bg-[#FDFBF7]">
