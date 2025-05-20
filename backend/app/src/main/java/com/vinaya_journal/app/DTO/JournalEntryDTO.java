@@ -4,11 +4,11 @@ public class JournalEntryDTO {
     private String title;
     private String content;
 
-    private String getTitle(){
+    public String getTitle(){
         return title;
     };
 
-    private String getContent(){
+    public String getContent(){
         return content;
     }
 
