@@ -91,7 +91,7 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
             }}
           >
             <span className="mr-1"><Save size={18} /></span>
-            {buttonText}
+            <span style={{fontFamily: 'Fira Sans'}}>{buttonText}</span>
           </button>
         </div>
 

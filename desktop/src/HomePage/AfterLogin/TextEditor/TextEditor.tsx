@@ -58,10 +58,7 @@ export const TextEditor = () => {
                      prose-strong:text-[#2F4F4F] prose-em:text-gray-600
                      text-lg cursor-text min-h-[calc(100vh-12rem)]"
             style={{
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
               fontFamily: 'serif',
-              background: 'transparent'
             }}
           />
         </div>
