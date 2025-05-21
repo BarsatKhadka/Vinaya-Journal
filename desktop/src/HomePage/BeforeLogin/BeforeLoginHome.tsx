@@ -9,7 +9,7 @@ export const BeforeLoginHome = () => {
     return (
         <div className="min-h-screen w-full overflow-x-hidden relative">
             <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
                 style={{ backgroundImage: `url(${beforeLoginBackground})` }}
             />
             <div className="relative">

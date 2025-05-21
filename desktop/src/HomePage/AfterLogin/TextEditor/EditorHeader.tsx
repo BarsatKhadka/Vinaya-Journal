@@ -18,7 +18,7 @@ export const EditorHeader = () => {
   }, [])
 
   return (
-    <div className="bg-[#FDFBF7] backdrop-blur-[2px] border-b border-gray-200/90 px-6 py-4">
+    <div className="border-b border-gray-200/90 px-6 py-4 ">
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-2xl font-serif text-gray-800">
