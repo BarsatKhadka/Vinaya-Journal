@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Save } from "lucide-react";
 import axios from "axios";
 
@@ -24,6 +24,14 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
   const Indicator = () => (
     <div className="w-1 h-1 rounded-full bg-[#4F6F4F]/80" />
   );
+
+  useEffect(() => {
+    const fetchSaved_at = async () => {
+      const response = await axios.get("http://localhost:8080/lastSavedAt");
+      setSaved_at(new Date(response.data).toLocaleString());
+    };
+    fetchSaved_at();
+  }, []);
 
   const handleSave = async () => {
     if (!content.trim()) return;
