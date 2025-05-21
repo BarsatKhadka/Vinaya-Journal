@@ -9,6 +9,7 @@ interface EditorFooterProps {
 export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<"success" | "error" | 'idle'>('idle');
+  const [saved_at, setSaved_at] = useState<string>("");
   
 
   const getWordCount = (text: string) => {
@@ -28,9 +29,10 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
     if (!content.trim()) return;
     setIsSaving(true);
     try {
-      await axios.post("http://localhost:8080/journalEntry", {
+      const response = await axios.post("http://localhost:8080/journalEntry", {
         content: content,
       });
+      setSaved_at(response.data);
       setSaveStatus("success");
     } catch (error) {
       console.error('Error saving journal entry:', error);
@@ -93,6 +95,16 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
             <span className="mr-1"><Save size={18} /></span>
             <span style={{fontFamily: 'Fira Sans'}}>{buttonText}</span>
           </button>
+          {saved_at && (
+            <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
+              Last saved at: {new Date(saved_at).toLocaleString()}
+            </span>
+          )}
+          {saved_at === "" && (
+            <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
+              Unsaved
+            </span>
+          )}
         </div>
 
         <div className="flex text-md text-gray-600 items-center gap-4">
