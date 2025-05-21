@@ -41,7 +41,7 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
       }, 1000)
       setTimeout(() => {
         setSaveStatus('idle');
-      }, 2700);
+      }, 3000);
     }
   };
 
@@ -61,20 +61,37 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
           <button
             onClick={handleSave}
             disabled={isSaving || !content.trim()}
-            className={`flex items-center gap-2 px-6 py-2 rounded-xl shadow-md
-              border border-[#C9A74A] bg-[#F7F4ED] relative cursor-pointer
-              ${isSaving || !content.trim() ? 'bg-gray-200 cursor-not-allowed' : ''}`}
+            className={`
+              flex items-center gap-2 px-6 py-2 rounded-xl
+              border border-[#C9A74A] relative cursor-pointer
+              transition-all duration-150
+              ${isSaving || !content.trim() ? 'opacity-60 cursor-not-allowed' : 'hover:border-[#2F4F4F] hover:shadow-md active:scale-[0.98]'}
+              ${saveStatus === 'success' ? 'border-green-400 text-green-700' : ''}
+              ${saveStatus === 'error' ? 'border-red-400 text-red-700' : ''}
+            `}
             style={{
+              outline: 'none',
+              minWidth: 90,
+              letterSpacing: '0.01em',
               fontFamily: 'serif',
-              fontWeight: 300,
+              fontWeight: 400,
               fontSize: '1rem',
               color: '#2F4F4F',
-              background: '#F7F4ED',
+              background: '#FDFBF7',
+              backgroundImage: `
+                linear-gradient(to right, #00000008 1px, transparent 1px),
+                linear-gradient(to bottom, #00000008 1px, transparent 1px)
+              `,
+              backgroundSize: '24px 24px',
+              boxShadow: isSaving || saveStatus === 'success' || saveStatus === 'error'
+                ? '0 2px 8px 0 #e6e1d5'
+                : '0 1px 2px 0 #eceae6',
+              borderBottomWidth: '2.5px',
+              borderRightWidth: '2.5px',
             }}
           >
             <span className="mr-1"><Save size={18} /></span>
             {buttonText}
-
           </button>
         </div>
 
