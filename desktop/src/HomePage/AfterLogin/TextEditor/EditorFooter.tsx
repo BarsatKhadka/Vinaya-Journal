@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Save } from "lucide-react";
 import axios from "axios";
 
@@ -7,6 +7,8 @@ interface EditorFooterProps {
 }
 
 export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
+  const [isSaving, setIsSaving] = useState(false);
+
   const getWordCount = (text: string) => {
     // Remove extra whitespace and split by spaces
     return text.trim().split(/\s+/).filter(word => word.length > 0).length;
@@ -22,12 +24,15 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
 
   const handleSave = async () => {
     if (!content.trim()) return;
+    setIsSaving(true);
     try {
       await axios.post("http://localhost:8080/journalEntry", {
         content: content,
       });
     } catch (error) {
       console.error('Error saving journal entry:', error);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -37,14 +42,20 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
         <div className="flex items-center gap-4">
           <button
             onClick={handleSave}
-            disabled={!content.trim()}
-            className="px-4 py-2 rounded-lg flex items-center gap-2
-                     bg-[#2F4F4F] hover:bg-[#1F3F3F] text-white shadow-md
-                     transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed"
-            style={{ fontFamily: '"Fira Sans", sans-serif' }}
+            disabled={isSaving || !content.trim()}
+            className={`flex items-center gap-2 px-6 py-2 rounded-xl shadow-md
+              border border-[#C9A74A] bg-[#F7F4ED] relative cursor-pointer
+              ${isSaving || !content.trim() ? 'bg-gray-200 cursor-not-allowed' : ''}`}
+            style={{
+              fontFamily: 'serif',
+              fontWeight: 300,
+              fontSize: '1rem',
+              color: '#2F4F4F',
+              background: '#F7F4ED',
+            }}
           >
-            <Save size={18} />
-            <span className="text-sm">Save</span>
+            <span className="mr-1"><Save size={18} /></span>
+            {isSaving ? 'Saving...' : 'Save'}
           </button>
         </div>
 
