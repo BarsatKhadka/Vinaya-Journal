@@ -8,6 +8,8 @@ interface EditorFooterProps {
 
 export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
   const [isSaving, setIsSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"success" | "error" | 'idle'>('idle');
+  
 
   const getWordCount = (text: string) => {
     // Remove extra whitespace and split by spaces
@@ -29,12 +31,28 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
       await axios.post("http://localhost:8080/journalEntry", {
         content: content,
       });
+      setSaveStatus("success");
     } catch (error) {
       console.error('Error saving journal entry:', error);
+      setSaveStatus("error");
     } finally {
-      setIsSaving(false);
+      setTimeout(() =>{
+        setIsSaving(false)
+      }, 1000)
+      setTimeout(() => {
+        setSaveStatus('idle');
+      }, 2700);
     }
   };
+
+  let buttonText = 'Save'
+  if(isSaving) {
+    buttonText = 'Saving...'
+  } else if(saveStatus === 'success') {
+    buttonText = 'Saved'
+  } else if(saveStatus === 'error') {
+    buttonText = 'Error'
+  }
 
   return (
     <div className="bg-white/30 backdrop-blur-[2px] border-t border-white/20 px-4 py-2">
@@ -55,7 +73,8 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
             }}
           >
             <span className="mr-1"><Save size={18} /></span>
-            {isSaving ? 'Saving...' : 'Save'}
+            {buttonText}
+
           </button>
         </div>
 
