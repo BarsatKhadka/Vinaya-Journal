@@ -19,12 +19,11 @@ export const AfterLoginRightTopBar = () => {
     }, [navigate]);
 
     return (
-        <div className="flex flex-col">
-            <div className="backdrop-blur-[2px] px-6 py-1 border-b border-gray-200/90 bg-[#FDFBF7]">
+            <div className="backdrop-blur-[2px] px-8 py-1 border-b border-gray-200/90 bg-[#FDFBF7]">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Logo and Title */}
                     <div className="flex items-center md:gap-4 group">
-                        <div className="rounded-full transition-transform duration-300 group-hover:scale-105">
+                        <div className="rounded-full transition-transform duration-300 group-hover:scale-105 ">
                             <img
                                 src={vinayaWithout}
                                 alt="Vinaya Logo"
@@ -57,6 +56,5 @@ export const AfterLoginRightTopBar = () => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
