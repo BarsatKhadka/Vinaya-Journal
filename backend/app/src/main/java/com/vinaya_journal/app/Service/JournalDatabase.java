@@ -36,8 +36,8 @@ public class JournalDatabase {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 content TEXT,
                 entry_date TEXT UNIQUE DEFAULT CURRENT_DATE,
-                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-                modified_at TEXT DEFAULT CURRENT_TIMESTAMP
+                created_at TEXT DEFAULT (datetime('now','localtime')),
+                modified_at TEXT DEFAULT (datetime('now','localtime'))
                 );
                 """;
         try(Statement stmt = conn.createStatement()){

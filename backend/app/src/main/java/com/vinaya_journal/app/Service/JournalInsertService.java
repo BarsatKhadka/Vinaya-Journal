@@ -13,7 +13,7 @@ public class JournalInsertService {
         INSERT INTO entries (content) VALUES(?)
         ON CONFLICT(entry_date) DO UPDATE SET
             content = excluded.content,
-            modified_at = datetime('now')
+            modified_at = datetime('now', 'localtime')
         """;
         try(Connection conn = JournalDatabase.getConnection()){
             PreparedStatement pstmt = conn.prepareStatement(sql);
