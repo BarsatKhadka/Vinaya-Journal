@@ -18,5 +18,4 @@ public class AppApplication implements ApplicationRunner {
 		JournalDatabase.initialize();
 	}
 
-
 }
