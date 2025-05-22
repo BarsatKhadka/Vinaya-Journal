@@ -5,9 +5,13 @@ type SidebarOption = 'Contextual RAG Memory' | 'Mood Insights' | 'Vinaya Ollama 
 interface AppState {
   selectedSidebar: SidebarOption;
   setSelectedSidebar: (sidebar: SidebarOption) => void;
+  ollamaRunning: boolean;
+  setOllamaRunning: (running: boolean) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
   selectedSidebar: 'Contextual RAG Memory',
   setSelectedSidebar: (sidebar: SidebarOption) => set((state) => ({ ...state, selectedSidebar: sidebar })),
+  ollamaRunning: false,
+  setOllamaRunning: (running: boolean) => set((state) => ({ ...state, ollamaRunning: running })),
 }));

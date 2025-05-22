@@ -1,25 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import {OllamaRunningCard} from "./OllamaRunningCard";
 import {OllamaNotRunningCard} from "./OllamaNotRunningCard";
 import LocalAiMemory from "../../../assets/FeatureCardIcons/LocalAiMemory.png"; 
+import { useAppStore } from "../../../store";
+
+export const checkOllamaRunning = async () => {
+    try {
+        const response = await axios.get("http://localhost:8000/ollama");
+        return response?.data;
+    } catch (error) {
+        console.error("Error checking Ollama status:", error);
+        return false;
+    }
+};
 
 export const LocalAIFeature = () => {
-    const [ollamaRunning, setOllamaRunning] = useState<boolean>(false);
-
-    const checkOllamaRunning = async () => {
-        try {
-            const response = await axios.get("http://localhost:8000/ollama");
-            setOllamaRunning(response?.data);
-        } catch (error) {
-            console.error("Error checking Ollama status:", error);
-            setOllamaRunning(false);
-        }
-    };
+    const { ollamaRunning, setOllamaRunning } = useAppStore();
 
     // Check if Ollama is running when the component mounts
     useEffect(() => {
-        checkOllamaRunning();
+        const fetchOllamaRunning = async () => {
+            const ollamaRunning = await checkOllamaRunning();
+            setOllamaRunning(ollamaRunning);
+        };
+        fetchOllamaRunning();
     }, []);
 
     return (
