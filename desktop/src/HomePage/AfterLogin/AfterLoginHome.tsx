@@ -1,5 +1,6 @@
 import { TextEditor } from "./TextEditor/TextEditor";
 import { AfterLoginRightTopBar } from "./RightSide/AfterLoginRightTopBar";
+import { SideBarAfterLogin } from "../AfterLogin/RightSide/SideBarAfterLogin";
 
 export const AfterLoginHome = () => {
     return (
@@ -8,7 +9,7 @@ export const AfterLoginHome = () => {
                 <AfterLoginRightTopBar />
                 <div className="flex flex-1 border-t border-gray-200/90">
                     <div className="w-1/4 border-r border-gray-200/90">
-
+                        <SideBarAfterLogin />
                     </div>
                     <div className="w-3/4">
 
