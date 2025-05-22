@@ -1,5 +1,6 @@
 import { LineChart, Bot, SquareTerminal } from "lucide-react";
 import { useAppStore } from "../../../../store";
+import { OllamaAIModelDropdown } from "./OllamaAIModelDropdown";
 
 
 export const SideBarAfterLogin = () => {
@@ -7,7 +8,7 @@ export const SideBarAfterLogin = () => {
     return (
         <div className="flex flex-col h-full w-full px-4 py-6 shadow-md"
         >
-            <div className="flex flex-col gap-2 mt-2">
+            <div className="flex flex-col gap-2 mt-2 flex-grow">
                 <button onClick={() => setSelectedSidebar('Contextual RAG Memory')} className="flex items-center gap-3 px-3 py-2 rounded-md text-[#2F4F4F] font-serif text-base hover:bg-[#e0f2ef] transition-all w-full cursor-pointer">
                     <SquareTerminal className="w-5 h-5" />
                     <span>Contextual RAG</span>
@@ -20,6 +21,9 @@ export const SideBarAfterLogin = () => {
                     <Bot className="w-5 h-5" />
                     <span>Vinaya Ollama AI</span>
                 </button>
+            </div>
+            <div className="mt-8">
+                <OllamaAIModelDropdown />
             </div>
         </div>
     );
