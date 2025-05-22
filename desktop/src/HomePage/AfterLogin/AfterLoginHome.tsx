@@ -6,6 +6,7 @@ import { ContextualRAG } from "./RightSide/SideBarComponents/ContextualRAG";
 import { MoodInsights } from "./RightSide/SideBarComponents/MoodInsights";
 import { VInayaOllamaAI } from "./RightSide/SideBarComponents/VInayaOllamaAI";
 
+
 export const AfterLoginHome = () => {
     const { selectedSidebar } = useAppStore();
     return (
@@ -13,7 +14,7 @@ export const AfterLoginHome = () => {
             <div className="flex flex-col h-full">
                 <AfterLoginRightTopBar />
                 <div className="flex flex-1 border-t border-gray-200/90">
-                    <div className="w-1/4 border-r border-gray-200/90">
+                    <div className="w-1/4 border-r border-gray-200/90 ">
                         <SideBarAfterLogin />
                     </div>
                     <div className="w-3/4">
