@@ -105,12 +105,12 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
           </button>
           {saved_at && (
             <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
-              Last saved at: {new Date(saved_at).toLocaleString()}
+              Today's entry last saved at: {new Date(saved_at).toLocaleString()}
             </span>
           )}
           {saved_at === "" && (
             <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
-              Unsaved
+              No entries yet for this day
             </span>
           )}
         </div>
