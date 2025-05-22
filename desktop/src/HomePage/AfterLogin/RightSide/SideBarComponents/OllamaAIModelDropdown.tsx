@@ -3,11 +3,12 @@ import { useAppStore } from "../../../../store";
 import { checkOllamaRunning } from "../../../BeforeLogin/OllamaAISection/OllamaAICard";
 import { AlertTriangle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { fetchOllamaModels } from "../../../BeforeLogin/OllamaAISection/OllamaRunningCard";
 
 export const OllamaAIModelDropdown = () => {
-    const { ollamaRunning, setOllamaRunning } = useAppStore();
+    const { ollamaRunning, setOllamaRunning, ollamaModels, setOllamaModels } = useAppStore();
 
-    //check if ollama is running
+    // First effect: check if Ollama is running
     useEffect(() => {
         const fetchOllamaRunning = async () => {
             const ollamaRunning = await checkOllamaRunning();
@@ -15,6 +16,13 @@ export const OllamaAIModelDropdown = () => {
         };
         fetchOllamaRunning();
     }, []);
+
+    // Second effect: fetch models when ollamaRunning becomes true
+    useEffect(() => {
+        if (ollamaRunning) {
+            fetchOllamaModels().then(setOllamaModels);
+        }
+    }, [ollamaRunning]);
 
     return (
         <div className="w-full max-w-xs mx-auto">
@@ -25,12 +33,25 @@ export const OllamaAIModelDropdown = () => {
                     </label>
                     <select
                         className="w-full px-2 md:px-3 py-2 rounded-md border border-gray-300 bg-white text-[#2F4F4F] font-serif text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F4F4F]"
-                        defaultValue="Mistral 78"
+                        defaultValue={ollamaModels.length > 0 ? ollamaModels[0] : "No models found"}
                     >
-                        <option value="Mistral 78">Mistral 78</option>
-                        <option value="Llama 3">Llama 3</option>
-                        <option value="Phi 3">Phi 3</option>
+                        {ollamaModels.length === 0 ? (
+                            <option value="No models found">No models found</option>
+                        ) : (
+                            ollamaModels.map((model) => (
+                                <option key={model} value={model}>
+                                    {model}
+                                </option>
+                            ))
+                        )}
                     </select>
+                    {ollamaModels.length === 0 && (
+                        <Link to="/" className="w-full block">
+                            <p className="mt-2 w-full px-2 md:px-4 py-1.5 rounded bg-red-100 text-red-700 font-medium hover:bg-red-200 transition cursor-pointer text-xs md:text-sm text-center">
+                                Guide to install Models
+                            </p>
+                        </Link>
+                    )}
                 </>
             ) : (
                 <div className="w-full px-2 md:px-3 py-4 rounded-md border border-red-200 bg-gradient-to-r from-red-50 to-orange-50 text-red-700 font-serif text-xs md:text-sm text-center shadow-sm flex flex-col items-center gap-2">

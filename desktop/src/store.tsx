@@ -7,6 +7,8 @@ interface AppState {
   setSelectedSidebar: (sidebar: SidebarOption) => void;
   ollamaRunning: boolean;
   setOllamaRunning: (running: boolean) => void;
+  ollamaModels: string[];
+  setOllamaModels: (models: string[]) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -14,4 +16,6 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setSelectedSidebar: (sidebar: SidebarOption) => set((state) => ({ ...state, selectedSidebar: sidebar })),
   ollamaRunning: false,
   setOllamaRunning: (running: boolean) => set((state) => ({ ...state, ollamaRunning: running })),
+  ollamaModels: [],
+  setOllamaModels: (models: string[]) => set((state) => ({ ...state, ollamaModels: models })),
 }));
