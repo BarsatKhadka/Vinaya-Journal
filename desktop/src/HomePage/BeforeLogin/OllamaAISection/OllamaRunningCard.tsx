@@ -49,19 +49,25 @@ const ExploreMoreSection = () => (
     </>
 );
 
+export const fetchOllamaModels = async (): Promise<string[]> => {
+    try {
+        const response = await axios.get("http://localhost:8000/models");
+        return response?.data.models || [];
+    } catch (error) {
+        console.error("Error checking Ollama status:", error);
+        return [];
+    }
+};
+
 export const OllamaRunningCard = () => {
     const [ollamaModels, setOllamaModels] = useState<string[]>([]);
-    
+
     useEffect(() => {
-        const checkOllamaModels = async () => {
-            try {
-                const response = await axios.get("http://localhost:8000/models");
-                setOllamaModels(response?.data.models || []);
-            } catch (error) {
-                console.error("Error checking Ollama status:", error);
-            }
+        const fetchModels = async () => {
+            const models = await fetchOllamaModels();
+            setOllamaModels(models);
         };
-        checkOllamaModels();
+        fetchModels();
     }, []);
 
     return (
