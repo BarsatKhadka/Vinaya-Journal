@@ -1,6 +1,6 @@
 import { TextEditor } from "./TextEditor/TextEditor";
 import { AfterLoginRightTopBar } from "./RightSide/AfterLoginRightTopBar";
-import { SideBarAfterLogin } from "../AfterLogin/RightSide/SideBarAfterLogin";
+import { SideBarAfterLogin } from "./RightSide/SideBarComponents/SideBarAfterLogin";
 
 export const AfterLoginHome = () => {
     return (
@@ -12,7 +12,7 @@ export const AfterLoginHome = () => {
                         <SideBarAfterLogin />
                     </div>
                     <div className="w-3/4">
-
+                        
                     </div>
                 </div>
             </div>
