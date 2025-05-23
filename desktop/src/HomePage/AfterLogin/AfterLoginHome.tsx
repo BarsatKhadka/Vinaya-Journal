@@ -5,6 +5,7 @@ import { useAppStore } from "../../store"
 import { ContextualRAG } from "./RightSide/SideBarComponents/ContextualRAG";
 import { MoodInsights } from "./RightSide/SideBarComponents/MoodInsights";
 import { VInayaOllamaAI } from "./RightSide/SideBarComponents/VInayaOllamaAI";
+import { RetrievePastEntries } from "./RightSide/SideBarComponents/RetrievePastEntries";
 
 export const AfterLoginHome = () => {
     const { selectedSidebar } = useAppStore();
@@ -20,6 +21,7 @@ export const AfterLoginHome = () => {
                         {selectedSidebar === 'Contextual RAG Memory' && <ContextualRAG />}
                         {selectedSidebar === 'Mood Insights' && <MoodInsights />}
                         {selectedSidebar === 'Vinaya Ollama AI' && <VInayaOllamaAI />}
+                        {selectedSidebar === 'Retrieve Past Entries' && <RetrievePastEntries/>}
                     </div>
                 </div>
             </div>
