@@ -54,7 +54,7 @@ export const OllamaAIModelDropdown = () => {
                     )}
                 </>
             ) : (
-                <div className="w-full px-2 md:px-3 py-4 rounded-md border border-red-200 bg-gradient-to-r from-red-50 to-orange-50 text-red-700 font-serif text-xs md:text-sm text-center shadow-sm flex flex-col items-center gap-2">
+                <div className="w-full px-2 md:px-3 py-2 lg:py-4 rounded-md border border-red-200 bg-gradient-to-r from-red-50 to-orange-50 text-red-700 font-serif text-xs md:text-sm text-center shadow-sm flex flex-col items-center gap-2">
                     <AlertTriangle className="w-6 h-6 text-red-400 mb-1" />
                     <div className="font-semibold text-base md:text-lg text-red-700">
                         Ollama is not running

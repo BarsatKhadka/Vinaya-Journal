@@ -104,18 +104,18 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
             <span style={{fontFamily: 'Fira Sans'}}>{buttonText}</span>
           </button>
           {saved_at && (
-            <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
+            <span className="text-xs lg:text-md text-gray-500 ml-2 whitespace-nowrap">
               Today's entry last saved at: {new Date(saved_at).toLocaleString()}
             </span>
           )}
           {saved_at === "" && (
-            <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
-              No entries yet for this day
+            <span className="lg:text-md text-xs text-gray-500 ml-2 whitespace-nowrap">
+              No entries yet
             </span>
           )}
         </div>
 
-        <div className="flex text-md text-gray-600 items-center gap-4">
+        <div className="flex flex-col md:flex-row text-xs lg:text-lg md:text-md text-gray-600 items-center gap-2 md:gap-4">
           <div className="flex items-center gap-2">
             <Indicator />
             <span style={{fontFamily: 'Roboto Mono'}}>
@@ -125,7 +125,13 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
           <div className="flex items-center gap-2">
             <Indicator />
             <span style={{fontFamily: 'Roboto Mono'}}>
-              {getCharCount(content)} {getCharCount(content) > 1 ? 'characters' : 'character'}
+              {getCharCount(content)}{" "}
+              <span className="inline lg:hidden">
+                char  
+              </span>
+              <span className="hidden lg:inline">
+              {getCharCount(content) > 1 ? 'characters' : 'character'}
+              </span>
             </span>
           </div>
         </div>
