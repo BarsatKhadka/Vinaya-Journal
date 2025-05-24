@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
-import ollama
+from rag.ollama import ollama_chat
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -27,8 +28,13 @@ def get_models():
     models = ollama.list()['models']
     return {"models": [m.model for m in models]}
 
-@app.post("/generate")
-def generate(prompt: str):
-    response = ollama.chat(model = "mistral", messages = [{"role": "user", "content": prompt}])
-    print(response)
-    return {"response": response['message']['content']}
+class ChatRequest(BaseModel):
+    prompt: str
+    model_name: str
+
+@app.post("/chat")
+def generate(request: ChatRequest):
+    prompt = request.prompt
+    model_name = request.model_name
+    response = ollama_chat(prompt , model_name)
+    return response
