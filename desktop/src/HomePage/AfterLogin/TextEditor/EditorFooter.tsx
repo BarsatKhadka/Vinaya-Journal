@@ -28,7 +28,11 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
   useEffect(() => {
     const fetchSaved_at = async () => {
       const response = await axios.get("http://localhost:8080/lastSavedAt");
+      if(response.data != "") {
       setSaved_at(new Date(response.data).toLocaleString());
+      }else{
+        setSaved_at("")
+      }
     };
     fetchSaved_at();
   }, []);

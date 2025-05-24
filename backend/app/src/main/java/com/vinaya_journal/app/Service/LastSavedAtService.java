@@ -18,9 +18,9 @@ public class LastSavedAtService {
             }
         } catch (SQLException e) {
             System.out.println(LocalDate.now().toString());
-            return LocalDate.now().toString();
+            return "";
         }
-        return LocalDate.now().toString();
+        return "";
     }
 
 }
