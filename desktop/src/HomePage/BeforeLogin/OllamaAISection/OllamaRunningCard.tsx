@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import axios from "axios";
+import { useAppStore } from "../../../store";
 
 const RamBadge = ({ ram }: { ram: string }) => (
     <span className="px-3 py-0.5 bg-[#E6E2DD] border border-[#CFCAC2] rounded-lg 
@@ -60,7 +61,7 @@ export const fetchOllamaModels = async (): Promise<string[]> => {
 };
 
 export const OllamaRunningCard = () => {
-    const [ollamaModels, setOllamaModels] = useState<string[]>([]);
+    const {ollamaModels, setOllamaModels} = useAppStore()
 
     useEffect(() => {
         const fetchModels = async () => {
@@ -73,10 +74,11 @@ export const OllamaRunningCard = () => {
     return (
         <div className="px-2 py-2">
             {ollamaModels.length === 0 ? (
+                
                 <div className="bg-[#F7F4F0] border border-gray-300 rounded-lg bg-[#FCFBFA]">
                     <p className="p-6 text-gray-700 text-base font-serif border-b border-gray-200 
                               tracking-wide text-center">
-                        Let's setup your first local AI companion.
+                        Let's setup your first local AI companion. 
                     </p>
 
                     {/* Mistral Card */}

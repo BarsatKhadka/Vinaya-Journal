@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
+import ollama
 from rag.ollama import ollama_chat
 from pydantic import BaseModel
 
