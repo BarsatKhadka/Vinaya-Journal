@@ -42,6 +42,6 @@ def generate(request: ChatRequest):
         for chunk in response:
             content = chunk.get("message", {}).get("content", "")
             if content:
-                yield f"{content}"
-                
+                yield f"{content}" 
+                print(content)
     return StreamingResponse(chat_stream(), media_type="text/event-stream")
