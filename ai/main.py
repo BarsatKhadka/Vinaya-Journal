@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 import ollama
-from rag.ollama import ollama_chat
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -37,5 +37,11 @@ class ChatRequest(BaseModel):
 def generate(request: ChatRequest):
     prompt = request.prompt
     model_name = request.model_name
-    response = ollama_chat(prompt , model_name)
-    return response
+    def chat_stream():
+        response = ollama.chat(model = model_name, messages = [{"role": "user", "content": prompt}],stream=True)
+        for chunk in response:
+            content = chunk.get("message", {}).get("content", "")
+            if content:
+                yield f"{content}"
+                
+    return StreamingResponse(chat_stream(), media_type="text/event-stream")
