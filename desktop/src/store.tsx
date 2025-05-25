@@ -9,6 +9,8 @@ interface AppState {
   setOllamaRunning: (running: boolean) => void;
   ollamaModels: string[];
   setOllamaModels: (models: string[]) => void;
+  currentModel: string;
+  setCurrentModel: (model: string) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -18,4 +20,6 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setOllamaRunning: (running: boolean) => set((state) => ({ ...state, ollamaRunning: running })),
   ollamaModels: [],
   setOllamaModels: (models: string[]) => set((state) => ({ ...state, ollamaModels: models })),
+  currentModel: "",
+  setCurrentModel: (model: string) => set((state) => ({ ...state, currentModel: model })),
 }));
