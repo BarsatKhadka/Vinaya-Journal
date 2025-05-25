@@ -4,6 +4,7 @@ import requests
 import ollama
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
+from rag.sqlite_utils import get_all_entries
 
 app = FastAPI()
 
@@ -45,3 +46,8 @@ def generate(request: ChatRequest):
                 yield f"{content}" 
                 print(content)
     return StreamingResponse(chat_stream(), media_type="text/event-stream")
+
+@app.get("/dummy")
+def dummy():
+    get_all_entries()
+
