@@ -4,7 +4,7 @@ import { SideBarAfterLogin } from "./RightSide/SideBarComponents/SideBarAfterLog
 import { useAppStore } from "../../store"
 import { ContextualRAG } from "./RightSide/SideBarComponents/ContextualRAG";
 import { MoodInsights } from "./RightSide/SideBarComponents/MoodInsights";
-import { VInayaOllamaAI } from "./RightSide/SideBarComponents/VInayaOllamaAI";
+import { VInayaOllamaAI } from "./RightSide/SideBarComponents/VinayaOllamaAI/VInayaOllamaAI";
 import { RetrievePastEntries } from "./RightSide/SideBarComponents/RetrievePastEntries";
 
 export const AfterLoginHome = () => {

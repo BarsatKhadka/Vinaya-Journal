@@ -3,7 +3,7 @@ import { BeforeLoginHome } from "./HomePage/BeforeLogin/BeforeLoginHome";
 import { AfterLoginHome } from "./HomePage/AfterLogin/AfterLoginHome";
 import { ContextualRAG } from "./HomePage/AfterLogin/RightSide/SideBarComponents/ContextualRAG";
 import { MoodInsights } from "./HomePage/AfterLogin/RightSide/SideBarComponents/MoodInsights";
-import { VInayaOllamaAI } from "./HomePage/AfterLogin/RightSide/SideBarComponents/VInayaOllamaAI";  
+import { VInayaOllamaAI } from "./HomePage/AfterLogin/RightSide/SideBarComponents/VinayaOllamaAI/VInayaOllamaAI";  
 import { RetrievePastEntries } from "./HomePage/AfterLogin/RightSide/SideBarComponents/RetrievePastEntries";
 
 function App() {

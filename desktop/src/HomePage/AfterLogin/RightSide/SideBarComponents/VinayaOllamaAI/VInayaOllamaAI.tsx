@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useAppStore } from "../../../../store";
+import { useAppStore } from "../../../../../store";
 import { Send } from "lucide-react";
-import VinayaOllamaAIBackground from "../../../../assets/BackgroundImages/VinayaOllamaAIBackground.png";
-import { OllamaAIModelDropdown } from "./OllamaAIModelDropdown";
+import VinayaOllamaAIBackground from "../../../../../assets/BackgroundImages/VinayaOllamaAIBackground.png"
+import { InChatAIModelDropdown } from "./InChatAIModelDropdown";
 
 interface Message {
     content: string;
@@ -85,7 +85,7 @@ export const VInayaOllamaAI = () => {
             <div className="absolute inset-0 bg-[#F7F4F0]/40 pointer-events-none z-0" />
             <div className="relative z-10 flex flex-col h-full">
                 <div className="items-start pt-6 pb-2">
-                    <OllamaAIModelDropdown />
+                    <InChatAIModelDropdown />
                 </div>
                 <div className="flex-1 flex flex-col items-center justify-center">
                     <div className="w-full max-w-2xl flex flex-col flex-1">
