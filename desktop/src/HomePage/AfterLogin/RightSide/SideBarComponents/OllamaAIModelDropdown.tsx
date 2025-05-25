@@ -36,7 +36,7 @@ export const OllamaAIModelDropdown = () => {
                     </label>
                     <select
                         className="w-full px-2 md:px-3 py-2 rounded-md border border-gray-300 bg-white text-[#2F4F4F] font-serif text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F4F4F]"
-                        defaultValue={ollamaModels.length > 0 ? ollamaModels[0] : "No models found"}
+                        value={ollamaModels.length > 0 ? currentModel : "No models found"}
                         onChange={(e) => setCurrentModel(e.target.value)}
                     >
                         {ollamaModels.length === 0 ? (
