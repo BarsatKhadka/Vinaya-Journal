@@ -69,7 +69,7 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
   }
 
   return (
-    <div className=" backdrop-blur-[2px] border-t border-white/20 px-4 py-2">
+    <div className=" backdrop-blur-[2px] border-t border-white/20 px-4 py-8">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <button

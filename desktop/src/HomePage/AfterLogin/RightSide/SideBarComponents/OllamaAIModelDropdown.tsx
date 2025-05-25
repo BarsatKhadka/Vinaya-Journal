@@ -28,7 +28,7 @@ export const OllamaAIModelDropdown = () => {
     }, [ollamaRunning]);
 
     return (
-        <div className="w-full max-w-xs mx-auto">
+        <div className="w-full max-w-xs mx-auto mb-1">
             {ollamaRunning ? (
                 <>
                     <label className="block text-xs md:text-sm font-serif text-[#2F4F4F] mb-2 ml-1">
