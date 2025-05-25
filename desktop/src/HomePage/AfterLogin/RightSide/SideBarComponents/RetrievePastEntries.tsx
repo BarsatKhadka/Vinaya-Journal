@@ -11,7 +11,7 @@ export const RetrievePastEntries = () => {
             style={{
                 backgroundImage: `url(${PastEntriesBackground})`,
                 backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundPosition: '50% center',
                 backgroundRepeat: 'no-repeat',
             }}
         >
