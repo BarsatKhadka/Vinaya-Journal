@@ -14,8 +14,11 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
-  selectedSidebar: 'Contextual RAG Memory',
-  setSelectedSidebar: (sidebar: SidebarOption) => set((state) => ({ ...state, selectedSidebar: sidebar })),
+  selectedSidebar: localStorage.getItem("vinaya_selectedSidebar") as SidebarOption || 'Contextual RAG Memory',
+  setSelectedSidebar: (sidebar: SidebarOption) => {
+    localStorage.setItem("vinaya_selectedSidebar", sidebar)
+    set((state) => ({     
+     ...state, selectedSidebar: sidebar }))},
   ollamaRunning: false,
   setOllamaRunning: (running: boolean) => set((state) => ({ ...state, ollamaRunning: running })),
   ollamaModels: [],
