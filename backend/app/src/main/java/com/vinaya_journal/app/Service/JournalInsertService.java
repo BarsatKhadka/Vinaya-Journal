@@ -10,11 +10,13 @@ import java.time.LocalDateTime;
 public class JournalInsertService {
     public static InsertServiceResultDTO insertJournal(JournalEntryDTO journalEntryDTO){
         String sql = """
-        INSERT INTO entries (content) VALUES(?)
+        INSERT INTO entries (content, entry_date, created_at, modified_at) 
+        VALUES (?, CURRENT_DATE, datetime('now','localtime'), datetime('now','localtime'))
         ON CONFLICT(entry_date) DO UPDATE SET
-            content = excluded.content,
-            modified_at = datetime('now', 'localtime')
+        content = excluded.content,
+        modified_at = datetime('now', 'localtime')
         """;
+
         try(Connection conn = JournalDatabase.getConnection()){
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,journalEntryDTO.getContent());
