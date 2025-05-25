@@ -74,8 +74,22 @@ export const RetrievePastEntries = () => {
                 />
             </div>
             <div className="relative z-10 flex flex-col items-start ml-8 w-full mt-8 justify-end">
-                <div className="text-[#2F4F4F]">
-                    {entries}
+                <div className="w-full max-w-xl">
+                    <div
+                        className="p-6 min-h-[120px] max-h-[500px] overflow-y-auto border-0 font-serif text-base whitespace-pre-line relative"
+                        style={{
+                            background: 'repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px)',
+                            boxShadow: '0 2px 12px 0 #e6e1d5',
+                            border: '1.5px solid #e6cfa7',
+                        }}
+                    >
+                        {selectedDate && (
+                            <div className="mb-4 mt-1 right-0 text-md text-[#2F4F4F] font-serif italic">
+                                {selectedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                            </div>
+                        )}
+                        <div className="text-[#6b4f27]">{entries}</div>
+                    </div>
                 </div>
             </div>
         </div>
