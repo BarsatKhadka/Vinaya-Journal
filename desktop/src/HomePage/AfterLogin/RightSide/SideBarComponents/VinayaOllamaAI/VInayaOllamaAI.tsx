@@ -126,21 +126,21 @@ export const VInayaOllamaAI = () => {
                             )}
                         </div>
                         <div className="w-full px-2 md:px-0 pb-6">
-                            <div className="flex items-end gap-2 bg-white rounded-2xl p-3 shadow-lg">
+                            <div className="flex items-end gap-2 bg-white rounded-xl p-2">
                                 <textarea
                                     value={prompt}
                                     onChange={(e) => setPrompt(e.target.value)}
                                     onKeyPress={handleKeyPress}
                                     placeholder="Type your message..."
-                                    className="flex-1 resize-none rounded-xl bg-transparent border-none text-[#2F4F4F] p-2 text-base focus:outline-none min-h-[40px] max-h-[120px] placeholder-[#6b7280]"
+                                    className="flex-1 resize-none rounded-lg bg-white text-[#2F4F4F] p-2 text-base focus:outline-none min-h-[40px] max-h-[120px] placeholder-[#6b7280]"
                                     rows={1}
                                 />
                                 <button
                                     onClick={handleAskStream}
                                     disabled={isLoading || !prompt.trim()}
-                                    className={`p-2 rounded-full ${
+                                    className={`p-2 rounded-lg ${
                                         isLoading || !prompt.trim()
-                                            ? 'bg-[#e0f2ef] text-[#bfa76a]'
+                                            ? 'bg-[#e0f2ef] text-[#bfa76a] cursor-not-allowed opacity-60'
                                             : 'bg-[#2F4F4F] text-white hover:bg-[#1F3F3F]'
                                     } transition-colors`}
                                 >
