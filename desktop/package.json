@@ -16,6 +16,7 @@
     "framer-motion": "^12.10.5",
     "lucide-react": "^0.509.0",
     "react": "^18.2.0",
+    "react-datepicker": "^8.4.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.6.0",
     "zustand": "^5.0.5"
