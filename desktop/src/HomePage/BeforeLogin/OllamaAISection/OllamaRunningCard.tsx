@@ -61,11 +61,14 @@ export const fetchOllamaModels = async (): Promise<string[]> => {
 };
 
 export const OllamaRunningCard = () => {
-    const {ollamaModels, setOllamaModels} = useAppStore()
+    const {ollamaModels, setOllamaModels, setCurrentModel} = useAppStore()
 
     useEffect(() => {
         const fetchModels = async () => {
             const models = await fetchOllamaModels();
+            if(models.length != 0) {
+                setCurrentModel(models[0]);
+            }
             setOllamaModels(models);
         };
         fetchModels();

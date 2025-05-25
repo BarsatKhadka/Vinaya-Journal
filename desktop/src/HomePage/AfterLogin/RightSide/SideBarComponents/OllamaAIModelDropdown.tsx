@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { fetchOllamaModels } from "../../../BeforeLogin/OllamaAISection/OllamaRunningCard";
 
 export const OllamaAIModelDropdown = () => {
-    const { ollamaRunning, setOllamaRunning, ollamaModels, setOllamaModels , setCurrentModel} = useAppStore();
+    const { ollamaRunning, setOllamaRunning, ollamaModels, setOllamaModels , currentModel, setCurrentModel} = useAppStore();
 
     // First effect: check if Ollama is running
     useEffect(() => {
@@ -21,6 +21,9 @@ export const OllamaAIModelDropdown = () => {
     useEffect(() => {
         if (ollamaRunning) {
             fetchOllamaModels().then(setOllamaModels);
+            if(ollamaModels.length != 0) {
+                setCurrentModel(ollamaModels[0]);
+            }
         }
     }, [ollamaRunning]);
 
@@ -40,7 +43,7 @@ export const OllamaAIModelDropdown = () => {
                             <option value="No models found">No models found</option>
                         ) : (
                             ollamaModels.map((model) => (
-                                <option key={model} value={model}>
+                                <option key={model} value={model} defaultValue={currentModel}>
                                     {model}
                                 </option>
                             ))
