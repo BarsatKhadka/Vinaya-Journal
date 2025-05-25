@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppStore } from "../../../../store";
 import { Send } from "lucide-react";
-import VinayaOllamaAIBackground from "../../../../assets/VinayaOllamaAIBackground.png";
+import VinayaOllamaAIBackground from "../../../../assets/BackgroundImages/VinayaOllamaAIBackground.png";
 import { OllamaAIModelDropdown } from "./OllamaAIModelDropdown";
 
 interface Message {
@@ -91,8 +91,8 @@ export const VInayaOllamaAI = () => {
                     <div className="w-full max-w-2xl flex flex-col flex-1">
                         <div className="flex-1 overflow-y-auto px-2 md:px-0 py-4 space-y-4">
                             {messages.length === 0 && !isLoading ? (
-                                <div className="flex flex-col items-center justify-center h-[40vh] select-none">
-                                    <h2 className="text-2xl md:text-3xl font-semibold mb-2 text-[#2F4F4F] text-center">Ready when you are.</h2>
+                                <div className="flex flex-col items-center justify-center h-[40vh] select-none" style={{fontFamily: 'Playfair Display'}}>
+                                    <h2 className="text-lg md:text-3xl font-semibold mb-2 text-[#2F4F4F] text-center">Ready when you are.</h2>
                                     <p className="text-base md:text-lg text-[#6b7280] text-center">Ask anything.</p>
                                 </div>
                             ) : (

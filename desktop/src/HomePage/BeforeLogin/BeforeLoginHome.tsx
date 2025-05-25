@@ -1,6 +1,6 @@
 import { TopBar } from "./TopBar"
 import { motion } from "framer-motion"
-import beforeLoginBackground from "../../assets/BeforeLoginBackground.png"
+import beforeLoginBackground from "../../assets/BackgroundImages/BeforeLoginBackground.png"
 import { LocalAIFeature } from "./OllamaAISection/OllamaAICard"
 import { RagAndMoodCard } from "./RAGandMoodSection/RagAndMoodCard"
 import { BeginJournaling } from "./BeginJournalingSection/BeginJournaling"
@@ -9,7 +9,7 @@ export const BeforeLoginHome = () => {
     return (
         <div className="min-h-screen w-full overflow-x-hidden relative">
             <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
                 style={{ backgroundImage: `url(${beforeLoginBackground})` }}
             />
             <div className="relative">

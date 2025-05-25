@@ -2,7 +2,7 @@ import { useTextEditor } from "./TextEditorHandles"
 import { EditorHeader } from "./EditorHeader"
 import { EditorFooter } from "./EditorFooter"
 import { useState, useEffect } from "react"
-import imageBackground from "../../../assets/textEditorBackground.png"
+import imageBackground from "../../../assets/BackgroundImages/textEditorBackground.png"
 
 export const TextEditor = () => {
   const { editorRef, handlePaste, handleKeyDown, handleContainerClick } = useTextEditor()
