@@ -31,7 +31,7 @@ export const TextEditor = () => {
         style={{
           backgroundImage: `url(${imageBackground})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: '66% center ',
           backgroundRepeat: 'no-repeat',
           opacity: 0.5, 
           pointerEvents: 'none', 

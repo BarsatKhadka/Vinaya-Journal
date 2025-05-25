@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAppStore } from "../../../../store";
 import { Send } from "lucide-react";
+import VinayaOllamaAIBackground from "../../../../assets/VinayaOllamaAIBackground.png";
+import { OllamaAIModelDropdown } from "./OllamaAIModelDropdown";
 
 interface Message {
     content: string;
@@ -70,66 +72,83 @@ export const VInayaOllamaAI = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-white">
+        <div
+            className="flex flex-col h-full relative text-[#2F4F4F]"
+            style={{
+                backgroundImage: `url(${VinayaOllamaAIBackground})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+            }}
+        >
             
-            <div className="p-4 border-b border-gray-200">
-                <h1 className="text-xl font-serif text-[#2F4F4F]">Vinaya AI Chat</h1>
-                <p className="text-sm text-gray-500">Powered by {currentModel || 'Ollama'}</p>
-            </div>
-
-            {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                {messages.map((message, index) => (
-                    <div
-                        key={index}
-                        className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
-                    >
-                        <div
-                            className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                                message.isUser
-                                    ? 'bg-[#2F4F4F] text-white'
-                                    : 'bg-[#e0f2ef] text-[#2F4F4F]'
-                            }`}
-                        >
-                            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+            <div className="absolute inset-0 bg-[#F7F4F0]/40 pointer-events-none z-0" />
+            <div className="relative z-10 flex flex-col h-full">
+                <div className="items-start pt-6 pb-2">
+                    <OllamaAIModelDropdown />
+                </div>
+                <div className="flex-1 flex flex-col items-center justify-center">
+                    <div className="w-full max-w-2xl flex flex-col flex-1">
+                        <div className="flex-1 overflow-y-auto px-2 md:px-0 py-4 space-y-4">
+                            {messages.length === 0 && !isLoading ? (
+                                <div className="flex flex-col items-center justify-center h-[40vh] select-none">
+                                    <h2 className="text-2xl md:text-3xl font-semibold mb-2 text-[#2F4F4F] text-center">Ready when you are.</h2>
+                                    <p className="text-base md:text-lg text-[#6b7280] text-center">Ask anything.</p>
+                                </div>
+                            ) : (
+                                messages.map((message, index) => (
+                                    <div
+                                        key={index}
+                                        className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+                                    >
+                                        <div
+                                            className={`max-w-[80%] rounded-xl px-4 py-3 shadow-md ${
+                                                message.isUser
+                                                    ? 'bg-white text-[#2F4F4F]'
+                                                    : 'bg-[#e0f2ef] text-[#2F4F4F]'
+                                            }`}
+                                        >
+                                            <p className="text-base whitespace-pre-wrap">{message.content}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                            {isLoading && (
+                                <div className="flex justify-start">
+                                    <div className="bg-[#e0f2ef] text-[#2F4F4F] rounded-xl px-4 py-3 shadow-md">
+                                        <div className="flex space-x-2">
+                                            <div className="w-2 h-2 bg-[#2F4F4F] rounded-full animate-bounce" />
+                                            <div className="w-2 h-2 bg-[#2F4F4F] rounded-full animate-bounce delay-100" />
+                                            <div className="w-2 h-2 bg-[#2F4F4F] rounded-full animate-bounce delay-200" />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                    </div>
-                ))}
-                {isLoading && (
-                    <div className="flex justify-start">
-                        <div className="bg-[#e0f2ef] text-[#2F4F4F] rounded-lg px-4 py-2">
-                            <div className="flex space-x-2">
-                                <div className="w-2 h-2 bg-[#2F4F4F] rounded-full animate-bounce" />
-                                <div className="w-2 h-2 bg-[#2F4F4F] rounded-full animate-bounce delay-100" />
-                                <div className="w-2 h-2 bg-[#2F4F4F] rounded-full animate-bounce delay-200" />
+                        <div className="w-full px-2 md:px-0 pb-6">
+                            <div className="flex items-end gap-2 bg-white rounded-2xl p-3 shadow-lg">
+                                <textarea
+                                    value={prompt}
+                                    onChange={(e) => setPrompt(e.target.value)}
+                                    onKeyPress={handleKeyPress}
+                                    placeholder="Type your message..."
+                                    className="flex-1 resize-none rounded-xl bg-transparent border-none text-[#2F4F4F] p-2 text-base focus:outline-none min-h-[40px] max-h-[120px] placeholder-[#6b7280]"
+                                    rows={1}
+                                />
+                                <button
+                                    onClick={handleAskStream}
+                                    disabled={isLoading || !prompt.trim()}
+                                    className={`p-2 rounded-full ${
+                                        isLoading || !prompt.trim()
+                                            ? 'bg-[#e0f2ef] text-[#bfa76a]'
+                                            : 'bg-[#2F4F4F] text-white hover:bg-[#1F3F3F]'
+                                    } transition-colors`}
+                                >
+                                    <Send className="w-5 h-5" />
+                                </button>
                             </div>
                         </div>
                     </div>
-                )}
-            </div>
-
-            
-            <div className="p-4 border-t border-gray-200">
-                <div className="flex items-end gap-2">
-                    <textarea
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        placeholder="Type your message..."
-                        className="flex-1 resize-none rounded-lg border border-gray-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F4F4F] min-h-[40px] max-h-[120px]"
-                        rows={1}
-                    />
-                    <button
-                        onClick={handleAskStream}
-                        disabled={isLoading || !prompt.trim()}
-                        className={`p-2 rounded-lg ${
-                            isLoading || !prompt.trim()
-                                ? 'bg-gray-200 text-gray-500'
-                                : 'bg-[#2F4F4F] text-white hover:bg-[#1F3F3F]'
-                        } transition-colors`}
-                    >
-                        <Send className="w-5 h-5" />
-                    </button>
                 </div>
             </div>
         </div>
