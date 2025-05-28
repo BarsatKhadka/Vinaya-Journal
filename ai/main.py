@@ -5,6 +5,7 @@ import ollama
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from rag.sqlite_utils import get_all_entries
+from rag.embedder import get_all_entries_embeddings
 
 app = FastAPI()
 
@@ -49,5 +50,7 @@ def generate(request: ChatRequest):
 
 @app.get("/dummy")
 def dummy():
-    get_all_entries()
+    embeddings = get_all_entries_embeddings()
+    print(embeddings)
+
 
