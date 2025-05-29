@@ -20,7 +20,7 @@ def sentence_chunks(text, date):
     sentencizer(text, date)
     sentences = chunks_info[date]["sentences"]
     chunked_sentences = []
-    for sentence in range(0,len(sentences),3):
+    for sentence in range(0,len(sentences)-2 ,2):
         chunk = "".join(sentences[sentence:sentence+3])
         chunked_sentences.append(chunk)
     chunks_info[date]["chunked_sentences"] = chunked_sentences
