@@ -14,7 +14,6 @@ def get_all_entries_embeddings():
     for date in chunks_info.keys():
         embeddings = embedding_model.encode(chunks_info[date]["chunked_sentences"])
         chunks_info[date]["embeddings"] = embeddings
-        print(embeddings.shape)
     return chunks_info
     
 
