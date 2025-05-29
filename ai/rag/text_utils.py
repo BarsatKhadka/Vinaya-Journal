@@ -12,14 +12,26 @@ def sentencizer(text, date):
     doc = nlp(text)
     sentences = list(doc.sents)
     chunks_info[date] = {
-        "sentences": [sent.text for sent in sentences],
+        "sentences": [str(sent.text) for sent in sentences],
         "sentence_count": len(sentences),
     }
     
+def sentence_chunks(text, date):
+    sentencizer(text, date)
+    sentences = chunks_info[date]["sentences"]
+    chunked_sentences = []
+    for sentence in range(0,len(sentences),3):
+        chunk = "".join(sentences[sentence:sentence+3])
+        chunked_sentences.append(chunk)
+    chunks_info[date]["chunked_sentences"] = chunked_sentences
+    chunks_info[date]["chunk_count"] = len(chunked_sentences)
+    return chunked_sentences
 
-for date, text in raw_entries:
-    if text.strip():
-        sentencizer(text, date)
 
 def give_chunks_info():
+    for date, text in raw_entries:
+        if text.strip():
+            sentence_chunks(text, date)
     return chunks_info
+
+
