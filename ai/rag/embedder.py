@@ -16,5 +16,3 @@ def get_all_entries_embeddings():
         chunks_info[date]["embeddings"] = embeddings
     return chunks_info
     
-
-

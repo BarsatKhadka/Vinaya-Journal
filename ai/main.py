@@ -6,7 +6,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from rag.sqlite_utils import get_all_entries
 from rag.embedder import get_all_entries_embeddings
-from rag.chromadb import chroma_client
+from rag.chromadb import chroma_client, create_collection
 
 app = FastAPI()
 
@@ -51,14 +51,13 @@ def generate(request: ChatRequest):
 
 @app.get("/dummy")
 def dummy():
-    # embeddings = get_all_entries_embeddings()
-    # print(embeddings)
+    chunks_info = get_all_entries_embeddings()
     collection = chroma_client.get_collection("journal_embeddings")
-
-
-    results = collection.get(include=["documents", "embeddings", "metadatas"])
+    create_collection(chunks_info)
+    results = collection.get(include=["documents", "metadatas", "embeddings"])
     print(results)
-    return results
+   
+    # return results
 
 
 

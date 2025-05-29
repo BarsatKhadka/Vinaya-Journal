@@ -7,3 +7,14 @@ chroma_client = chromadb.Client(Settings(
 ))
 
 collection = chroma_client.get_or_create_collection(name="journal_embeddings")
+
+def create_collection(chunks_info):
+    collection = chroma_client.get_or_create_collection(name="journal_embeddings")
+    for date in chunks_info.keys():
+        collection.add(
+            documents=chunks_info[date]["chunked_sentences"],
+            embeddings=chunks_info[date]["embeddings"],
+            ids= [f"{date}-{i}" for i in range(len(chunks_info[date]["chunked_sentences"]))],
+            metadatas=[{"date": date , "chunk_index": i} for i in range(len(chunks_info[date]["chunked_sentences"]))]
+        )
+    return collection
