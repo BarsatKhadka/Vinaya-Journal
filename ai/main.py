@@ -6,7 +6,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from rag.sqlite_utils import get_all_entries
 from rag.embedder import get_all_entries_embeddings
-from rag.chromadb import chroma_client, create_collection
+from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
 
 app = FastAPI()
 
@@ -54,7 +54,9 @@ def dummy():
     chunks_info = get_all_entries_embeddings()
     collection = chroma_client.get_collection("journal_embeddings")
     create_collection(chunks_info)
-    results = collection.get(include=["documents", "metadatas", "embeddings"])
+    # results = collection.get(include=["documents", "metadatas", "embeddings"])
+    # print(results)
+    results = get_existing_entry_dates()
     print(results)
    
     # return results

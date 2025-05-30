@@ -18,3 +18,10 @@ def create_collection(chunks_info):
             metadatas=[{"date": date , "chunk_index": i} for i in range(len(chunks_info[date]["chunked_sentences"]))]
         )
     return collection
+
+def get_existing_entry_dates():
+    results = collection.get(include=["metadatas"])
+    metadatas = results.get("metadatas",[])
+    existing_dates = {metadata["date"] for metadata in metadatas if "date" in metadata}
+    return existing_dates
+
