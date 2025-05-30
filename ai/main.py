@@ -8,6 +8,7 @@ from rag.sqlite_utils import get_all_entries
 from rag.embedder import get_all_entries_embeddings
 from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
 
+
 app = FastAPI()
 
 
@@ -55,6 +56,10 @@ def dummy():
     collection = chroma_client.get_collection("journal_embeddings")
     create_collection(chunks_info)
     get_all_entries_embeddings()
+    print(get_existing_entry_dates())
+    results = collection.get(include=["documents", "metadatas", "embeddings"])
+    print(results)
+
     
 
    
