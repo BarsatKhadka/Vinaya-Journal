@@ -54,10 +54,9 @@ def dummy():
     chunks_info = get_all_entries_embeddings()
     collection = chroma_client.get_collection("journal_embeddings")
     create_collection(chunks_info)
-    # results = collection.get(include=["documents", "metadatas", "embeddings"])
-    # print(results)
-    results = get_existing_entry_dates()
-    print(results)
+    get_all_entries_embeddings()
+    
+
    
     # return results
 
