@@ -53,15 +53,10 @@ def generate(request: ChatRequest):
 @app.get("/dummy")
 def dummy():
     chunks_info = get_all_entries_embeddings()
-    collection = chroma_client.get_collection("journal_embeddings")
     create_collection(chunks_info)
-    get_all_entries_embeddings()
-    print(get_existing_entry_dates())
-    results = collection.get(include=["documents", "metadatas", "embeddings"])
+    collection = chroma_client.get_collection("journal_embeddings")
+    results = collection.get(ids=["2025-05-30-0"],include=["documents", "metadatas", "embeddings"])
     print(results)
-
-    
-
    
     # return results
 

@@ -12,7 +12,7 @@ embedding_model = SentenceTransformer(model_name_or_path="all-MiniLM-L6-v2" , de
 def get_all_entries_embeddings():
     raw_entries = get_all_entries()
     chunks_info = give_chunks_info()
-    existing_dates = get_existing_entry_dates()
+    existing_dates , today = get_existing_entry_dates()
     for date in chunks_info.keys():
         if date not in existing_dates:
             embeddings = embedding_model.encode(chunks_info[date]["chunked_sentences"])

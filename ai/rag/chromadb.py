@@ -24,8 +24,9 @@ def add_entry(date, chunked_sentences, embeddings):
         metadatas=[{"date": date , "chunk_index": i} for i in range(len(chunked_sentences))]
     )
 
-def delete_existing_entry(date):
-    pass
+def delete_existing_entry(today_date, today_prev_entry , today_prev_entry_len):
+    for i in range(today_prev_entry_len):
+        collection.delete(ids=[f"{today_date}-{i}"])
 
 def create_collection(chunks_info):
     collection = chroma_client.get_or_create_collection(name="journal_embeddings")
@@ -34,7 +35,8 @@ def create_collection(chunks_info):
         if date in existing_dates:
             pass
         elif date == today:
-            delete_existing_entry(date)
+            delete_existing_entry(date, chunks_info[date] , len(chunks_info[date]["chunked_sentences"]))
+            add_entry(date, chunks_info[date]["chunked_sentences"], chunks_info[date]["embeddings"])
         else:
             add_entry(date, chunks_info[date]["chunked_sentences"], chunks_info[date]["embeddings"])
 
