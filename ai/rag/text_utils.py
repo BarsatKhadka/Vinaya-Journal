@@ -5,7 +5,7 @@ nlp = English()
 nlp.add_pipe("sentencizer")
 
 chunks_info = dict()
-raw_entries = get_all_entries()
+
 
 def sentencizer(text, date):
     text = text.replace("\n", " ")
@@ -31,6 +31,7 @@ def sentence_chunks(text, date , stride=2 , chunk_size=3):
 
 
 def give_chunks_info():
+    raw_entries = get_all_entries()
     for date, text in raw_entries:
         if text.strip():
             sentence_chunks(text, date)

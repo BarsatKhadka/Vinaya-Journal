@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from rag.sqlite_utils import get_all_entries
 from rag.embedder import get_all_entries_embeddings
 from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
+from rag.text_utils import give_chunks_info
 
 
 app = FastAPI()
@@ -54,8 +55,9 @@ def generate(request: ChatRequest):
 def dummy():
     chunks_info = get_all_entries_embeddings()
     collection= create_collection(chunks_info)
-    results = collection.get(ids=["2025-05-30-0"],include=["documents", "metadatas", "embeddings"])
+    results = collection.get(ids=["2025-06-03-0"],include=["documents", "metadatas", "embeddings"])
     print(results)
+    # print(give_chunks_info())
    
     # return results
 
