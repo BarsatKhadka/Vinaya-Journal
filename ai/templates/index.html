@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinaya Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vinaya-beige': '#F7F4F0',
+                        'vinaya-dark': '#2F4F4F',
+                        'vinaya-light': '#e0f2ef',
+                        'vinaya-paper': '#fef1d6',
+                        'vinaya-paper-line': '#f9e4b7',
+                        'vinaya-paper-border': '#e6cfa7',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-vinaya-beige">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-vinaya-beige/70 pointer-events-none"></div>
+    
+    <!-- Main content -->
+    <div class="relative z-10 flex flex-col items-center min-h-screen p-8">
+        <div class="w-full max-w-4xl">
+            <!-- Title -->
+            <h1 class="text-3xl font-serif text-vinaya-dark mb-8 text-center">Vinaya Journal</h1>
+            
+            <!-- Journal Entry Form -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 mb-8 border border-vinaya-paper-border">
+                <form action="/submit" method="post" class="space-y-4">
+                    <div>
+                        <label for="date" class="block text-vinaya-dark font-serif mb-2">Date</label>
+                        <input type="date" id="date" name="date" required
+                            class="w-full p-2 border border-vinaya-paper-border rounded-lg focus:ring-2 focus:ring-vinaya-light focus:border-vinaya-dark">
+                    </div>
+                    <div>
+                        <label for="content" class="block text-vinaya-dark font-serif mb-2">Journal Entry</label>
+                        <textarea id="content" name="content" rows="10" required
+                            class="w-full p-4 border border-vinaya-paper-border rounded-lg focus:ring-2 focus:ring-vinaya-light focus:border-vinaya-dark"
+                            style="background: repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px);"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-vinaya-dark text-white py-2 px-4 rounded-lg hover:bg-vinaya-dark/90 transition-colors">
+                        Save Entry
+                    </button>
+                </form>
+            </div>
+
+            <!-- Past Entries Section -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-vinaya-paper-border">
+                <h2 class="text-2xl font-serif text-vinaya-dark mb-4">Past Entries</h2>
+                <div class="space-y-4">
+                    {% for entry in entries %}
+                    <div class="p-4 rounded-lg border border-vinaya-paper-border"
+                        style="background: repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px);">
+                        <div class="text-vinaya-dark font-serif italic mb-2">{{ entry.date }}</div>
+                        <div class="text-vinaya-dark/80">{{ entry.content }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
