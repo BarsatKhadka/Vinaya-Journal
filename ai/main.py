@@ -55,9 +55,9 @@ def generate(request: ChatRequest):
 def dummy():
     chunks_info = get_all_entries_embeddings()
     collection= create_collection(chunks_info)
-    results = collection.get(ids=["2025-06-03-0"],include=["documents", "metadatas", "embeddings"])
+    results = collection.get(include=["documents", "metadatas", "embeddings"])
     print(results)
-    # print(give_chunks_info())
+
    
     # return results
 
