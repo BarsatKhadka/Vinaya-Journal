@@ -48,7 +48,6 @@ def generate(request: ChatRequest):
             content = chunk.get("message", {}).get("content", "")
             if content:
                 yield f"{content}" 
-                print(content)
     return StreamingResponse(chat_stream(), media_type="text/event-stream")
 
 
@@ -57,10 +56,8 @@ def query_rag(query_request: str=Query(...,alias="q")):
     chunks_info_with_embeddings = get_all_entries_embeddings()
     collection= create_collection(chunks_info_with_embeddings)
     results = query(collection , query_request)
-    print(results)
+    return results
 
-   
-    # return results
 
 
 

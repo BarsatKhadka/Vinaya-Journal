@@ -26,7 +26,14 @@ def query(collection , query):
     results = collection.query(
         query_embeddings = query_embeddings,
         n_results = 2,
-        include = ["documents", "metadatas", "embeddings"]
+        include = ["documents", "metadatas"]
     )
-    return results
+
+    print(results)
+    
+    results_json = []
+    for i in range(len(results["documents"][0])):
+        results_json.append({"date":results["metadatas"][0][i]["date"] , "content":results["documents"][0][i]})
+
+    return results_json 
     
