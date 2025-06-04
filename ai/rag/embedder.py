@@ -21,3 +21,12 @@ def get_all_entries_embeddings():
             pass
     return chunks_info
     
+def query(collection , query):
+    query_embeddings = embedding_model.encode(query)
+    results = collection.query(
+        query_embeddings = query_embeddings,
+        n_results = 2,
+        include = ["documents", "metadatas", "embeddings"]
+    )
+    return results
+    

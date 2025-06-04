@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 import ollama
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from rag.sqlite_utils import get_all_entries
-from rag.embedder import get_all_entries_embeddings
+from rag.embedder import get_all_entries_embeddings, query
 from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
 from rag.text_utils import give_chunks_info
 
@@ -51,11 +51,12 @@ def generate(request: ChatRequest):
                 print(content)
     return StreamingResponse(chat_stream(), media_type="text/event-stream")
 
-@app.get("/dummy")
-def dummy():
-    chunks_info = get_all_entries_embeddings()
-    collection= create_collection(chunks_info)
-    results = collection.get(include=["documents", "metadatas", "embeddings"])
+
+@app.get("/query")
+def query_rag(query_request: str=Query(...,alias="q")):
+    chunks_info_with_embeddings = get_all_entries_embeddings()
+    collection= create_collection(chunks_info_with_embeddings)
+    results = query(collection , query_request)
     print(results)
 
    
