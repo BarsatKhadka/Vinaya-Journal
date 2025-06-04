@@ -9,7 +9,12 @@ export const RetrievePastEntries = () => {
 
     useEffect(() => {
         const fetchEntries = async () => {
-            const date = selectedDate.toISOString().split('T')[0];
+            
+            const year = selectedDate.getFullYear();
+            const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+            const day = String(selectedDate.getDate()).padStart(2, '0');
+            const date = `${year}-${month}-${day}`;
+            
             const response = await axios.get(`http://localhost:8080/retrieve?date=${date}`);
             const data = response.data;
             setEntries(data);
