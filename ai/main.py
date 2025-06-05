@@ -60,6 +60,9 @@ def query_rag(query_request: str=Query(...,alias="q")):
 
 @app.get("/dummy")
 def dummy():
-     get_mood_insights("to shun the senses is the highest happiness.")
+    text = """Today feels like one of those days where time both stretches and compresses all at once. I woke up early, just as the first hints of dawn were creeping through the curtains. The sky was still a pale gray, whispering promises of a warm day ahead. There’s something soothing about those early morning moments — everything feels quiet, untouched, like the world is holding its breath before the chaos begins.
+
+I sat by the window for a while, nursing a cup of tea, watching the neighborhood slowly come to life. The usual hum of cars starting up, birds chirping in their own rhythm, and distant laughter from somewhere down the street. It reminded me how much I take for granted these simple sounds — the soundtrack of everyday life. Sometimes, I wish I could bottle this peace, carry it with me when everything feels overwhelming.."""
+    get_mood_insights(text)
 
 

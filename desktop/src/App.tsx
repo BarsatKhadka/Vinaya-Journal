@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BeforeLoginHome } from "./HomePage/BeforeLogin/BeforeLoginHome";
 import { AfterLoginHome } from "./HomePage/AfterLogin/AfterLoginHome";
-import { ContextualRAG } from "./HomePage/AfterLogin/RightSide/SideBarComponents/ContextualRAG";
+import { ContextualRAG } from "./HomePage/AfterLogin/RightSide/SideBarComponents/ContextualRAG/ContextualRAG";
 import { MoodInsights } from "./HomePage/AfterLogin/RightSide/SideBarComponents/MoodInsights";
 import { VInayaOllamaAI } from "./HomePage/AfterLogin/RightSide/SideBarComponents/VinayaOllamaAI/VInayaOllamaAI";  
 import { RetrievePastEntries } from "./HomePage/AfterLogin/RightSide/SideBarComponents/RetrievePastEntries";
