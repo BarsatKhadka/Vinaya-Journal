@@ -82,7 +82,7 @@ export const VInayaOllamaAI = () => {
             }}
         >
             
-            <div className="absolute inset-0 bg-[#F7F4F0]/40 pointer-events-none z-0" />
+            <div className="absolute inset-0 bg-[#ddcb99]/50 pointer-events-none z-0" />
             <div className="relative z-10 flex flex-col h-full">
                 <div className="items-start pt-6 pb-2">
                     <InChatAIModelDropdown />
