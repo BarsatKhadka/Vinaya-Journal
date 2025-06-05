@@ -1,9 +1,18 @@
 import ContextualRAGBackground from '../../../../assets/BackgroundImages/COntextualRAGBackground.png';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios'
 
 export const ContextualRAG = () => {
     const [searchQuery, setSearchQuery] = useState('');
-
+    const [searchResults, setSearchResults] = useState([]);
+    
+    useEffect(() => {
+        const fetchSearchResults = async () => {
+            const response = await axios.get(`http://localhost:8000/query?q=${searchQuery}`);
+            setSearchResults(response.data);
+        };
+        fetchSearchResults();
+    }, [searchQuery]);
 
     return (
         <div className="flex flex-col h-full p-8 bg-[#fae4b2]/50" style={{
@@ -41,12 +50,6 @@ export const ContextualRAG = () => {
                                 />
                             </svg>
                         </div>
-                        <button
-                            className="px-6 py-4 bg-[#2F4F4F] text-white rounded-lg cursor-pointer hover:bg-[#2F4F4F]/90 transition-all duration-300 font-serif disabled:opacity-50 flex items-center space-x-2"
-                            style={{fontFamily: 'Roboto Mono'}}
-                        >
-                            <span>Search</span>
-                        </button>
                     </div>
 
                     <div className="mt-4 relative group">
@@ -71,6 +74,14 @@ export const ContextualRAG = () => {
                                 Semantic search finds journal entries by meaning, not just matching words. It understands the context and intent behind your search.
                             </p>
                         </div>
+                    </div>
+
+                    <div className="mt-4">
+                        {searchResults.map((result: any) => (
+                            <div key={result.id} className="p-4 mb-4 bg-white rounded-lg border border-[#e6cfa7]">
+                                {result.content} {result.date}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
