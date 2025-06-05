@@ -8,7 +8,7 @@ from rag.sqlite_utils import get_all_entries
 from rag.embedder import get_all_entries_embeddings, query
 from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
 from rag.text_utils import give_chunks_info
-
+from rag.mood_insights import get_mood_insights
 
 app = FastAPI()
 
@@ -58,6 +58,8 @@ def query_rag(query_request: str=Query(...,alias="q")):
     results = query(collection , query_request)
     return results
 
-
+@app.get("/dummy")
+def dummy():
+     get_mood_insights("to shun the senses is the highest happiness.")
 
 
