@@ -6,7 +6,7 @@ export const ContextualRAG = () => {
 
 
     return (
-        <div className="flex flex-col h-full p-8 bg-[#ddcb99]/50" style={{
+        <div className="flex flex-col h-full p-8 bg-[#fae4b2]/50" style={{
             backgroundImage: `url(${ContextualRAGBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',

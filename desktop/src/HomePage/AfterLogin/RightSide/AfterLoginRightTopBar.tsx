@@ -19,7 +19,7 @@ export const AfterLoginRightTopBar = () => {
     }, [navigate]);
 
     return (
-            <div className="backdrop-blur-[2px] px-8 py-1 border-b border-gray-200/90 ">
+            <div className="backdrop-blur-[2px] px-8 py-1 bg-[#fae4b2] border-b border-[#e6cfa7]">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Logo and Title */}
                     <div className="flex items-center md:gap-1 group">

@@ -23,7 +23,7 @@ export const RetrievePastEntries = () => {
     }, [selectedDate]);
 
     return (
-        <div className="flex flex-col items-center h-full bg-[#ddcb99]/50 p-8">
+        <div className="flex flex-col items-center h-full bg-[#fae4b2]/50 p-8">
             <style>{`
                 .vinaya-calendar .react-datepicker__header {
                     background-color: #e0f2ef;

@@ -18,22 +18,22 @@ export const EditorHeader = () => {
   }, [])
 
   return (
-    <div className="border-b border-gray-200/90 px-4 md:px-6 py-3 md:py-4 bg-transparent">
+    <div className="border-b border-[#e6cfa7] px-4 md:px-6 py-3 md:py-4 bg-[#fae4b2]">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 md:gap-0">
         <div>
-          <h1 className="text-xl md:text-2xl font-serif text-gray-800">
-            <span className="bg-gradient-to-r from-teal-700 to-slate-700 bg-clip-text text-transparent">
+          <h1 className="text-xl md:text-2xl font-serif text-[#2F4F4F]">
+            <span className="bg-gradient-to-r from-[#2F4F4F] to-[#1F3F3F] bg-clip-text text-transparent">
               Write your thoughts
             </span>
           </h1>
-          <p className="text-xs md:text-sm text-gray-600 font-light tracking-wide mt-1" 
+          <p className="text-xs md:text-sm text-[#2F4F4F]/80 font-light tracking-wide mt-1" 
              style={{ fontFamily: '"Fira Sans", sans-serif' }}>
             {quote}
           </p>
         </div>
         
         <div className="text-right md:min-w-[180px]">
-          <p className="text-xs text-gray-500 italic mt-1" 
+          <p className="text-xs text-[#2F4F4F]/70 italic mt-1" 
              style={{ fontFamily: '"Fira Sans", sans-serif' }}>
             Today is 
           </p>
