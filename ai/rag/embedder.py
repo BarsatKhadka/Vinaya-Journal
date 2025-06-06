@@ -5,6 +5,8 @@ from rag.text_utils import give_chunks_info
 from rag.chromadb import get_existing_entry_dates
 from transformers import pipeline
 from collections import defaultdict
+from datetime import datetime
+import json
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -58,11 +60,16 @@ def query(collection , query):
 
     return results_json 
 
-def generate_mood_insights(collection):
+def generate_mood_insights(collection , last_n_days = 2):
+
+    existing_dates , today = get_existing_entry_dates()
+    sorted_dates = sorted(existing_dates, key=lambda d: datetime.strptime(d, "%Y-%m-%d"), reverse=True)
+    eligible_dates = sorted_dates[:last_n_days]
+
     mood_results= collection.get(include=["metadatas"])
-    mood_insights = defaultdict(list)
+    mood_insights = {}
     for metadata in mood_results["metadatas"]:
-        if(metadata['chunk_index']) == 0 :
-            mood_insights[metadata['date']].append(metadata['sentiment'])
-    return dict(mood_insights)
+        if metadata['chunk_index'] == 0 and metadata['date'] in eligible_dates:
+            mood_insights[metadata['date']] = json.loads(metadata['sentiment'])
+    return mood_insights
     

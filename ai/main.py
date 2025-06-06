@@ -58,9 +58,9 @@ def query_rag(query_request: str=Query(...,alias="q")):
     return results
 
 @app.get("/mood_insights")
-def mood_insights():
+def mood_insights(last_n_days: int = Query(default=2)):
     chunks_info_with_embeddings_and_sentiment = get_all_entries_embeddings_with_sentiment()
     collection= create_collection(chunks_info_with_embeddings_and_sentiment)
-    results = generate_mood_insights(collection)
+    results = generate_mood_insights(collection , last_n_days)
     return results
     
