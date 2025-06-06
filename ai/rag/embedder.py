@@ -67,9 +67,9 @@ def generate_mood_insights(collection , last_n_days = 2):
     eligible_dates = sorted_dates[:last_n_days]
 
     mood_results= collection.get(include=["metadatas"])
-    mood_insights = {}
+    mood_insights = []
     for metadata in mood_results["metadatas"]:
         if metadata['chunk_index'] == 0 and metadata['date'] in eligible_dates:
-            mood_insights[metadata['date']] = json.loads(metadata['sentiment'])
+            mood_insights.append({"date": metadata['date'] , "sentiment": json.loads(metadata['sentiment'])})
     return mood_insights
     
