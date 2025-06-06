@@ -6,7 +6,6 @@ from rag.chromadb import get_existing_entry_dates
 from transformers import pipeline
 from collections import defaultdict
 
-
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 embedding_model = SentenceTransformer(model_name_or_path="all-MiniLM-L6-v2" , device = device )
@@ -59,5 +58,11 @@ def query(collection , query):
 
     return results_json 
 
-
+def generate_mood_insights(collection):
+    mood_results= collection.get(include=["metadatas"])
+    mood_insights = defaultdict(list)
+    for metadata in mood_results["metadatas"]:
+        if(metadata['chunk_index']) == 0 :
+            mood_insights[metadata['date']].append(metadata['sentiment'])
+    return dict(mood_insights)
     
