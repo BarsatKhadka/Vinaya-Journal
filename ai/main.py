@@ -5,7 +5,7 @@ import ollama
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from rag.sqlite_utils import get_all_entries
-from rag.embedder import get_all_entries_embeddings_with_sentiment, query
+from rag.embedder import get_all_entries_embeddings_with_sentiment, query, generate_mood_insights
 from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
 from rag.text_utils import give_chunks_info
 
@@ -56,7 +56,5 @@ def query_rag(query_request: str=Query(...,alias="q")):
     collection= create_collection(chunks_info_with_embeddings_and_sentiment)
     results = query(collection , query_request)
     return results
-
-
 
 

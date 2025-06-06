@@ -19,12 +19,19 @@ def get_existing_entry_dates():
 
 def add_entry(date, chunked_sentences, embeddings , sentiment):
     sentiment_str = json.dumps(sentiment) if sentiment else None
+    metadatas= []
+    for i in range(len(chunked_sentences)):
+        metadata = {"date": date, "chunk_index": i}
+        if i ==0 and sentiment_str:
+            metadata["sentiment"] = sentiment_str
+        metadatas.append(metadata)
     collection.add(
         documents=chunked_sentences,
         embeddings=embeddings,
         ids=[f"{date}-{i}" for i in range(len(chunked_sentences))],
-        metadatas=[{"date": date, "chunk_index": i , "sentiment": sentiment_str} for i in range(len(chunked_sentences))]
+        metadatas=metadatas
     )
+
 
 def delete_existing_entry(today_date, today_prev_entry, today_prev_entry_len):
     for i in range(today_prev_entry_len):

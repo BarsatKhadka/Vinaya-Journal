@@ -6,6 +6,7 @@ from rag.chromadb import get_existing_entry_dates
 from transformers import pipeline
 from collections import defaultdict
 
+
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 embedding_model = SentenceTransformer(model_name_or_path="all-MiniLM-L6-v2" , device = device )
@@ -57,4 +58,6 @@ def query(collection , query):
         results_json.append({"date":results["metadatas"][0][i]["date"] , "content":results["documents"][0][i]})
 
     return results_json 
+
+
     
