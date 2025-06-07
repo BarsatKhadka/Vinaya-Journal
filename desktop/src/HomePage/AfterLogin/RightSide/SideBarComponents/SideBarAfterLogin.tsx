@@ -1,57 +1,89 @@
 import { LineChart, Bot, SquareTerminal, CalendarClock} from "lucide-react";
 import { useAppStore } from "../../../../store";
 import { OllamaAIModelDropdown } from "./OllamaAIModelDropdown";
-
+import { motion } from "framer-motion";
 
 export const SideBarAfterLogin = () => {
     const { setSelectedSidebar, selectedSidebar } = useAppStore();
+
     return (
-        <div className="flex flex-col h-full w-full px-4 py-6 bg-[#fae4b2] border-r border-[#e6cfa7]"
-        >
+        <div className="flex flex-col h-full w-full px-4 py-6 bg-[#fae4b2] border-r border-[#e6cfa7]">
             <div className="flex flex-col gap-2 mt-2 flex-grow">
                 <button 
                     onClick={() => setSelectedSidebar('Contextual RAG Memory')} 
-                    className={`flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base transition-all w-full cursor-pointer ${
-                        selectedSidebar === 'Contextual RAG Memory' 
-                            ? 'bg-[#2F4F4F] text-white' 
-                            : 'text-[#2F4F4F] hover:bg-white'
-                    }`}
+                    className="relative flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base w-full cursor-pointer"
+                    style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                    <SquareTerminal className="w-5 h-5" />
-                    <span>Contextual RAG</span>
+                    {selectedSidebar === 'Contextual RAG Memory' && (
+                        <motion.div
+                            layoutId="activeTab"
+                            className="absolute inset-0 bg-[#2F4F4F] rounded-md"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                    )}
+                    <span className="relative z-10 flex items-center gap-3">
+                        <SquareTerminal className={`w-5 h-5 ${selectedSidebar === 'Contextual RAG Memory' ? 'text-white' : 'text-[#2F4F4F]'}`} />
+                        <span className={selectedSidebar === 'Contextual RAG Memory' ? 'text-white' : 'text-[#2F4F4F]'}>
+                            Contextual RAG
+                        </span>
+                    </span>
                 </button>
                 <button 
                     onClick={() => setSelectedSidebar('Mood Insights')} 
-                    className={`flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base transition-all w-full cursor-pointer ${
-                        selectedSidebar === 'Mood Insights' 
-                            ? 'bg-[#2F4F4F] text-white' 
-                            : 'text-[#2F4F4F] hover:bg-white'
-                    }`}
+                    className="relative flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base w-full cursor-pointer"
+                    style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                    <LineChart className="w-5 h-5" />
-                    <span>Mood Insights</span>
+                    {selectedSidebar === 'Mood Insights' && (
+                        <motion.div
+                            layoutId="activeTab"
+                            className="absolute inset-0 bg-[#2F4F4F] rounded-md"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                    )}
+                    <span className="relative z-10 flex items-center gap-3">
+                        <LineChart className={`w-5 h-5 ${selectedSidebar === 'Mood Insights' ? 'text-white' : 'text-[#2F4F4F]'}`} />
+                        <span className={selectedSidebar === 'Mood Insights' ? 'text-white' : 'text-[#2F4F4F]'}>
+                            Mood Insights
+                        </span>
+                    </span>
                 </button>
                 <button 
                     onClick={() => setSelectedSidebar('Vinaya Ollama AI')} 
-                    className={`flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base transition-all w-full cursor-pointer ${
-                        selectedSidebar === 'Vinaya Ollama AI' 
-                            ? 'bg-[#2F4F4F] text-white' 
-                            : 'text-[#2F4F4F] hover:bg-white'
-                    }`}
+                    className="relative flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base w-full cursor-pointer"
+                    style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                    <Bot className="w-5 h-5" />
-                    <span>Vinaya Ollama AI</span>
+                    {selectedSidebar === 'Vinaya Ollama AI' && (
+                        <motion.div
+                            layoutId="activeTab"
+                            className="absolute inset-0 bg-[#2F4F4F] rounded-md"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                    )}
+                    <span className="relative z-10 flex items-center gap-3">
+                        <Bot className={`w-5 h-5 ${selectedSidebar === 'Vinaya Ollama AI' ? 'text-white' : 'text-[#2F4F4F]'}`} />
+                        <span className={selectedSidebar === 'Vinaya Ollama AI' ? 'text-white' : 'text-[#2F4F4F]'}>
+                            Vinaya Ollama AI
+                        </span>
+                    </span>
                 </button>
                 <button 
                     onClick={() => setSelectedSidebar('Retrieve Past Entries')} 
-                    className={`flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base transition-all w-full cursor-pointer ${
-                        selectedSidebar === 'Retrieve Past Entries' 
-                            ? 'bg-[#2F4F4F] text-white' 
-                            : 'text-[#2F4F4F] hover:bg-white'
-                    }`}
+                    className="relative flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base w-full cursor-pointer"
+                    style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                    <CalendarClock className="w-5 h-5" />
-                    <span>Retrieve Past Entries</span>
+                    {selectedSidebar === 'Retrieve Past Entries' && (
+                        <motion.div
+                            layoutId="activeTab"
+                            className="absolute inset-0 bg-[#2F4F4F] rounded-md"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                    )}
+                    <span className="relative z-10 flex items-center gap-3">
+                        <CalendarClock className={`w-5 h-5 ${selectedSidebar === 'Retrieve Past Entries' ? 'text-white' : 'text-[#2F4F4F]'}`} />
+                        <span className={selectedSidebar === 'Retrieve Past Entries' ? 'text-white' : 'text-[#2F4F4F]'}>
+                            Retrieve Past Entries
+                        </span>
+                    </span>
                 </button>
             </div>
             <div className="mt-8">
