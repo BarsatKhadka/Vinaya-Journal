@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ChevronDown } from 'lucide-react';
 import { MoodRecord, timeRanges } from './mood';
 import { MoodCharts } from './MoodCharts';
+import { AnalyzeMood } from './AnalyzeMood';
 
 export const MoodInsights = () => {
     const [moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
@@ -27,7 +28,7 @@ export const MoodInsights = () => {
 
     return (
         <div
-            className="flex flex-col h-full relative bg-[#fae4b2]"
+            className="flex flex-col h-full relative"
             style={{
                 backgroundImage: `url(${MoodInsightsBackground})`,
                 backgroundSize: 'cover',
@@ -70,6 +71,7 @@ export const MoodInsights = () => {
             <div className="flex flex-col items-center">
                 <MoodCharts chartData={chartData} />
             </div>
+            <AnalyzeMood />
         </div>
     );
 };
