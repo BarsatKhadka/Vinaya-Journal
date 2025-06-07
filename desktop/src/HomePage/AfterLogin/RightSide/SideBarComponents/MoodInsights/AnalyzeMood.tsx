@@ -1,9 +1,9 @@
 import { BarChart, Activity, TrendingUp, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useAppStore } from '../../../../../store'
 
 export const AnalyzeMood = () => {
-    const [activeTab, setActiveTab] = useState<string | null>("dominant");
+    const { activeMoodTab, setActiveMoodTab } = useAppStore();
 
     return (
         <div className="mt-8 mb-8 flex flex-col items-center">
@@ -12,16 +12,16 @@ export const AnalyzeMood = () => {
             >
                 <BarChart className="w-5 h-5 text-white absolute left-4 opacity-100 group-hover:opacity-0 transition-all duration-200" />
                 <Activity className="w-5 h-5 text-white absolute right-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-4 transition-all duration-200" />
-                <span className="group-hover:-translate-x-4 transition-all duration-200">Analyze Mood with Pandas</span>
+                <span className="group-hover:-translate-x-4 transition-all duration-200">Analyze {activeMoodTab} with Pandas</span>
             </button>
 
             <div className="mt-4 flex flex-row gap-3 z-99">
                 <button 
-                    onClick={() => setActiveTab('average')}
+                    onClick={() => setActiveMoodTab('Average Sentiment')}
                     className="relative flex items-center gap-2 px-4 py-2.5 rounded-lg font-serif text-base cursor-pointer"
                     style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                    {activeTab === 'average' && (
+                    {activeMoodTab === 'Average Sentiment' && (
                         <motion.div
                             layoutId="moodTab"
                             className="absolute inset-0 rounded-lg"
@@ -42,11 +42,11 @@ export const AnalyzeMood = () => {
                 </button>
                 
                 <button 
-                    onClick={() => setActiveTab('dominant')}
+                    onClick={() => setActiveMoodTab('Dominant Mood')}
                     className="relative flex items-center gap-2 px-4 py-2.5 rounded-lg font-serif text-base cursor-pointer"
                     style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                    {activeTab === 'dominant' && (
+                        {activeMoodTab === 'Dominant Mood' && (
                         <motion.div
                             layoutId="moodTab"
                             className="absolute inset-0 rounded-lg"
@@ -67,11 +67,11 @@ export const AnalyzeMood = () => {
                 </button>
                 
                 <button 
-                    onClick={() => setActiveTab('daily')}
+                    onClick={() => setActiveMoodTab('Daily Changes and Trends')}
                     className="relative flex items-center gap-2 px-4 py-2.5 rounded-lg font-serif text-base cursor-pointer"
                     style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                    {activeTab === 'daily' && (
+                    {activeMoodTab === 'Daily Changes and Trends' && (
                         <motion.div
                             layoutId="moodTab"
                             className="absolute inset-0 rounded-lg"

@@ -11,6 +11,8 @@ interface AppState {
   setOllamaModels: (models: string[]) => void;
   currentModel: string;
   setCurrentModel: (model: string) => void;
+  activeMoodTab: string;
+  setActiveMoodTab: (tab: string) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -25,4 +27,6 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setOllamaModels: (models: string[]) => set((state) => ({ ...state, ollamaModels: models })),
   currentModel: "",
   setCurrentModel: (model: string) => set((state) => ({ ...state, currentModel: model })),
+  activeMoodTab: "Dominant Mood",
+  setActiveMoodTab: (tab: string) => set((state) => ({ ...state, activeMoodTab: tab })),
 }));
