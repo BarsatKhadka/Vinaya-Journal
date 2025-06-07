@@ -1,7 +1,10 @@
-fastapi
-uvicorn
-sentence-transformers
-chromadb
-ollama
-python-dotenv
-requests
+fastapi>=0.104.0
+uvicorn>=0.24.0
+sentence-transformers>=2.2.2
+chromadb>=0.4.18
+ollama>=0.1.6
+python-dotenv>=1.0.0
+requests>=2.31.0
+torch>=2.1.0
+transformers>=4.35.0
+pydantic>=2.4.2
