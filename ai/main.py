@@ -8,6 +8,7 @@ from rag.sqlite_utils import get_all_entries
 from rag.embedder import get_all_entries_embeddings_with_sentiment, query, generate_mood_insights
 from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
 from rag.text_utils import give_chunks_info
+from pandasFolder.analyze_mood_trends import analyze_mood_trends
 
 app = FastAPI()
 
@@ -63,4 +64,13 @@ def mood_insights(last_n_days: int = Query(default=2)):
     collection= create_collection(chunks_info_with_embeddings_and_sentiment)
     results = generate_mood_insights(collection , last_n_days)
     return results
-    
+
+@app.get("/mood_analysis")
+def mood_analysis(last_n_days: int = Query(default=2)):
+    input_insight = mood_insights(last_n_days)
+    results = analyze_mood_trends(input_insight)
+    return results
+
+
+
+
