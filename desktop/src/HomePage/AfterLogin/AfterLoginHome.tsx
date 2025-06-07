@@ -3,7 +3,7 @@ import { AfterLoginRightTopBar } from "./RightSide/AfterLoginRightTopBar";
 import { SideBarAfterLogin } from "./RightSide/SideBarComponents/SideBarAfterLogin";
 import { useAppStore } from "../../store"
 import { ContextualRAG } from "./RightSide/SideBarComponents/ContextualRAG/ContextualRAG";
-import { MoodInsights } from "./RightSide/SideBarComponents/MoodInsights";
+import { MoodInsights } from "./RightSide/SideBarComponents/MoodInsights/MoodInsights";
 import { VInayaOllamaAI } from "./RightSide/SideBarComponents/VinayaOllamaAI/VInayaOllamaAI";
 import { RetrievePastEntries } from "./RightSide/SideBarComponents/RetrievePastEntries";
 

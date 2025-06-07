@@ -1,9 +1,10 @@
 import { useAppStore } from "../../../../../store";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 export const InChatAIModelDropdown = () => {
     const {ollamaRunning, ollamaModels, currentModel, setCurrentModel} = useAppStore();
-
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     return (
         <div className="w-full flex items-center mb-2">
@@ -12,21 +13,33 @@ export const InChatAIModelDropdown = () => {
                     <span className="text-xs font-semibold md:text-sm font-serif text-[#2F4F4F] whitespace-nowrap ml-2">
                         Ollama
                     </span>
-                    <select
-                        className="px-2 py-1 rounded-md border border-[#e0f2ef] bg-[#e0f2ef]/70 shadow-sm text-[#2F4F4F] font-serif text-xs focus:outline-none focus:ring-2 focus:ring-[#2F4F4F] transition-colors"
-                        value={currentModel}
-                        onChange={(e) => setCurrentModel(e.target.value)}
-                    >
-                        {ollamaModels.length === 0 ? (
-                            <option value="No models found">No models found</option>
-                        ) : (
-                            ollamaModels.map((model) => (
-                                <option key={model} value={model}>
-                                    {model}
-                                </option>
-                            ))
+                    <div className="relative">
+                        <button
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#2F4F4F] text-white font-serif hover:bg-[#2F4F4F]/90 transition-colors"
+                        >
+                            {ollamaModels.length === 0 ? "No models found" : currentModel}
+                            <ChevronDown className="w-4 h-4" />
+                        </button>
+                        {isDropdownOpen && ollamaModels.length > 0 && (
+                            <div className="absolute top-full right-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-[#e6cfa7] z-50">
+                                {ollamaModels.map((model) => (
+                                    <button
+                                        key={model}
+                                        onClick={() => {
+                                            setCurrentModel(model);
+                                            setIsDropdownOpen(false);
+                                        }}
+                                        className={`w-full text-left px-3 py-2 font-serif text-[#2F4F4F] hover:bg-[#fae4b2] transition-colors ${
+                                            currentModel === model ? 'bg-[#fae4b2]' : ''
+                                        }`}
+                                    >
+                                        {model}
+                                    </button>
+                                ))}
+                            </div>
                         )}
-                    </select>
+                    </div>
                 </div>
             ) : (
                 <div className="flex items-center gap-1 text-xs text-red-700 font-serif">
