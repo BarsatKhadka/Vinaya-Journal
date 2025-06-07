@@ -19,6 +19,7 @@
     "react-datepicker": "^8.4.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.6.0",
+    "recharts": "^2.15.3",
     "zustand": "^5.0.5"
   },
   "devDependencies": {

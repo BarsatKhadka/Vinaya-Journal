@@ -3,6 +3,7 @@ import MoodInsightsBackground from '../../../../../assets/BackgroundImages/MoodI
 import axios from 'axios';
 import { ChevronDown } from 'lucide-react';
 import { MoodRecord, timeRanges } from './mood';
+import { MoodCharts } from './MoodCharts';
 
 export const MoodInsights = () => {
     const [moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
@@ -16,7 +17,13 @@ export const MoodInsights = () => {
             setMoodInsights(data);
         };
         fetchMoodInsights();
+        console.log(moodInsights)
     }, [selectedDays]);
+
+    const chartData = moodInsights.map((entry) => ({
+        date: entry.date,
+        ...entry.sentiment 
+    }));
 
     return (
         <div
@@ -61,6 +68,7 @@ export const MoodInsights = () => {
                 </div>
             </div>
             <div className="flex flex-col items-center">
+                <MoodCharts chartData={chartData} />
             </div>
         </div>
     );
