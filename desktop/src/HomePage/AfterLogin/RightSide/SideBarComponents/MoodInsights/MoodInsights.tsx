@@ -2,26 +2,7 @@ import { useEffect, useState } from 'react';
 import MoodInsightsBackground from '../../../../../assets/BackgroundImages/MoodInsightsBackground.png';
 import axios from 'axios';
 import { ChevronDown } from 'lucide-react';
-
-type MoodRecord = {
-    date: string;
-    sentiment: {
-        anger: number;
-        disgust: number;
-        fear: number;
-        joy: number;
-        neutral: number;
-        sadness: number;
-        surprise: number;
-    };
-};
-
-const timeRanges = [
-    { label: 'Last 2 Days', value: 2 },
-    { label: 'Last Week', value: 7 },
-    { label: 'Last 2 Weeks', value: 14 },
-    { label: 'Last Month', value: 30 }
-];
+import { MoodRecord, timeRanges } from './mood';
 
 export const MoodInsights = () => {
     const [moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
@@ -39,7 +20,7 @@ export const MoodInsights = () => {
 
     return (
         <div
-            className="flex flex-col items-center h-full relative bg-[#fae4b2]"
+            className="flex flex-col h-full relative bg-[#fae4b2]"
             style={{
                 backgroundImage: `url(${MoodInsightsBackground})`,
                 backgroundSize: 'cover',
@@ -48,10 +29,9 @@ export const MoodInsights = () => {
             }}
         >
             <div className="absolute inset-0 bg-[#fae4b2]/50 pointer-events-none z-0" />
-            <div className="relative z-10 flex flex-col items-center w-full">
-                <div className="flex items-center gap-4 mt-8">
-                    <h1 className="text-xl font-serif text-[#2F4F4F]">Mood Insights</h1>
-                    <div className="relative">
+            <div className="relative z-10 flex flex-col w-full">
+                <div className="flex items-center justify-end mt-8">
+                    <div className="relative mr-6">
                         <button
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#2F4F4F] text-white font-serif hover:bg-[#2F4F4F]/90 transition-colors"
@@ -60,7 +40,7 @@ export const MoodInsights = () => {
                             <ChevronDown className="w-4 h-4" />
                         </button>
                         {isDropdownOpen && (
-                            <div className="absolute top-full left-0 mt-1 w-40 bg-white rounded-md shadow-lg border border-[#e6cfa7]">
+                            <div className="absolute top-full right-0 mt-1 w-40 bg-white rounded-md shadow-lg border border-[#e6cfa7]">
                                 {timeRanges.map((range) => (
                                     <button
                                         key={range.value}
