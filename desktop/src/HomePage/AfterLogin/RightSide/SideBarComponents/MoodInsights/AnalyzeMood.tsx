@@ -13,7 +13,7 @@ export const AnalyzeMood = () => {
             >
                 <BarChart className="w-5 h-5 text-white absolute left-4 opacity-100 group-hover:opacity-0 transition-all duration-200" />
                 <Activity className="w-5 h-5 text-white absolute right-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-4 transition-all duration-200" />
-                <span className="group-hover:-translate-x-4 transition-all duration-200">Analyze {activeMoodTab} with Pandas</span>
+                <span className="group-hover:-translate-x-4 transition-all duration-200">Visualize {activeMoodTab} with Pandas</span>
             </button>
 
             <div className="mt-4 flex flex-row gap-3 z-99">

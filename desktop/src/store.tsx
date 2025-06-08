@@ -15,6 +15,8 @@ interface AppState {
   setActiveMoodTab: (tab: string) => void;
   selectedDays: number;
   setSelectedDays: (days: number) => void;
+  chartData: any;
+  setChartData: (data: any) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -33,4 +35,6 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setActiveMoodTab: (tab: string) => set((state) => ({ ...state, activeMoodTab: tab })),
   selectedDays: 2,
   setSelectedDays: (days: number) => set((state) => ({ ...state, selectedDays: days })),
+  chartData: [],
+  setChartData: (data: any) => set((state) => ({ ...state, chartData: data })),
 }));

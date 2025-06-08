@@ -11,20 +11,20 @@ export const MoodInsights = () => {
     const [moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
     const { selectedDays, setSelectedDays } = useAppStore();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const { chartData, setChartData } = useAppStore();
     
     useEffect(() => {
         const fetchMoodInsights = async () => {
             const response = await axios.get(`http://localhost:8000/mood_insights?last_n_days=${selectedDays}`);
             const data = response.data;
             setMoodInsights(data);
+            setChartData(data.map((entry: MoodRecord) => ({
+                date: entry.date,
+                ...entry.sentiment 
+            })));
         };
         fetchMoodInsights();
-    }, [selectedDays]);
-
-    const chartData = moodInsights.map((entry) => ({
-        date: entry.date,
-        ...entry.sentiment 
-    }));
+    }, [selectedDays, setChartData]);
 
     return (
         <div
