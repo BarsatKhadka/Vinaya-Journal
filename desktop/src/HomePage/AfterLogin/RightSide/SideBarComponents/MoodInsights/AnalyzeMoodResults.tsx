@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppStore } from "../../../../../store"
 import axios from "axios";
 import { AvgSentiment } from "./AvgSentiment";
+import { DominantMood } from "./DominantMood";
 
 export const AnalyzeMoodResults = () => {
     const {activeMoodTab, selectedDays} = useAppStore();
@@ -23,6 +24,7 @@ export const AnalyzeMoodResults = () => {
     return (
         <div>
             {activeMoodTab === "Average Sentiment" && <AvgSentiment avgSentiment={analyzeMoodResults?.avg_sentiment} />}
+            {activeMoodTab === "Dominant Mood" && <DominantMood dominantMood={analyzeMoodResults?.dominant_mood_of_the_day} />}
         </div>
     );
 }
