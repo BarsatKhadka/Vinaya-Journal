@@ -1,4 +1,5 @@
 import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart } from 'recharts';
+import { useAppStore } from '../../../../../store';
 
 interface MoodChartsProps {
     chartData: any;
@@ -16,9 +17,11 @@ const colors = [
 ];
 
 export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
+    const { chartDataType } = useAppStore();
     return (
         <div className="w-full h-full mr-8 mt-4 ">
             <div className="w-full h-[400px]">
+                {chartDataType === "Initial" && (
                 <ResponsiveContainer width="100%" height="100%">
                     <ComposedChart data={chartData}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#e6cfa7" />
@@ -57,8 +60,30 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
                                 activeDot={{ r: 6, fill: colors[index] }}
                             />
                         ))}
-                    </ComposedChart>
-                </ResponsiveContainer>
+                        </ComposedChart>
+                    </ResponsiveContainer>
+                )}
+                {chartDataType === "Average Sentiment" && (
+                    <ResponsiveContainer width="100%" height="100%">
+                        <ComposedChart data={chartData}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="#e6cfa7" />
+                        </ComposedChart>
+                    </ResponsiveContainer>
+                )}
+                {chartDataType === "Dominant Mood" && (
+                    <ResponsiveContainer width="100%" height="100%">
+                        <ComposedChart data={chartData}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="#e6cfa7" />
+                        </ComposedChart>
+                    </ResponsiveContainer>
+                )}
+                {chartDataType === "Daily Changes and Trends" && (
+                    <ResponsiveContainer width="100%" height="100%">
+                        <ComposedChart data={chartData}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="#e6cfa7" />
+                        </ComposedChart>
+                    </ResponsiveContainer>
+                )}
             </div>
         </div>
     )

@@ -11,7 +11,7 @@ export const MoodInsights = () => {
     const [moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
     const { selectedDays, setSelectedDays } = useAppStore();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const { chartData, setChartData } = useAppStore();
+    const { chartData, setChartData ,  setChartDataType } = useAppStore();
     
     useEffect(() => {
         const fetchMoodInsights = async () => {
@@ -22,6 +22,7 @@ export const MoodInsights = () => {
                 date: entry.date,
                 ...entry.sentiment 
             })));
+            setChartDataType("Initial")
         };
         fetchMoodInsights();
     }, [selectedDays, setChartData]);

@@ -17,6 +17,8 @@ interface AppState {
   setSelectedDays: (days: number) => void;
   chartData: any;
   setChartData: (data: any) => void;
+  chartDataType: string;
+  setChartDataType: (type: string) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -37,4 +39,6 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setSelectedDays: (days: number) => set((state) => ({ ...state, selectedDays: days })),
   chartData: [],
   setChartData: (data: any) => set((state) => ({ ...state, chartData: data })),
+  chartDataType: "Initial",
+  setChartDataType: (type: string) => set((state) => ({ ...state, chartDataType: type })),
 }));

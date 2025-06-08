@@ -5,9 +5,12 @@ import { AvgSentiment } from "./AvgSentiment";
 import { DominantMood } from "./DominantMood";
 import { DailyChangesAndTrends } from "./DailyChangesAndTrends";
 
+
+
 export const AnalyzeMoodResults = () => {
     const {activeMoodTab, selectedDays} = useAppStore();
     const [analyzeMoodResults, setAnalyzeMoodResults] = useState<any>(null);
+    const { chartData, setChartData , setChartDataType } = useAppStore();
 
     useEffect(() => {
         const fetchMoodResults = async () => {
@@ -21,6 +24,22 @@ export const AnalyzeMoodResults = () => {
         };
         fetchMoodResults();
     }, [selectedDays]);
+
+    useEffect(() => {
+        if (activeMoodTab === "Average Sentiment") {
+            setChartData(analyzeMoodResults?.avg_sentiment);
+            setChartDataType("Average Sentiment");
+        }
+        if (activeMoodTab === "Dominant Mood") {
+            setChartData(analyzeMoodResults?.dominant_mood_of_the_day);
+            setChartDataType("Dominant Mood");
+        }
+        if (activeMoodTab === "Daily Changes and Trends") {
+            setChartData(analyzeMoodResults?.daily_changes);
+            setChartDataType("Daily Changes and Trends");
+        }
+        console.log(chartData)
+    }, [activeMoodTab]);
 
     return (
         <div>
