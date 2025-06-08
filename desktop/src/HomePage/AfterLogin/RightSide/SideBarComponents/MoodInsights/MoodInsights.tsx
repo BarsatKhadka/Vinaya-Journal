@@ -5,10 +5,11 @@ import { ChevronDown } from 'lucide-react';
 import { MoodRecord, timeRanges } from './mood';
 import { MoodCharts } from './MoodCharts';
 import { AnalyzeMood } from './AnalyzeMood';
+import { useAppStore } from '../../../../../store';
 
 export const MoodInsights = () => {
     const [moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
-    const [selectedDays, setSelectedDays] = useState(2);
+    const { selectedDays, setSelectedDays } = useAppStore();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     
     useEffect(() => {
@@ -18,7 +19,6 @@ export const MoodInsights = () => {
             setMoodInsights(data);
         };
         fetchMoodInsights();
-        console.log(moodInsights)
     }, [selectedDays]);
 
     const chartData = moodInsights.map((entry) => ({
