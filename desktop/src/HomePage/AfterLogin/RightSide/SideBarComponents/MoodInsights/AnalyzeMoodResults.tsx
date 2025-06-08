@@ -12,7 +12,7 @@ export const AnalyzeMoodResults = () => {
     useEffect(() => {
         const fetchMoodResults = async () => {
             const response = await axios.get(`http://localhost:8000/mood_analysis?last_n_days=${selectedDays}`);
-            const data = response.data;
+            const data = response?.data;
             setAnalyzeMoodResults(data)
         }
         fetchMoodResults();
@@ -21,6 +21,7 @@ export const AnalyzeMoodResults = () => {
     return (
         <div>
             {activeMoodTab === "Average Sentiment" && <AvgSentiment avgSentiment={analyzeMoodResults?.avg_sentiment} />}
+            
             
         </div>
     );

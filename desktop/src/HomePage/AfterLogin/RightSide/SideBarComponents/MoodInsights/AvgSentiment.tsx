@@ -9,7 +9,7 @@ interface AvgSentimentProps {
         anger: number;
         sadness: number;
         disgust: number;
-    }
+    } | null;
 }
 
 const getSentimentColor = (sentiment: string) => {
@@ -26,6 +26,22 @@ const getSentimentColor = (sentiment: string) => {
 };
 
 export const AvgSentiment: React.FC<AvgSentimentProps> = ({ avgSentiment }) => {
+    if (!avgSentiment) {
+        return (
+            <div className="mt-12 grid grid-cols-3 gap-3">
+                {Array(6).fill(0).map((_, index) => (
+                    <div 
+                        key={index}
+                        className="bg-[#fef1d6] border border-[#2F4F4F] rounded-lg p-2 animate-pulse"
+                    >
+                        <div className="h-4 bg-[#2F4F4F]/20 rounded w-3/4 mb-2"></div>
+                        <div className="h-6 bg-[#2F4F4F]/20 rounded w-1/2"></div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
     return (
         <div className="mt-12 grid grid-cols-3 gap-3">
             {Object.entries(avgSentiment).map(([sentiment, value]) => (
