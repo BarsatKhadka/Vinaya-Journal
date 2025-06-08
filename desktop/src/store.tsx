@@ -13,6 +13,8 @@ interface AppState {
   setCurrentModel: (model: string) => void;
   activeMoodTab: string;
   setActiveMoodTab: (tab: string) => void;
+  selectedDays: number;
+  setSelectedDays: (days: number) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -29,4 +31,6 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setCurrentModel: (model: string) => set((state) => ({ ...state, currentModel: model })),
   activeMoodTab: "Dominant Mood",
   setActiveMoodTab: (tab: string) => set((state) => ({ ...state, activeMoodTab: tab })),
+  selectedDays: 2,
+  setSelectedDays: (days: number) => set((state) => ({ ...state, selectedDays: days })),
 }));

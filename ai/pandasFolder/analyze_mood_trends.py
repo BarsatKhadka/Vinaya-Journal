@@ -10,7 +10,7 @@ def analyze_mood_trends(mood_data):
     df['date'] = pd.to_datetime(df['date']).dt.date
     df.set_index('date', inplace=True)
 
-    avg_sentiment = df.mean()
+    avg_sentiment = df.mean().sort_values(ascending=False)
     dominant_mood_of_the_day = df.idxmax(axis=1)
     daily_changes = df.diff().fillna(0).round(3)
 

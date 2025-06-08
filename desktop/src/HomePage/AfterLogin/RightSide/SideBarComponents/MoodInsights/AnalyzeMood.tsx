@@ -1,6 +1,7 @@
 import { BarChart, Activity, TrendingUp, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../../../../../store'
+import { AnalyzeMoodResults } from './AnalyzeMoodResults';
 
 export const AnalyzeMood = () => {
     const { activeMoodTab, setActiveMoodTab } = useAppStore();
@@ -91,6 +92,7 @@ export const AnalyzeMood = () => {
                     </span>
                 </button>
             </div>
+            <AnalyzeMoodResults />
         </div>
     )
 }
