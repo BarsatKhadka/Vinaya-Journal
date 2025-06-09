@@ -1,10 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BeforeLoginHome } from "./HomePage/BeforeLogin/BeforeLoginHome";
 import { AfterLoginHome } from "./HomePage/AfterLogin/AfterLoginHome";
-import { ContextualRAG } from "./HomePage/AfterLogin/RightSide/SideBarComponents/ContextualRAG/ContextualRAG";
-import { MoodInsights } from "./HomePage/AfterLogin/RightSide/SideBarComponents/MoodInsights/MoodInsights";
-import { VInayaOllamaAI } from "./HomePage/AfterLogin/RightSide/SideBarComponents/VinayaOllamaAI/VInayaOllamaAI";  
-import { RetrievePastEntries } from "./HomePage/AfterLogin/RightSide/SideBarComponents/RetrievePastEntries";
+import { Settings } from "./HomePage/AfterLogin/RightSide/Settings";
 
 function App() {
   return (
@@ -12,11 +9,8 @@ function App() {
       <div className="bg-[#F7F4F0] min-h-screen">
         <Routes>
           <Route path="/" element={<BeforeLoginHome />} />
-          <Route path="/app/*"  element={ <AfterLoginHome />}/>
-          <Route path="/app/contextual-rag" element={<ContextualRAG />} />
-          <Route path="/app/mood-insights" element={<MoodInsights />} />
-          <Route path="/app/vinaya-ollama-ai" element={<VInayaOllamaAI />} />
-          <Route path="/app/retrieve-past-entries" element={<RetrievePastEntries />} />
+          <Route path="/app/*"  element={ <AfterLoginHome />}/> 
+          <Route path="/app/settings" element={<Settings />} />
         </Routes>
       </div>
     </Router>

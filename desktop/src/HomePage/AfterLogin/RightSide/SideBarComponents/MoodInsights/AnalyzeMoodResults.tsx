@@ -8,7 +8,7 @@ import { DailyChangesAndTrends } from "./DailyChangesAndTrends";
 export const AnalyzeMoodResults = () => {
     const {activeMoodTab, selectedDays} = useAppStore();
     const [analyzeMoodResults, setAnalyzeMoodResults] = useState<any>(null);
-    const { chartData, setChartData, setChartDataType } = useAppStore();
+    const { setChartData, setChartDataType } = useAppStore();
 
     useEffect(() => {
         const fetchMoodResults = async () => {

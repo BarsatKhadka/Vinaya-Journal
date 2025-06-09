@@ -50,9 +50,11 @@ export const AfterLoginRightTopBar = () => {
                         <button className="p-2 text-gray-600 hover:text-white rounded-lg transition-all duration-200 hover:bg-[#2F4F4F] cursor-pointer">
                             <History size={20} strokeWidth={1.5} />
                         </button>
+                        <Link to="/app/settings">
                         <button className="p-2 text-gray-600 hover:text-white rounded-lg transition-all duration-200 hover:bg-[#2F4F4F] cursor-pointer">
                             <Settings size={20} strokeWidth={1.5} />
                         </button>
+                        </Link>
                     </div>
                 </div>
             </div>
