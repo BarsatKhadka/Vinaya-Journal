@@ -33,7 +33,7 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setOllamaModels: (models: string[]) => set((state) => ({ ...state, ollamaModels: models })),
   currentModel: "",
   setCurrentModel: (model: string) => set((state) => ({ ...state, currentModel: model })),
-  activeMoodTab: "Dominant Mood",
+  activeMoodTab: "Overview",
   setActiveMoodTab: (tab: string) => set((state) => ({ ...state, activeMoodTab: tab })),
   selectedDays: 2,
   setSelectedDays: (days: number) => set((state) => ({ ...state, selectedDays: days })),
