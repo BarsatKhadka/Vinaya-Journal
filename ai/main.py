@@ -63,12 +63,10 @@ def generate(request: ChatRequest):
     "You've been here before. What happened last time?"
 
     If they seem overwhelmed or scattered, suggest stillness. If they're stuck, help them name the stuckness without trying to fix it. Your job is to hold them to themselves — not fix, rescue, or soothe.
-
+    Just answer the question for the prompt in relation to the context from past entries , don't give any other information.
     Context from past entries:
     {content}
     """
-
-    print(system_prompt)
 
     def chat_stream():
         response = ollama.chat(

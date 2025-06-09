@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAppStore } from "../../../../../store";
-import { Send, MessageSquare, Bot, User } from "lucide-react";
+import { Send, MessageSquare, Bot, User, X } from "lucide-react";
 import VinayaOllamaAIBackground from "../../../../../assets/BackgroundImages/VinayaOllamaAIBackground.png"
 import { InChatAIModelDropdown } from "./InChatAIModelDropdown";
 
@@ -13,6 +13,7 @@ export const VInayaOllamaAI = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [prompt, setPrompt] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [abortController, setAbortController] = useState<AbortController | null>(null);
     const { currentModel, setCurrentModel, ollamaModels } = useAppStore();
 
     useEffect(() => {
@@ -23,6 +24,10 @@ export const VInayaOllamaAI = () => {
 
     const handleAskStream = async () => {
         if (!prompt.trim() || !currentModel) return;
+
+        // Create new AbortController for this request
+        const controller = new AbortController();
+        setAbortController(controller);
 
         // Add user message
         setMessages(prev => [...prev, { content: prompt, isUser: true }]);
@@ -40,7 +45,8 @@ export const VInayaOllamaAI = () => {
                 body: JSON.stringify({
                     prompt: prompt,
                     model_name: currentModel,
-                })
+                }),
+                signal: controller.signal
             });
 
             const reader = response?.body?.getReader();
@@ -63,10 +69,23 @@ export const VInayaOllamaAI = () => {
                 });
             }
         } catch (error) {
-            console.error("Error:", error);
-            setMessages(prev => [...prev, { content: "Sorry, something went wrong. Please try again.", isUser: false }]);
+            if (error instanceof Error) {
+                if (error.name === 'AbortError') {
+                    setMessages(prev => [...prev, { content: "Response stopped.", isUser: false }]);
+                } else {
+                    console.error("Error:", error);
+                    setMessages(prev => [...prev, { content: "Sorry, something went wrong. Please try again.", isUser: false }]);
+                }
+            }
         } finally {
             setIsLoading(false);
+            setAbortController(null);
+        }
+    };
+
+    const handleStopGeneration = () => {
+        if (abortController) {
+            abortController.abort();
         }
     };
 
@@ -180,17 +199,26 @@ export const VInayaOllamaAI = () => {
                             className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#2F4F4F]"
                             strokeWidth={1.5}
                         />
-                        <button
-                            onClick={handleAskStream}
-                            disabled={isLoading || !prompt.trim() || !currentModel}
-                            className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-lg ${
-                                isLoading || !prompt.trim() || !currentModel
-                                    ? 'text-[#bfa76a] cursor-not-allowed opacity-60'
-                                    : 'text-[#2F4F4F] hover:text-[#1F3F3F]'
-                            } transition-colors`}
-                        >
-                            <Send className="w-5 h-5" />
-                        </button>
+                        {isLoading ? (
+                            <button
+                                onClick={handleStopGeneration}
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-lg text-[#2F4F4F] hover:text-[#1F3F3F] transition-colors"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        ) : (
+                            <button
+                                onClick={handleAskStream}
+                                disabled={!prompt.trim() || !currentModel}
+                                className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-lg ${
+                                    !prompt.trim() || !currentModel
+                                        ? 'text-[#bfa76a] cursor-not-allowed opacity-60'
+                                        : 'text-[#2F4F4F] hover:text-[#1F3F3F]'
+                                } transition-colors`}
+                            >
+                                <Send className="w-5 h-5" />
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
