@@ -9,12 +9,22 @@ interface Message {
     isUser: boolean;
 }
 
+const STORAGE_KEY = "vinaya-ai-chat-messages";
+
 export const VInayaOllamaAI = () => {
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<Message[]>(() => {
+        const savedMessages = sessionStorage.getItem(STORAGE_KEY);
+        return savedMessages ? JSON.parse(savedMessages) : [];
+    });
     const [prompt, setPrompt] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [abortController, setAbortController] = useState<AbortController | null>(null);
     const { currentModel, setCurrentModel, ollamaModels } = useAppStore();
+
+    // Save messages to sessionStorage whenever they change
+    useEffect(() => {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    }, [messages]);
 
     useEffect(() => {
         if (ollamaModels.length > 0 && !currentModel) {
