@@ -1,7 +1,6 @@
 import BeginJournalingImage from "../../../assets/BeginJournalingPen.png";
 import ZeroCloudImage from "../../../assets/FeatureCardIcons/CloudIcon.png";
 import { Github } from "lucide-react";
-import { Encryption } from "./Encryption";
 import { Link } from "react-router-dom";
 
 const DhammaWheel = () => (
@@ -27,6 +26,13 @@ const DhammaWheel = () => (
         {/* Hub */}
         <circle cx="12" cy="12" r="2" fill="currentColor" />
     </svg>
+);
+
+const EncryptionLabel = () => (
+    <div className="flex flex-col items-center justify-center w-[200px] h-[200px] bg-[#2F4F4F]/5 rounded-xl p-4">
+        <div className="text-2xl font-serif text-[#2F4F4F] mb-2">Encryption</div>
+        <div className="text-sm text-[#2F4F4F]/60 italic">Coming in next release</div>
+    </div>
 );
 
 export const BeginJournaling = () => {
@@ -68,9 +74,9 @@ export const BeginJournaling = () => {
 
                 {/* Main Content Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 items-center md:items-start">
-                    {/* Left Content - Encryption */}
+                    {/* Left Content - Encryption Label */}
                     <div className="md:col-span-4 md:pr-4 flex justify-center md:justify-start">
-                        <Encryption />
+                        <EncryptionLabel />
                     </div>
 
                     {/* Center Image */}
@@ -85,7 +91,7 @@ export const BeginJournaling = () => {
                     </div>
 
                     {/* Right Content - Begin Journey */}
-                    <div className="md:col-span-5 md:pl-4 flex flex-col items-center md:items-start">
+                    <div className="md:col-span-5 md:pl-4 flex flex-col items-center md:items-start mt-8">
                         <div className="space-y-2 text-center md:text-left">
                             <div className="space-y-1">
                                 <h4 className="text-2xl md:text-3xl font-serif text-gray-800 leading-tight">
@@ -108,9 +114,9 @@ export const BeginJournaling = () => {
                                   style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                                 <div className="absolute inset-0 rounded-xl bg-white/5 
                                               opacity-0 group-hover:opacity-100 
-                                              transition-opacity duration-300" />
+                                              transition-opacity duration-300 " />
                                 <DhammaWheel />
-                                <span className="relative text-[15px] font-medium tracking-wider 
+                                <span className="relative text-[15px] font-medium tracking-wider  
                                                text-white/90 group-hover:text-white" 
                                       style={{ fontFamily: '"PlayFair Display", sans-serif' }}>
                                     Start Writing
