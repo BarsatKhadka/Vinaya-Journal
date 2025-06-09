@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useAppStore } from "../../../../../store";
 
 interface MoodData {
     [date: string]: number;
@@ -31,7 +32,7 @@ const getRowColor = (mood: string, currentValue: number, previousValue: number |
 };
 
 export const DailyChangesAndTrends: React.FC<DailyChangesAndTrendsProps> = ({ dailyChangesAndTrends }) => {
-    const [selectedMood, setSelectedMood] = useState<string>("anger");
+    const { selectedMood, setSelectedMood } = useAppStore();    
 
     if (!dailyChangesAndTrends || Object.keys(dailyChangesAndTrends).length === 0) {
         return (

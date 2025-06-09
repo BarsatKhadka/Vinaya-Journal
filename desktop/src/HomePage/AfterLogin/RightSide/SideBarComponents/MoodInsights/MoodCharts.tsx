@@ -1,4 +1,4 @@
-import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Bar, Cell } from 'recharts';
+import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Bar, Cell, ReferenceLine, Area } from 'recharts';
 import { useAppStore } from '../../../../../store';
 
 interface MoodChartsProps {
@@ -17,7 +17,7 @@ const colors = [
 ];
 
 export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
-    const { chartDataType } = useAppStore();
+    const { chartDataType, selectedMood } = useAppStore();
 
     const transformAvgSentimentData = (data: any) => {
         if (!data) return [];
@@ -34,6 +34,18 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
             mood: mood.charAt(0).toUpperCase() + mood.slice(1),
             value: 1,
             color: colors[emotions.indexOf(mood)] || '#6b7280'
+        }));
+    };
+
+    const transformDailyChangesData = (data: Record<string, Record<string, number>>) => {
+        if (!data || !selectedMood) return [];
+        const moodData = data[selectedMood];
+        if (!moodData) return [];
+        
+        return Object.entries(moodData).map(([date, value]) => ({
+            date,
+            value: Number(value),
+            color: value >= 0 ? colors[emotions.indexOf(selectedMood)] : '#dc2626'
         }));
     };
 
@@ -177,8 +189,53 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
                 )}
                 {chartDataType === "Daily Changes and Trends" && (
                     <ResponsiveContainer width="100%" height="100%">
-                        <ComposedChart data={chartData}>
+                        <ComposedChart data={transformDailyChangesData(chartData)}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#e6cfa7" />
+                            <XAxis 
+                                dataKey="date" 
+                                stroke="#2F4F4F"
+                                tick={{ fill: '#2F4F4F', fontFamily: 'serif' }}
+                                angle={-45}
+                                textAnchor="end"
+                                height={60}
+                            />
+                            <YAxis 
+                                stroke="#2F4F4F"
+                                tick={{ fill: '#2F4F4F', fontFamily: 'serif' }}
+                                tickFormatter={(value) => `${(value * 100).toFixed(1)}%`}
+                            />
+                            <ReferenceLine y={0} stroke="#2F4F4F" strokeDasharray="3 3" />
+                            <Tooltip 
+                                contentStyle={{ 
+                                    backgroundColor: '#fae4b2',
+                                    border: '1px solid #2F4F4F',
+                                    borderRadius: '4px',
+                                    fontFamily: 'serif'
+                                }}
+                                formatter={(value: number) => [`${(value * 100).toFixed(2)}%`, 'Change']}
+                            />
+                            <Legend 
+                                wrapperStyle={{ 
+                                    fontFamily: 'serif',
+                                    color: '#2F4F4F',
+                                    fontSize: '0px'
+                                }}
+                            />
+                            <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke={colors[emotions.indexOf(selectedMood)]}
+                                fill={colors[emotions.indexOf(selectedMood)]}
+                                fillOpacity={0.2}
+                            />
+                            <Line
+                                type="monotone"
+                                dataKey="value"
+                                stroke={colors[emotions.indexOf(selectedMood)]}
+                                strokeWidth={2}
+                                dot={{ fill: colors[emotions.indexOf(selectedMood)], strokeWidth: 2 }}
+                                activeDot={{ r: 6, fill: colors[emotions.indexOf(selectedMood)] }}
+                            />
                         </ComposedChart>
                     </ResponsiveContainer>
                 )}

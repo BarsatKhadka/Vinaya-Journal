@@ -19,6 +19,8 @@ interface AppState {
   setChartData: (data: any) => void;
   chartDataType: string;
   setChartDataType: (type: string) => void;
+  selectedMood: string;
+  setSelectedMood: (mood: string) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -41,4 +43,6 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setChartData: (data: any) => set((state) => ({ ...state, chartData: data })),
   chartDataType: "Initial",
   setChartDataType: (type: string) => set((state) => ({ ...state, chartDataType: type })),
+  selectedMood: "anger",
+  setSelectedMood: (mood: string) => set((state) => ({ ...state, selectedMood: mood })),
 }));
