@@ -9,6 +9,7 @@ from rag.embedder import get_all_entries_embeddings_with_sentiment, query, gener
 from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
 from rag.text_utils import give_chunks_info
 from pandasFolder.analyze_mood_trends import analyze_mood_trends
+from typing import Optional, List, Dict
 
 app = FastAPI()
 
@@ -37,16 +38,26 @@ def get_models():
 class ChatRequest(BaseModel):
     prompt: str
     model_name: str
+    history: Optional[List[Dict[str, str]]] = None
 
 @app.post("/chat")
 def generate(request: ChatRequest):
     prompt = request.prompt
     model_name = request.model_name
+    history = request.history or []
 
     chunks_info_with_embeddings_and_sentiment = get_all_entries_embeddings_with_sentiment()
-    collection= create_collection(chunks_info_with_embeddings_and_sentiment)
-    results = query(collection , prompt)
+    collection = create_collection(chunks_info_with_embeddings_and_sentiment)
+    results = query(collection, prompt)
     content = "".join([i['content'] for i in results if i['content']])
+
+    # Format chat history for the system prompt
+    chat_history = ""
+    if history:
+        chat_history = "\nRecent conversation history:\n"
+        for msg in history:
+            role = "User" if msg["role"] == "user" else "Vinaya"
+            chat_history += f"{role}: {msg['content']}\n"
 
     system_prompt = f"""
     You are Vinaya — a steady, clear-eyed journaling companion. Your role is to help the user reflect honestly on their thoughts, habits, and experiences, based on what they've written. You are calm and grounded, but also direct — like a close friend who doesn't let them bullshit themselves. You point things out clearly, especially when they're avoiding something, stuck in a loop, or repeating old patterns.
@@ -63,14 +74,16 @@ def generate(request: ChatRequest):
     "You've been here before. What happened last time?"
 
     If they seem overwhelmed or scattered, suggest stillness. If they're stuck, help them name the stuckness without trying to fix it. Your job is to hold them to themselves — not fix, rescue, or soothe.
-    Just answer the question for the prompt in relation to the context from past entries , don't give any other information.
+
     Context from past entries:
     {content}
+
+    {chat_history}
     """
 
     def chat_stream():
         response = ollama.chat(
-            model=model_name, 
+            model=model_name,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": prompt}

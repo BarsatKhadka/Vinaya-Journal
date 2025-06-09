@@ -46,6 +46,12 @@ export const VInayaOllamaAI = () => {
 
         let assistantMessage = "";
         try {
+            // Get the last 5 messages for context (history)
+            const recentMessages = messages.slice(-5).map(msg => ({
+                role: msg.isUser ? "user" : "assistant",
+                content: msg.content
+            }));
+
             const response: any = await fetch("http://localhost:8000/chat", {
                 method: "POST",
                 headers: {
@@ -55,6 +61,7 @@ export const VInayaOllamaAI = () => {
                 body: JSON.stringify({
                     prompt: prompt,
                     model_name: currentModel,
+                    history: recentMessages
                 }),
                 signal: controller.signal
             });
