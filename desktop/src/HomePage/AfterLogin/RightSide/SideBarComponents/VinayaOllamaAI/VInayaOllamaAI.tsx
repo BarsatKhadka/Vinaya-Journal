@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAppStore } from "../../../../../store";
-import { Send } from "lucide-react";
+import { Send, MessageSquare, Bot, User } from "lucide-react";
 import VinayaOllamaAIBackground from "../../../../../assets/BackgroundImages/VinayaOllamaAIBackground.png"
 import { InChatAIModelDropdown } from "./InChatAIModelDropdown";
 
@@ -87,17 +87,16 @@ export const VInayaOllamaAI = () => {
                 backgroundRepeat: 'no-repeat',
             }}
         >
-            
             <div className="absolute inset-0 bg-[#fae4b2]/50 pointer-events-none z-0" />
             <div className="relative z-10 flex flex-col h-full">
                 <div className="items-start pt-6 pb-2">
                     <InChatAIModelDropdown />
                 </div>
-                <div className="flex-1 flex flex-col items-center justify-center">
-                    <div className="w-full max-w-2xl flex flex-col flex-1">
-                        <div className="flex-1 overflow-y-auto px-2 md:px-0 py-4 space-y-4">
+                <div className="flex-1 flex flex-col items-center justify-between min-h-0">
+                    <div className="w-full max-w-2xl flex flex-col h-full">
+                        <div className="flex-1 overflow-y-auto px-2 md:px-0 py-4 space-y-6" style={{ maxHeight: 'calc(100vh - 280px)' }}>
                             {messages.length === 0 && !isLoading ? (
-                                <div className="flex flex-col items-center justify-center h-[40vh] select-none" style={{fontFamily: 'Playfair Display'}}>
+                                <div className="flex flex-col items-center justify-start h-full pt-8 select-none" style={{fontFamily: 'Playfair Display'}}>
                                     <h2 className="text-lg md:text-3xl font-semibold mb-2 text-[#2F4F4F] text-center">Ready when you are.</h2>
                                     <p className="text-base md:text-lg text-[#6b7280] text-center">Ask anything.</p>
                                 </div>
@@ -105,23 +104,53 @@ export const VInayaOllamaAI = () => {
                                 messages.map((message, index) => (
                                     <div
                                         key={index}
-                                        className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+                                        className={`flex ${message.isUser ? 'justify-end' : 'justify-start'} items-start gap-3 mt-4`}
                                     >
+                                        {!message.isUser && (
+                                            <div className="w-8 h-8 rounded-full bg-[#e0f2ef] flex items-center justify-center flex-shrink-0">
+                                                <Bot className="w-5 h-5 text-[#2F4F4F]" strokeWidth={1.5} />
+                                            </div>
+                                        )}
                                         <div
-                                            className={`max-w-[80%] rounded-xl px-4 py-3 shadow-md ${
+                                            className={`max-w-[80%] rounded-xl px-6 py-4 ${
                                                 message.isUser
-                                                    ? 'bg-white text-[#2F4F4F]'
-                                                    : 'bg-[#e0f2ef] text-[#2F4F4F]'
+                                                    ? 'bg-white text-[#2F4F4F] shadow-[0_2px_12px_0_#e6e1d5]'
+                                                    : 'bg-[#e0f2ef] text-[#2F4F4F] shadow-[0_2px_12px_0_rgba(224,242,239,0.5)]'
                                             }`}
+                                            style={{
+                                                background: message.isUser 
+                                                    ? 'repeating-linear-gradient(to bottom, #ffffff, #ffffff 28px, #f9f9f9 29px, #ffffff 30px)'
+                                                    : 'repeating-linear-gradient(to bottom, #f0f7f5, #f0f7f5 28px, #e0f2ef 29px, #f0f7f5 30px)',
+                                            }}
                                         >
-                                            <p className="text-base whitespace-pre-wrap">{message.content}</p>
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <span className="text-xs font-serif text-[#2F4F4F]/70">
+                                                    {message.isUser ? 'You' : 'Vinaya AI'}
+                                                </span>
+                                            </div>
+                                            <p className="text-base whitespace-pre-wrap font-serif leading-relaxed">
+                                                {message.content}
+                                            </p>
                                         </div>
+                                        {message.isUser && (
+                                            <div className="w-8 h-8 rounded-full bg-[#2F4F4F] flex items-center justify-center flex-shrink-0">
+                                                <User className="w-5 h-5 text-white" strokeWidth={1.5} />
+                                            </div>
+                                        )}
                                     </div>
                                 ))
                             )}
                             {isLoading && (
-                                <div className="flex justify-start">
-                                    <div className="bg-[#e0f2ef] text-[#2F4F4F] rounded-xl px-4 py-3 shadow-md">
+                                <div className="flex justify-start items-start gap-3 mt-4">
+                                    <div className="w-8 h-8 rounded-full bg-[#e0f2ef] flex items-center justify-center flex-shrink-0">
+                                        <Bot className="w-5 h-5 text-[#2F4F4F]" strokeWidth={1.5} />
+                                    </div>
+                                    <div className="bg-[#e0f2ef] text-[#2F4F4F] rounded-xl px-6 py-4 shadow-[0_2px_12px_0_rgba(224,242,239,0.5)]">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <span className="text-xs font-serif text-[#2F4F4F]/70">
+                                                Vinaya AI
+                                            </span>
+                                        </div>
                                         <div className="flex space-x-2">
                                             <div className="w-2 h-2 bg-[#2F4F4F] rounded-full animate-bounce" />
                                             <div className="w-2 h-2 bg-[#2F4F4F] rounded-full animate-bounce delay-100" />
@@ -131,29 +160,37 @@ export const VInayaOllamaAI = () => {
                                 </div>
                             )}
                         </div>
-                        <div className="w-full px-2 md:px-0 pb-6">
-                            <div className="flex items-end gap-2 bg-white rounded-xl p-2">
-                                <textarea
-                                    value={prompt}
-                                    onChange={(e) => setPrompt(e.target.value)}
-                                    onKeyPress={handleKeyPress}
-                                    placeholder="Type your message..."
-                                    className="flex-1 resize-none rounded-lg bg-white text-[#2F4F4F] p-2 text-base focus:outline-none min-h-[40px] max-h-[120px] placeholder-[#6b7280]"
-                                    rows={1}
-                                />
-                                <button
-                                    onClick={handleAskStream}
-                                    disabled={isLoading || !prompt.trim() || !currentModel}
-                                    className={`p-2 rounded-lg ${
-                                        isLoading || !prompt.trim() || !currentModel
-                                            ? 'bg-[#e0f2ef] text-[#bfa76a] cursor-not-allowed opacity-60'
-                                            : 'bg-[#2F4F4F] text-white hover:bg-[#1F3F3F]'
-                                    } transition-colors`}
-                                >
-                                    <Send className="w-5 h-5" />
-                                </button>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div className="w-full px-2 md:px-0 pb-6">
+                    <div className="relative flex-grow max-w-2xl mx-auto">
+                        <textarea
+                            value={prompt}
+                            onChange={(e) => setPrompt(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                            placeholder="Type your message..."
+                            className="w-full p-4 pl-12 pr-12 rounded-lg border border-[#e0f2ef] focus:ring-2 focus:ring-[#e0f2ef] focus:border-[#2F4F4F] outline-none font-serif transition-all duration-300 resize-none min-h-[40px] max-h-[120px]"
+                            style={{
+                                background: 'repeating-linear-gradient(to bottom, #f0f7f5, #f0f7f5 28px, #e0f2ef 29px, #f0f7f5 30px)',
+                                boxShadow: '0 2px 12px 0 rgba(224, 242, 239, 0.5)',
+                            }}
+                            rows={1}
+                        />
+                        <MessageSquare
+                            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#2F4F4F]"
+                            strokeWidth={1.5}
+                        />
+                        <button
+                            onClick={handleAskStream}
+                            disabled={isLoading || !prompt.trim() || !currentModel}
+                            className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-lg ${
+                                isLoading || !prompt.trim() || !currentModel
+                                    ? 'text-[#bfa76a] cursor-not-allowed opacity-60'
+                                    : 'text-[#2F4F4F] hover:text-[#1F3F3F]'
+                            } transition-colors`}
+                        >
+                            <Send className="w-5 h-5" />
+                        </button>
                     </div>
                 </div>
             </div>
