@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppStore } from "../../../../../store";
 import { Send } from "lucide-react";
 import VinayaOllamaAIBackground from "../../../../../assets/BackgroundImages/VinayaOllamaAIBackground.png"
@@ -13,10 +13,16 @@ export const VInayaOllamaAI = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [prompt, setPrompt] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const { currentModel } = useAppStore();
+    const { currentModel, setCurrentModel, ollamaModels } = useAppStore();
+
+    useEffect(() => {
+        if (ollamaModels.length > 0 && !currentModel) {
+            setCurrentModel(ollamaModels[0]);
+        }
+    }, [ollamaModels, currentModel, setCurrentModel]);
 
     const handleAskStream = async () => {
-        if (!prompt.trim()) return;
+        if (!prompt.trim() || !currentModel) return;
 
         // Add user message
         setMessages(prev => [...prev, { content: prompt, isUser: true }]);
@@ -137,9 +143,9 @@ export const VInayaOllamaAI = () => {
                                 />
                                 <button
                                     onClick={handleAskStream}
-                                    disabled={isLoading || !prompt.trim()}
+                                    disabled={isLoading || !prompt.trim() || !currentModel}
                                     className={`p-2 rounded-lg ${
-                                        isLoading || !prompt.trim()
+                                        isLoading || !prompt.trim() || !currentModel
                                             ? 'bg-[#e0f2ef] text-[#bfa76a] cursor-not-allowed opacity-60'
                                             : 'bg-[#2F4F4F] text-white hover:bg-[#1F3F3F]'
                                     } transition-colors`}
