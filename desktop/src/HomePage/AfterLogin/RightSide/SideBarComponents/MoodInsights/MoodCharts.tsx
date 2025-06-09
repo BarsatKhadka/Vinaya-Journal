@@ -27,6 +27,16 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
         }));
     };
 
+    const transformDominantMoodData = (data: Record<string, string>) => {
+        if (!data) return [];
+        return Object.entries(data).map(([date, mood]) => ({
+            date,
+            mood: mood.charAt(0).toUpperCase() + mood.slice(1),
+            value: 1,
+            color: colors[emotions.indexOf(mood)] || '#6b7280'
+        }));
+    };
+
     return (
         <div className="w-full h-full mr-8 mt-4 ">
             <div className="w-full h-[400px]">
@@ -118,8 +128,50 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
                 )}
                 {chartDataType === "Dominant Mood" && (
                     <ResponsiveContainer width="100%" height="100%">
-                        <ComposedChart data={chartData}>
+                        <ComposedChart data={transformDominantMoodData(chartData)}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#e6cfa7" />
+                            <XAxis 
+                                dataKey="date" 
+                                stroke="#2F4F4F"
+                                tick={{ fill: '#2F4F4F', fontFamily: 'serif' }}
+                                angle={-45}
+                                textAnchor="end"
+                                height={60}
+                            />
+                            <YAxis 
+                                hide={true}
+                                domain={[0, 0.5]}
+                            />
+                            <Tooltip 
+                                contentStyle={{ 
+                                    backgroundColor: '#fae4b2',
+                                    border: '1px solid #2F4F4F',
+                                    borderRadius: '4px',
+                                    fontFamily: 'serif'
+                                }}
+                                formatter={(value: number, name: string, props: any) => [
+                                    props.payload.mood,
+                                    'Dominant Mood'
+                                ]}
+                            />
+                            <Legend 
+                                wrapperStyle={{ 
+                                    fontFamily: 'serif',
+                                    color: '#2F4F4F'
+                                }}
+                            />
+                            <Bar 
+                                dataKey="value" 
+                                radius={[4, 4, 0, 0]}
+                                barSize={20}
+                            >
+                                {transformDominantMoodData(chartData)?.map((entry: any) => (
+                                    <Cell 
+                                        key={`cell-${entry.date}`} 
+                                        fill={entry.color}
+                                    />
+                                ))}
+                            </Bar>
                         </ComposedChart>
                     </ResponsiveContainer>
                 )}
