@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../../../store';
 import { ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Settings: React.FC = () => {
     const { setSelectedSidebar } = useAppStore();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.altKey && event.key === 'ArrowLeft') {
+                navigate('/app');
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [navigate]);
 
     return (
-        <div className="flex h-screen bg-[#fae4b2]/30">
+        <div className="flex h-screen bg-[#fae4b2]">
             {/* Left Sidebar */}
             <div className="w-48 bg-white border-r border-[#2F4F4F]/20 p-4">
                 <Link to="/app" className="flex items-center space-x-2 text-[#2F4F4F] font-serif mb-6 hover:text-[#2F4F4F]/80">
                     <ArrowLeft className="w-5 h-5" />
-                    <span>Back</span>
+                    <span>Back (Alt + <ArrowLeft className="w-3 h-3 inline-block text-red-500" />)</span>
                 </Link>
                 
                 <div className="space-y-2">
