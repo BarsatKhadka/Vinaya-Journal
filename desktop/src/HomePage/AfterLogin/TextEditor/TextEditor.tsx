@@ -4,15 +4,28 @@ import { EditorFooter } from "./EditorFooter"
 import { useState, useEffect } from "react"
 import imageBackground from "../../../assets/BackgroundImages/textEditorBackground.png"
 
+const STORAGE_KEY = "text-editor-content"
+
 export const TextEditor = () => {
   const { editorRef, handlePaste, handleKeyDown, handleContainerClick } = useTextEditor()
   const [content, setContent] = useState<string>("")
 
-  // Update content when editor changes
+  // Load saved content on mount
+  useEffect(() => {
+    const savedContent = sessionStorage.getItem(STORAGE_KEY)
+    if (savedContent && editorRef.current) {
+      editorRef.current.innerText = savedContent
+      setContent(savedContent)
+    }
+  }, [])
+
+  // Update content when editor changes and save to sessionStorage
   useEffect(() => {
     const updateContent = () => {
       if (editorRef.current) {
-        setContent(editorRef.current.innerText || "")
+        const newContent = editorRef.current.innerText || ""
+        setContent(newContent)
+        sessionStorage.setItem(STORAGE_KEY, newContent)
       }
     }
 
