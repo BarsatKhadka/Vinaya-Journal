@@ -28,10 +28,27 @@ const DhammaWheel = () => (
     </svg>
 );
 
-const EncryptionLabel = () => (
-    <div className="flex flex-col items-center justify-center w-[200px] h-[200px] bg-[#2F4F4F]/5 rounded-xl p-4">
-        <div className="text-2xl font-serif text-[#2F4F4F] mb-2">Encryption</div>
-        <div className="text-sm text-[#2F4F4F]/60 italic">Coming in next release</div>
+const VersionCard = () => (
+    <div className="flex flex-col items-center justify-center w-[200px] h-[200px] bg-[#2F4F4F]/5 rounded-xl p-4 relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#2F4F4F]/5 to-[#2F4F4F]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="flex flex-col items-center text-center">
+            <div className="text-2xl font-serif text-[#2F4F4F] mb-2">Version 1.0</div>
+            <div className="text-sm text-[#2F4F4F]/60 italic mb-6">Initial Release</div>
+            <a 
+                href="https://github.com/BarsatKhadka/Vinaya-Journal/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-2.5 
+                         text-[#2F4F4F] hover:text-[#1F3F3F]
+                         rounded-lg border border-[#2F4F4F]/20
+                         hover:border-[#2F4F4F]/40 hover:bg-[#2F4F4F]/5
+                         transition-all duration-300 shadow-sm hover:shadow-md
+                         bg-white/50 backdrop-blur-sm"
+            >
+                <Github className="w-4 h-4" />
+                <span className="text-sm font-medium tracking-wide">Report Issues</span>
+            </a>
+        </div>
     </div>
 );
 
@@ -74,9 +91,9 @@ export const BeginJournaling = () => {
 
                 {/* Main Content Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 items-center md:items-start">
-                    {/* Left Content - Encryption Label */}
+                    {/* Left Content - Version and Encryption */}
                     <div className="md:col-span-4 md:pr-4 flex justify-center md:justify-start">
-                        <EncryptionLabel />
+                        <VersionCard />
                     </div>
 
                     {/* Center Image */}
@@ -114,9 +131,9 @@ export const BeginJournaling = () => {
                                   style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                                 <div className="absolute inset-0 rounded-xl bg-white/5 
                                               opacity-0 group-hover:opacity-100 
-                                              transition-opacity duration-300 " />
+                                              transition-opacity duration-300" />
                                 <DhammaWheel />
-                                <span className="relative text-[15px] font-medium tracking-wider  
+                                <span className="relative text-[15px] font-medium tracking-wider 
                                                text-white/90 group-hover:text-white" 
                                       style={{ fontFamily: '"PlayFair Display", sans-serif' }}>
                                     Start Writing
