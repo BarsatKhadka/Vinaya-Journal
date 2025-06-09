@@ -1,4 +1,4 @@
-import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart } from 'recharts';
+import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Bar, Cell } from 'recharts';
 import { useAppStore } from '../../../../../store';
 
 interface MoodChartsProps {
@@ -18,6 +18,15 @@ const colors = [
 
 export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
     const { chartDataType } = useAppStore();
+
+    const transformAvgSentimentData = (data: any) => {
+        if (!data) return [];
+        return Object.entries(data).map(([emotion, value]) => ({
+            label: emotion.charAt(0).toUpperCase() + emotion.slice(1),
+            value: Number(value)
+        }));
+    };
+
     return (
         <div className="w-full h-full mr-8 mt-4 ">
             <div className="w-full h-[400px]">
@@ -65,8 +74,45 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
                 )}
                 {chartDataType === "Average Sentiment" && (
                     <ResponsiveContainer width="100%" height="100%">
-                        <ComposedChart data={chartData}>
+                        <ComposedChart data={transformAvgSentimentData(chartData)}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#e6cfa7" />
+                            <XAxis 
+                                dataKey="label" 
+                                stroke="#2F4F4F"
+                                tick={{ fill: '#2F4F4F', fontFamily: 'serif' }}
+                                angle={-45}
+                                textAnchor="end"
+                                height={60}
+                            />
+                            <YAxis 
+                                domain={[0, 1]}
+                                stroke="#2F4F4F"
+                                tick={{ fill: '#2F4F4F', fontFamily: 'serif' }}
+                                tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
+                            />
+                            <Tooltip 
+                                contentStyle={{ 
+                                    backgroundColor: '#fae4b2',
+                                    border: '1px solid #2F4F4F',
+                                    borderRadius: '4px',
+                                    fontFamily: 'serif'
+                                }}
+                                formatter={(value: number) => [`${(value * 100).toFixed(1)}%`, 'Sentiment']}
+                            />
+                            <Legend 
+                                wrapperStyle={{ 
+                                    fontFamily: 'serif',
+                                    color: '#2F4F4F'
+                                }}
+                            />
+                            <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                                {transformAvgSentimentData(chartData)?.map((entry: any, index: number) => (
+                                    <Cell 
+                                        key={`cell-${index}`} 
+                                        fill={colors[emotions.indexOf(entry.label.toLowerCase())] || '#6b7280'} 
+                                    />
+                                ))}
+                            </Bar>
                         </ComposedChart>
                     </ResponsiveContainer>
                 )}
