@@ -11,9 +11,9 @@ export const Navbar = () => {
     const currentOS = getOS();
 
     return (
-        <div className="flex flex-col pt-4 sm:pt-8 items-center min-h-screen bg-[#FAF9F6]">
+        <div className="w-full py-4">
             <div className="w-full max-w-6xl px-4 sm:px-6 mx-auto">
-                <div className="rounded-2xl border border-gray-200/60 bg-white/95 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl hover:border-gray-300">
+                <div className="rounded-2xl border border-white/20 bg-white/40 backdrop-blur-[2px] shadow-sm transition-all duration-300 hover:shadow-md hover:border-white/30">
                     <div className="flex flex-col sm:flex-row items-center p-5 sm:p-7 space-y-4 sm:space-y-0 sm:justify-between relative">
                         {/* Logo and Title Section */}
                         <div className="flex items-center space-x-4 sm:space-x-5">
@@ -30,23 +30,23 @@ export const Navbar = () => {
                                     VINAYA 
                                 </h1>
                                 <p className="text-sm sm:text-base text-gray-500/90 font-serif italic tracking-wide">
-                                    <span >yours truly journaling companion </span>
+                                    <span>yours truly journaling companion</span>
                                 </p>
                             </div>
                         </div>
 
                         {/* Download Buttons Section */}
                         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
-                            <button className="w-full sm:w-auto px-6 py-2.5 bg-gray-900 text-white rounded-xl hover:bg-gray-800 active:bg-gray-950 transition-all duration-200 font-medium flex items-center justify-center gap-3 group">
+                            <button className="w-full sm:w-auto px-6 py-2.5 bg-[#2F4F4F] text-white rounded-xl hover:bg-[#1F3F3F] active:bg-[#0F2F2F] transition-all duration-200 font-medium flex items-center justify-center gap-3 group font-fira">
                                 <svg className="w-5 h-5 transform transition-transform group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                                 </svg>
-                                <span className="relative ">
+                                <span className="relative">
                                     Download for {currentOS}
                                     <span className="absolute inset-x-0 -bottom-px h-px bg-white/50 transform origin-left transition-transform group-hover:scale-x-100 scale-x-0"></span>
                                 </span>
                             </button>
-                            <button className="w-full sm:w-auto px-5 py-2.5 border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 hover:border-gray-300 active:bg-gray-100 transition-all duration-200 font-medium">
+                            <button className="w-full sm:w-auto px-5 py-2.5 border border-white/20 text-[#2F4F4F] rounded-xl hover:bg-white/20 hover:border-white/30 active:bg-white/30 transition-all duration-200 font-medium font-fira">
                                 All downloads
                             </button>
                         </div>

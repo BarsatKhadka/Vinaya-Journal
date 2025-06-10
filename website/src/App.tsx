@@ -7,7 +7,7 @@ function App() {
       <div className="min-h-screen bg-slate-50">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/app" element={<div>App Page (Coming Soon)</div>} />
+          {/* <Route path="/app" element={<div>App Page (Coming Soon)</div>} /> */}
         </Routes>
       </div>
     </Router>

@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        'playfair': ['"Playfair Display"', 'serif'],
+        'fira': ['"Fira Sans"', 'sans-serif'],
+        'mono': ['"Roboto Mono"', 'monospace'],
       },
     },
   },

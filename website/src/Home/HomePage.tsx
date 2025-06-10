@@ -2,19 +2,25 @@ import { motion } from "framer-motion"
 import { LocalAIFeature } from "./components/OllamaAICard"
 import { RagAndMoodCard } from "./components/RagAndMoodCard"
 import { BeginJournaling } from "./components/BeginJournaling"
+import { Navbar } from "./Navbar"
 import beforeLoginBackground from "../assets/BackgroundImages/BeforeLoginBackground.png"
 
 export const HomePage = () => {
     return (
         <div className="min-h-screen w-full overflow-x-hidden relative">
+            {/* Background Image */}
             <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
+                className="fixed inset-0 bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${beforeLoginBackground})` }}
             />
-            <div className="relative">
+            
+            {/* Content Overlay */}
+            <div className="relative min-h-screen ">
+                <Navbar />
+
                 {/* Welcome to Vinaya Journal */}
-                <main className="container mx-auto px-4 relative">
-                    <div className="flex flex-col items-center justify-center h-[25vh] text-center relative mb-10 pt-20">
+                <main className="container mx-auto px-4 relative pt-4">
+                    <div className="flex flex-col items-center justify-center h-[20vh] text-center relative mb-8">
                         <motion.h1 
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -34,10 +40,7 @@ export const HomePage = () => {
                                 ease: "easeOut",
                                 delay: 0.2 
                             }}
-                            className="text-lg md:text-sm lg:text-xl text-slate-600 font-light tracking-wide"
-                            style={{
-                                fontFamily: '"Playfair Display", serif',
-                            }}
+                            className="text-lg md:text-sm lg:text-xl text-slate-600 font-light tracking-wide font-playfair"
                         >
                             your private local AI journaling app
                         </motion.p>
