@@ -1,6 +1,8 @@
+<h2 style="display: flex; align-items: center; gap: 10px;">
+  <img src="https://raw.githubusercontent.com/BarsatKhadka/Vinaya-Journal/main/desktop/src/assets/vinayaLogoWhite.png" alt="Vinaya Logo" width="70" />
+  <span>Vinaya Journal</span>
+</h2>
 
-<img src="https://github.com/BarsatKhadka/Vinaya-Journal/blob/main/desktop/src/assets/vinayaWithout.png" alt="Vinaya Logo" width="40" /> 
-## Vinaya Journal
 
 Vinaya Journal is a **cross-platform** journaling desktop app that integrates local AI via [Ollama](https://ollama.com/) and a retrieval-augmented generation (RAG) pipeline using ChromaDB. 
 It is designed for **offline-first, privacy-conscious AI journaling** so that your thoughts stay on your device.
@@ -15,6 +17,7 @@ It is designed for **offline-first, privacy-conscious AI journaling** so that yo
 - **Built by a Journaler, Not a SaaS Product**  
  This isn’t some SaaS product chasing data or engagement graphs. That said, if you see me promoting Vinaya on Reddit or LinkedIn, know that I, too, hope it finds its way into real hands other than me. But its roots are honest: Vinaya was born out of a personal need—for a local, intelligent, and private journaling space to support my daily meditation and practice of restraint.
 
+## Core Features
 
 ## Project Structure
 
