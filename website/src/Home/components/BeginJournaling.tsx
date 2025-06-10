@@ -127,7 +127,7 @@ export const BeginJournaling = () => {
                                 </p>
                             </div>
 
-                            <Link to="/app" 
+                            <a href="https://github.com/BarsatKhadka/Vinaya-Journal/blob/main/README.md" target="_blank"
                                   className="group flex items-center justify-center gap-3 px-7 py-3.5 
                                            bg-[#2F4F4F] text-white rounded-xl 
                                            shadow-md hover:shadow-xl
@@ -142,9 +142,9 @@ export const BeginJournaling = () => {
                                 <span className="relative text-[15px] font-medium tracking-wider 
                                                text-white/90 group-hover:text-white" 
                                       style={{ fontFamily: '"PlayFair Display", sans-serif' }}>
-                                    Start Writing
+                                    Why Vinaya?
                                 </span>
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>
