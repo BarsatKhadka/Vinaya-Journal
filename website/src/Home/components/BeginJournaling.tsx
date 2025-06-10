@@ -1,6 +1,5 @@
 import { motion } from "framer-motion"
 import { Github } from "lucide-react"
-import { Link } from "react-router-dom"
 import BeginJournalingImage from "../../assets/BeginJournalingPen.png"
 import ZeroCloudImage from "../../assets/FeatureCardIcons/CloudIcon.png"
 
