@@ -1,9 +1,8 @@
 import { app, BrowserWindow, ipcMain, globalShortcut, Menu } from "electron";
-import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import os from "os";
-createRequire(import.meta.url);
+import { spawn } from "child_process";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const menuTemplate = [
   {
@@ -20,6 +19,8 @@ const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
 const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
 let win;
+let myAppProcess = null;
+let mainProcess = null;
 function createWindow() {
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
@@ -36,6 +37,35 @@ function createWindow() {
     win.loadURL(VITE_DEV_SERVER_URL);
   } else {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
+  }
+}
+function spawnChildProcesses() {
+  const binPath = path.join(process.env.APP_ROOT, "resources", "MyApp", "bin");
+  myAppProcess = spawn(path.join(binPath, "MyApp"), [], {
+    stdio: "pipe"
+  });
+  myAppProcess.stdout.on("data", (data) => {
+    console.log(`MyApp stdout: ${data}`);
+  });
+  myAppProcess.stderr.on("data", (data) => {
+    console.error(`MyApp stderr: ${data}`);
+  });
+  mainProcess = spawn(path.join(binPath, "main"), [], {
+    stdio: "pipe"
+  });
+  mainProcess.stdout.on("data", (data) => {
+    console.log(`Main process stdout: ${data}`);
+  });
+  mainProcess.stderr.on("data", (data) => {
+    console.error(`Main process stderr: ${data}`);
+  });
+}
+function cleanupChildProcesses() {
+  if (myAppProcess) {
+    myAppProcess.kill();
+  }
+  if (mainProcess) {
+    mainProcess.kill();
   }
 }
 app.on("window-all-closed", () => {
@@ -60,6 +90,12 @@ app.whenReady().then(() => {
   globalShortcut.register("CommandOrControl+R", () => {
     win == null ? void 0 : win.webContents.reload();
   });
+  setTimeout(() => {
+    spawnChildProcesses();
+  }, 10);
+});
+app.on("before-quit", () => {
+  cleanupChildProcesses();
 });
 export {
   MAIN_DIST,
