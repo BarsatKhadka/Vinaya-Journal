@@ -117,6 +117,10 @@ def mood_analysis(last_n_days: int = Query(default=2)):
     results = analyze_mood_trends(input_insight)
     return results
 
+@app.get("/test")
+def test():
+    return "yes"
+
 
 
 

@@ -121,7 +121,7 @@ export const BeginJournaling = () => {
                                 </p>
                             </div>
 
-                            <Link to="/app" 
+                            <Link to="/loading" 
                                   className="group flex items-center justify-center gap-3 px-7 py-3.5 
                                            bg-[#2F4F4F] text-white rounded-xl 
                                            shadow-md hover:shadow-xl
