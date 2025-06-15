@@ -6,7 +6,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from rag.sqlite_utils import get_all_entries
 from rag.embedder import get_all_entries_embeddings_with_sentiment, query, generate_mood_insights
-from rag.chromadb import chroma_client, create_collection, get_existing_entry_dates
+from rag.chromautils import chroma_client, create_collection, get_existing_entry_dates
 from rag.text_utils import give_chunks_info
 from pandasFolder.analyze_mood_trends import analyze_mood_trends
 from typing import Optional, List, Dict
@@ -120,6 +120,10 @@ def mood_analysis(last_n_days: int = Query(default=2)):
 @app.get("/test")
 def test():
     return "yes"
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000 , reload=False)
 
 
 

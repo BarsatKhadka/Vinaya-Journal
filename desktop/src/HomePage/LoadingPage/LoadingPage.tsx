@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 
 export const LoadingPage = () => {
@@ -41,6 +41,14 @@ export const LoadingPage = () => {
         }
         python();
     }, []); 
+
+    useEffect(() => {
+        const reloadInterval = setInterval(() => {
+            window.location.reload();
+        }, 8000);
+
+        return () => clearInterval(reloadInterval);
+    }, []);
 
     const StatusItem = ({ title, status, description }: { title: string; status: boolean; description?: string }) => (
         <motion.div 
@@ -84,10 +92,18 @@ export const LoadingPage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-[#2F4F4F]/70"
+                        className="text-[#2F4F4F]/70 mb-2"
                     >
                         Please wait while we prepare your journaling environment
                     </motion.p>
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="text-sm text-[#2F4F4F]/60"
+                    >
+                        Press Ctrl+R to refresh the page for real-time service status updates
+                    </motion.div>
                 </div>
 
                 {/* Status Items */}
@@ -145,6 +161,10 @@ export const LoadingPage = () => {
                         </p>
                     </motion.div>
                 )}
+
+                <div className="text-sm text-gray-500 mt-4">
+                    Note: Python service may take a few moments to load. You can press Ctrl+R to refresh the page for real-time updates.
+                </div>
             </motion.div>
         </div>
     );

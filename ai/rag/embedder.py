@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer
 import torch
 from rag.sqlite_utils import get_all_entries
 from rag.text_utils import give_chunks_info
-from rag.chromadb import get_existing_entry_dates
+from rag.chromautils import get_existing_entry_dates
 from transformers import pipeline
 from collections import defaultdict
 from datetime import datetime

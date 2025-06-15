@@ -1,6 +1,6 @@
 import sqlite3
 from pathlib import Path
-from rag.chromadb import get_existing_entry_dates
+from rag.chromautils import get_existing_entry_dates
 
 user_home = Path.home()
 database_path = user_home / "vinayadb" / "journalEntries.db"
