@@ -10,9 +10,8 @@ import { RetrievePastEntries } from "./RightSide/SideBarComponents/RetrievePastE
 export const AfterLoginHome = () => {
     const { selectedSidebar } = useAppStore();
     return (
-        <div className="flex flex-col h-screen bg-[#fbf8f0]">
-            {/* Top section with sidebar and selected component */}
-            <div className="flex flex-col flex-1 min-h-0">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 h-screen bg-[#fbf8f0]">
+            <div className="flex flex-col h-full">
                 <AfterLoginRightTopBar />
                 <div className="flex flex-col md:flex-row flex-1 min-h-0">
                     <div className="w-full md:w-1/4 min-h-[150px] md:min-h-0">
@@ -26,9 +25,8 @@ export const AfterLoginHome = () => {
                     </div>
                 </div>
             </div>
-
             
-            <div className="w-full h-[0vh] md:h-[0vh]">
+            <div className="w-full h-[0vh] lg:h-full">
                 <TextEditor />
             </div>
         </div>
