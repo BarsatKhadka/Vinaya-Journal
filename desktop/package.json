@@ -13,6 +13,7 @@
     "@tailwindcss/vite": "^4.1.6",
     "axios": "^1.9.0",
     "better-sqlite3": "^11.10.0",
+    "electron-log": "^5.4.1",
     "framer-motion": "^12.10.5",
     "lucide-react": "^0.509.0",
     "react": "^18.2.0",
@@ -47,14 +48,11 @@
     "productName": "VinayaJournal",
     "files": [
       "dist/**",
-      "dist-electron/**"
+      "dist-electron/**",
+      "Servers/**"
     ],
-    "extraResources": [
-      {
-        "from": "Servers/",
-        "to": "Servers",
-        "filter": ["**/*"]
-      }
+    "asarUnpack": [
+      "Servers/**"
     ],
     "win": {
       "target": "nsis"

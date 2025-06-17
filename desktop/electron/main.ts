@@ -1,11 +1,14 @@
-import { app, BrowserWindow , Menu, globalShortcut, ipcMain } from 'electron'
+import { app, BrowserWindow , Menu, globalShortcut, ipcMain, dialog } from 'electron'
 // import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import os from 'os'
+import { spawn } from 'child_process'
 
 // const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+let backendProcess;
+// let aiProcess;
 
 const menuTemplate = [
   {
@@ -60,6 +63,45 @@ function createWindow() {
   }
 }
 
+function serverStart(){
+  let binPath;
+  if (process.env.NODE_ENV === 'development') {
+    binPath = path.join(__dirname, '..', 'Servers', 'MyApp', 'bin');
+  } else {
+    binPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'Servers', 'MyApp', 'bin');
+  }
+  
+  const executable = process.platform === 'win32' ? 'MyApp.exe' : './MyApp';
+  
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Server Path',
+    message: 'Attempting to start server from:',
+    detail: path.join(binPath, executable),
+  });
+
+  backendProcess = spawn(path.join(binPath, executable), [], {
+    cwd: binPath,
+    detached: true,
+    stdio: 'pipe', // Changed from 'ignore' to 'pipe' to capture output
+  });
+
+  // Log process output
+  backendProcess.stdout?.on('data', (data) => {
+    console.log(`Server stdout: ${data}`);
+  });
+
+  backendProcess.stderr?.on('data', (data) => {
+    console.error(`Server stderr: ${data}`);
+  });
+
+  backendProcess.on('error', (err) => {
+    console.error('Failed to start server:', err);
+  });
+
+  backendProcess.unref();
+}
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -83,6 +125,7 @@ ipcMain.handle('get-os', () => {
 })
 
 app.whenReady().then(() => {
+  serverStart();
   createWindow()
   
   // For dev tools (console)

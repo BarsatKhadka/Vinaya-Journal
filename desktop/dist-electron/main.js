@@ -1,8 +1,11 @@
-import { app as n, BrowserWindow as i, ipcMain as p, globalShortcut as r, Menu as s } from "electron";
-import { fileURLToPath as d } from "node:url";
+import { app as n, BrowserWindow as u, ipcMain as P, dialog as v, globalShortcut as d, Menu as m } from "electron";
+import { fileURLToPath as g } from "node:url";
 import o from "node:path";
 import R from "os";
-const l = o.dirname(d(import.meta.url)), _ = [
+import { spawn as _ } from "child_process";
+const i = o.dirname(g(import.meta.url));
+let s;
+const b = [
   {
     label: "Quit",
     accelerator: "Command+Q",
@@ -11,37 +14,65 @@ const l = o.dirname(d(import.meta.url)), _ = [
     }
   }
 ];
-process.env.APP_ROOT = o.join(l, "..");
-const t = process.env.VITE_DEV_SERVER_URL, P = o.join(process.env.APP_ROOT, "dist-electron"), a = o.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = t ? o.join(process.env.APP_ROOT, "public") : a;
+process.env.APP_ROOT = o.join(i, "..");
+const a = process.env.VITE_DEV_SERVER_URL, M = o.join(process.env.APP_ROOT, "dist-electron"), f = o.join(process.env.APP_ROOT, "dist");
+process.env.VITE_PUBLIC = a ? o.join(process.env.APP_ROOT, "public") : f;
 let e;
-function c() {
-  const m = s.buildFromTemplate(_);
-  s.setApplicationMenu(m), e = new i({
+function h() {
+  const t = m.buildFromTemplate(b);
+  m.setApplicationMenu(t), e = new u({
     icon: o.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
-      preload: o.join(l, "preload.mjs")
+      preload: o.join(i, "preload.mjs")
     }
   }), e.webContents.on("did-finish-load", () => {
     e == null || e.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
-  }), t ? e.loadURL(t) : e.loadFile(o.join(a, "index.html"));
+  }), a ? e.loadURL(a) : e.loadFile(o.join(f, "index.html"));
+}
+function w() {
+  var l, c;
+  let t;
+  process.env.NODE_ENV === "development" ? t = o.join(i, "..", "Servers", "MyApp", "bin") : t = o.join(process.resourcesPath, "app.asar.unpacked", "Servers", "MyApp", "bin");
+  const p = process.platform === "win32" ? "MyApp.exe" : "./MyApp";
+  v.showMessageBox({
+    type: "info",
+    title: "Server Path",
+    message: "Attempting to start server from:",
+    detail: o.join(t, p)
+  }), s = _(o.join(t, p), [], {
+    cwd: t,
+    detached: !0,
+    stdio: "pipe"
+    // Changed from 'ignore' to 'pipe' to capture output
+  }), (l = s.stdout) == null || l.on("data", (r) => {
+    console.log(`Server stdout: ${r}`);
+  }), (c = s.stderr) == null || c.on("data", (r) => {
+    console.error(`Server stderr: ${r}`);
+  }), s.on("error", (r) => {
+    console.error("Failed to start server:", r);
+  }), s.unref();
 }
 n.on("window-all-closed", () => {
   process.platform !== "darwin" && (n.quit(), e = null);
 });
 n.on("activate", () => {
-  i.getAllWindows().length === 0 && c();
+  u.getAllWindows().length === 0 && h();
 });
-p.handle("get-os", () => R.platform());
+P.handle("get-os", () => R.platform());
 n.whenReady().then(() => {
-  c(), r.register("CommandOrControl+Shift+I", () => {
+  v.showMessageBox({
+    type: "info",
+    title: "Server Path",
+    message: "Attempting to start server from:",
+    detail: process.resourcesPath + "/app.asar.unpacked/Servers/MyApp/bin/MyApp.exe"
+  }), w(), h(), d.register("CommandOrControl+Shift+I", () => {
     e == null || e.webContents.openDevTools();
-  }), r.register("CommandOrControl+R", () => {
+  }), d.register("CommandOrControl+R", () => {
     e == null || e.webContents.reload();
   });
 });
 export {
-  P as MAIN_DIST,
-  a as RENDERER_DIST,
-  t as VITE_DEV_SERVER_URL
+  M as MAIN_DIST,
+  f as RENDERER_DIST,
+  a as VITE_DEV_SERVER_URL
 };
