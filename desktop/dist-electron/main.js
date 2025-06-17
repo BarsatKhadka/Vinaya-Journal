@@ -1,66 +1,47 @@
-import { app, BrowserWindow, ipcMain, globalShortcut, Menu } from "electron";
-import { fileURLToPath } from "node:url";
-import path from "node:path";
-import os from "os";
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const menuTemplate = [
+import { app as n, BrowserWindow as i, ipcMain as p, globalShortcut as r, Menu as s } from "electron";
+import { fileURLToPath as d } from "node:url";
+import o from "node:path";
+import R from "os";
+const l = o.dirname(d(import.meta.url)), _ = [
   {
     label: "Quit",
     accelerator: "Command+Q",
     click: () => {
-      app.quit();
+      n.quit();
     }
   }
 ];
-process.env.APP_ROOT = path.join(__dirname, "..");
-const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
-const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
-const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
-let win;
-function createWindow() {
-  const menu = Menu.buildFromTemplate(menuTemplate);
-  Menu.setApplicationMenu(menu);
-  win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+process.env.APP_ROOT = o.join(l, "..");
+const t = process.env.VITE_DEV_SERVER_URL, P = o.join(process.env.APP_ROOT, "dist-electron"), a = o.join(process.env.APP_ROOT, "dist");
+process.env.VITE_PUBLIC = t ? o.join(process.env.APP_ROOT, "public") : a;
+let e;
+function c() {
+  const m = s.buildFromTemplate(_);
+  s.setApplicationMenu(m), e = new i({
+    icon: o.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
-      preload: path.join(__dirname, "preload.mjs")
+      preload: o.join(l, "preload.mjs")
     }
-  });
-  win.webContents.on("did-finish-load", () => {
-    win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
-  });
-  if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL);
-  } else {
-    win.loadFile(path.join(RENDERER_DIST, "index.html"));
-  }
+  }), e.webContents.on("did-finish-load", () => {
+    e == null || e.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
+  }), t ? e.loadURL(t) : e.loadFile(o.join(a, "index.html"));
 }
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-    win = null;
-  }
+n.on("window-all-closed", () => {
+  process.platform !== "darwin" && (n.quit(), e = null);
 });
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+n.on("activate", () => {
+  i.getAllWindows().length === 0 && c();
 });
-ipcMain.handle("get-os", () => {
-  return os.platform();
-});
-app.whenReady().then(() => {
-  createWindow();
-  globalShortcut.register("CommandOrControl+Shift+I", () => {
-    win == null ? void 0 : win.webContents.openDevTools();
-  });
-  globalShortcut.register("CommandOrControl+R", () => {
-    win == null ? void 0 : win.webContents.reload();
+p.handle("get-os", () => R.platform());
+n.whenReady().then(() => {
+  c(), r.register("CommandOrControl+Shift+I", () => {
+    e == null || e.webContents.openDevTools();
+  }), r.register("CommandOrControl+R", () => {
+    e == null || e.webContents.reload();
   });
 });
 export {
-  MAIN_DIST,
-  RENDERER_DIST,
-  VITE_DEV_SERVER_URL
+  P as MAIN_DIST,
+  a as RENDERER_DIST,
+  t as VITE_DEV_SERVER_URL
 };

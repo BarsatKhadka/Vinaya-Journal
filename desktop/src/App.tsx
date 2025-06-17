@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { BeforeLoginHome } from "./HomePage/BeforeLogin/BeforeLoginHome";
 import { AfterLoginHome } from "./HomePage/AfterLogin/AfterLoginHome";
 import { Settings } from "./HomePage/AfterLogin/RightSide/Settings";

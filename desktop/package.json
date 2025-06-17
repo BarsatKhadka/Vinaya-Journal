@@ -51,8 +51,8 @@
     ],
     "extraResources": [
       {
-        "from": "resources/bin",
-        "to": "bin",
+        "from": "Servers/",
+        "to": "Servers",
         "filter": ["**/*"]
       }
     ],
