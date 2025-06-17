@@ -8,7 +8,7 @@ import { AnalyzeMood } from './AnalyzeMood';
 import { useAppStore } from '../../../../../store';
 
 export const MoodInsights = () => {
-    const [moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
+    const [_moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
     const { selectedDays, setSelectedDays } = useAppStore();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const { chartData, setChartData ,  setChartDataType } = useAppStore();
@@ -23,6 +23,7 @@ export const MoodInsights = () => {
                 ...entry.sentiment 
             })));
             setChartDataType("Initial")
+            
         };
         fetchMoodInsights();
     }, [selectedDays, setChartData]);

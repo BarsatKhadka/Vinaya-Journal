@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useAppStore } from '../../../store';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const Settings: React.FC = () => {
-    const { setSelectedSidebar } = useAppStore();
+
     const navigate = useNavigate();
 
     useEffect(() => {

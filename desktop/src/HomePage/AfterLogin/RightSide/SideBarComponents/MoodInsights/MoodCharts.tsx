@@ -161,7 +161,7 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
                                     borderRadius: '4px',
                                     fontFamily: 'serif'
                                 }}
-                                formatter={(value: number, name: string, props: any) => [
+                                formatter={(_value: number, _name: string, props: any) => [
                                     props.payload.mood,
                                     'Dominant Mood'
                                 ]}
