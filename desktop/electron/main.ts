@@ -1,14 +1,14 @@
-import { app, BrowserWindow , Menu, globalShortcut, ipcMain, dialog } from 'electron'
+import { app, BrowserWindow , Menu, globalShortcut, ipcMain } from 'electron'
 // import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import os from 'os'
-import { spawn } from 'child_process'
+import { spawn, ChildProcess } from 'child_process'
 
 // const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-let backendProcess;
-// let aiProcess;
+let backendProcess: ChildProcess | null = null;
+let aiProcess: ChildProcess | null = null;
 
 const menuTemplate = [
   {
@@ -71,19 +71,20 @@ function serverStart(){
     binPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'Servers', 'MyApp', 'bin');
   }
   
-  const executable = process.platform === 'win32' ? 'MyApp.exe' : './MyApp';
+  const backendExecutable = process.platform === 'win32' ? 'MyApp.exe' : './MyApp';
+  const aiExecutable = process.platform === 'win32' ? 'main.exe' : './main';
   
-  dialog.showMessageBox({
-    type: 'info',
-    title: 'Server Path',
-    message: 'Attempting to start server from:',
-    detail: path.join(binPath, executable),
-  });
 
-  backendProcess = spawn(path.join(binPath, executable), [], {
+  backendProcess = spawn(path.join(binPath, backendExecutable), [], {
     cwd: binPath,
     detached: true,
-    stdio: 'pipe', // Changed from 'ignore' to 'pipe' to capture output
+    stdio: 'pipe', 
+  });
+
+  aiProcess = spawn(path.join(binPath, aiExecutable), [], {
+    cwd: binPath,
+    detached: true,
+    stdio: 'pipe', 
   });
 
   // Log process output
@@ -100,6 +101,7 @@ function serverStart(){
   });
 
   backendProcess.unref();
+  aiProcess.unref();
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -107,8 +109,23 @@ function serverStart(){
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    if (backendProcess) {
+      backendProcess.kill();
+    }
+    if (aiProcess) {
+      aiProcess.kill();
+    }
     app.quit()
     win = null
+  }
+})
+
+app.on('before-quit', () => {
+  if (backendProcess) {
+    backendProcess.kill();
+  }
+  if (aiProcess) {
+    aiProcess.kill();
   }
 })
 
