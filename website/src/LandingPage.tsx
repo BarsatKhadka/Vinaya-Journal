@@ -53,26 +53,32 @@ const VinayaJournal = () => {
           </div>
 
           {/* Download Buttons */}
-          <div className="flex justify-center gap-6 mb-16">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-16 px-4">
             <a
               href="https://drive.google.com/uc?export=download&id=1dnYFvsEHGxljod268HvSgffxBiVFWTpv"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-8 py-3 border-2 border-teal-700 text-teal-800 rounded-xl bg-white/80 hover:bg-teal-50/80 shadow-lg hover:shadow-xl transition-all font-semibold text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
+              className="flex items-center justify-center gap-3 px-6 sm:px-8 py-3 border-2 border-teal-700 text-teal-800 rounded-xl bg-white/80 hover:bg-teal-50/80 shadow-lg hover:shadow-xl transition-all font-semibold text-base sm:text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 w-full sm:w-auto"
               style={{ fontFamily: 'Inter, Manrope, sans-serif' }}
             >
-              <FaLinux className="w-6 h-6 text-teal-700" />
-              Download for Linux <span className="text-sm italic font-normal ml-2">(AppImage)</span>
+              <FaLinux className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 flex-shrink-0" />
+              <span className="flex flex-col sm:flex-row sm:items-center">
+                <span>Download for Linux</span>
+                <span className="text-xs sm:text-sm italic font-normal sm:ml-2">(AppImage)</span>
+              </span>
             </a>
             <a
               href="https://drive.google.com/uc?export=download&id=1sU8MGFldePB2a3P1y_dqruxPHJ-oCCOm"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-8 py-3 border-2 border-teal-700 text-teal-800 rounded-xl bg-white/80 hover:bg-teal-50/80 shadow-lg hover:shadow-xl transition-all font-semibold text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
+              className="flex items-center justify-center gap-3 px-6 sm:px-8 py-3 border-2 border-teal-700 text-teal-800 rounded-xl bg-white/80 hover:bg-teal-50/80 shadow-lg hover:shadow-xl transition-all font-semibold text-base sm:text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 w-full sm:w-auto"
               style={{ fontFamily: 'Inter, Manrope, sans-serif' }}
             >
-              <FaWindows className="w-6 h-6 text-teal-700" />
-              Download for Windows <span className="text-sm italic font-normal ml-2">(exe)</span>
+              <FaWindows className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 flex-shrink-0" />
+              <span className="flex flex-col sm:flex-row sm:items-center">
+                <span>Download for Windows</span>
+                <span className="text-xs sm:text-sm italic font-normal sm:ml-2">(exe)</span>
+              </span>
             </a>
           </div>
 
