@@ -109,15 +109,15 @@ export const LoadingPage = () => {
                 {/* Status Items */}
                 <div className="space-y-4">
                     <StatusItem 
-                        title="Java Backend" 
+                        title="Backend" 
                         status={javaRunning}
                     />
                     <StatusItem 
-                        title="SQLite Database" 
+                        title="Local Database" 
                         status={sqliteRunning}
                     />
                     <StatusItem 
-                        title="Python AI Service" 
+                        title="AI Service" 
                         status={pythonRunning}
                         description="If the model is loading, you can proceed and refresh the app later with Ctrl+R"
                     />
@@ -157,13 +157,13 @@ export const LoadingPage = () => {
                     >
                         <AlertCircle className="w-4 h-4" />
                         <p>
-                            Note: (May take a few minutes) If Python service is still loading, you can proceed to the app and refresh (Ctrl+R) when it's ready.
+                            Note: (May take a few minutes) If AI service is still loading, you can proceed to the app and refresh (Ctrl+R) when it's ready.
                         </p>
                     </motion.div>
                 )}
 
                 <div className="text-sm text-gray-500 mt-4">
-                    Note: Python service may take a few moments to load. You can press Ctrl+R to refresh the page for real-time updates.
+                    Note: AI service may take a few moments to load. You can press Ctrl+R to refresh the page for real-time updates.
                 </div>
             </motion.div>
         </div>

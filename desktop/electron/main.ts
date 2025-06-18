@@ -44,7 +44,7 @@ function createWindow() {
   const menu = Menu.buildFromTemplate(menuTemplate)
   Menu.setApplicationMenu(menu)
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    icon: path.join(process.env.VITE_PUBLIC, 'vinayaWithout.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },

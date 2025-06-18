@@ -1,74 +1,116 @@
-import { app as t, BrowserWindow as f, ipcMain as _, globalShortcut as d, Menu as m } from "electron";
-import { fileURLToPath as P } from "node:url";
-import o from "node:path";
-import w from "os";
-import { spawn as u } from "child_process";
-const a = o.dirname(P(import.meta.url));
-let n = null, s = null;
-const h = [
+import { app, BrowserWindow, ipcMain, globalShortcut, Menu } from "electron";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+import os from "os";
+import { spawn } from "child_process";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+let backendProcess = null;
+let aiProcess = null;
+const menuTemplate = [
   {
     label: "Quit",
     accelerator: "Command+Q",
     click: () => {
-      t.quit();
+      app.quit();
     }
   }
 ];
-process.env.APP_ROOT = o.join(a, "..");
-const l = process.env.VITE_DEV_SERVER_URL, g = o.join(process.env.APP_ROOT, "dist-electron"), v = o.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = l ? o.join(process.env.APP_ROOT, "public") : v;
-let e;
-function b() {
-  const r = m.buildFromTemplate(h);
-  m.setApplicationMenu(r), e = new f({
-    icon: o.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+process.env.APP_ROOT = path.join(__dirname, "..");
+const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
+const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
+const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
+process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
+let win;
+function createWindow() {
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+  win = new BrowserWindow({
+    icon: path.join(process.env.VITE_PUBLIC, "vinayaWithout.png"),
     webPreferences: {
-      preload: o.join(a, "preload.mjs")
+      preload: path.join(__dirname, "preload.mjs")
     }
-  }), e.webContents.on("did-finish-load", () => {
-    e == null || e.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
-  }), l ? e.loadURL(l) : e.loadFile(o.join(v, "index.html"));
+  });
+  win.webContents.on("did-finish-load", () => {
+    win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
+  });
+  if (VITE_DEV_SERVER_URL) {
+    win.loadURL(VITE_DEV_SERVER_URL);
+  } else {
+    win.loadFile(path.join(RENDERER_DIST, "index.html"));
+  }
 }
-function T() {
-  var c, p;
-  let r;
-  process.env.NODE_ENV === "development" ? r = o.join(a, "..", "Servers", "MyApp", "bin") : r = o.join(process.resourcesPath, "app.asar.unpacked", "Servers", "MyApp", "bin");
-  const E = process.platform === "win32" ? "MyApp.exe" : "./MyApp", R = process.platform === "win32" ? "main.exe" : "./main";
-  n = u(o.join(r, E), [], {
-    cwd: r,
-    detached: !0,
+function serverStart() {
+  var _a, _b;
+  let binPath;
+  if (process.env.NODE_ENV === "development") {
+    binPath = path.join(__dirname, "..", "Servers", "MyApp", "bin");
+  } else {
+    binPath = path.join(process.resourcesPath, "app.asar.unpacked", "Servers", "MyApp", "bin");
+  }
+  const backendExecutable = process.platform === "win32" ? "MyApp.exe" : "./MyApp";
+  const aiExecutable = process.platform === "win32" ? "main.exe" : "./main";
+  backendProcess = spawn(path.join(binPath, backendExecutable), [], {
+    cwd: binPath,
+    detached: true,
     stdio: "pipe"
-  }), s = u(o.join(r, R), [], {
-    cwd: r,
-    detached: !0,
+  });
+  aiProcess = spawn(path.join(binPath, aiExecutable), [], {
+    cwd: binPath,
+    detached: true,
     stdio: "pipe"
-  }), (c = n.stdout) == null || c.on("data", (i) => {
-    console.log(`Server stdout: ${i}`);
-  }), (p = n.stderr) == null || p.on("data", (i) => {
-    console.error(`Server stderr: ${i}`);
-  }), n.on("error", (i) => {
-    console.error("Failed to start server:", i);
-  }), n.unref(), s.unref();
+  });
+  (_a = backendProcess.stdout) == null ? void 0 : _a.on("data", (data) => {
+    console.log(`Server stdout: ${data}`);
+  });
+  (_b = backendProcess.stderr) == null ? void 0 : _b.on("data", (data) => {
+    console.error(`Server stderr: ${data}`);
+  });
+  backendProcess.on("error", (err) => {
+    console.error("Failed to start server:", err);
+  });
+  backendProcess.unref();
+  aiProcess.unref();
 }
-t.on("window-all-closed", () => {
-  process.platform !== "darwin" && (n && n.kill(), s && s.kill(), t.quit(), e = null);
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    if (backendProcess) {
+      backendProcess.kill();
+    }
+    if (aiProcess) {
+      aiProcess.kill();
+    }
+    app.quit();
+    win = null;
+  }
 });
-t.on("before-quit", () => {
-  n && n.kill(), s && s.kill();
+app.on("before-quit", () => {
+  if (backendProcess) {
+    backendProcess.kill();
+  }
+  if (aiProcess) {
+    aiProcess.kill();
+  }
 });
-t.on("activate", () => {
-  f.getAllWindows().length === 0 && b();
+app.on("activate", () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });
-_.handle("get-os", () => w.platform());
-t.whenReady().then(() => {
-  T(), b(), d.register("CommandOrControl+Shift+I", () => {
-    e == null || e.webContents.openDevTools();
-  }), d.register("CommandOrControl+R", () => {
-    e == null || e.webContents.reload();
+ipcMain.handle("get-os", () => {
+  return os.platform();
+});
+app.whenReady().then(() => {
+  serverStart();
+  createWindow();
+  globalShortcut.register("CommandOrControl+Shift+I", () => {
+    win == null ? void 0 : win.webContents.openDevTools();
+  });
+  globalShortcut.register("CommandOrControl+R", () => {
+    win == null ? void 0 : win.webContents.reload();
   });
 });
 export {
-  g as MAIN_DIST,
-  v as RENDERER_DIST,
-  l as VITE_DEV_SERVER_URL
+  MAIN_DIST,
+  RENDERER_DIST,
+  VITE_DEV_SERVER_URL
 };

@@ -1,4 +1,3 @@
-// @see - https://www.electron.build/configuration/configuration
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "YourAppID",
@@ -12,12 +11,14 @@
     "dist-electron"
   ],
   "mac": {
+    "icon": "assets/icons/icon.icns",
     "target": [
       "dmg"
     ],
     "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
   },
   "win": {
+    "icon": "assets/icons/icon.ico",
     "target": [
       {
         "target": "nsis",
@@ -35,6 +36,7 @@
     "deleteAppDataOnUninstall": false
   },
   "linux": {
+    "icon": "src/assets/linux/256x256.png",
     "target": [
       "AppImage"
     ],
