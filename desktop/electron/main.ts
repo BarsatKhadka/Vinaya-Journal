@@ -71,7 +71,7 @@ function serverStart(){
     binPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'Servers', 'MyApp', 'bin');
   }
   
-  const backendExecutable = process.platform === 'win32' ? 'MyApp.exe' : './MyApp';
+  const backendExecutable = process.platform === 'win32' ? 'App.exe' : './MyApp';
   const aiExecutable = process.platform === 'win32' ? 'main.exe' : './main';
   
 

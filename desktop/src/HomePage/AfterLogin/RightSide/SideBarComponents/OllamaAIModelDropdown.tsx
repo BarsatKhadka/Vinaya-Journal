@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppStore } from "../../../../store";
-import { checkOllamaRunning } from "../../../BeforeLogin/OllamaAISection/OllamaAICard";
+import { checkOllamaRunning } from "../../../../utils/ollamaUtils";
 import { AlertTriangle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { fetchOllamaModels } from "../../../BeforeLogin/OllamaAISection/OllamaRunningCard";

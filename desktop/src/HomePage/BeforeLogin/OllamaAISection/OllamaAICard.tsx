@@ -4,16 +4,7 @@ import {OllamaRunningCard} from "./OllamaRunningCard";
 import {OllamaNotRunningCard} from "./OllamaNotRunningCard";
 import LocalAiMemory from "../../../assets/FeatureCardIcons/LocalAiMemory.png"; 
 import { useAppStore } from "../../../store";
-
-export const checkOllamaRunning = async () => {
-    try {
-        const response = await axios.get("http://localhost:8000/ollama");
-        return response?.data;
-    } catch (error) {
-        console.error("Error checking Ollama status:", error);
-        return false;
-    }
-};
+import { checkOllamaRunning } from "../../../utils/ollamaUtils";
 
 export const LocalAIFeature = () => {
     const { ollamaRunning, setOllamaRunning } = useAppStore();

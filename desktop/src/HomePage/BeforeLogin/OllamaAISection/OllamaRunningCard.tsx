@@ -10,6 +10,56 @@ const RamBadge = ({ ram }: { ram: string }) => (
     </span>
 );
 
+const InstallButton = ({ modelName }: { modelName: string }) => {
+    const isWindows = navigator.platform.indexOf('Win') !== -1;
+    const tooltipText = isWindows 
+        ? `Download ${modelName} from Ollama app` 
+        : `Run: ollama pull ${modelName}`;
+
+    return (
+        <div className="relative group">
+            <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
+                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
+                    style={{ fontFamily: "serif" }}>
+                Install
+            </button>
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 
+                        bg-gray-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 
+                        transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10
+                        before:content-[''] before:absolute before:top-full before:left-1/2 
+                        before:transform before:-translate-x-1/2 before:border-4 before:border-transparent 
+                        before:border-t-gray-800">
+                {tooltipText}
+            </div>
+        </div>
+    );
+};
+
+const RemoveButton = ({ modelName }: { modelName: string }) => {
+    const isWindows = navigator.platform.indexOf('Win') !== -1;
+    const tooltipText = isWindows 
+        ? `Remove ${modelName} from Ollama app` 
+        : `Run: ollama rm ${modelName}`;
+
+    return (
+        <div className="relative group">
+            <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
+                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
+                    style={{ fontFamily: "serif" }}>
+                Remove
+            </button>
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 
+                        bg-gray-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 
+                        transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10
+                        before:content-[''] before:absolute before:top-full before:left-1/2 
+                        before:transform before:-translate-x-1/2 before:border-4 before:border-transparent 
+                        before:border-t-gray-800">
+                {tooltipText}
+            </div>
+        </div>
+    );
+};
+
 const ExploreMoreSection = () => (
     <>
         {/* Divider */}
@@ -97,11 +147,7 @@ export const OllamaRunningCard = () => {
                                     Editor's choice - a top pick for everyday user.
                                 </p>
                             </div>
-                            <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
-                                    style={{ fontFamily: "serif" }}>
-                                Install
-                            </button>
+                            <InstallButton modelName="mistral:7b" />
                         </div>
                     </div>
 
@@ -118,11 +164,7 @@ export const OllamaRunningCard = () => {
                                     great for reasoning and quick response
                                 </p>
                             </div>
-                            <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
-                                    style={{ fontFamily: "serif" }}>
-                                Install
-                            </button>
+                            <InstallButton modelName="phi:2.7b" />
                         </div>
                     </div>
 
@@ -139,11 +181,7 @@ export const OllamaRunningCard = () => {
                                     ideal for low-resource setups.
                                 </p>
                             </div>
-                            <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                           text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
-                                    style={{ fontFamily: "serif" }}>
-                                Install
-                            </button>
+                            <InstallButton modelName="TinyLlama" />
                         </div>
                     </div>
 
@@ -171,11 +209,7 @@ export const OllamaRunningCard = () => {
                                         Local model - ready to use
                                     </p>
                                 </div>
-                                <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
-                                               text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
-                                        style={{ fontFamily: "serif" }}>
-                                    Remove
-                                </button>
+                                <RemoveButton modelName={model} />
                             </div>
                         </div>
                     ))}
