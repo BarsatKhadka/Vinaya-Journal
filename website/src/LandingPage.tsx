@@ -65,7 +65,7 @@ const VinayaJournal = () => {
               Download for Linux <span className="text-sm italic font-normal ml-2">(AppImage)</span>
             </a>
             <a
-              href="https://drive.google.com/uc?export=download&id=1dnYFvsEHGxljod268HvSgffxBiVFWTpv"
+              href="https://drive.google.com/uc?export=download&id=1sU8MGFldePB2a3P1y_dqruxPHJ-oCCOm"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 px-8 py-3 border-2 border-teal-700 text-teal-800 rounded-xl bg-white/80 hover:bg-teal-50/80 shadow-lg hover:shadow-xl transition-all font-semibold text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
