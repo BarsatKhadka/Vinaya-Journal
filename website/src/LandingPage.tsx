@@ -40,12 +40,12 @@ const VinayaJournal = () => {
           {/* Logo at the top center */}
           <div className="text-center mb-12 flex flex-col items-center justify-center ">
             <div className=" flex justify-center">
-              <img src={vinayaLogo} alt="Vinaya Journal Logo" className="w-24 h-24 mx-auto object-contain drop-shadow-lg mt-2" />
+              <img src={vinayaLogo} alt="Vinaya Journal Logo" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mx-auto object-contain drop-shadow-lg mt-2" />
             </div>
-            <h1 className="text-6xl font-serif text-teal-800 tracking-tight mb-1 drop-shadow-sm" style={{ letterSpacing: '0.04em' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-teal-800 tracking-tight mb-1 drop-shadow-sm" style={{ letterSpacing: '0.04em' }}>
               VINAYA JOURNAL
             </h1>
-            <p className="text-2xl max-w-2xl mx-auto leading-relaxed text-center mt-2 mb-2" style={{ fontFamily: 'Inter, Manrope, sans-serif', letterSpacing: '0.01em' }}>
+            <p className="text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed text-center mt-2 mb-2 px-4" style={{ fontFamily: 'Inter, Manrope, sans-serif', letterSpacing: '0.01em' }}>
               <span className="text-gray-600">Before acting, the wise reflect.<br />
               While acting, they stay mindful.<br /></span>
               <span className="text-teal-800">After acting, they journal their actions.</span>
