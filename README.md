@@ -36,6 +36,7 @@ It is designed for **offline-first, privacy-conscious AI journaling** so that yo
   Engage with your journal in conversation with an AI that understands your entries, helping deepen reflection and insight.
 
   ![Vinaya Ollama AI Chat](https://github.com/BarsatKhadka/Vinaya-Journal/blob/5f949193089048c592ed4985b814e24d9a9de7d0/desktop/src/assets/READMEImgs/VinayaOllamaAIREADME.png?raw=true)
+
   
 ## Project Structure
 
@@ -59,6 +60,31 @@ This project follow a clear separation between core development and release pack
   - Content not relevant to core development, intentionally excluded from `main`
 
 > ⚠️ Note: `release-packaging-vX` branches are not merged into `main` to keep the main codebase clean and focused.
+
+
+# License 
+
+![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+Copyright (c) 2025 Barsat
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 
 
