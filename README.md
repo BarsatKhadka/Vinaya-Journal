@@ -37,7 +37,7 @@ It is designed for **offline-first, privacy-conscious AI journaling** so that yo
 
   ![Vinaya Ollama AI Chat](https://github.com/BarsatKhadka/Vinaya-Journal/blob/5f949193089048c592ed4985b814e24d9a9de7d0/desktop/src/assets/READMEImgs/VinayaOllamaAIREADME.png?raw=true)
 
-  
+
 ## Project Structure
 
 This project follow a clear separation between core development and release packaging:
@@ -61,6 +61,9 @@ This project follow a clear separation between core development and release pack
 
 > ⚠️ Note: `release-packaging-vX` branches are not merged into `main` to keep the main codebase clean and focused.
 
+## Running Vinaya Locally
+You can run the full Vinaya Journal stack on your own machine (frontend + backend + AI service).
+See the full guide here 👉 docs/LOCALSETUP.md
 
 # License 
 
