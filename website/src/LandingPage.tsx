@@ -9,6 +9,7 @@ import FeatureButtons from './components/FeatureButtons';
 import JournalCard from './components/JournalCard';
 import PreviousEntries from './assets/READMEImgs/PreviousEntries.png';
 import { FaLinux, FaWindows } from 'react-icons/fa';
+import { FaGithub, FaLaptop, FaExclamationCircle } from 'react-icons/fa';
 import Footer from './components/Footer';
 
 const featureImages = {
@@ -53,7 +54,7 @@ const VinayaJournal = () => {
           </div>
 
           {/* Download Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-16 px-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-8 px-4">
             <a
               href="https://drive.google.com/uc?export=download&id=1dnYFvsEHGxljod268HvSgffxBiVFWTpv"
               target="_blank"
@@ -79,6 +80,30 @@ const VinayaJournal = () => {
                 <span>Download for Windows</span>
                 <span className="text-xs sm:text-sm italic font-normal sm:ml-2">(exe)</span>
               </span>
+            </a>
+          </div>
+
+          {/* Additional Buttons Row */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-16 px-4">
+            <a
+              href="https://github.com/BarsatKhadka/Vinaya-Journal/blob/main/docs/LOCALSETUP.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 px-6 sm:px-8 py-3 border-2 border-teal-700 text-teal-800 rounded-xl bg-white/80 hover:bg-teal-50/80 shadow-lg hover:shadow-xl transition-all font-semibold text-base sm:text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 w-full sm:w-auto"
+              style={{ fontFamily: 'Inter, Manrope, sans-serif' }}
+            >
+              <FaLaptop className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 flex-shrink-0" />
+              <span>Local Setup Guide</span>
+            </a>
+            <a
+              href="https://github.com/BarsatKhadka/Vinaya-Journal/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 px-6 sm:px-8 py-3 border-2 border-teal-700 text-teal-800 rounded-xl bg-white/80 hover:bg-teal-50/80 shadow-lg hover:shadow-xl transition-all font-semibold text-base sm:text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 w-full sm:w-auto"
+              style={{ fontFamily: 'Inter, Manrope, sans-serif' }}
+            >
+              <FaExclamationCircle className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 flex-shrink-0" />
+              <span>Request a Feature</span>
             </a>
           </div>
 
