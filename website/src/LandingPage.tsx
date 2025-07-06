@@ -9,7 +9,7 @@ import FeatureButtons from './components/FeatureButtons';
 import JournalCard from './components/JournalCard';
 import PreviousEntries from './assets/READMEImgs/PreviousEntries.png';
 import { FaLinux, FaWindows } from 'react-icons/fa';
-import { FaGithub, FaLaptop, FaExclamationCircle } from 'react-icons/fa';
+import {  FaLaptop, FaExclamationCircle } from 'react-icons/fa';
 import Footer from './components/Footer';
 
 const featureImages = {
