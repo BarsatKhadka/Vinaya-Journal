@@ -63,7 +63,7 @@ This project follow a clear separation between core development and release pack
 
 ## Running Vinaya Locally
 You can run the full Vinaya Journal stack on your own machine (frontend + backend + AI service).
-See the full guide here 👉 docs/LOCALSETUP.md
+See the full guide here 👉 ![docs/LOCALSETUP.md](https://github.com/BarsatKhadka/Vinaya-Journal/blob/9b33b2caef03ada02ea7f894ae0db85dcad69f81/docs/LOCALSETUP.md)
 
 # License 
 

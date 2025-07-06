@@ -1,7 +1,27 @@
-import { FaGithub, FaHeart } from 'react-icons/fa';
+import { FaGithub, FaHeart, FaStar, FaCodeBranch } from 'react-icons/fa';
 import { SiReact, SiSpring, SiFastapi } from 'react-icons/si';
+import { useState, useEffect } from 'react';
 
 const Footer = () => {
+  const [repoStats, setRepoStats] = useState({ stars: 0, forks: 0 });
+
+  useEffect(() => {
+    const fetchRepoStats = async () => {
+      try {
+        const response = await fetch('https://api.github.com/repos/BarsatKhadka/Vinaya-Journal');
+        const data = await response.json();
+        setRepoStats({
+          stars: data.stargazers_count || 0,
+          forks: data.forks_count || 0
+        });
+      } catch (error) {
+        console.error('Failed to fetch repo stats:', error);
+      }
+    };
+
+    fetchRepoStats();
+  }, []);
+
   return (
     <footer
       className="w-full max-w-7xl mx-auto mb-2 px-6 py-5 rounded-2xl border border-[#e6cfa7] flex flex-col sm:flex-row items-center justify-between gap-4 text-center"
@@ -23,15 +43,27 @@ const Footer = () => {
             <FaGithub className="w-4 h-4" />
             <span className="font-medium">GitHub</span>
           </a>
-          <span className="flex items-center gap-2 text-green-700 font-medium">
-            <span className="relative flex h-3 w-3">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 text-gray-700">
+              <FaStar className="w-4 h-4 text-yellow-500" />
+              <span className="font-medium">{repoStats.stars}</span>
+            </div>
+            <div className="flex items-center gap-1 text-gray-700">
+              <FaCodeBranch className="w-4 h-4 text-blue-500" />
+              <span className="font-medium">{repoStats.forks}</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 text-xs text-gray-700 font-semibold mt-1">
+          <span>Version 1.0</span>
+          <span className="flex items-center gap-1 text-green-700 font-medium">
+            <span className="relative flex h-2 w-2 ml-8">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
             </span>
-            Active Development
+            Open Source (Join the development)
           </span>
         </div>
-        <span className="text-xs text-gray-700 font-semibold mt-1">Version 1.0</span>
       </div>
 
       {/* Right: Developer Info */}
