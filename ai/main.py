@@ -17,8 +17,9 @@ app.add_middleware(
 @app.get("/ollama")
 def is_ollama_running():
     try:
+        import os
         import requests
-        response = requests.get("http://localhost:11434")
+        response = requests.get(os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"))
         return response.status_code == 200
     except (requests.exceptions.RequestException, ImportError):
         return False
