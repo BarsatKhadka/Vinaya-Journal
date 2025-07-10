@@ -1,18 +1,10 @@
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
-import requests
-import ollama
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from rag.sqlite_utils import get_all_entries
-from rag.embedder import get_all_entries_embeddings_with_sentiment, query, generate_mood_insights
-from rag.chromautils import chroma_client, create_collection, get_existing_entry_dates
-from rag.text_utils import give_chunks_info
-from pandasFolder.analyze_mood_trends import analyze_mood_trends
 from typing import Optional, List, Dict
 
 app = FastAPI()
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,15 +17,20 @@ app.add_middleware(
 @app.get("/ollama")
 def is_ollama_running():
     try:
+        import requests
         response = requests.get("http://localhost:11434")
         return response.status_code == 200
-    except requests.exceptions.RequestException:
+    except (requests.exceptions.RequestException, ImportError):
         return False
 
 @app.get("/models")
 def get_models():
-    models = ollama.list()['models']
-    return {"models": [m.model for m in models]}
+    try:
+        import ollama
+        models = ollama.list()['models']
+        return {"models": [m.model for m in models]}
+    except (ImportError, Exception) as e:
+        return {"models": [], "error": str(e)}
 
 class ChatRequest(BaseModel):
     prompt: str
@@ -42,6 +39,10 @@ class ChatRequest(BaseModel):
 
 @app.post("/chat")
 def generate(request: ChatRequest):
+    from ollama import chat
+    from rag.embedder import get_all_entries_embeddings_with_sentiment, query
+    from rag.chromautils import create_collection
+    
     prompt = request.prompt
     model_name = request.model_name
     history = request.history or []
@@ -51,7 +52,6 @@ def generate(request: ChatRequest):
     results = query(collection, prompt)
     content = "".join([i['content'] for i in results if i['content']])
 
-    # Format chat history for the system prompt
     chat_history = ""
     if history:
         chat_history = "\nRecent conversation history:\n"
@@ -82,7 +82,7 @@ def generate(request: ChatRequest):
     """
 
     def chat_stream():
-        response = ollama.chat(
+        response = chat(
             model=model_name,
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -99,6 +99,9 @@ def generate(request: ChatRequest):
 
 @app.get("/query")
 def query_rag(query_request: str=Query(...,alias="q")):
+    from rag.embedder import get_all_entries_embeddings_with_sentiment, query
+    from rag.chromautils import create_collection
+    
     chunks_info_with_embeddings_and_sentiment = get_all_entries_embeddings_with_sentiment()
     collection= create_collection(chunks_info_with_embeddings_and_sentiment)
     results = query(collection , query_request)
@@ -106,6 +109,9 @@ def query_rag(query_request: str=Query(...,alias="q")):
 
 @app.get("/mood_insights")
 def mood_insights(last_n_days: int = Query(default=2)):
+    from rag.embedder import get_all_entries_embeddings_with_sentiment, generate_mood_insights
+    from rag.chromautils import create_collection
+    
     chunks_info_with_embeddings_and_sentiment = get_all_entries_embeddings_with_sentiment()
     collection= create_collection(chunks_info_with_embeddings_and_sentiment)
     results = generate_mood_insights(collection , last_n_days)
@@ -113,6 +119,8 @@ def mood_insights(last_n_days: int = Query(default=2)):
 
 @app.get("/mood_analysis")
 def mood_analysis(last_n_days: int = Query(default=2)):
+    from pandasFolder.analyze_mood_trends import analyze_mood_trends
+    
     input_insight = mood_insights(last_n_days)
     results = analyze_mood_trends(input_insight)
     return results
@@ -121,9 +129,9 @@ def mood_analysis(last_n_days: int = Query(default=2)):
 def test():
     return "yes"
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000 , reload=False)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="0.0.0.0", port=8000 , reload=False)
 
 
 
