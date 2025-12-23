@@ -1,4 +1,5 @@
 import { Calendar } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface SearchResultCardProps {
     content: string;
@@ -6,6 +7,7 @@ interface SearchResultCardProps {
 }
 
 export const SearchResultCard = ({ content, date}: SearchResultCardProps) => {
+    const { t } = useTranslation();
     return (
         <div className="p-6 mb-4 bg-white rounded-lg border border-[#e6cfa7] hover:border-[#2F4F4F]/30 transition-all duration-300 group">
             <div className="flex items-start justify-between mb-3">
@@ -23,7 +25,7 @@ export const SearchResultCard = ({ content, date}: SearchResultCardProps) => {
             </div>
             <div className="mt-4 pt-3 border-t border-[#e6cfa7] group-hover:border-[#2F4F4F]/30 transition-colors duration-300">
                 <button className="text-xs text-[#2F4F4F]/70 hover:text-[#2F4F4F] font-serif transition-colors duration-200">
-                    View full entry →
+                    {t('rag.viewFullEntry')}
                 </button>
             </div>
         </div>

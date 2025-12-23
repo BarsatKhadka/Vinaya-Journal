@@ -21,6 +21,8 @@ interface AppState {
   setChartDataType: (type: string) => void;
   selectedMood: string;
   setSelectedMood: (mood: string) => void;
+  editorContent: string;
+  setEditorContent: (content: string) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -45,4 +47,6 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setChartDataType: (type: string) => set((state) => ({ ...state, chartDataType: type })),
   selectedMood: "anger",
   setSelectedMood: (mood: string) => set((state) => ({ ...state, selectedMood: mood })),
+  editorContent: "",
+  setEditorContent: (content: string) => set((state) => ({ ...state, editorContent: content })),
 }));

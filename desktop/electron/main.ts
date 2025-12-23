@@ -64,12 +64,13 @@ function createWindow() {
 }
 
 function serverStart(){
-  let binPath;
   if (process.env.NODE_ENV === 'development') {
-    binPath = path.join(__dirname, '..', 'Servers', 'MyApp', 'bin');
-  } else {
-    binPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'Servers', 'MyApp', 'bin');
+    console.log('In development mode, skipping automatic server start. Please ensure backend servers are running manually.');
+    return;
   }
+
+  let binPath;
+  binPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'Servers', 'MyApp', 'bin');
   
   const backendExecutable = process.platform === 'win32' ? 'MyApp.exe' : './MyApp';
   const aiExecutable = process.platform === 'win32' ? 'main.exe' : './main';

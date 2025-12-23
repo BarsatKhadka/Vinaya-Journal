@@ -2,6 +2,7 @@ import BeginJournalingImage from "../../../assets/BeginJournalingPen.png";
 import ZeroCloudImage from "../../../assets/FeatureCardIcons/CloudIcon.png";
 import { Github } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const DhammaWheel = () => (
     <svg 
@@ -28,12 +29,14 @@ const DhammaWheel = () => (
     </svg>
 );
 
-const VersionCard = () => (
+const VersionCard = () => {
+    const { t } = useTranslation();
+    return (
     <div className="flex flex-col items-center justify-center w-[200px] h-[200px] bg-[#2F4F4F]/5 rounded-xl p-4 relative overflow-hidden group">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#2F4F4F]/5 to-[#2F4F4F]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="flex flex-col items-center text-center">
-            <div className="text-2xl font-serif text-[#2F4F4F] mb-2">Version 1.0</div>
-            <div className="text-sm text-[#2F4F4F]/60 italic mb-6">Initial Release</div>
+            <div className="text-2xl font-serif text-[#2F4F4F] mb-2">{t('beginJournaling.version')}</div>
+            <div className="text-sm text-[#2F4F4F]/60 italic mb-6">{t('beginJournaling.initialRelease')}</div>
             <a 
                 href="https://github.com/BarsatKhadka/Vinaya-Journal/issues"
                 target="_blank"
@@ -46,13 +49,15 @@ const VersionCard = () => (
                          bg-white/50 backdrop-blur-sm"
             >
                 <Github className="w-4 h-4" />
-                <span className="text-sm font-medium tracking-wide">Report Issues</span>
+                <span className="text-sm font-medium tracking-wide">{t('beginJournaling.reportIssues')}</span>
             </a>
         </div>
     </div>
-);
+    );
+};
 
 export const BeginJournaling = () => {
+    const { t } = useTranslation();
     return (
         <div className="bg-white/40 backdrop-blur-[2px] rounded-xl border border-white/20 shadow-sm">
             <div className="p-4 md:p-6 space-y-4 md:space-y-6">
@@ -70,7 +75,7 @@ export const BeginJournaling = () => {
                         />
                         <span className="text-xs tracking-wide" 
                               style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                            Zero Cloud Dependency
+                            {t('beginJournaling.zeroCloud')}
                         </span>
                     </div>
                     <a href="https://github.com/BarsatKhadka/Vinaya-Journal"
@@ -84,7 +89,7 @@ export const BeginJournaling = () => {
                         <Github className="w-4 h-4" />
                         <span className="text-xs tracking-wide"
                               style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                            Open Source Contribute
+                            {t('beginJournaling.openSource')}
                         </span>
                     </a>
                 </div>
@@ -112,12 +117,12 @@ export const BeginJournaling = () => {
                         <div className="space-y-2 text-center md:text-left">
                             <div className="space-y-1">
                                 <h4 className="text-2xl md:text-3xl font-serif text-gray-800 leading-tight">
-                                    Begin your Journey with
-                                    <span className="text-[#2F4F4F]"> Vinaya</span>
+                                    {t('beginJournaling.beginJourney')}
+                                    <span className="text-[#2F4F4F]">{t('beginJournaling.vinaya')}</span>
                                 </h4>
                                 <p className="text-xs text-gray-500 italic mb-3" 
                                    style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                                    Not to become someone but to understand yourself
+                                    {t('beginJournaling.quote')}
                                 </p>
                             </div>
 
@@ -136,7 +141,7 @@ export const BeginJournaling = () => {
                                 <span className="relative text-[15px] font-medium tracking-wider 
                                                text-white/90 group-hover:text-white" 
                                       style={{ fontFamily: '"PlayFair Display", sans-serif' }}>
-                                    Start Writing
+                                    {t('beginJournaling.startWriting')}
                                 </span>
                             </Link>
                         </div>

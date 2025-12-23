@@ -3,20 +3,48 @@ import { EditorHeader } from "./EditorHeader"
 import { EditorFooter } from "./EditorFooter"
 import { useState, useEffect } from "react"
 import imageBackground from "../../../assets/BackgroundImages/textEditorBackground.png"
+import { useTranslation } from "react-i18next"
+import axios from "axios"
+
+import { useAppStore } from "../../../store"
 
 const STORAGE_KEY = "text-editor-content"
 
 export const TextEditor = () => {
   const { editorRef, handlePaste, handleKeyDown, handleContainerClick } = useTextEditor()
   const [content, setContent] = useState<string>("")
+  const { t } = useTranslation()
+  const { setEditorContent } = useAppStore()
 
   // Load saved content on mount
   useEffect(() => {
-    const savedContent = sessionStorage.getItem(STORAGE_KEY)
-    if (savedContent && editorRef.current) {
-      editorRef.current.innerText = savedContent
-      setContent(savedContent)
+    const loadContent = async () => {
+      const savedContent = sessionStorage.getItem(STORAGE_KEY)
+      if (savedContent && editorRef.current) {
+        editorRef.current.innerText = savedContent
+        setContent(savedContent)
+        setEditorContent(savedContent)
+      } else {
+        try {
+          const dateObj = new Date();
+          const year = dateObj.getFullYear();
+          const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+          const day = String(dateObj.getDate()).padStart(2, '0');
+          const date = `${year}-${month}-${day}`;
+          
+          const response = await axios.get(`http://localhost:8080/retrieve?date=${date}`);
+          if (response.data && editorRef.current) {
+             editorRef.current.innerText = response.data;
+             setContent(response.data);
+             sessionStorage.setItem(STORAGE_KEY, response.data);
+             setEditorContent(response.data);
+          }
+        } catch (error) {
+          console.error("Error loading today's entry:", error);
+        }
+      }
     }
+    loadContent();
   }, [])
 
   // Update content when editor changes and save to sessionStorage
@@ -26,6 +54,7 @@ export const TextEditor = () => {
         const newContent = editorRef.current.innerText || ""
         setContent(newContent)
         sessionStorage.setItem(STORAGE_KEY, newContent)
+        setEditorContent(newContent)
       }
     }
 
@@ -62,14 +91,14 @@ export const TextEditor = () => {
             contentEditable
             onPaste={handlePaste}
             onKeyDown={handleKeyDown}
-            data-placeholder="Begin writing..."
-            className="w-full max-w-full p-8 focus:outline-none 
+            data-placeholder={t('textEditor.placeholder')}
+            className="w-full max-w-full p-9 focus:outline-none
                      prose prose-slate empty:before:content-[attr(data-placeholder)]
                      empty:before:text-gray-500 empty:before:pointer-events-none
                      prose-p:text-[#2F4F4F] prose-p:leading-relaxed prose-p:font-['Fira_Sans']
                      prose-pre:bg-[#2F4F4F]/5 prose-pre:text-[#2F4F4F]
                      prose-strong:text-[#2F4F4F] prose-em:text-[#2F4F4F]/80
-                     text-lg cursor-text min-h-[calc(100vh-12rem)]"
+                     text-lg/7.5 cursor-text min-h-[calc(100vh-12rem)]"
             style={{
               fontFamily: 'serif',
               background: 'repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px)',

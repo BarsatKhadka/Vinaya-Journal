@@ -4,6 +4,7 @@ import {OllamaRunningCard} from "./OllamaRunningCard";
 import {OllamaNotRunningCard} from "./OllamaNotRunningCard";
 import LocalAiMemory from "../../../assets/FeatureCardIcons/LocalAiMemory.png"; 
 import { useAppStore } from "../../../store";
+import { useTranslation } from 'react-i18next';
 
 export const checkOllamaRunning = async () => {
     try {
@@ -16,6 +17,7 @@ export const checkOllamaRunning = async () => {
 };
 
 export const LocalAIFeature = () => {
+    const { t } = useTranslation();
     const { ollamaRunning, setOllamaRunning } = useAppStore();
 
     // Check if Ollama is running when the component mounts
@@ -41,13 +43,13 @@ export const LocalAIFeature = () => {
                     />
                 </div>
                 <h3 className="text-base md:text-lg lg:text-2xl font-medium text-gray-800 font-serif">
-                    Locally Setup Ollama AI
+                    {t('features.localAI.title')}
                 </h3>
             </div>
 
             <p className="text-xs md:text-sm lg:text-base text-gray-600 pl-11 md:pl-12 lg:pl-14">
                 <span style={{ fontFamily: '"Playfair Display", serif', color: 'inherit' , fontWeight: '500' }}>
-                    all processing happens <span style={{ color: '#4caf50',fontWeight: '600' }}>locally on your device</span>
+                    {t('features.localAI.descriptionPart1')}<span style={{ color: '#4caf50',fontWeight: '600' }}>{t('features.localAI.descriptionPart2')}</span>
                 </span>
             </p>
 
@@ -76,7 +78,7 @@ export const LocalAIFeature = () => {
                     )}
                     <span className="text-xs md:text-sm lg:text-base" 
                           style={{ fontFamily: '"Roboto Mono", sans-serif', fontWeight: '400' }}>
-                        {ollamaRunning ? "Ollama detected and running locally" : "Ollama not running locally"}
+                        {ollamaRunning ? t('features.localAI.ollamaDetected') : t('features.localAI.ollamaNotDetected')}
                     </span>
                 </div>
             </div>

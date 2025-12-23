@@ -2,16 +2,25 @@ import { useEffect, useState } from 'react';
 import MoodInsightsBackground from '../../../../../assets/BackgroundImages/MoodInsightsBackground.png';
 import axios from 'axios';
 import { ChevronDown } from 'lucide-react';
-import { MoodRecord, timeRanges } from './mood';
+import { MoodRecord } from './mood';
 import { MoodCharts } from './MoodCharts';
 import { AnalyzeMood } from './AnalyzeMood';
 import { useAppStore } from '../../../../../store';
+import { useTranslation } from 'react-i18next';
 
 export const MoodInsights = () => {
+    const { t } = useTranslation();
     const [_moodInsights, setMoodInsights] = useState<MoodRecord[]>([]);
     const { selectedDays, setSelectedDays } = useAppStore();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const { chartData, setChartData ,  setChartDataType } = useAppStore();
+
+    const timeRanges = [
+        { label: t('moodInsights.last2Days'), value: 2 },
+        { label: t('moodInsights.lastWeek'), value: 7 },
+        { label: t('moodInsights.last2Weeks'), value: 14 },
+        { label: t('moodInsights.lastMonth'), value: 30 }
+    ];
     
     useEffect(() => {
         const fetchMoodInsights = async () => {

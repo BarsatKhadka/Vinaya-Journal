@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppStore } from "../../../../../store";
+import { useTranslation } from "react-i18next";
 
 interface MoodData {
     [date: string]: number;
@@ -7,18 +8,20 @@ interface MoodData {
 
 interface DailyChangesAndTrendsProps {
     dailyChangesAndTrends: {
-        anger: MoodData;
-        disgust: MoodData;
-        fear: MoodData;
-        joy: MoodData;
-        sadness: MoodData;
-        surprise: MoodData;
-        neutral: MoodData;
+        [key: string]: MoodData;
     } | null;
 }
 
-const positiveEmotions = ['joy', 'surprise', 'neutral'];
-const negativeEmotions = ['anger', 'disgust', 'fear', 'sadness'];
+const positiveEmotions = [
+    'admiration', 'amusement', 'approval', 'caring', 'desire', 
+    'excitement', 'gratitude', 'joy', 'love', 'optimism', 
+    'pride', 'realization', 'relief', 'surprise', 'curiosity', 'neutral'
+];
+const negativeEmotions = [
+    'anger', 'annoyance', 'confusion', 'disappointment', 'disapproval', 
+    'disgust', 'embarrassment', 'fear', 'grief', 'nervousness', 
+    'remorse', 'sadness'
+];
 
 const getRowColor = (mood: string, currentValue: number, previousValue: number | undefined) => {
     if (previousValue === undefined) return 'bg-white';
@@ -33,11 +36,12 @@ const getRowColor = (mood: string, currentValue: number, previousValue: number |
 
 export const DailyChangesAndTrends: React.FC<DailyChangesAndTrendsProps> = ({ dailyChangesAndTrends }) => {
     const { selectedMood, setSelectedMood } = useAppStore();    
+    const { t } = useTranslation();
 
     if (!dailyChangesAndTrends || Object.keys(dailyChangesAndTrends).length === 0) {
         return (
             <div>
-                <p>No daily changes and trends found</p>
+                <p>{t('moodInsights.noDailyChangesFound')}</p>
             </div>
         )
     }
@@ -52,7 +56,7 @@ export const DailyChangesAndTrends: React.FC<DailyChangesAndTrendsProps> = ({ da
                 <table className="w-full">
                     <thead className="sticky top-0 bg-[#fef1d6] z-10">
                         <tr>
-                            <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>Date</th>
+                            <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>{t('moodInsights.date')}</th>
                             <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>
                                 <select 
                                     value={selectedMood}
@@ -62,7 +66,7 @@ export const DailyChangesAndTrends: React.FC<DailyChangesAndTrendsProps> = ({ da
                                 >
                                     {moods.map((mood) => (
                                         <option key={mood} value={mood}>
-                                            {mood.charAt(0).toUpperCase() + mood.slice(1)}
+                                            {t(`moodInsights.sentiments.${mood}`)}
                                         </option>
                                     ))}
                                 </select>

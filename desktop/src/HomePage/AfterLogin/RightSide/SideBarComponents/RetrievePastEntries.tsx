@@ -4,8 +4,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const RetrievePastEntries = () => {
+    const { t, i18n } = useTranslation();
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [entries, setEntries] = useState<string>("");
 
@@ -33,13 +35,13 @@ export const RetrievePastEntries = () => {
                 
                 const response = await axios.get(`http://localhost:8080/retrieve?date=${date}`);
                 const data = response.data;
-                setEntries(data || "No entries found for this date.");
+                setEntries(data || t('retrievePastEntries.noEntriesFound'));
             } catch (err) {
-                setEntries("Unable to retrieve entries. Please try again.");
+                setEntries(t('retrievePastEntries.errorRetrieving'));
             }
         };
         fetchEntries();
-    }, [selectedDate]);
+    }, [selectedDate, t]);
 
     const navigateDate = (direction: 'prev' | 'next') => {
         const newDate = new Date(selectedDate);
@@ -102,7 +104,7 @@ export const RetrievePastEntries = () => {
             `}</style>
 
             <div className="flex items-center mb-4">
-                <h2 className="text-[#2F4F4F] font-serif text-xl">Past Reflections</h2>
+                <h2 className="text-[#2F4F4F] font-serif text-xl">{t('retrievePastEntries.title')}</h2>
             </div>
 
             <div className="flex gap-6 h-[calc(100%-3rem)]">
@@ -112,21 +114,26 @@ export const RetrievePastEntries = () => {
                         onChange={handleDateSelect}
                         inline
                         calendarClassName="vinaya-calendar"
+                        locale={i18n.language}
                     />
                     <div className="pt-2 border-t border-[#2F4F4F]/20">
                         <DatePicker
-                            selected={previousMonth}
+                            selected={null}
+                            openToDate={previousMonth}
                             onChange={handleDateSelect}
                             inline
                             calendarClassName="vinaya-calendar"
+                            locale={i18n.language}
                         />
                     </div>
                     <div className="pt-2 border-t border-[#2F4F4F]/20">
                         <DatePicker
-                            selected={twoMonthsAgo}
+                            selected={null}
+                            openToDate={twoMonthsAgo}
                             onChange={handleDateSelect}
                             inline
                             calendarClassName="vinaya-calendar"
+                            locale={i18n.language}
                         />
                     </div>
                 </div>
@@ -136,13 +143,14 @@ export const RetrievePastEntries = () => {
                         className="h-[770px] overflow-y-auto border-0 font-serif text-base whitespace-pre-line relative rounded-lg"
                         style={{
                             background: 'repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px)',
+                            backgroundAttachment: 'local',
                             boxShadow: '0 2px 12px rgba(46, 79, 79, 0.1)',
                             border: '1.5px solid #e6cfa7',
                         }}
                     >
                         <div className="sticky top-0 bg-[#fef1d6] py-2 px-6 z-10 border-b border-[#e6cfa7] flex items-center justify-between">
                             <div className="text-[#2F4F4F] font-serif text-lg">
-                                {selectedDate.toLocaleDateString(undefined, { 
+                                {selectedDate.toLocaleDateString(i18n.language, { 
                                     weekday: 'long',
                                     year: 'numeric', 
                                     month: 'long', 
@@ -168,8 +176,8 @@ export const RetrievePastEntries = () => {
                                 </motion.button>
                             </div>
                         </div>
-                        <div className="p-6">
-                            <div className="text-[#6b4f27] leading-relaxed">
+                        <div className="pl-6">
+                            <div className="text-[#6b4f27] text-lg/7 pt-4" style={{ lineHeight: '30px' }}>
                                 {entries}
                             </div>
                         </div>

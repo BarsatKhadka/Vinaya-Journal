@@ -1,8 +1,10 @@
 import { useAppStore } from "../../../../../store";
 import { AlertTriangle, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 export const InChatAIModelDropdown = () => {
+    const { t } = useTranslation();
     const {ollamaRunning, ollamaModels, currentModel, setCurrentModel} = useAppStore();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -11,14 +13,14 @@ export const InChatAIModelDropdown = () => {
             {ollamaRunning ? (
                 <div className="ml-auto mr-4 flex items-center gap-2">
                     <span className="text-xs font-semibold md:text-sm font-serif text-[#2F4F4F] whitespace-nowrap ml-2">
-                        Ollama
+                        {t('ai.ollama')}
                     </span>
                     <div className="relative">
                         <button
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#2F4F4F] text-white font-serif hover:bg-[#2F4F4F]/90 transition-colors"
                         >
-                            {ollamaModels.length === 0 ? "No models found" : currentModel}
+                            {ollamaModels.length === 0 ? t('ai.noModels') : currentModel}
                             <ChevronDown className="w-4 h-4" />
                         </button>
                         {isDropdownOpen && ollamaModels.length > 0 && (
@@ -44,9 +46,9 @@ export const InChatAIModelDropdown = () => {
             ) : (
                 <div className="flex items-center gap-1 text-xs text-red-700 font-serif">
                     <AlertTriangle className="w-4 h-4 text-red-400" />
-                    Ollama is not running
+                    {t('ai.notRunning')}
                 </div>
             )}
         </div>
     );
-}
+};

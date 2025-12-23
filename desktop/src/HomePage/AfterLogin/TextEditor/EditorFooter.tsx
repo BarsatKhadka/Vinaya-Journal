@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from 'react';
 import { Save } from "lucide-react";
 import axios from "axios";
+import { useTranslation } from 'react-i18next';
 
 interface EditorFooterProps {
   content: string;
@@ -10,6 +11,7 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<"success" | "error" | 'idle'>('idle');
   const [saved_at, setSaved_at] = useState<string>("");
+  const { t, i18n } = useTranslation();
   
 
   const getWordCount = (text: string) => {
@@ -29,13 +31,13 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
     const fetchSaved_at = async () => {
       const response = await axios.get("http://localhost:8080/lastSavedAt");
       if(response.data != "") {
-      setSaved_at(new Date(response.data).toLocaleString());
+      setSaved_at(new Date(response.data).toLocaleString(i18n.language));
       }else{
         setSaved_at("")
       }
     };
     fetchSaved_at();
-  }, []);
+  }, [i18n.language]);
 
   const handleSave = async () => {
     if (!content.trim()) return;
@@ -59,13 +61,13 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
     }
   };
 
-  let buttonText = 'Save'
+  let buttonText = t('textEditor.save')
   if(isSaving) {
-    buttonText = 'Saving...'
+    buttonText = t('textEditor.saving')
   } else if(saveStatus === 'success') {
-    buttonText = 'Saved'
+    buttonText = t('textEditor.saved')
   } else if(saveStatus === 'error') {
-    buttonText = 'Error'
+    buttonText = t('textEditor.error')
   }
 
   return (
@@ -109,12 +111,12 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
           </button>
           {saved_at && (
             <span className="text-xs lg:text-md text-gray-500 ml-2 whitespace-nowrap">
-              Today's entry last saved at: {new Date(saved_at).toLocaleString()}
+              {t('textEditor.lastSavedAt')}: {new Date(saved_at).toLocaleString(i18n.language)}
             </span>
           )}
           {saved_at === "" && (
             <span className="lg:text-md text-xs text-gray-500 ml-2 whitespace-nowrap">
-              No entries yet
+              {t('textEditor.noEntriesYet')}
             </span>
           )}
         </div>
@@ -123,7 +125,7 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
           <div className="flex items-center gap-2">
             <Indicator />
             <span style={{fontFamily: 'Roboto Mono'}}>
-              {getWordCount(content)} {getWordCount(content) > 1 ? 'words' : 'word'}
+              {getWordCount(content)} {getWordCount(content) > 1 ? t('textEditor.words') : t('textEditor.word')}
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -131,10 +133,10 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
             <span style={{fontFamily: 'Roboto Mono'}}>
               {getCharCount(content)}{" "}
               <span className="inline lg:hidden">
-                char  
+                {t('textEditor.char')}
               </span>
               <span className="hidden lg:inline">
-              {getCharCount(content) > 1 ? 'characters' : 'character'}
+              {getCharCount(content) > 1 ? t('textEditor.characters') : t('textEditor.character')}
               </span>
             </span>
           </div>

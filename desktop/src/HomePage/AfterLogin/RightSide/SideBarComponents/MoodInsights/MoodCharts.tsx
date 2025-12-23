@@ -1,39 +1,37 @@
 import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Bar, Cell, ReferenceLine, Area } from 'recharts';
 import { useAppStore } from '../../../../../store';
+import { useTranslation } from 'react-i18next';
+import { SIGNIFICANT_SENTIMENT_THRESHOLD, EMOTIONS_LIST, EMOTION_COLORS } from './mood';
 
 interface MoodChartsProps {
     chartData: any;
 }
 
-const emotions = ["joy", "sadness", "anger", "fear", "surprise", "disgust", "neutral"];
-const colors = [
-    "#f59e0b",  
-    "#3b82f6",  
-    "#dc2626",  
-    "#0891b2",  
-    "#10b981",  
-    "#7e22ce",  
-    "#6b7280"   
-];
-
 export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
+    const { t } = useTranslation();
     const { chartDataType, selectedMood } = useAppStore();
 
     const transformAvgSentimentData = (data: any) => {
         if (!data) return [];
-        return Object.entries(data).map(([emotion, value]) => ({
-            label: emotion.charAt(0).toUpperCase() + emotion.slice(1),
-            value: Number(value)
-        }));
+        return Object.entries(data)
+            .filter(([_, value]) => {
+                const val = Number(value);
+                return !isNaN(val) && val > SIGNIFICANT_SENTIMENT_THRESHOLD;
+            })
+            .map(([emotion, value]) => ({
+                label: t(`moodInsights.sentiments.${emotion}`),
+                originalEmotion: emotion,
+                value: Number(value)
+            }));
     };
 
     const transformDominantMoodData = (data: Record<string, string>) => {
         if (!data) return [];
         return Object.entries(data).map(([date, mood]) => ({
             date,
-            mood: mood.charAt(0).toUpperCase() + mood.slice(1),
+            mood: t(`moodInsights.sentiments.${mood}`),
             value: 1,
-            color: colors[emotions.indexOf(mood)] || '#6b7280'
+            color: EMOTION_COLORS[EMOTIONS_LIST.indexOf(mood)] || '#6b7280'
         }));
     };
 
@@ -45,9 +43,27 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
         return Object.entries(moodData).map(([date, value]) => ({
             date,
             value: Number(value),
-            color: value >= 0 ? colors[emotions.indexOf(selectedMood)] : '#dc2626'
+            color: value >= 0 ? EMOTION_COLORS[EMOTIONS_LIST.indexOf(selectedMood)] : '#dc2626'
         }));
     };
+
+    const getSignificantEmotions = () => {
+        if (!chartData || !Array.isArray(chartData)) return EMOTIONS_LIST;
+        
+        const significantEmotions = new Set<string>();
+        chartData.forEach(entry => {
+            EMOTIONS_LIST.forEach(emotion => {
+                const val = Number(entry[emotion]);
+                if (!isNaN(val) && val > SIGNIFICANT_SENTIMENT_THRESHOLD) {
+                    significantEmotions.add(emotion);
+                }
+            });
+        });
+        
+        return EMOTIONS_LIST.filter(e => significantEmotions.has(e));
+    };
+
+    const visibleEmotions = getSignificantEmotions();
 
     return (
         <div className="w-full h-full mr-8 mt-4 ">
@@ -80,17 +96,21 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
                                 color: '#2F4F4F'
                             }}
                         />
-                        {emotions.map((emotion, index) => (
-                            <Line
-                                key={emotion}
-                                type="monotone"
-                                dataKey={emotion}
-                                stroke={colors[index]}
-                                strokeWidth={2}
-                                dot={{ fill: colors[index], strokeWidth: 2 }}
-                                activeDot={{ r: 6, fill: colors[index] }}
-                            />
-                        ))}
+                        {visibleEmotions.map((emotion) => {
+                            const index = EMOTIONS_LIST.indexOf(emotion);
+                            return (
+                                <Line
+                                    key={emotion}
+                                    type="monotone"
+                                    dataKey={emotion}
+                                    name={t(`moodInsights.sentiments.${emotion}`)}
+                                    stroke={EMOTION_COLORS[index]}
+                                    strokeWidth={2}
+                                    dot={{ fill: EMOTION_COLORS[index], strokeWidth: 2 }}
+                                    activeDot={{ r: 6, fill: EMOTION_COLORS[index] }}
+                                />
+                            );
+                        })}
                         </ComposedChart>
                     </ResponsiveContainer>
                 )}
@@ -131,7 +151,7 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
                                 {transformAvgSentimentData(chartData)?.map((entry: any, index: number) => (
                                     <Cell 
                                         key={`cell-${index}`} 
-                                        fill={colors[emotions.indexOf(entry.label.toLowerCase())] || '#6b7280'} 
+                                        fill={EMOTION_COLORS[EMOTIONS_LIST.indexOf(entry.originalEmotion)] || '#6b7280'} 
                                     />
                                 ))}
                             </Bar>
@@ -224,17 +244,17 @@ export const MoodCharts: React.FC<MoodChartsProps> = ({ chartData }) => {
                             <Area
                                 type="monotone"
                                 dataKey="value"
-                                stroke={colors[emotions.indexOf(selectedMood)]}
-                                fill={colors[emotions.indexOf(selectedMood)]}
+                                stroke={EMOTION_COLORS[EMOTIONS_LIST.indexOf(selectedMood)]}
+                                fill={EMOTION_COLORS[EMOTIONS_LIST.indexOf(selectedMood)]}
                                 fillOpacity={0.2}
                             />
                             <Line
                                 type="monotone"
                                 dataKey="value"
-                                stroke={colors[emotions.indexOf(selectedMood)]}
+                                stroke={EMOTION_COLORS[EMOTIONS_LIST.indexOf(selectedMood)]}
                                 strokeWidth={2}
-                                dot={{ fill: colors[emotions.indexOf(selectedMood)], strokeWidth: 2 }}
-                                activeDot={{ r: 6, fill: colors[emotions.indexOf(selectedMood)] }}
+                                dot={{ fill: EMOTION_COLORS[EMOTIONS_LIST.indexOf(selectedMood)], strokeWidth: 2 }}
+                                activeDot={{ r: 6, fill: EMOTION_COLORS[EMOTIONS_LIST.indexOf(selectedMood)] }}
                             />
                         </ComposedChart>
                     </ResponsiveContainer>

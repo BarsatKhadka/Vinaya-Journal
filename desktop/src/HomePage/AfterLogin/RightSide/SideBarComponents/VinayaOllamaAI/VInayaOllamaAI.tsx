@@ -3,6 +3,7 @@ import { useAppStore } from "../../../../../store";
 import { Send, MessageSquare, Bot, User, X } from "lucide-react";
 import VinayaOllamaAIBackground from "../../../../../assets/BackgroundImages/VinayaOllamaAIBackground.png"
 import { InChatAIModelDropdown } from "./InChatAIModelDropdown";
+import { useTranslation } from 'react-i18next';
 
 interface Message {
     content: string;
@@ -12,6 +13,7 @@ interface Message {
 const STORAGE_KEY = "vinaya-ai-chat-messages";
 
 export const VInayaOllamaAI = () => {
+    const { t, i18n } = useTranslation();
     const [messages, setMessages] = useState<Message[]>(() => {
         const savedMessages = sessionStorage.getItem(STORAGE_KEY);
         return savedMessages ? JSON.parse(savedMessages) : [];
@@ -61,7 +63,8 @@ export const VInayaOllamaAI = () => {
                 body: JSON.stringify({
                     prompt: prompt,
                     model_name: currentModel,
-                    history: recentMessages
+                    history: recentMessages,
+                    language: i18n.language
                 }),
                 signal: controller.signal
             });
@@ -88,10 +91,10 @@ export const VInayaOllamaAI = () => {
         } catch (error) {
             if (error instanceof Error) {
                 if (error.name === 'AbortError') {
-                    setMessages(prev => [...prev, { content: "Response stopped.", isUser: false }]);
+                    setMessages(prev => [...prev, { content: t('ai.responseStopped'), isUser: false }]);
                 } else {
                     console.error("Error:", error);
-                    setMessages(prev => [...prev, { content: "Sorry, something went wrong. Please try again.", isUser: false }]);
+                    setMessages(prev => [...prev, { content: t('ai.error'), isUser: false }]);
                 }
             }
         } finally {
@@ -133,8 +136,8 @@ export const VInayaOllamaAI = () => {
                         <div className="flex-1 overflow-y-auto px-2 md:px-0 py-4 space-y-6" style={{ maxHeight: 'calc(100vh - 280px)' }}>
                             {messages.length === 0 && !isLoading ? (
                                 <div className="flex flex-col items-center justify-start h-full pt-8 select-none" style={{fontFamily: 'Playfair Display'}}>
-                                    <h2 className="text-lg md:text-3xl font-semibold mb-2 text-[#2F4F4F] text-center">Ready when you are.</h2>
-                                    <p className="text-base md:text-lg text-[#6b7280] text-center">Ask anything.</p>
+                                    <h2 className="text-lg md:text-3xl font-semibold mb-2 text-[#2F4F4F] text-center">{t('ai.readyTitle')}</h2>
+                                    <p className="text-base md:text-lg text-[#6b7280] text-center">{t('ai.readySubtitle')}</p>
                                 </div>
                             ) : (
                                 messages.map((message, index) => (
@@ -161,7 +164,7 @@ export const VInayaOllamaAI = () => {
                                         >
                                             <div className="flex items-center gap-2 mb-3">
                                                 <span className="text-xs font-serif text-[#2F4F4F]/70">
-                                                    {message.isUser ? 'You' : 'Vinaya AI'}
+                                                    {message.isUser ? t('ai.you') : t('ai.vinayaAI')}
                                                 </span>
                                             </div>
                                             <p className="text-base whitespace-pre-wrap font-serif leading-relaxed">
@@ -184,7 +187,7 @@ export const VInayaOllamaAI = () => {
                                     <div className="bg-[#e0f2ef] text-[#2F4F4F] rounded-xl px-6 py-4 shadow-[0_2px_12px_0_rgba(224,242,239,0.5)]">
                                         <div className="flex items-center gap-2 mb-3">
                                             <span className="text-xs font-serif text-[#2F4F4F]/70">
-                                                Vinaya AI
+                                                {t('ai.vinayaAI')}
                                             </span>
                                         </div>
                                         <div className="flex space-x-2">
@@ -204,7 +207,7 @@ export const VInayaOllamaAI = () => {
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
                             onKeyPress={handleKeyPress}
-                            placeholder="Type your message..."
+                            placeholder={t('ai.placeholder')}
                             className="w-full p-4 pl-12 pr-12 rounded-lg border border-[#e0f2ef] focus:ring-2 focus:ring-[#e0f2ef] focus:border-[#2F4F4F] outline-none font-serif transition-all duration-300 resize-none min-h-[40px] max-h-[120px]"
                             style={{
                                 background: 'repeating-linear-gradient(to bottom, #f0f7f5, #f0f7f5 28px, #e0f2ef 29px, #f0f7f5 30px)',

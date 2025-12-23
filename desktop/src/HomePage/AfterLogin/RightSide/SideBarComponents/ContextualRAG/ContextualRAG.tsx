@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Search, HelpCircle } from 'lucide-react';
 import { SearchResultCard } from './SearchResultCard';
+import { useTranslation } from 'react-i18next';
 
 interface SearchResult {
     id: string;
@@ -12,6 +13,7 @@ interface SearchResult {
 }
 
 export const ContextualRAG = () => {
+    const { t } = useTranslation();
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
     
@@ -47,7 +49,7 @@ export const ContextualRAG = () => {
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Search your memories semantically..."
+                                placeholder={t('rag.searchPlaceholder')}
                                 className="w-full p-4 pl-12 pr-12 rounded-lg border border-[#e6cfa7] focus:ring-2 focus:ring-[#e0f2ef] focus:border-[#2F4F4F] outline-none font-serif transition-all duration-300"
                                 style={{
                                     background: 'repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px)',
@@ -63,7 +65,7 @@ export const ContextualRAG = () => {
 
                     <div className="mt-4 relative group">
                         <div className="text-[#2F4F4F] font-serif text-sm cursor-help flex items-center space-x-1">
-                            <span>What is semantic search?</span>
+                            <span>{t('rag.whatIsSemantic')}</span>
                             <HelpCircle
                                 className="w-4 h-4"
                                 strokeWidth={1.5}
@@ -71,7 +73,7 @@ export const ContextualRAG = () => {
                         </div>
                         <div className="absolute left-0 mt-2 w-64 p-4 bg-white rounded-lg shadow-lg border border-[#e6cfa7] z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform translate-y-0">
                             <p className="text-[#2F4F4F] font-serif text-sm">
-                                Semantic search finds journal entries by meaning, not just matching words. It understands the context and intent behind your search.
+                                {t('rag.semanticDescription')}
                             </p>
                         </div>
                     </div>
@@ -87,7 +89,7 @@ export const ContextualRAG = () => {
                             ))
                         ) : searchQuery.trim() ? (
                             <div className="text-center py-8 text-[#2F4F4F]/70 font-serif">
-                                No results found
+                                {t('rag.noResults')}
                             </div>
                         ) : null}
                     </div>

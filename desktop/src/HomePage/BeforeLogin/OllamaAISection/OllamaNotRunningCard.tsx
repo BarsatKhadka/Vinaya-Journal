@@ -1,38 +1,42 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-const ReportBrokenLink = () => (
+const ReportBrokenLink = () => {
+    const { t } = useTranslation();
+    return (
     <div className="text-center mt-4 pt-4 border-t border-gray-200">
         <p className="text-xs text-gray-500" style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-            Found a broken link?{' '}
+            {t('features.localAI.brokenLink')}{' '}
             <a
                 href="https://github.com/BarsatKhadka/Vinaya-Journal/issues"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#2F4F4F] hover:text-[#1F3F3F] underline decoration-dotted"
             >
-                Report it
+                {t('features.localAI.reportIt')}
             </a>
         </p>
     </div>
-);
+)};
 
 const MacOSCard = () => {
+    const { t } = useTranslation();
     return (
         <div className="p-4">
             <div className="flex justify-between items-start">
                 <div className="w-full">
-                    <h3 className="text-lg font-serif text-gray-800 mb-4">macOS Installation</h3>
+                    <h3 className="text-lg font-serif text-gray-800 mb-4">{t('features.localAI.macOSInstallation')}</h3>
                     
                     <div className="space-y-6">
                         {/* Homebrew Option */}
                         <div className="border-l-2 border-[#2F4F4F] pl-4">
                             <h4 className="text-sm font-medium text-gray-700" 
                                 style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                                Via Homebrew (Recommended)
+                                {t('features.localAI.viaHomebrew')}
                             </h4>
                             <p className="text-xs text-gray-500 mt-1 italic" 
                                style={{fontFamily: 'Fira Sans'}}>
-                                Install using Homebrew package manager
+                                {t('features.localAI.installHomebrew')}
                             </p>
                             <div className="mt-2 p-2 bg-gray-100 rounded font-mono text-sm">
                                 brew install ollama
@@ -43,11 +47,11 @@ const MacOSCard = () => {
                         <div className="border-l-2 border-[#2F4F4F] pl-4">
                             <h4 className="text-sm font-medium text-gray-700"
                                 style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                                Direct Download
+                                {t('features.localAI.directDownload')}
                             </h4>
                             <p className="text-xs text-gray-500 mt-1 italic" 
                                style={{fontFamily: 'Fira Sans'}}>
-                                Download and install manually
+                                {t('features.localAI.downloadManually')}
                             </p>
                             <a
                                 href="https://ollama.com/download/Ollama-darwin.zip"
@@ -57,7 +61,7 @@ const MacOSCard = () => {
                                          text-sm transition-colors underline"
                                 style={{ fontFamily: '"Fira Sans", sans-serif' }}
                             >
-                                Download for macOS
+                                {t('features.localAI.downloadMacOS')}
                                 <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" 
                                      stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" 
@@ -73,22 +77,24 @@ const MacOSCard = () => {
     );
 };
 
-const LinuxCard = () => (
+const LinuxCard = () => {
+    const { t } = useTranslation();
+    return (
     <div className="p-4">
         <div className="flex justify-between items-start">
             <div className="w-full">
-                <h3 className="text-lg font-serif text-gray-800 mb-4">Linux Installation</h3>
+                <h3 className="text-lg font-serif text-gray-800 mb-4">{t('features.localAI.linuxInstallation')}</h3>
                 
                 <div className="space-y-6">
                     {/* Snap Option */}
                     <div className="border-l-2 border-[#2F4F4F] pl-4">
                         <h4 className="text-sm font-medium text-gray-700" 
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                            Via Snap (Recommended)
+                            {t('features.localAI.viaSnap')}
                         </h4>
                         <p className="text-xs text-gray-500 mt-1 italic" 
                            style={{fontFamily: 'Fira Sans'}}>
-                            Install using Snap package manager
+                            {t('features.localAI.installSnap')}
                         </p>
                         <div className="mt-2 p-2 bg-gray-100 rounded font-mono text-sm">
                             sudo snap install ollama
@@ -99,11 +105,11 @@ const LinuxCard = () => (
                     <div className="border-l-2 border-[#2F4F4F] pl-4">
                         <h4 className="text-sm font-medium text-gray-700"
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                            Via Shell Script
+                            {t('features.localAI.viaShellScript')}
                         </h4>
                         <p className="text-xs text-gray-500 mt-1 italic" 
                            style={{fontFamily: 'Fira Sans'}}>
-                            Install using the official install script
+                            {t('features.localAI.installShellScript')}
                         </p>
                         <div className="mt-2 p-2 bg-gray-100 rounded font-mono text-sm">
                             curl https://ollama.ai/install.sh | sh
@@ -114,24 +120,26 @@ const LinuxCard = () => (
         </div>
         <ReportBrokenLink />
     </div>
-);
+)};
 
-const WindowsCard = () => (
+const WindowsCard = () => {
+    const { t } = useTranslation();
+    return (
     <div className="p-4">
         <div className="flex justify-between items-start">
             <div className="w-full">
-                <h3 className="text-lg font-serif text-gray-800 mb-4">Windows Installation</h3>
+                <h3 className="text-lg font-serif text-gray-800 mb-4">{t('features.localAI.windowsInstallation')}</h3>
                 
                 <div className="space-y-6">
                     {/* Windows Download Option */}
                     <div className="border-l-2 border-[#2F4F4F] pl-4">
                         <h4 className="text-sm font-medium text-gray-700"
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                            Windows Installer
+                            {t('features.localAI.windowsInstaller')}
                         </h4>
                         <p className="text-xs text-gray-500 mt-1 italic" 
                            style={{fontFamily: 'Fira Sans'}}>
-                            Download and run the Windows installer 
+                            {t('features.localAI.downloadWindowsInstaller')}
                         </p>
                         <a
                             href="https://ollama.com/download/OllamaSetup.exe"
@@ -141,7 +149,7 @@ const WindowsCard = () => (
                                      text-sm transition-colors underline"
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}
                         >
-                            Download Windows Installer For Ollama
+                            {t('features.localAI.downloadWindows')}
                             <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" 
                                  stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" 
@@ -154,10 +162,11 @@ const WindowsCard = () => (
         </div>
         <ReportBrokenLink />
     </div>
-);
+)};
 
 export const OllamaNotRunningCard = () => {
     const [osName, setOsName] = useState<string>("");
+    const { t } = useTranslation();
 
     useEffect(() => {
         const getOsName = async () => {
@@ -184,11 +193,11 @@ export const OllamaNotRunningCard = () => {
                     <div className="p-4">
                         <div className="w-full">
                             <h3 className="text-lg font-serif text-gray-800 mb-4">
-                                System OS detection failed
+                                {t('features.localAI.osDetectionFailed')}
                             </h3>
                             
                             <p className="text-sm text-gray-600 mb-4" style={{fontFamily: 'Fira Sans'}}>
-                                Please choose your operating system below to get installation instructions:
+                                {t('features.localAI.chooseOS')}
                             </p>
 
                             <div className="space-y-4">
@@ -198,7 +207,7 @@ export const OllamaNotRunningCard = () => {
                                    rel="noopener noreferrer"
                                    style={{fontFamily: 'Fira Sans'}}
                                 >
-                                    → Download for macOS
+                                    → {t('features.localAI.downloadMacOS')}
                                 </a>
                                 <a href="https://ollama.com/download/linux"
                                    className="block text-[#2F4F4F] hover:text-[#1F3F3F] underline"
@@ -206,7 +215,7 @@ export const OllamaNotRunningCard = () => {
                                    rel="noopener noreferrer"
                                    style={{fontFamily: 'Fira Sans'}}
                                 >
-                                    → Download for Linux
+                                    → {t('features.localAI.downloadLinux')}
                                 </a>
                                 <a href="https://ollama.com/download/windows"
                                    className="block text-[#2F4F4F] hover:text-[#1F3F3F] underline"
@@ -214,7 +223,7 @@ export const OllamaNotRunningCard = () => {
                                    rel="noopener noreferrer"
                                    style={{fontFamily: 'Fira Sans'}}
                                 >
-                                    → Download for Windows 
+                                    → {t('features.localAI.downloadWindows')}
                                 </a>
                             </div>
                         </div>

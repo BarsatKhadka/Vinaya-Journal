@@ -2,9 +2,34 @@ import { BarChart, Activity, TrendingUp, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../../../../../store'
 import { AnalyzeMoodResults } from './AnalyzeMoodResults';
+import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { CurrentMood } from './CurrentMood';
 
 export const AnalyzeMood = () => {
-    const { activeMoodTab, setActiveMoodTab } = useAppStore();
+    const { t } = useTranslation();
+    const { activeMoodTab, setActiveMoodTab, selectedDays } = useAppStore();
+    const [analyzeMoodResults, setAnalyzeMoodResults] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMoodResults = async () => {
+            setIsLoading(true);
+            try {
+                const response = await axios.get(`http://localhost:8000/mood_analysis?last_n_days=${selectedDays}`);
+                setAnalyzeMoodResults(response.data);
+            } catch (error) {
+                console.error('Error fetching mood results:', error);
+                setAnalyzeMoodResults(null);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchMoodResults();
+    }, [selectedDays]);
+
+    const hasData = analyzeMoodResults && analyzeMoodResults !== "No mood data available";
 
     const handleOverviewClick = () => {
         setTimeout(() => {
@@ -13,6 +38,14 @@ export const AnalyzeMood = () => {
         }, 100);
         
     };
+
+    if (!hasData && !isLoading) {
+        return (
+            <div className="mt-4 mb-4 flex flex-col items-center w-full">
+                 <CurrentMood />
+            </div>
+        )
+    }
 
     return (
         <div className="mt-8 mb-8 flex flex-col items-center">
@@ -36,7 +69,7 @@ export const AnalyzeMood = () => {
                 <span className="relative z-10 flex items-center gap-2">
                     <BarChart className="w-4 h-4 text-[#2F4F4F]" />
                     <span className="text-sm font-medium text-[#2F4F4F]">
-                        Overview
+                        {t('moodInsights.overview')}
                     </span>
                 </span>
             </button>
@@ -61,7 +94,7 @@ export const AnalyzeMood = () => {
                     <span className="relative z-10 flex items-center gap-2">
                         <Heart className="w-4 h-4 text-[#2F4F4F]" />
                         <span className="text-sm font-medium text-[#2F4F4F]">
-                            Average Sentiment
+                            {t('moodInsights.averageSentiment')}
                         </span>
                     </span>
                 </button>
@@ -86,7 +119,7 @@ export const AnalyzeMood = () => {
                     <span className="relative z-10 flex items-center gap-2">
                         <Activity className="w-4 h-4 text-[#2F4F4F]" />
                         <span className="text-sm font-medium text-[#2F4F4F]">
-                            Dominant Mood
+                            {t('moodInsights.dominantMood')}
                         </span>
                     </span>
                 </button>
@@ -111,12 +144,12 @@ export const AnalyzeMood = () => {
                     <span className="relative z-10 flex items-center gap-2">
                         <TrendingUp className="w-4 h-4 text-[#2F4F4F]" />
                         <span className="text-sm font-medium text-[#2F4F4F]">
-                            Daily Changes and Trends
+                            {t('moodInsights.dailyChangesAndTrends')}
                         </span>
                     </span>
                 </button>
             </div>
-            <AnalyzeMoodResults />
+            <AnalyzeMoodResults data={analyzeMoodResults} />
         </div>
     )
 }

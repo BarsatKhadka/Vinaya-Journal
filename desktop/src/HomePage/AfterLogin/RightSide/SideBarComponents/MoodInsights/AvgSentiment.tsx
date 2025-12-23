@@ -1,31 +1,77 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { SIGNIFICANT_SENTIMENT_THRESHOLD } from "./mood";
 
 interface AvgSentimentProps {
     avgSentiment: {
-        neutral: number;
-        surprise: number;
-        joy: number;
-        fear: number;
+        admiration: number;
+        amusement: number;
         anger: number;
-        sadness: number;
+        annoyance: number;
+        approval: number;
+        caring: number;
+        confusion: number;
+        curiosity: number;
+        desire: number;
+        disappointment: number;
+        disapproval: number;
         disgust: number;
+        embarrassment: number;
+        excitement: number;
+        fear: number;
+        gratitude: number;
+        grief: number;
+        joy: number;
+        love: number;
+        nervousness: number;
+        optimism: number;
+        pride: number;
+        realization: number;
+        relief: number;
+        remorse: number;
+        sadness: number;
+        surprise: number;
+        neutral: number;
     } | null;
 }
 
 const getSentimentColor = (sentiment: string) => {
-    const colors = {
-        neutral: 'bg-[#fef1d6] border-[#2F4F4F]',
-        surprise: 'bg-[#e6f3ff] border-[#2F4F4F]',
-        joy: 'bg-[#e6ffe6] border-[#2F4F4F]',
-        fear: 'bg-[#fff2e6] border-[#2F4F4F]',
+    const colors: Record<string, string> = {
+        admiration: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        amusement: 'bg-[#e6ffe6] border-[#2F4F4F]',
         anger: 'bg-[#ffe6e6] border-[#2F4F4F]',
+        annoyance: 'bg-[#ffe6e6] border-[#2F4F4F]',
+        approval: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        caring: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        confusion: 'bg-[#e6f3ff] border-[#2F4F4F]',
+        curiosity: 'bg-[#e6f3ff] border-[#2F4F4F]',
+        desire: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        disappointment: 'bg-[#e6e6ff] border-[#2F4F4F]',
+        disapproval: 'bg-[#ffe6e6] border-[#2F4F4F]',
+        disgust: 'bg-[#f2e6ff] border-[#2F4F4F]',
+        embarrassment: 'bg-[#e6e6ff] border-[#2F4F4F]',
+        excitement: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        fear: 'bg-[#fff2e6] border-[#2F4F4F]',
+        gratitude: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        grief: 'bg-[#e6e6ff] border-[#2F4F4F]',
+        joy: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        love: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        nervousness: 'bg-[#fff2e6] border-[#2F4F4F]',
+        optimism: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        pride: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        realization: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        relief: 'bg-[#e6ffe6] border-[#2F4F4F]',
+        remorse: 'bg-[#e6e6ff] border-[#2F4F4F]',
         sadness: 'bg-[#e6e6ff] border-[#2F4F4F]',
-        disgust: 'bg-[#f2e6ff] border-[#2F4F4F]'
+        surprise: 'bg-[#e6f3ff] border-[#2F4F4F]',
+        neutral: 'bg-[#fef1d6] border-[#2F4F4F]'
     };
-    return colors[sentiment as keyof typeof colors] || 'bg-[#fef1d6] border-[#2F4F4F]';
+    return colors[sentiment] || 'bg-[#fef1d6] border-[#2F4F4F]';
 };
 
 export const AvgSentiment: React.FC<AvgSentimentProps> = ({ avgSentiment }) => {
+    const { t } = useTranslation();
+
     if (!avgSentiment) {
         return (
             <div className="mt-12 grid grid-cols-3 gap-3">
@@ -42,18 +88,22 @@ export const AvgSentiment: React.FC<AvgSentimentProps> = ({ avgSentiment }) => {
         );
     }
 
+    const sortedSentiments = Object.entries(avgSentiment)
+        .filter(([_, value]) => value > SIGNIFICANT_SENTIMENT_THRESHOLD)
+        .sort(([, a], [, b]) => b - a);
+
     return (
         <div className="mt-12 grid grid-cols-3 gap-3">
-            {Object.entries(avgSentiment).map(([sentiment, value]) => (
+            {sortedSentiments.map(([sentiment, value]) => (
                 <div 
                     key={sentiment} 
                     className={`${getSentimentColor(sentiment)} border rounded-lg p-2 hover:opacity-80 transition-all opacity-80`}
                 >
                     <div className="text-xs text-black" style={{fontFamily: 'Roboto'}}>
-                        {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
+                        {t(`moodInsights.sentiments.${sentiment}`)}
                     </div>
                     <div className="text-lg font-medium text-black" style={{fontFamily: 'Roboto'}}>
-                        {value}
+                        {Math.round(value * 100)}%
                     </div>
                 </div>
             ))}

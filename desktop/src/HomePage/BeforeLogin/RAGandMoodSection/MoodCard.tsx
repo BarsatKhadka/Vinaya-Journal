@@ -1,6 +1,8 @@
 import MoodIcon from '../../../assets/FeatureCardIcons/MoodIcon.png'
+import { useTranslation } from 'react-i18next';
 
 export const MoodCard = () => {
+    const { t } = useTranslation();
     return (
         <div className="flex flex-col items-center rounded-xl 
                      bg-white/40 backdrop-blur-[2px] border-[0.5px] border-[#2F4F4F]/10 
@@ -16,16 +18,16 @@ export const MoodCard = () => {
 
             <div className="text-center space-y-2 px-4 pb-4">
                 <h3 className="text-xl font-serif text-gray-800">
-                    Mood Tracker Vinaya<span className="text-green-600"> suggests:</span>
+                    {t('features.mood.titlePart1')}<span className="text-green-600">{t('features.mood.titlePart2')}</span>
                 </h3>
 
                 <div className="space-y-2">
                     <p className="text-sm text-gray-600 leading-relaxed" 
                        style={{ fontFamily: 'Fira Sans, serif' }}>
-                        "He abused me, he beat me,<br/>
-                        He defeated me, he robbed me" —<br/>
-                        Those who harbor such thoughts<br/>
-                        Will never be free from hatred.
+                        {t('features.mood.quoteLine1')}<br/>
+                        {t('features.mood.quoteLine2')}<br/>
+                        {t('features.mood.quoteLine3')}<br/>
+                        {t('features.mood.quoteLine4')}
                     </p>
                 </div>
             </div>

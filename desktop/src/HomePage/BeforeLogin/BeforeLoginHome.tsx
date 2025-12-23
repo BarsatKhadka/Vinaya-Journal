@@ -4,8 +4,10 @@ import beforeLoginBackground from "../../assets/BackgroundImages/BeforeLoginBack
 import { LocalAIFeature } from "./OllamaAISection/OllamaAICard"
 import { RagAndMoodCard } from "./RAGandMoodSection/RagAndMoodCard"
 import { BeginJournaling } from "./BeginJournalingSection/BeginJournaling"
+import { useTranslation } from 'react-i18next';
 
 export const BeforeLoginHome = () => {
+    const { t } = useTranslation();
     return (
         <div className="min-h-screen w-full overflow-x-hidden relative">
             <div 
@@ -25,7 +27,7 @@ export const BeforeLoginHome = () => {
                             className="text-4xl md:text-3xl lg:text-6xl font-serif font-medium tracking-tight mb-2"
                         >
                             <span className="bg-gradient-to-r from-teal-700 to-slate-700 bg-clip-text text-transparent">
-                                Write with gentle focus
+                                {t('welcome.title')}
                             </span>
                         </motion.h1>
 
@@ -42,7 +44,7 @@ export const BeforeLoginHome = () => {
                                 fontFamily: '"Playfair Display", serif',
                             }}
                         >
-                            your private local AI journaling app
+                            {t('welcome.subtitle')}
                         </motion.p>
                     </div>
                       

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Lock, LockKeyhole } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Encryption = () => {
     const [encryptionEnabled, setEncryptionEnabled] = useState(false);
     const [password, setPassword] = useState("");
     const [passwordHint, setPasswordHint] = useState("");
+    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col space-y-4 w-[300px] mt-8 ">
@@ -18,7 +20,7 @@ export const Encryption = () => {
                 </div>
                 <span className="text-sm text-gray-700" 
                       style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                    Enable Encryption
+                    {t('encryption.enable')}
                 </span>
             </label>
 
@@ -29,7 +31,7 @@ export const Encryption = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={!encryptionEnabled}
-                    placeholder="Enter password"
+                    placeholder={t('encryption.enterPassword')}
                     className={`w-full px-3 py-2 pl-9 rounded-lg border
                             ${!encryptionEnabled ? 'bg-gray-100 text-gray-400' : 'bg-white'}
                             focus:outline-none focus:ring-1 focus:ring-[#2F4F4F]`}
@@ -46,7 +48,7 @@ export const Encryption = () => {
                     value={passwordHint}
                     onChange={(e) => setPasswordHint(e.target.value)}
                     disabled={!encryptionEnabled}
-                    placeholder="Password hint (optional)"
+                    placeholder={t('encryption.passwordHint')}
                     className={`w-full px-3 py-2 pl-9 rounded-lg border
                             ${!encryptionEnabled ? 'bg-gray-100 text-gray-400' : 'bg-white'}
                             focus:outline-none focus:ring-1 focus:ring-[#2F4F4F]`}

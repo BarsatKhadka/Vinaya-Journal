@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface DominantMoodProps {
     dominantMood: {
@@ -9,10 +10,12 @@ interface DominantMoodProps {
 
 
 export const DominantMood: React.FC<DominantMoodProps> = ({dominantMood}) => {
+    const { t } = useTranslation();
+
     if (!dominantMood || Object.keys(dominantMood).length === 0) {
         return (
             <div>
-                <p>No dominant mood found</p>
+                <p>{t('moodInsights.noDominantMoodFound')}</p>
             </div>
         )
     }
@@ -23,8 +26,8 @@ export const DominantMood: React.FC<DominantMoodProps> = ({dominantMood}) => {
                 <table className="w-full">
                     <thead className="sticky top-0 bg-[#fef1d6] z-10">
                         <tr>
-                            <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>Date</th>
-                            <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>Dominant Mood</th>
+                            <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>{t('moodInsights.date')}</th>
+                            <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>{t('moodInsights.dominantMood')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,7 +35,7 @@ export const DominantMood: React.FC<DominantMoodProps> = ({dominantMood}) => {
                             <tr key={date} className="hover:bg-[#fef1d6]/50 transition-all border-t border-[#2F4F4F]/50 opacity-80">
                                 <td className="px-16 py-3 text-sm text-black" style={{fontFamily: 'Roboto Mono'}}>{date}</td>
                                 <td className="px-16 py-3 text-sm font-medium text-black" style={{fontFamily: 'Roboto Mono'}}>
-                                    {(mood as string).charAt(0).toUpperCase() + (mood as string).slice(1)}
+                                    {t(`moodInsights.sentiments.${mood}`)}
                                 </td>
                             </tr>
                         ))}

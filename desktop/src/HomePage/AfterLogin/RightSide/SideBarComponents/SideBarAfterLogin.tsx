@@ -2,9 +2,11 @@ import { LineChart, Bot, SquareTerminal, CalendarClock} from "lucide-react";
 import { useAppStore } from "../../../../store";
 import { OllamaAIModelDropdown } from "./OllamaAIModelDropdown";
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 
 export const SideBarAfterLogin = () => {
     const { setSelectedSidebar, selectedSidebar } = useAppStore();
+    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col h-full w-full px-4 py-6 bg-[#fae4b2] border-r border-[#e6cfa7]">
@@ -24,7 +26,7 @@ export const SideBarAfterLogin = () => {
                     <span className="relative z-10 flex items-center gap-3">
                         <SquareTerminal className={`w-5 h-5 ${selectedSidebar === 'Contextual RAG Memory' ? 'text-white' : 'text-[#2F4F4F]'}`} />
                         <span className={selectedSidebar === 'Contextual RAG Memory' ? 'text-white' : 'text-[#2F4F4F]'}>
-                            Contextual RAG
+                            {t('sidebar.contextualRag')}
                         </span>
                     </span>
                 </button>
@@ -43,7 +45,7 @@ export const SideBarAfterLogin = () => {
                     <span className="relative z-10 flex items-center gap-3">
                         <LineChart className={`w-5 h-5 ${selectedSidebar === 'Mood Insights' ? 'text-white' : 'text-[#2F4F4F]'}`} />
                         <span className={selectedSidebar === 'Mood Insights' ? 'text-white' : 'text-[#2F4F4F]'}>
-                            Mood Insights
+                            {t('sidebar.moodInsights')}
                         </span>
                     </span>
                 </button>
@@ -62,7 +64,7 @@ export const SideBarAfterLogin = () => {
                     <span className="relative z-10 flex items-center gap-3">
                         <Bot className={`w-5 h-5 ${selectedSidebar === 'Vinaya Ollama AI' ? 'text-white' : 'text-[#2F4F4F]'}`} />
                         <span className={selectedSidebar === 'Vinaya Ollama AI' ? 'text-white' : 'text-[#2F4F4F]'}>
-                            Vinaya Ollama AI
+                            {t('sidebar.vinayaAI')}
                         </span>
                     </span>
                 </button>
@@ -81,7 +83,7 @@ export const SideBarAfterLogin = () => {
                     <span className="relative z-10 flex items-center gap-3">
                         <CalendarClock className={`w-5 h-5 ${selectedSidebar === 'Retrieve Past Entries' ? 'text-white' : 'text-[#2F4F4F]'}`} />
                         <span className={selectedSidebar === 'Retrieve Past Entries' ? 'text-white' : 'text-[#2F4F4F]'}>
-                            Retrieve Past Entries
+                            {t('sidebar.retrieveEntries')}
                         </span>
                     </span>
                 </button>

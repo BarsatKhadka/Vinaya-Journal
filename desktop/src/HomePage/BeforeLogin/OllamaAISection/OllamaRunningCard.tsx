@@ -1,6 +1,7 @@
 import { useEffect} from "react";
 import axios from "axios";
 import { useAppStore } from "../../../store";
+import { useTranslation } from "react-i18next";
 
 const RamBadge = ({ ram }: { ram: string }) => (
     <span className="px-3 py-0.5 bg-[#E6E2DD] border border-[#CFCAC2] rounded-lg 
@@ -10,7 +11,9 @@ const RamBadge = ({ ram }: { ram: string }) => (
     </span>
 );
 
-const ExploreMoreSection = () => (
+const ExploreMoreSection = () => {
+    const { t } = useTranslation();
+    return (
     <>
         {/* Divider */}
         <div className="border-t border-gray-200 mt-2"></div>
@@ -19,7 +22,7 @@ const ExploreMoreSection = () => (
         <div className="p-4 text-center">
             <p className="text-sm text-gray-600 mb-2" 
                style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                Looking for different models?
+                {t('features.localAI.lookingForModels')}
             </p>
             <a
                 href="https://ollama.ai/library"
@@ -31,7 +34,7 @@ const ExploreMoreSection = () => (
                          hover:decoration-[#1F3F3F] hover:scale-105 transform"
                 style={{ fontFamily: '"Fira Sans", sans-serif' }}
             >
-                Explore Ollama Model Library
+                {t('features.localAI.exploreLibrary')}
                 <svg
                     className="w-4 h-4"
                     fill="none"
@@ -48,7 +51,7 @@ const ExploreMoreSection = () => (
             </a>
         </div>
     </>
-);
+)};
 
 export const fetchOllamaModels = async (): Promise<string[]> => {
     try {
@@ -62,6 +65,7 @@ export const fetchOllamaModels = async (): Promise<string[]> => {
 
 export const OllamaRunningCard = () => {
     const {ollamaModels, setOllamaModels, setCurrentModel} = useAppStore()
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchModels = async () => {
@@ -81,7 +85,7 @@ export const OllamaRunningCard = () => {
                 <div className="bg-[#F7F4F0] border border-gray-300 rounded-lg bg-[#FCFBFA]">
                     <p className="p-6 text-gray-700 text-base font-serif border-b border-gray-200 
                               tracking-wide text-center">
-                        Let's setup your first local AI companion. 
+                        {t('features.localAI.setupFirstCompanion')}
                     </p>
 
                     {/* Mistral Card */}
@@ -94,13 +98,13 @@ export const OllamaRunningCard = () => {
                                 </div>
                                 <p className="text-xs text-gray-500 mt-1 italic" 
                                    style={{fontFamily: 'Fira Sans'}}>
-                                    Editor's choice - a top pick for everyday user.
+                                    {t('features.localAI.mistralDesc')}
                                 </p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
                                            text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
                                     style={{ fontFamily: "serif" }}>
-                                Install
+                                {t('features.localAI.install')}
                             </button>
                         </div>
                     </div>
@@ -115,13 +119,13 @@ export const OllamaRunningCard = () => {
                                 </div>
                                 <p className="text-xs text-gray-500 mt-1 italic" 
                                    style={{fontFamily: 'Fira Sans'}}>
-                                    great for reasoning and quick response
+                                    {t('features.localAI.phiDesc')}
                                 </p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
                                            text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
                                     style={{ fontFamily: "serif" }}>
-                                Install
+                                {t('features.localAI.install')}
                             </button>
                         </div>
                     </div>
@@ -136,13 +140,13 @@ export const OllamaRunningCard = () => {
                                 </div>
                                 <p className="text-xs text-gray-500 mt-1 italic" 
                                    style={{fontFamily: 'Fira Sans'}}>
-                                    ideal for low-resource setups.
+                                    {t('features.localAI.tinyLlamaDesc')}
                                 </p>
                             </div>
                             <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
                                            text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
                                     style={{ fontFamily: "serif" }}>
-                                Install
+                                {t('features.localAI.install')}
                             </button>
                         </div>
                     </div>
@@ -153,7 +157,7 @@ export const OllamaRunningCard = () => {
                 <div className="bg-[#F7F4F0] border border-gray-400 rounded-lg">
                     <p className="p-6 text-gray-700 text-base border-b border-gray-200 
                               tracking-wide font-serif text-center">
-                        Available local models
+                        {t('features.localAI.availableModels')}
                     </p>
 
                     {ollamaModels.map((model, index) => (
@@ -164,17 +168,17 @@ export const OllamaRunningCard = () => {
                                 <div>
                                     <div className="flex items-center">
                                         <h3 className="text-lg font-serif text-gray-800">{model}</h3>
-                                        <RamBadge ram="Ready" />
+                                        <RamBadge ram={t('features.localAI.ready')} />
                                     </div>
                                     <p className="text-xs text-gray-500 mt-1 italic" 
                                        style={{fontFamily: 'Fira Sans'}}>
-                                        Local model - ready to use
+                                        {t('features.localAI.readyToUse')}
                                     </p>
                                 </div>
                                 <button className="bg-[#2F4F4F] text-white px-4 py-1.5 rounded-md 
                                                text-sm hover:bg-[#1F3F3F] transition-colors cursor-pointer" 
                                         style={{ fontFamily: "serif" }}>
-                                    Remove
+                                    {t('features.localAI.remove')}
                                 </button>
                             </div>
                         </div>

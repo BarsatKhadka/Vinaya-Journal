@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const LoadingPage = () => {
+    const { t } = useTranslation();
     const [javaRunning, setJavaRunning] = useState(false);
     const [sqliteRunning, setSqliteRunning] = useState(false);
     const [pythonRunning, setPythonRunning] = useState(false);
@@ -86,7 +88,7 @@ export const LoadingPage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-3xl md:text-4xl font-serif text-[#2F4F4F] mb-3"
                     >
-                        Starting Vinaya
+                        {t('loading.title')}
                     </motion.h1>
                     <motion.p 
                         initial={{ opacity: 0, y: 20 }}
@@ -94,7 +96,7 @@ export const LoadingPage = () => {
                         transition={{ delay: 0.2 }}
                         className="text-[#2F4F4F]/70 mb-2"
                     >
-                        Please wait while we prepare your journaling environment
+                        {t('loading.subtitle')}
                     </motion.p>
                     <motion.div 
                         initial={{ opacity: 0 }}
@@ -102,24 +104,24 @@ export const LoadingPage = () => {
                         transition={{ delay: 0.4 }}
                         className="text-sm text-[#2F4F4F]/60"
                     >
-                        Press Ctrl+R to refresh the page for real-time service status updates
+                        {t('loading.refreshHint')}
                     </motion.div>
                 </div>
 
                 {/* Status Items */}
                 <div className="space-y-4">
                     <StatusItem 
-                        title="Java Backend" 
+                        title={t('loading.javaBackend')} 
                         status={javaRunning}
                     />
                     <StatusItem 
-                        title="SQLite Database" 
+                        title={t('loading.sqliteDatabase')} 
                         status={sqliteRunning}
                     />
                     <StatusItem 
-                        title="Python AI Service" 
+                        title={t('loading.pythonService')} 
                         status={pythonRunning}
-                        description="If the model is loading, you can proceed and refresh the app later with Ctrl+R"
+                        description={t('loading.pythonLoadingHint')}
                     />
                 </div>
 
@@ -143,7 +145,7 @@ export const LoadingPage = () => {
                                       opacity-0 group-hover:opacity-100 
                                       transition-opacity duration-300 cursor-pointer" />
                         <span className="relative text-lg font-medium tracking-wide cursor-pointer">
-                            Continue to App
+                            {t('loading.continue')}
                         </span>
                     </button>
                 </motion.div>
@@ -157,13 +159,13 @@ export const LoadingPage = () => {
                     >
                         <AlertCircle className="w-4 h-4" />
                         <p>
-                            Note: (May take a few minutes) If Python service is still loading, you can proceed to the app and refresh (Ctrl+R) when it's ready.
+                            {t('loading.pythonNote')}
                         </p>
                     </motion.div>
                 )}
 
                 <div className="text-sm text-gray-500 mt-4">
-                    Note: Python service may take a few moments to load. You can press Ctrl+R to refresh the page for real-time updates.
+                    {t('loading.pythonNoteShort')}
                 </div>
             </motion.div>
         </div>
