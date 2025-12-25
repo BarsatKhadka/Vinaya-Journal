@@ -23,6 +23,8 @@ interface AppState {
   setSelectedMood: (mood: string) => void;
   editorContent: string;
   setEditorContent: (content: string) => void;
+  theme: string;
+  setTheme: (theme: string) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -49,4 +51,9 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
   setSelectedMood: (mood: string) => set((state) => ({ ...state, selectedMood: mood })),
   editorContent: "",
   setEditorContent: (content: string) => set((state) => ({ ...state, editorContent: content })),
+  theme: localStorage.getItem("vinaya_theme") || 'original',
+  setTheme: (theme: string) => {
+    localStorage.setItem("vinaya_theme", theme);
+    set((state) => ({ ...state, theme }));
+  },
 }));

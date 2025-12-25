@@ -4,14 +4,14 @@ import { useTranslation } from "react-i18next";
 const ReportBrokenLink = () => {
     const { t } = useTranslation();
     return (
-    <div className="text-center mt-4 pt-4 border-t border-gray-200">
-        <p className="text-xs text-gray-500" style={{ fontFamily: '"Fira Sans", sans-serif' }}>
+    <div className="text-center mt-4 pt-4 border-t border-[var(--border-color)]">
+        <p className="text-xs text-[var(--text-muted)]" style={{ fontFamily: '"Fira Sans", sans-serif' }}>
             {t('features.localAI.brokenLink')}{' '}
             <a
                 href="https://github.com/BarsatKhadka/Vinaya-Journal/issues"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#2F4F4F] hover:text-[#1F3F3F] underline decoration-dotted"
+                className="text-[var(--text-main)] hover:text-[var(--text-main)] underline decoration-dotted"
             >
                 {t('features.localAI.reportIt')}
             </a>
@@ -25,31 +25,31 @@ const MacOSCard = () => {
         <div className="p-4">
             <div className="flex justify-between items-start">
                 <div className="w-full">
-                    <h3 className="text-lg font-serif text-gray-800 mb-4">{t('features.localAI.macOSInstallation')}</h3>
+                    <h3 className="text-lg font-serif text-[var(--text-main)] mb-4">{t('features.localAI.macOSInstallation')}</h3>
                     
                     <div className="space-y-6">
                         {/* Homebrew Option */}
-                        <div className="border-l-2 border-[#2F4F4F] pl-4">
-                            <h4 className="text-sm font-medium text-gray-700" 
+                        <div className="border-l-2 border-[var(--border-color)] pl-4">
+                            <h4 className="text-sm font-medium text-[var(--text-main)]" 
                                 style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                                 {t('features.localAI.viaHomebrew')}
                             </h4>
-                            <p className="text-xs text-gray-500 mt-1 italic" 
+                            <p className="text-xs text-[var(--text-muted)] mt-1 italic" 
                                style={{fontFamily: 'Fira Sans'}}>
                                 {t('features.localAI.installHomebrew')}
                             </p>
-                            <div className="mt-2 p-2 bg-gray-100 rounded font-mono text-sm">
+                            <div className="mt-2 p-2 bg-[var(--bg-card)] rounded font-mono text-sm">
                                 brew install ollama
                             </div>
                         </div>
 
                         {/* Direct Download Option */}
-                        <div className="border-l-2 border-[#2F4F4F] pl-4">
-                            <h4 className="text-sm font-medium text-gray-700"
+                        <div className="border-l-2 border-[var(--border-color)] pl-4">
+                            <h4 className="text-sm font-medium text-[var(--text-main)]"
                                 style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                                 {t('features.localAI.directDownload')}
                             </h4>
-                            <p className="text-xs text-gray-500 mt-1 italic" 
+                            <p className="text-xs text-[var(--text-muted)] mt-1 italic" 
                                style={{fontFamily: 'Fira Sans'}}>
                                 {t('features.localAI.downloadManually')}
                             </p>
@@ -57,7 +57,7 @@ const MacOSCard = () => {
                                 href="https://ollama.com/download/Ollama-darwin.zip"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="mt-2 inline-flex items-center text-[#2F4F4F] hover:text-[#1F3F3F] 
+                                className="mt-2 inline-flex items-center text-[var(--text-main)] hover:text-[var(--text-main)] 
                                          text-sm transition-colors underline"
                                 style={{ fontFamily: '"Fira Sans", sans-serif' }}
                             >
@@ -83,35 +83,35 @@ const LinuxCard = () => {
     <div className="p-4">
         <div className="flex justify-between items-start">
             <div className="w-full">
-                <h3 className="text-lg font-serif text-gray-800 mb-4">{t('features.localAI.linuxInstallation')}</h3>
+                <h3 className="text-lg font-serif text-[var(--text-main)] mb-4">{t('features.localAI.linuxInstallation')}</h3>
                 
                 <div className="space-y-6">
                     {/* Snap Option */}
-                    <div className="border-l-2 border-[#2F4F4F] pl-4">
-                        <h4 className="text-sm font-medium text-gray-700" 
+                    <div className="border-l-2 border-[var(--border-color)] pl-4">
+                        <h4 className="text-sm font-medium text-[var(--text-main)]" 
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                             {t('features.localAI.viaSnap')}
                         </h4>
-                        <p className="text-xs text-gray-500 mt-1 italic" 
+                        <p className="text-xs text-[var(--text-muted)] mt-1 italic" 
                            style={{fontFamily: 'Fira Sans'}}>
                             {t('features.localAI.installSnap')}
                         </p>
-                        <div className="mt-2 p-2 bg-gray-100 rounded font-mono text-sm">
+                        <div className="mt-2 p-2 bg-[var(--bg-card)] rounded font-mono text-sm">
                             sudo snap install ollama
                         </div>
                     </div>
 
                     {/* Shell Script Option */}
-                    <div className="border-l-2 border-[#2F4F4F] pl-4">
-                        <h4 className="text-sm font-medium text-gray-700"
+                    <div className="border-l-2 border-[var(--border-color)] pl-4">
+                        <h4 className="text-sm font-medium text-[var(--text-main)]"
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                             {t('features.localAI.viaShellScript')}
                         </h4>
-                        <p className="text-xs text-gray-500 mt-1 italic" 
+                        <p className="text-xs text-[var(--text-muted)] mt-1 italic" 
                            style={{fontFamily: 'Fira Sans'}}>
                             {t('features.localAI.installShellScript')}
                         </p>
-                        <div className="mt-2 p-2 bg-gray-100 rounded font-mono text-sm">
+                        <div className="mt-2 p-2 bg-[var(--bg-card)] rounded font-mono text-sm">
                             curl https://ollama.ai/install.sh | sh
                         </div>
                     </div>
@@ -128,16 +128,16 @@ const WindowsCard = () => {
     <div className="p-4">
         <div className="flex justify-between items-start">
             <div className="w-full">
-                <h3 className="text-lg font-serif text-gray-800 mb-4">{t('features.localAI.windowsInstallation')}</h3>
+                <h3 className="text-lg font-serif text-[var(--text-main)] mb-4">{t('features.localAI.windowsInstallation')}</h3>
                 
                 <div className="space-y-6">
                     {/* Windows Download Option */}
-                    <div className="border-l-2 border-[#2F4F4F] pl-4">
-                        <h4 className="text-sm font-medium text-gray-700"
+                    <div className="border-l-2 border-[var(--border-color)] pl-4">
+                        <h4 className="text-sm font-medium text-[var(--text-main)]"
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                             {t('features.localAI.windowsInstaller')}
                         </h4>
-                        <p className="text-xs text-gray-500 mt-1 italic" 
+                        <p className="text-xs text-[var(--text-muted)] mt-1 italic" 
                            style={{fontFamily: 'Fira Sans'}}>
                             {t('features.localAI.downloadWindowsInstaller')}
                         </p>
@@ -145,7 +145,7 @@ const WindowsCard = () => {
                             href="https://ollama.com/download/OllamaSetup.exe"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-2 inline-flex items-center text-[#2F4F4F] hover:text-[#1F3F3F] 
+                            className="mt-2 inline-flex items-center text-[var(--text-main)] hover:text-[var(--text-main)] 
                                      text-sm transition-colors underline"
                             style={{ fontFamily: '"Fira Sans", sans-serif' }}
                         >
@@ -192,17 +192,17 @@ export const OllamaNotRunningCard = () => {
                 return (
                     <div className="p-4">
                         <div className="w-full">
-                            <h3 className="text-lg font-serif text-gray-800 mb-4">
+                            <h3 className="text-lg font-serif text-[var(--text-main)] mb-4">
                                 {t('features.localAI.osDetectionFailed')}
                             </h3>
                             
-                            <p className="text-sm text-gray-600 mb-4" style={{fontFamily: 'Fira Sans'}}>
+                            <p className="text-sm text-[var(--text-muted)] mb-4" style={{fontFamily: 'Fira Sans'}}>
                                 {t('features.localAI.chooseOS')}
                             </p>
 
                             <div className="space-y-4">
                                 <a href="https://ollama.com/download/mac"
-                                   className="block text-[#2F4F4F] hover:text-[#1F3F3F] underline"
+                                   className="block text-[var(--text-main)] hover:text-[var(--text-main)] underline"
                                    target="_blank"
                                    rel="noopener noreferrer"
                                    style={{fontFamily: 'Fira Sans'}}
@@ -210,7 +210,7 @@ export const OllamaNotRunningCard = () => {
                                     → {t('features.localAI.downloadMacOS')}
                                 </a>
                                 <a href="https://ollama.com/download/linux"
-                                   className="block text-[#2F4F4F] hover:text-[#1F3F3F] underline"
+                                   className="block text-[var(--text-main)] hover:text-[var(--text-main)] underline"
                                    target="_blank"
                                    rel="noopener noreferrer"
                                    style={{fontFamily: 'Fira Sans'}}
@@ -218,7 +218,7 @@ export const OllamaNotRunningCard = () => {
                                     → {t('features.localAI.downloadLinux')}
                                 </a>
                                 <a href="https://ollama.com/download/windows"
-                                   className="block text-[#2F4F4F] hover:text-[#1F3F3F] underline"
+                                   className="block text-[var(--text-main)] hover:text-[var(--text-main)] underline"
                                    target="_blank"
                                    rel="noopener noreferrer"
                                    style={{fontFamily: 'Fira Sans'}}
@@ -235,7 +235,7 @@ export const OllamaNotRunningCard = () => {
 
     return (
         <div className="px-2 py-2">
-            <div className="bg-[#F7F4F0] border border-gray-400 rounded-lg">
+            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg">
                 {renderOSCard()}
             </div>
         </div>

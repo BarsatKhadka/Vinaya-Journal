@@ -38,28 +38,30 @@ export const MoodInsights = () => {
     }, [selectedDays, setChartData]);
 
     return (
-        <div
-            className="flex flex-col h-full relative"
-            style={{
-                backgroundImage: `url(${MoodInsightsBackground})`,
-                backgroundSize: 'cover',
-                backgroundPosition: '50% center',
-                backgroundRepeat: 'no-repeat',
-            }}
-        >
-            <div className="absolute inset-0 bg-[#fae4b2]/50 pointer-events-none z-0" />
+        <div className="flex flex-col h-full relative">
+            <div
+                className="absolute inset-0 z-0"
+                style={{
+                    backgroundImage: `url(${MoodInsightsBackground})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: '50% center',
+                    backgroundRepeat: 'no-repeat',
+                    filter: 'var(--image-filter)',
+                }}
+            />
+            <div className="absolute inset-0 bg-[var(--bg-main)]/50 pointer-events-none z-0" />
             <div className="relative z-10 flex flex-col w-full">
                 <div className="flex items-center justify-end mt-8">
                     <div className="relative mr-6">
                         <button
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                            className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#2F4F4F] text-white font-serif hover:bg-[#2F4F4F]/90 transition-colors"
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[var(--accent)] text-[var(--text-on-accent)] font-serif hover:opacity-90 transition-colors"
                         >
                             {timeRanges.find(range => range.value === selectedDays)?.label}
                             <ChevronDown className="w-4 h-4" />
                         </button>
                         {isDropdownOpen && (
-                            <div className="absolute top-full right-0 mt-1 w-40 bg-white rounded-md shadow-lg border border-[#e6cfa7]">
+                            <div className="absolute top-full right-0 mt-1 w-40 bg-[var(--bg-card)] rounded-md shadow-lg border border-[var(--border-color)]">
                                 {timeRanges.map((range) => (
                                     <button
                                         key={range.value}
@@ -67,8 +69,8 @@ export const MoodInsights = () => {
                                             setSelectedDays(range.value);
                                             setIsDropdownOpen(false);
                                         }}
-                                        className={`w-full text-left px-3 py-2 font-serif text-[#2F4F4F] hover:bg-[#fae4b2] transition-colors ${
-                                            selectedDays === range.value ? 'bg-[#fae4b2]' : ''
+                                        className={`w-full text-left px-3 py-2 font-serif text-[var(--text-main)] hover:bg-[var(--hover-bg)] transition-colors ${
+                                            selectedDays === range.value ? 'bg-[var(--hover-bg)]' : ''
                                         }`}
                                     >
                                         {range.label}

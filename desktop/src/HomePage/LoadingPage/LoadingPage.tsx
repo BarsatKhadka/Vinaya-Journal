@@ -56,26 +56,26 @@ export const LoadingPage = () => {
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-4 p-4 bg-white/40 backdrop-blur-sm rounded-xl border border-white/20"
+            className="flex items-center gap-4 p-4 bg-[var(--bg-card)]/40 backdrop-blur-sm rounded-xl border border-[var(--border-color)]"
         >
             <div className="flex-shrink-0">
                 {status ? (
-                    <CheckCircle2 className="w-6 h-6 text-green-600" />
+                    <CheckCircle2 className="w-6 h-6 text-[var(--accent)]" />
                 ) : (
-                    <Loader2 className="w-6 h-6 text-[#2F4F4F] animate-spin" />
+                    <Loader2 className="w-6 h-6 text-[var(--text-main)] animate-spin" />
                 )}
             </div>
             <div className="flex-1">
-                <h3 className="text-lg font-medium text-[#2F4F4F]">{title}</h3>
+                <h3 className="text-lg font-medium text-[var(--text-main)]">{title}</h3>
                 {description && (
-                    <p className="text-sm text-[#2F4F4F]/70 mt-1">{description}</p>
+                    <p className="text-sm text-[var(--text-muted)] mt-1">{description}</p>
                 )}
             </div>
         </motion.div>
     );
 
     return (
-        <div className="min-h-screen w-full bg-[#fbf8f0] flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen w-full bg-[var(--bg-app)] flex flex-col items-center justify-center p-4">
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -86,7 +86,7 @@ export const LoadingPage = () => {
                     <motion.h1 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-3xl md:text-4xl font-serif text-[#2F4F4F] mb-3"
+                        className="text-3xl md:text-4xl font-serif text-[var(--text-main)] mb-3"
                     >
                         {t('loading.title')}
                     </motion.h1>
@@ -94,7 +94,7 @@ export const LoadingPage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-[#2F4F4F]/70 mb-2"
+                        className="text-[var(--text-muted)] mb-2"
                     >
                         {t('loading.subtitle')}
                     </motion.p>

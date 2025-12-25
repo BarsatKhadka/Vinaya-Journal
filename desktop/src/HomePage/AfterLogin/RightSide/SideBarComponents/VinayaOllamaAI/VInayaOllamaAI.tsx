@@ -117,16 +117,18 @@ export const VInayaOllamaAI = () => {
     };
 
     return (
-        <div
-            className="flex flex-col h-full relative text-[#2F4F4F]"
-            style={{
-                backgroundImage: `url(${VinayaOllamaAIBackground})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-            }}
-        >
-            <div className="absolute inset-0 bg-[#fae4b2]/50 pointer-events-none z-0" />
+        <div className="flex flex-col h-full relative text-[var(--text-main)]">
+            <div 
+                className="absolute inset-0 z-0"
+                style={{
+                    backgroundImage: `url(${VinayaOllamaAIBackground})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    filter: 'var(--image-filter)',
+                }}
+            />
+            <div className="absolute inset-0 bg-[var(--bg-main)]/50 pointer-events-none z-0" />
             <div className="relative z-10 flex flex-col h-full">
                 <div className="items-start pt-6 pb-2">
                     <InChatAIModelDropdown />
@@ -136,8 +138,8 @@ export const VInayaOllamaAI = () => {
                         <div className="flex-1 overflow-y-auto px-2 md:px-0 py-4 space-y-6" style={{ maxHeight: 'calc(100vh - 280px)' }}>
                             {messages.length === 0 && !isLoading ? (
                                 <div className="flex flex-col items-center justify-start h-full pt-8 select-none" style={{fontFamily: 'Playfair Display'}}>
-                                    <h2 className="text-lg md:text-3xl font-semibold mb-2 text-[#2F4F4F] text-center">{t('ai.readyTitle')}</h2>
-                                    <p className="text-base md:text-lg text-[#6b7280] text-center">{t('ai.readySubtitle')}</p>
+                                    <h2 className="text-lg md:text-3xl font-semibold mb-2 text-[var(--text-main)] text-center">{t('ai.readyTitle')}</h2>
+                                    <p className="text-base md:text-lg text-[var(--text-muted)] text-center">{t('ai.readySubtitle')}</p>
                                 </div>
                             ) : (
                                 messages.map((message, index) => (
@@ -146,8 +148,8 @@ export const VInayaOllamaAI = () => {
                                         className={`flex ${message.isUser ? 'justify-end' : 'justify-start'} items-start gap-3 mt-4`}
                                     >
                                         {!message.isUser && (
-                                            <div className="w-8 h-8 rounded-full bg-[#e0f2ef] flex items-center justify-center flex-shrink-0">
-                                                <Bot className="w-5 h-5 text-[#2F4F4F]" strokeWidth={1.5} />
+                                            <div className="w-8 h-8 rounded-full bg-[var(--hover-bg)] flex items-center justify-center flex-shrink-0">
+                                                <Bot className="w-5 h-5 text-[var(--text-main)]" strokeWidth={1.5} />
                                             </div>
                                         )}
                                         <div
@@ -208,21 +210,20 @@ export const VInayaOllamaAI = () => {
                             onChange={(e) => setPrompt(e.target.value)}
                             onKeyPress={handleKeyPress}
                             placeholder={t('ai.placeholder')}
-                            className="w-full p-4 pl-12 pr-12 rounded-lg border border-[#e0f2ef] focus:ring-2 focus:ring-[#e0f2ef] focus:border-[#2F4F4F] outline-none font-serif transition-all duration-300 resize-none min-h-[40px] max-h-[120px]"
+                            className="w-full p-4 pl-12 pr-12 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-[var(--accent)]/20 focus:border-[var(--accent)] outline-none font-serif transition-all duration-300 resize-none min-h-[40px] max-h-[120px] text-[var(--text-main)] placeholder-[var(--text-muted)] bg-[var(--bg-card)]"
                             style={{
-                                background: 'repeating-linear-gradient(to bottom, #f0f7f5, #f0f7f5 28px, #e0f2ef 29px, #f0f7f5 30px)',
-                                boxShadow: '0 2px 12px 0 rgba(224, 242, 239, 0.5)',
+                                boxShadow: '0 2px 12px 0 rgba(0,0,0,0.05)',
                             }}
                             rows={1}
                         />
                         <MessageSquare
-                            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#2F4F4F]"
+                            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[var(--text-main)]"
                             strokeWidth={1.5}
                         />
                         {isLoading ? (
                             <button
                                 onClick={handleStopGeneration}
-                                className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-lg text-[#2F4F4F] hover:text-[#1F3F3F] transition-colors"
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-lg text-[var(--text-main)] hover:text-[var(--text-muted)] transition-colors"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -232,8 +233,8 @@ export const VInayaOllamaAI = () => {
                                 disabled={!prompt.trim() || !currentModel}
                                 className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-lg ${
                                     !prompt.trim() || !currentModel
-                                        ? 'text-[#bfa76a] cursor-not-allowed opacity-60'
-                                        : 'text-[#2F4F4F] hover:text-[#1F3F3F]'
+                                        ? 'text-[var(--text-muted)] cursor-not-allowed opacity-60'
+                                        : 'text-[var(--text-main)] hover:text-[var(--text-muted)]'
                                 } transition-colors`}
                             >
                                 <Send className="w-5 h-5" />

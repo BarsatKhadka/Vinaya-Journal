@@ -45,7 +45,7 @@ export const TextEditor = () => {
       }
     }
     loadContent();
-  }, [])
+  }, [editorRef, setEditorContent])
 
   // Update content when editor changes and save to sessionStorage
   useEffect(() => {
@@ -63,10 +63,10 @@ export const TextEditor = () => {
       editor.addEventListener('input', updateContent)
       return () => editor.removeEventListener('input', updateContent)
     }
-  }, [])
+  }, [editorRef, setEditorContent])
   
   return (
-    <div className="h-screen flex flex-col relative bg-[#fae4b2]">
+    <div className="h-screen flex flex-col relative bg-[var(--bg-main)]">
     
       <div
         className="absolute inset-0 z-0"
@@ -77,13 +77,14 @@ export const TextEditor = () => {
           backgroundRepeat: 'no-repeat',
           opacity: 0.3, 
           pointerEvents: 'none', 
+          filter: 'var(--image-filter)',
         }}
       />
 
       <div className="relative z-10 flex flex-col h-full">
         <EditorHeader />
         <div
-          className="flex-1 overflow-y-auto border-t border-[#e6cfa7]"
+          className="flex-1 overflow-y-auto border-t border-[var(--border-color)]"
           onClick={handleContainerClick}
         >
           <div
@@ -94,14 +95,16 @@ export const TextEditor = () => {
             data-placeholder={t('textEditor.placeholder')}
             className="w-full max-w-full p-9 focus:outline-none
                      prose prose-slate empty:before:content-[attr(data-placeholder)]
-                     empty:before:text-gray-500 empty:before:pointer-events-none
-                     prose-p:text-[#2F4F4F] prose-p:leading-relaxed prose-p:font-['Fira_Sans']
-                     prose-pre:bg-[#2F4F4F]/5 prose-pre:text-[#2F4F4F]
-                     prose-strong:text-[#2F4F4F] prose-em:text-[#2F4F4F]/80
+                     empty:before:text-[var(--text-muted)] empty:before:pointer-events-none
+                     prose-headings:text-[var(--text-main)] prose-ul:text-[var(--text-main)] prose-ol:text-[var(--text-main)]
+                     prose-p:text-[var(--text-main)] prose-p:leading-relaxed prose-p:font-['Fira_Sans']
+                     prose-pre:bg-[var(--hover-bg)] prose-pre:text-[var(--text-main)]
+                     prose-strong:text-[var(--text-main)] prose-em:text-[var(--text-muted)]
+                     prose-blockquote:text-[var(--text-muted)] prose-blockquote:border-[var(--accent)]
                      text-lg/7.5 cursor-text min-h-[calc(100vh-12rem)]"
             style={{
               fontFamily: 'serif',
-              background: 'repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px)',
+              background: 'repeating-linear-gradient(to bottom, var(--paper-line-bg), var(--paper-line-bg) 28px, var(--paper-line-color) 29px, var(--paper-line-bg) 30px)',
             }}
           />
         </div>

@@ -35,13 +35,19 @@ export const ContextualRAG = () => {
     }, [searchQuery]);
 
     return (
-        <div className="flex flex-col h-full p-8 bg-[#fae4b2]/50" style={{
-            backgroundImage: `url(${ContextualRAGBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-        }}>
-            <div className="w-full max-w-2xl space-y-6">
+        <div className="flex flex-col h-full relative p-8">
+            <div 
+                className="absolute inset-0 z-0"
+                style={{
+                    backgroundImage: `url(${ContextualRAGBackground})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    filter: 'var(--image-filter)'
+                }}
+            />
+            <div className="absolute inset-0 bg-[var(--bg-main)]/50 pointer-events-none z-0" />
+            <div className="w-full max-w-2xl space-y-6 relative z-10">
                 <div className="relative">
                     <div className="flex items-center space-x-2">
                         <div className="relative flex-grow">
@@ -50,29 +56,29 @@ export const ContextualRAG = () => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder={t('rag.searchPlaceholder')}
-                                className="w-full p-4 pl-12 pr-12 rounded-lg border border-[#e6cfa7] focus:ring-2 focus:ring-[#e0f2ef] focus:border-[#2F4F4F] outline-none font-serif transition-all duration-300"
+                                className="w-full p-4 pl-12 pr-12 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-[var(--accent)]/20 focus:border-[var(--accent)] outline-none font-serif transition-all duration-300 text-[var(--text-main)] placeholder-[var(--text-muted)]"
                                 style={{
-                                    background: 'repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px)',
-                                    boxShadow: '0 2px 12px 0 #e6e1d5',
+                                    background: 'var(--bg-card)',
+                                    boxShadow: '0 2px 12px 0 rgba(0,0,0,0.05)',
                                 }}
                             />
                             <Search
-                                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#2F4F4F]"
+                                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[var(--text-main)]"
                                 strokeWidth={1.5}
                             />
                         </div>
                     </div>
 
                     <div className="mt-4 relative group">
-                        <div className="text-[#2F4F4F] font-serif text-sm cursor-help flex items-center space-x-1">
+                        <div className="text-[var(--text-main)] font-serif text-sm cursor-help flex items-center space-x-1">
                             <span>{t('rag.whatIsSemantic')}</span>
                             <HelpCircle
                                 className="w-4 h-4"
                                 strokeWidth={1.5}
                             />
                         </div>
-                        <div className="absolute left-0 mt-2 w-64 p-4 bg-white rounded-lg shadow-lg border border-[#e6cfa7] z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform translate-y-0">
-                            <p className="text-[#2F4F4F] font-serif text-sm">
+                        <div className="absolute left-0 mt-2 w-64 p-4 bg-[var(--bg-card)] rounded-lg shadow-lg border border-[var(--border-color)] z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform translate-y-0">
+                            <p className="text-[var(--text-main)] font-serif text-sm">
                                 {t('rag.semanticDescription')}
                             </p>
                         </div>
@@ -88,7 +94,7 @@ export const ContextualRAG = () => {
                                 />
                             ))
                         ) : searchQuery.trim() ? (
-                            <div className="text-center py-8 text-[#2F4F4F]/70 font-serif">
+                            <div className="text-center py-8 text-[var(--text-muted)] font-serif">
                                 {t('rag.noResults')}
                             </div>
                         ) : null}

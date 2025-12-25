@@ -24,14 +24,14 @@ const negativeEmotions = [
 ];
 
 const getRowColor = (mood: string, currentValue: number, previousValue: number | undefined) => {
-    if (previousValue === undefined) return 'bg-white';
+    if (previousValue === undefined) return 'bg-transparent';
     
     if (positiveEmotions.includes(mood)) {
-        return currentValue < previousValue ? 'bg-red-100' : 'bg-green-100';
+        return currentValue < previousValue ? 'bg-red-500/10' : 'bg-[var(--accent)]/10';
     } else if (negativeEmotions.includes(mood)) {
-        return currentValue > previousValue ? 'bg-red-100' : 'bg-green-100';
+        return currentValue > previousValue ? 'bg-red-500/10' : 'bg-[var(--accent)]/10';
     }
-    return 'bg-white';
+    return 'bg-transparent';
 };
 
 export const DailyChangesAndTrends: React.FC<DailyChangesAndTrendsProps> = ({ dailyChangesAndTrends }) => {
@@ -52,16 +52,16 @@ export const DailyChangesAndTrends: React.FC<DailyChangesAndTrendsProps> = ({ da
 
     return (
         <div className="mt-8">
-            <div className="h-[240px] overflow-y-auto border border-[#2F4F4F]/20 rounded-lg">
+            <div className="h-[240px] overflow-y-auto border border-[var(--border-color)] rounded-lg">
                 <table className="w-full">
-                    <thead className="sticky top-0 bg-[#fef1d6] z-10">
+                    <thead className="sticky top-0 bg-[var(--paper-line-bg)] z-10">
                         <tr>
-                            <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>{t('moodInsights.date')}</th>
-                            <th className="px-16 py-3 text-left text-sm font-medium text-[#2F4F4F] bg-[#fef1d6]" style={{fontFamily: 'serif'}}>
+                            <th className="px-16 py-3 text-left text-sm font-medium text-[var(--text-main)] bg-[var(--paper-line-bg)]" style={{fontFamily: 'serif'}}>{t('moodInsights.date')}</th>
+                            <th className="px-16 py-3 text-left text-sm font-medium text-[var(--text-main)] bg-[var(--paper-line-bg)]" style={{fontFamily: 'serif'}}>
                                 <select 
                                     value={selectedMood}
                                     onChange={(e) => setSelectedMood(e.target.value)}
-                                    className="w-full px-4 py-2 border border-[#2F4F4F]/20 rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-[#2F4F4F]/20"
+                                    className="w-full px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20"
                                     style={{fontFamily: 'Roboto Mono'}}
                                 >
                                     {moods.map((mood) => (

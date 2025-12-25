@@ -10,7 +10,7 @@ import { RetrievePastEntries } from "./RightSide/SideBarComponents/RetrievePastE
 export const AfterLoginHome = () => {
     const { selectedSidebar } = useAppStore();
     return (
-        <div className="flex flex-col lg:grid lg:grid-cols-2 h-screen bg-[#fbf8f0]">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 h-screen bg-[var(--bg-app)]">
             <div className="flex flex-col h-full">
                 <AfterLoginRightTopBar />
                 <div className="flex flex-col md:flex-row flex-1 min-h-0">

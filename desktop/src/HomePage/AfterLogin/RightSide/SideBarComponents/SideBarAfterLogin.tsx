@@ -9,7 +9,7 @@ export const SideBarAfterLogin = () => {
     const { t } = useTranslation();
 
     return (
-        <div className="flex flex-col h-full w-full px-4 py-6 bg-[#fae4b2] border-r border-[#e6cfa7]">
+        <div className="flex flex-col h-full w-full px-4 py-6 bg-[var(--bg-main)] border-r border-[var(--border-color)]">
             <div className="flex flex-col gap-2 mt-2 flex-grow">
                 <button 
                     onClick={() => setSelectedSidebar('Contextual RAG Memory')} 
@@ -19,13 +19,13 @@ export const SideBarAfterLogin = () => {
                     {selectedSidebar === 'Contextual RAG Memory' && (
                         <motion.div
                             layoutId="activeTab"
-                            className="absolute inset-0 bg-[#2F4F4F] rounded-md"
+                            className="absolute inset-0 bg-[var(--accent)] rounded-md"
                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                         />
                     )}
                     <span className="relative z-10 flex items-center gap-3">
-                        <SquareTerminal className={`w-5 h-5 ${selectedSidebar === 'Contextual RAG Memory' ? 'text-white' : 'text-[#2F4F4F]'}`} />
-                        <span className={selectedSidebar === 'Contextual RAG Memory' ? 'text-white' : 'text-[#2F4F4F]'}>
+                        <SquareTerminal className={`w-5 h-5 ${selectedSidebar === 'Contextual RAG Memory' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}`} />
+                        <span className={selectedSidebar === 'Contextual RAG Memory' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}>
                             {t('sidebar.contextualRag')}
                         </span>
                     </span>
@@ -38,13 +38,13 @@ export const SideBarAfterLogin = () => {
                     {selectedSidebar === 'Mood Insights' && (
                         <motion.div
                             layoutId="activeTab"
-                            className="absolute inset-0 bg-[#2F4F4F] rounded-md"
+                            className="absolute inset-0 bg-[var(--accent)] rounded-md"
                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                         />
                     )}
                     <span className="relative z-10 flex items-center gap-3">
-                        <LineChart className={`w-5 h-5 ${selectedSidebar === 'Mood Insights' ? 'text-white' : 'text-[#2F4F4F]'}`} />
-                        <span className={selectedSidebar === 'Mood Insights' ? 'text-white' : 'text-[#2F4F4F]'}>
+                        <LineChart className={`w-5 h-5 ${selectedSidebar === 'Mood Insights' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}`} />
+                        <span className={selectedSidebar === 'Mood Insights' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}>
                             {t('sidebar.moodInsights')}
                         </span>
                     </span>
@@ -57,13 +57,13 @@ export const SideBarAfterLogin = () => {
                     {selectedSidebar === 'Vinaya Ollama AI' && (
                         <motion.div
                             layoutId="activeTab"
-                            className="absolute inset-0 bg-[#2F4F4F] rounded-md"
+                            className="absolute inset-0 bg-[var(--accent)] rounded-md"
                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                         />
                     )}
                     <span className="relative z-10 flex items-center gap-3">
-                        <Bot className={`w-5 h-5 ${selectedSidebar === 'Vinaya Ollama AI' ? 'text-white' : 'text-[#2F4F4F]'}`} />
-                        <span className={selectedSidebar === 'Vinaya Ollama AI' ? 'text-white' : 'text-[#2F4F4F]'}>
+                        <Bot className={`w-5 h-5 ${selectedSidebar === 'Vinaya Ollama AI' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}`} />
+                        <span className={selectedSidebar === 'Vinaya Ollama AI' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}>
                             {t('sidebar.vinayaAI')}
                         </span>
                     </span>
@@ -76,13 +76,13 @@ export const SideBarAfterLogin = () => {
                     {selectedSidebar === 'Retrieve Past Entries' && (
                         <motion.div
                             layoutId="activeTab"
-                            className="absolute inset-0 bg-[#2F4F4F] rounded-md"
+                            className="absolute inset-0 bg-[var(--accent)] rounded-md"
                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                         />
                     )}
                     <span className="relative z-10 flex items-center gap-3">
-                        <CalendarClock className={`w-5 h-5 ${selectedSidebar === 'Retrieve Past Entries' ? 'text-white' : 'text-[#2F4F4F]'}`} />
-                        <span className={selectedSidebar === 'Retrieve Past Entries' ? 'text-white' : 'text-[#2F4F4F]'}>
+                        <CalendarClock className={`w-5 h-5 ${selectedSidebar === 'Retrieve Past Entries' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}`} />
+                        <span className={selectedSidebar === 'Retrieve Past Entries' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}>
                             {t('sidebar.retrieveEntries')}
                         </span>
                     </span>

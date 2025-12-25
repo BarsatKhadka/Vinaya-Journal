@@ -24,7 +24,7 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
   };
 
   const Indicator = () => (
-    <div className="w-1 h-1 rounded-full bg-[#4F6F4F]/80" />
+    <div className="w-1 h-1 rounded-full bg-[var(--accent)]/80" />
   );
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
   }
 
   return (
-    <div className=" backdrop-blur-[2px] border-t border-white/20 px-4 py-8">
+    <div className=" backdrop-blur-[2px] border-t border-[var(--border-color)] px-4 py-8">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <button
@@ -79,11 +79,11 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
             disabled={isSaving || !content.trim()}
             className={`
               flex items-center gap-2 px-6 py-2 rounded-xl
-              border border-[#C9A74A] relative cursor-pointer
+              border border-[var(--accent)] relative cursor-pointer
               transition-all duration-150
-              ${isSaving || !content.trim() ? 'opacity-60 cursor-not-allowed' : 'hover:border-[#2F4F4F] hover:shadow-md active:scale-[0.98]'}
-              ${saveStatus === 'success' ? 'border-green-400 text-green-700' : ''}
-              ${saveStatus === 'error' ? 'border-red-400 text-red-700' : ''}
+              ${isSaving || !content.trim() ? 'opacity-60 cursor-not-allowed' : 'hover:border-[var(--text-main)] hover:shadow-md active:scale-[0.98]'}
+              ${saveStatus === 'success' ? 'border-[var(--accent)] text-[var(--text-main)]' : ''}
+              ${saveStatus === 'error' ? 'border-red-400 text-red-500' : ''}
             `}
             style={{
               outline: 'none',
@@ -92,16 +92,11 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
               fontFamily: 'serif',
               fontWeight: 400,
               fontSize: '1rem',
-              color: '#2F4F4F',
-              background: '#FDFBF7',
-              backgroundImage: `
-                linear-gradient(to right, #00000008 1px, transparent 1px),
-                linear-gradient(to bottom, #00000008 1px, transparent 1px)
-              `,
-              backgroundSize: '24px 24px',
+              color: 'var(--text-main)',
+              background: 'var(--bg-card)',
               boxShadow: isSaving || saveStatus === 'success' || saveStatus === 'error'
-                ? '0 2px 8px 0 #e6e1d5'
-                : '0 1px 2px 0 #eceae6',
+                ? '0 2px 8px 0 rgba(0,0,0,0.1)'
+                : '0 1px 2px 0 rgba(0,0,0,0.05)',
               borderBottomWidth: '2.5px',
               borderRightWidth: '2.5px',
             }}

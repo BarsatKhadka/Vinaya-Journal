@@ -50,7 +50,7 @@ export const RetrievePastEntries = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-[#fae4b2]/30 p-6">
+        <div className="flex flex-col h-full bg-[var(--bg-inner)] p-6">
             <style>{`
                 .vinaya-calendar .react-datepicker__header {
                     background-color: transparent;
@@ -58,20 +58,20 @@ export const RetrievePastEntries = () => {
                     padding: 0;
                 }
                 .vinaya-calendar .react-datepicker__current-month {
-                    color: #2F4F4F;
+                    color: var(--text-main);
                     font-family: 'Roboto Mono','Fira Sans', serif;
                     font-size: 1rem;
                     margin-bottom: 0.5rem;
                 }
                 .vinaya-calendar .react-datepicker__day-name {
-                    color: #2F4F4F;
+                    color: var(--text-main);
                     font-family: 'Roboto Mono','Fira Sans', serif;
                     font-size: 0.8rem;
                     width: 2rem;
                     margin: 0.1rem;
                 }
                 .vinaya-calendar .react-datepicker__day {
-                    color: #2F4F4F;
+                    color: var(--text-main);
                     font-family: 'Roboto Mono','Fira Sans', serif;
                     width: 2rem;
                     height: 2rem;
@@ -81,30 +81,35 @@ export const RetrievePastEntries = () => {
                 }
                 .vinaya-calendar .react-datepicker__day--selected,
                 .vinaya-calendar .react-datepicker__day--keyboard-selected {
-                    background-color: #2F4F4F !important;
-                    color: #fff !important;
+                    background-color: var(--accent) !important;
+                    color: var(--text-on-accent) !important;
                 }
                 .vinaya-calendar .react-datepicker__day--today {
-                    border: 2px solid #2F4F4F;
+                    border: 2px solid var(--accent);
                     background: transparent;
-                    color: #2F4F4F;
+                    color: var(--text-main);
                     font-weight: 600;
                 }
                 .vinaya-calendar .react-datepicker__day:hover {
-                    background: #e0f2ef;
-                    color: #2F4F4F;
+                    background: var(--hover-bg);
+                    color: var(--text-main);
                 }
                 .vinaya-calendar .react-datepicker__month-dropdown-container,
                 .vinaya-calendar .react-datepicker__year-dropdown-container {
-                    color: #2F4F4F;
+                    color: var(--text-main);
                 }
                 .vinaya-calendar .react-datepicker__triangle {
                     display: none;
                 }
+                .vinaya-calendar {
+                    background-color: transparent;
+                    border: none;
+                    font-family: 'Roboto Mono','Fira Sans', serif;
+                }
             `}</style>
 
             <div className="flex items-center mb-4">
-                <h2 className="text-[#2F4F4F] font-serif text-xl">{t('retrievePastEntries.title')}</h2>
+                <h2 className="text-[var(--text-main)] font-serif text-xl">{t('retrievePastEntries.title')}</h2>
             </div>
 
             <div className="flex gap-6 h-[calc(100%-3rem)]">
@@ -116,7 +121,7 @@ export const RetrievePastEntries = () => {
                         calendarClassName="vinaya-calendar"
                         locale={i18n.language}
                     />
-                    <div className="pt-2 border-t border-[#2F4F4F]/20">
+                    <div className="pt-2 border-t border-[var(--border-color)]">
                         <DatePicker
                             selected={null}
                             openToDate={previousMonth}
@@ -126,7 +131,7 @@ export const RetrievePastEntries = () => {
                             locale={i18n.language}
                         />
                     </div>
-                    <div className="pt-2 border-t border-[#2F4F4F]/20">
+                    <div className="pt-2 border-t border-[var(--border-color)]">
                         <DatePicker
                             selected={null}
                             openToDate={twoMonthsAgo}
@@ -142,14 +147,14 @@ export const RetrievePastEntries = () => {
                     <div
                         className="h-[770px] overflow-y-auto border-0 font-serif text-base whitespace-pre-line relative rounded-lg"
                         style={{
-                            background: 'repeating-linear-gradient(to bottom, #fef1d6, #fef1d6 28px, #f9e4b7 29px, #fef1d6 30px)',
+                            background: 'repeating-linear-gradient(to bottom, var(--paper-line-bg), var(--paper-line-bg) 28px, var(--paper-line-color) 29px, var(--paper-line-bg) 30px)',
                             backgroundAttachment: 'local',
-                            boxShadow: '0 2px 12px rgba(46, 79, 79, 0.1)',
-                            border: '1.5px solid #e6cfa7',
+                            boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+                            border: '1.5px solid var(--border-color)',
                         }}
                     >
-                        <div className="sticky top-0 bg-[#fef1d6] py-2 px-6 z-10 border-b border-[#e6cfa7] flex items-center justify-between">
-                            <div className="text-[#2F4F4F] font-serif text-lg">
+                        <div className="sticky top-0 bg-[var(--paper-line-bg)] py-2 px-6 z-10 border-b border-[var(--border-color)] flex items-center justify-between">
+                            <div className="text-[var(--text-main)] font-serif text-lg">
                                 {selectedDate.toLocaleDateString(i18n.language, { 
                                     weekday: 'long',
                                     year: 'numeric', 
@@ -162,22 +167,22 @@ export const RetrievePastEntries = () => {
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => navigateDate('prev')}
-                                    className="p-1.5 rounded-full hover:bg-[#2F4F4F]/10"
+                                    className="p-1.5 rounded-full hover:bg-[var(--hover-bg)]"
                                 >
-                                    <ChevronLeft className="w-5 h-5 text-[#2F4F4F]" />
+                                    <ChevronLeft className="w-5 h-5 text-[var(--text-main)]" />
                                 </motion.button>
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => navigateDate('next')}
-                                    className="p-1.5 rounded-full hover:bg-[#2F4F4F]/10"
+                                    className="p-1.5 rounded-full hover:bg-[var(--hover-bg)]"
                                 >
-                                    <ChevronRight className="w-5 h-5 text-[#2F4F4F]" />
+                                    <ChevronRight className="w-5 h-5 text-[var(--text-main)]" />
                                 </motion.button>
                             </div>
                         </div>
                         <div className="pl-6">
-                            <div className="text-[#6b4f27] text-lg/7 pt-4" style={{ lineHeight: '30px' }}>
+                            <div className="text-[var(--text-main)] text-lg/7 pt-4" style={{ lineHeight: '30px' }}>
                                 {entries}
                             </div>
                         </div>

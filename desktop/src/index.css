@@ -1,1 +1,66 @@
 @import "tailwindcss";
+
+:root {
+  /* Default / Original Theme */
+  --bg-main: #fae4b2;
+  --bg-app: #F7F4F0;
+  --bg-card: #ffffff;
+  --text-main: #2F4F4F;
+  --text-muted: rgba(47, 79, 79, 0.8);
+  --border-color: rgba(47, 79, 79, 0.2);
+  --accent: #2F4F4F;
+  --hover-bg: rgba(47, 79, 79, 0.1);
+  --bg-inner: rgba(250, 228, 178, 0.3);
+  --text-on-accent: #ffffff;
+  --paper-line-bg: #fef1d6;
+  --paper-line-color: #f9e4b7;
+  --image-filter: none;
+}
+
+[data-theme='blue'] {
+  --bg-main: #bfdbfe;
+  --bg-app: #eff6ff;
+  --bg-card: #ffffff;
+  --text-main: #1e3a8a;
+  --text-muted: rgba(30, 58, 138, 0.8);
+  --border-color: rgba(30, 58, 138, 0.2);
+  --accent: #2563eb;
+  --hover-bg: rgba(30, 58, 138, 0.1);
+  --bg-inner: rgba(191, 219, 254, 0.3);
+  --text-on-accent: #ffffff;
+  --paper-line-bg: #eff6ff;
+  --paper-line-color: #bfdbfe;
+  --image-filter: hue-rotate(180deg) saturate(0.8);
+}
+
+[data-theme='red'] {
+  --bg-main: #fecaca;
+  --bg-app: #fef2f2;
+  --bg-card: #ffffff;
+  --text-main: #881337;
+  --text-muted: rgba(136, 19, 55, 0.8);
+  --border-color: rgba(136, 19, 55, 0.2);
+  --accent: #e11d48;
+  --hover-bg: rgba(136, 19, 55, 0.1);
+  --bg-inner: rgba(254, 202, 202, 0.3);
+  --text-on-accent: #ffffff;
+  --paper-line-bg: #fef2f2;
+  --paper-line-color: #fecaca;
+  --image-filter: hue-rotate(-45deg) saturate(0.9);
+}
+
+[data-theme='zen'] {
+  --bg-main: #18181b;
+  --bg-app: #09090b;
+  --bg-card: #27272a;
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --border-color: #3f3f46;
+  --accent: #e4e4e7;
+  --hover-bg: rgba(255, 255, 255, 0.1);
+  --bg-inner: rgba(255, 255, 255, 0.05);
+  --text-on-accent: #18181b;
+  --paper-line-bg: #27272a;
+  --paper-line-color: #3f3f46;
+  --image-filter: grayscale(100%) brightness(0.2) invert(0);
+}

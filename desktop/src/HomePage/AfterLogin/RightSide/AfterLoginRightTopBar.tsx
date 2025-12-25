@@ -21,7 +21,7 @@ export const AfterLoginRightTopBar = () => {
     }, [navigate]);
 
     return (
-            <div className="backdrop-blur-[2px] px-8 py-1 bg-[#fae4b2] border-b border-[#e6cfa7]">
+            <div className="backdrop-blur-[2px] px-8 py-1 bg-[var(--bg-main)] border-b border-[var(--border-color)]">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Logo and Title */}
                     <div className="flex items-center md:gap-1 group">
@@ -33,7 +33,7 @@ export const AfterLoginRightTopBar = () => {
                             />
                         </div>
                         <h1 className="text-xl md:text-2xl font-serif font-medium tracking-wide">
-                            <span className="text-gray-900 bg-gradient-to-r from-teal-700 to-slate-700 bg-clip-text text-transparent">
+                            <span className="text-[var(--text-main)]">
                                 VINAYA
                             </span>
                         </h1>
@@ -42,18 +42,18 @@ export const AfterLoginRightTopBar = () => {
                     {/* Navigation Icons */}
                     <div className="flex items-center gap-6">
                         <Link to="/">
-                        <button className="p-2 text-gray-600 hover:text-white rounded-lg transition-all duration-200 hover:bg-[#2F4F4F] cursor-pointer group relative">
+                        <button className="p-2 text-[var(--text-main)] hover:text-[var(--text-on-accent)] rounded-lg transition-all duration-200 hover:bg-[var(--accent)] cursor-pointer group relative">
                             <Home size={20} strokeWidth={1.5} />
-                            <span className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                            <span className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 bg-[var(--accent)] text-[var(--text-on-accent)] text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                                 {t('topBar.homeTooltip')}
                             </span>
                         </button>
                         </Link>
-                        <button className="p-2 text-gray-600 hover:text-white rounded-lg transition-all duration-200 hover:bg-[#2F4F4F] cursor-pointer">
+                        <button className="p-2 text-[var(--text-main)] hover:text-[var(--text-on-accent)] rounded-lg transition-all duration-200 hover:bg-[var(--accent)] cursor-pointer">
                             <History size={20} strokeWidth={1.5} />
                         </button>
                         <Link to="/app/settings">
-                        <button className="p-2 text-gray-600 hover:text-white rounded-lg transition-all duration-200 hover:bg-[#2F4F4F] cursor-pointer">
+                        <button className="p-2 text-[var(--text-main)] hover:text-[var(--text-on-accent)] rounded-lg transition-all duration-200 hover:bg-[var(--accent)] cursor-pointer">
                             <Settings size={20} strokeWidth={1.5} />
                         </button>
                         </Link>

@@ -12,7 +12,10 @@ export const BeforeLoginHome = () => {
         <div className="min-h-screen w-full overflow-x-hidden relative">
             <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
-                style={{ backgroundImage: `url(${beforeLoginBackground})` }}
+                style={{ 
+                    backgroundImage: `url(${beforeLoginBackground})`,
+                    filter: 'var(--image-filter)'
+                }}
             />
             <div className="relative">
                 <TopBar />
@@ -26,7 +29,7 @@ export const BeforeLoginHome = () => {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                             className="text-4xl md:text-3xl lg:text-6xl font-serif font-medium tracking-tight mb-2"
                         >
-                            <span className="bg-gradient-to-r from-teal-700 to-slate-700 bg-clip-text text-transparent">
+                            <span className="text-[var(--text-main)]">
                                 {t('welcome.title')}
                             </span>
                         </motion.h1>
@@ -39,7 +42,7 @@ export const BeforeLoginHome = () => {
                                 ease: "easeOut",
                                 delay: 0.2 
                             }}
-                            className="text-lg md:text-sm lg:text-xl text-slate-600 font-light tracking-wide"
+                            className="text-lg md:text-sm lg:text-xl text-[var(--text-muted)] font-light tracking-wide"
                             style={{
                                 fontFamily: '"Playfair Display", serif',
                             }}

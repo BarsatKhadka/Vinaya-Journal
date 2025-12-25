@@ -10,7 +10,7 @@ const DhammaWheel = () => (
         fill="none" 
         className="relative w-7 h-7 transform 
                    group-hover:rotate-180 transition-transform duration-1000
-                   group-hover:text-white text-white/90"
+                   group-hover:text-[var(--text-main)] text-[var(--text-main)]"
         stroke="currentColor"
         strokeWidth="1.5"
     >
@@ -32,21 +32,21 @@ const DhammaWheel = () => (
 const VersionCard = () => {
     const { t } = useTranslation();
     return (
-    <div className="flex flex-col items-center justify-center w-[200px] h-[200px] bg-[#2F4F4F]/5 rounded-xl p-4 relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#2F4F4F]/5 to-[#2F4F4F]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <div className="flex flex-col items-center justify-center w-[200px] h-[200px] bg-[var(--bg-card)] rounded-xl p-4 relative overflow-hidden group">
+        <div className="absolute inset-0 bg-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="flex flex-col items-center text-center">
-            <div className="text-2xl font-serif text-[#2F4F4F] mb-2">{t('beginJournaling.version')}</div>
-            <div className="text-sm text-[#2F4F4F]/60 italic mb-6">{t('beginJournaling.initialRelease')}</div>
+            <div className="text-2xl font-serif text-[var(--text-main)] mb-2">{t('beginJournaling.version')}</div>
+            <div className="text-sm text-[var(--text-muted)] italic mb-6">{t('beginJournaling.initialRelease')}</div>
             <a 
                 href="https://github.com/BarsatKhadka/Vinaya-Journal/issues"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-2.5 
-                         text-[#2F4F4F] hover:text-[#1F3F3F]
-                         rounded-lg border border-[#2F4F4F]/20
-                         hover:border-[#2F4F4F]/40 hover:bg-[#2F4F4F]/5
+                         text-[var(--text-main)] hover:text-[var(--text-main)]
+                         rounded-lg border border-[var(--border-color)]
+                         hover:border-[var(--border-color)] hover:bg-[var(--bg-card)]
                          transition-all duration-300 shadow-sm hover:shadow-md
-                         bg-white/50 backdrop-blur-sm"
+                         bg-[var(--bg-card)] backdrop-blur-sm"
             >
                 <Github className="w-4 h-4" />
                 <span className="text-sm font-medium tracking-wide">{t('beginJournaling.reportIssues')}</span>
@@ -59,19 +59,20 @@ const VersionCard = () => {
 export const BeginJournaling = () => {
     const { t } = useTranslation();
     return (
-        <div className="bg-white/40 backdrop-blur-[2px] rounded-xl border border-white/20 shadow-sm">
+        <div className="bg-[var(--bg-card)] backdrop-blur-[2px] rounded-xl border border-[var(--border-color)] shadow-sm">
             <div className="p-4 md:p-6 space-y-4 md:space-y-6">
                 {/* Top Section with Zero Cloud and Open Source */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
                     <div className="flex items-center gap-2 px-3 py-1.5 
-                                  text-gray-600 hover:text-gray-800
-                                  rounded-lg border border-gray-200
-                                  hover:border-gray-300 hover:bg-gray-50/50
+                                  text-[var(--text-muted)] hover:text-[var(--text-main)]
+                                  rounded-lg border border-[var(--border-color)]
+                                  hover:border-[var(--border-color)] hover:bg-[var(--bg-card)]
                                   transition-all duration-200 w-full sm:w-auto">
                         <img
                             src={ZeroCloudImage}
                             alt="Zero cloud dependency"
                             className="w-4 h-4"
+                            style={{ filter: 'var(--image-filter)' }}
                         />
                         <span className="text-xs tracking-wide" 
                               style={{ fontFamily: '"Fira Sans", sans-serif' }}>
@@ -82,9 +83,9 @@ export const BeginJournaling = () => {
                        target="_blank"
                        rel="noopener noreferrer"
                        className="flex items-center gap-2 px-3 py-1.5 
-                                text-gray-600 hover:text-gray-800
-                                rounded-lg border border-gray-200
-                                hover:border-gray-300 hover:bg-gray-50/50
+                                text-[var(--text-muted)] hover:text-[var(--text-main)]
+                                rounded-lg border border-[var(--border-color)]
+                                hover:border-[var(--border-color)] hover:bg-[var(--bg-card)]
                                 transition-all duration-200 w-full sm:w-auto">
                         <Github className="w-4 h-4" />
                         <span className="text-xs tracking-wide"
@@ -108,6 +109,7 @@ export const BeginJournaling = () => {
                                 src={BeginJournalingImage}
                                 alt="Begin journaling illustration"
                                 className="w-[120px] h-[120px] md:w-[150px] md:h-[150px] object-contain drop-shadow-md"
+                                style={{ filter: 'var(--image-filter)' }}
                             />
                         </div>
                     </div>
@@ -116,11 +118,11 @@ export const BeginJournaling = () => {
                     <div className="md:col-span-5 md:pl-4 flex flex-col items-center md:items-start mt-8">
                         <div className="space-y-2 text-center md:text-left">
                             <div className="space-y-1">
-                                <h4 className="text-2xl md:text-3xl font-serif text-gray-800 leading-tight">
+                                <h4 className="text-2xl md:text-3xl font-serif text-[var(--text-main)] leading-tight">
                                     {t('beginJournaling.beginJourney')}
-                                    <span className="text-[#2F4F4F]">{t('beginJournaling.vinaya')}</span>
+                                    <span className="text-[var(--text-main)]">{t('beginJournaling.vinaya')}</span>
                                 </h4>
-                                <p className="text-xs text-gray-500 italic mb-3" 
+                                <p className="text-xs text-[var(--text-muted)] italic mb-3" 
                                    style={{ fontFamily: '"Fira Sans", sans-serif' }}>
                                     {t('beginJournaling.quote')}
                                 </p>
@@ -128,18 +130,18 @@ export const BeginJournaling = () => {
 
                             <Link to="/loading" 
                                   className="group flex items-center justify-center gap-3 px-7 py-3.5 
-                                           bg-[#2F4F4F] text-white rounded-xl 
+                                           bg-[var(--bg-card)] text-[var(--text-main)] rounded-xl 
                                            shadow-md hover:shadow-xl
                                            transition-all duration-300 ease-out cursor-pointer
-                                           hover:bg-[#1F3F3F] relative
-                                           border border-white/5 w-full max-w-[300px]"
+                                           hover:bg-[var(--bg-card)] relative
+                                           border border-[var(--border-color)] w-full max-w-[300px]"
                                   style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-                                <div className="absolute inset-0 rounded-xl bg-white/5 
+                                <div className="absolute inset-0 rounded-xl bg-[var(--text-main)]/5 
                                               opacity-0 group-hover:opacity-100 
                                               transition-opacity duration-300" />
                                 <DhammaWheel />
                                 <span className="relative text-[15px] font-medium tracking-wider 
-                                               text-white/90 group-hover:text-white" 
+                                               text-[var(--text-main)] group-hover:text-[var(--text-main)]" 
                                       style={{ fontFamily: '"PlayFair Display", sans-serif' }}>
                                     {t('beginJournaling.startWriting')}
                                 </span>

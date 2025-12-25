@@ -33,11 +33,11 @@ export const OllamaAIModelDropdown = () => {
         <div className="w-full max-w-xs mx-auto mb-1">
             {ollamaRunning ? (
                 <>
-                    <label className="block text-xs md:text-sm font-serif text-[#2F4F4F] mb-2 ml-1">
+                    <label className="block text-xs md:text-sm font-serif text-[var(--text-main)] mb-2 ml-1">
                         {t('ai.modelLabel')}
                     </label>
                     <select
-                        className="w-full px-2 md:px-3 py-2 rounded-md border border-gray-300 bg-white text-[#2F4F4F] font-serif text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F4F4F]"
+                        className="w-full px-2 md:px-3 py-2 rounded-md border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-main)] font-serif text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
                         value={ollamaModels.length > 0 ? currentModel : t('ai.noModels')}
                         onChange={(e) => setCurrentModel(e.target.value)}
                     >

@@ -31,7 +31,7 @@ export const LocalAIFeature = () => {
 
     return (
         <div className="flex flex-col p-6 rounded-xl
-                    bg-white/40 backdrop-blur-[2px] border border-white/20
+                    bg-[var(--bg-card)] backdrop-blur-[2px] border border-[var(--border-color)]
                     shadow-sm transition hover:shadow-md">
             {/* Icon and Title Row */}
             <div className="flex items-center gap-2">
@@ -40,16 +40,17 @@ export const LocalAIFeature = () => {
                         src={LocalAiMemory}
                         alt="Local AI Memory icon"
                         className="w-full h-full object-contain"
+                        style={{ filter: 'var(--image-filter)' }}
                     />
                 </div>
-                <h3 className="text-base md:text-lg lg:text-2xl font-medium text-gray-800 font-serif">
+                <h3 className="text-base md:text-lg lg:text-2xl font-medium text-[var(--text-main)] font-serif">
                     {t('features.localAI.title')}
                 </h3>
             </div>
 
-            <p className="text-xs md:text-sm lg:text-base text-gray-600 pl-11 md:pl-12 lg:pl-14">
+            <p className="text-xs md:text-sm lg:text-base text-[var(--text-muted)] pl-11 md:pl-12 lg:pl-14">
                 <span style={{ fontFamily: '"Playfair Display", serif', color: 'inherit' , fontWeight: '500' }}>
-                    {t('features.localAI.descriptionPart1')}<span style={{ color: '#4caf50',fontWeight: '600' }}>{t('features.localAI.descriptionPart2')}</span>
+                    {t('features.localAI.descriptionPart1')}<span style={{ color: 'var(--accent)',fontWeight: '600' }}>{t('features.localAI.descriptionPart2')}</span>
                 </span>
             </p>
 
@@ -58,14 +59,14 @@ export const LocalAIFeature = () => {
                 <div className={`
                     flex items-center gap-2 px-3 py-2 rounded-lg
                     ${ollamaRunning 
-                        ? 'bg-green-50/50 border border-[#E6E2DD]' 
+                        ? 'bg-[var(--bg-inner)] border border-[var(--border-color)]' 
                         : 'bg-red-50/50 border border-red-200'
                     }
                     transition-colors duration-200
                 `}>
                     {ollamaRunning ? (
-                        <div className="w-5 h-5 rounded-full bg-[#d4e3d3] flex items-center justify-center">
-                            <svg className="w-3 h-3 text-green-600" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <div className="w-5 h-5 rounded-full bg-[var(--hover-bg)] flex items-center justify-center">
+                            <svg className="w-3 h-3 text-[var(--accent)]" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
