@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { Save } from "lucide-react";
 import axios from "axios";
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,11 @@ interface EditorFooterProps {
   content: string;
 }
 
-export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
+export interface EditorFooterRef {
+  triggerSave: () => void;
+}
+
+export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ content }, ref) => {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<"success" | "error" | 'idle'>('idle');
   const [saved_at, setSaved_at] = useState<string>("");
@@ -60,6 +64,11 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
       }, 3000);
     }
   };
+
+  // Expose handleSave to parent component
+  useImperativeHandle(ref, () => ({
+    triggerSave: handleSave
+  }));
 
   let buttonText = t('textEditor.save')
   if(isSaving) {
@@ -139,4 +148,6 @@ export const EditorFooter: React.FC<EditorFooterProps> = ({ content }) => {
       </div>
     </div>
   );
-}; 
+});
+
+EditorFooter.displayName = 'EditorFooter';

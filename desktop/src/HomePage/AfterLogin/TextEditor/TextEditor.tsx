@@ -1,7 +1,7 @@
 import { useTextEditor } from "./TextEditorHandles"
 import { EditorHeader } from "./EditorHeader"
 import { EditorFooter } from "./EditorFooter"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import imageBackground from "../../../assets/BackgroundImages/textEditorBackground.png"
 import { useTranslation } from "react-i18next"
 import axios from "axios"
@@ -15,6 +15,21 @@ export const TextEditor = () => {
   const [content, setContent] = useState<string>("")
   const { t } = useTranslation()
   const { setEditorContent } = useAppStore()
+  const editorFooterRef = useRef<{ triggerSave: () => void }>(null)
+
+  // Add Ctrl+S keyboard shortcut
+  useEffect(() => {
+    const handleSaveShortcut = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault()
+        // Trigger save function from EditorFooter
+        editorFooterRef.current?.triggerSave()
+      }
+    }
+
+    document.addEventListener('keydown', handleSaveShortcut)
+    return () => document.removeEventListener('keydown', handleSaveShortcut)
+  }, [])
 
   // Load saved content on mount
   useEffect(() => {
@@ -108,7 +123,7 @@ export const TextEditor = () => {
             }}
           />
         </div>
-        <EditorFooter content={content} />
+        <EditorFooter ref={editorFooterRef} content={content} />
       </div>
     </div>
   )
