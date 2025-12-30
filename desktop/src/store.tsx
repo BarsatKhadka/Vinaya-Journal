@@ -25,6 +25,8 @@ interface AppState {
   setEditorContent: (content: string) => void;
   theme: string;
   setTheme: (theme: string) => void;
+  selectedDate: string;
+  setSelectedDate: (date: string) => void;
 }
 
 export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppState) => void) => ({
@@ -56,4 +58,12 @@ export const useAppStore = create<AppState>((set: (fn: (state: AppState) => AppS
     localStorage.setItem("vinaya_theme", theme);
     set((state) => ({ ...state, theme }));
   },
+  selectedDate: (() => {
+    const dateObj = new Date();
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  })(),
+  setSelectedDate: (date: string) => set((state) => ({ ...state, selectedDate: date })),
 }));

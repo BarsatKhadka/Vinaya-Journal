@@ -2,6 +2,7 @@ import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'rea
 import { Save } from "lucide-react";
 import axios from "axios";
 import { useTranslation } from 'react-i18next';
+import { useAppStore } from "../../../store";
 
 interface EditorFooterProps {
   content: string;
@@ -16,6 +17,7 @@ export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ co
   const [saveStatus, setSaveStatus] = useState<"success" | "error" | 'idle'>('idle');
   const [saved_at, setSaved_at] = useState<string>("");
   const { t, i18n } = useTranslation();
+  const { selectedDate } = useAppStore();
   
 
   const getWordCount = (text: string) => {
@@ -33,7 +35,7 @@ export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ co
 
   useEffect(() => {
     const fetchSaved_at = async () => {
-      const response = await axios.get("http://localhost:8080/lastSavedAt");
+      const response = await axios.get(`http://localhost:8080/lastSavedAt?date=${selectedDate}`);
       if(response.data != "") {
       setSaved_at(new Date(response.data).toLocaleString(i18n.language));
       }else{
@@ -41,14 +43,27 @@ export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ co
       }
     };
     fetchSaved_at();
-  }, [i18n.language]);
+  }, [i18n.language, selectedDate]);
 
   const handleSave = async () => {
     if (!content.trim()) return;
+
+    const dateObj = new Date();
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const today = `${year}-${month}-${day}`;
+
+    if (selectedDate < today) {
+        const confirmed = window.confirm(t('textEditor.confirmPreviousDaySave'));
+        if (!confirmed) return;
+    }
+
     setIsSaving(true);
     try {
       const response = await axios.post("http://localhost:8080/journalEntry", {
         content: content,
+        date: selectedDate
       });
       setSaved_at(response.data);
       setSaveStatus("success");

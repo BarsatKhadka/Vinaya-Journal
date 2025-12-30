@@ -174,6 +174,7 @@
     "placeholder": "Begin writing...",
     "writeYourThoughts": "Write your thoughts",
     "todayIs": "Today is",
+    "confirmPreviousDaySave": "You are submitting an entry for a previous day. You won't be able to edit this later. Do you want to continue?",
     "save": "Save",
     "saving": "Saving...",
     "saved": "Saved",

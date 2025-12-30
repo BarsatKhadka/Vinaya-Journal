@@ -1,27 +1,19 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useAppStore } from "../../../store"
 
 export const EditorHeader = () => {
-  const [currentDate, setCurrentDate] = useState('')
+  const { selectedDate, setSelectedDate } = useAppStore()
   const [quote, setQuote] = useState('')
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   useEffect(() => {
-    const date = new Date()
-    const options: Intl.DateTimeFormatOptions = { 
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }
-    setCurrentDate(date.toLocaleDateString(i18n.language, options))
-    
     const quotes = t('textEditor.quotes', { returnObjects: true }) as string[];
     if (Array.isArray(quotes) && quotes.length > 0) {
         const randomIndex = Math.floor(Math.random() * quotes.length);
         setQuote(quotes[randomIndex]);
     }
-  }, [i18n.language, t])
+  }, [t])
 
   return (
     <div className="border-b border-[var(--border-color)] px-4 md:px-6 py-3 md:py-4 bg-transparent">
@@ -43,7 +35,12 @@ export const EditorHeader = () => {
              style={{ fontFamily: '"Fira Sans", sans-serif' }}>
             {t('textEditor.todayIs')}
           </p>
-          <p className="text-base md:text-lg font-serif text-[var(--text-main)]">{currentDate}</p>
+          <input 
+            type="date" 
+            value={selectedDate} 
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="text-base md:text-lg font-serif text-[var(--text-main)]"
+          />
         </div>
       </div>
     </div>
