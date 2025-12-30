@@ -1,27 +1,53 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, forwardRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useAppStore } from "../../../store"
+import DatePicker, { registerLocale } from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { fr, enUS } from 'date-fns/locale';
+
+registerLocale('fr', fr)
+registerLocale('en', enUS)
 
 export const EditorHeader = () => {
-  const [currentDate, setCurrentDate] = useState('')
+  const { selectedDate, setSelectedDate } = useAppStore()
   const [quote, setQuote] = useState('')
   const { t, i18n } = useTranslation()
 
   useEffect(() => {
-    const date = new Date()
-    const options: Intl.DateTimeFormatOptions = { 
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }
-    setCurrentDate(date.toLocaleDateString(i18n.language, options))
-    
     const quotes = t('textEditor.quotes', { returnObjects: true }) as string[];
     if (Array.isArray(quotes) && quotes.length > 0) {
         const randomIndex = Math.floor(Math.random() * quotes.length);
         setQuote(quotes[randomIndex]);
     }
-  }, [i18n.language, t])
+  }, [t])
+
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      setSelectedDate(`${year}-${month}-${day}`);
+    }
+  }
+
+  const dateObj = new Date();
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const today = `${year}-${month}-${day}`;
+
+  const isToday = selectedDate === today;
+
+  // Custom input component for DatePicker to match the design
+  const CustomDateInput = forwardRef<HTMLButtonElement, any>(({ value, onClick }, ref) => (
+    <button 
+      className="text-base md:text-lg font-serif text-[var(--text-main)] bg-transparent border-none focus:ring-0 text-right cursor-pointer hover:opacity-80"
+      onClick={onClick}
+      ref={ref}
+    >
+      {value}
+    </button>
+  ));
 
   return (
     <div className="border-b border-[var(--border-color)] px-4 md:px-6 py-3 md:py-4 bg-transparent">
@@ -41,9 +67,18 @@ export const EditorHeader = () => {
         <div className="text-right md:min-w-[180px]">
           <p className="text-xs text-[var(--text-muted)] italic mt-1" 
              style={{ fontFamily: '"Fira Sans", sans-serif' }}>
-            {t('textEditor.todayIs')}
+            {isToday ? t('textEditor.todayIs') : t('textEditor.entryFor')}
           </p>
-          <p className="text-base md:text-lg font-serif text-[var(--text-main)]">{currentDate}</p>
+          <div className="flex justify-end">
+            <DatePicker
+              selected={new Date(selectedDate)}
+              onChange={handleDateChange}
+              dateFormat="EEEE, d MMMM yyyy"
+              customInput={<CustomDateInput />}
+              maxDate={new Date()}
+              locale={i18n.language}
+            />
+          </div>
         </div>
       </div>
     </div>

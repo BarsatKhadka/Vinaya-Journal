@@ -13,8 +13,9 @@ const STORAGE_KEY = "text-editor-content"
 export const TextEditor = () => {
   const { editorRef, handlePaste, handleKeyDown, handleContainerClick } = useTextEditor()
   const [content, setContent] = useState<string>("")
+  const [hasExistingEntry, setHasExistingEntry] = useState<boolean>(false)
   const { t } = useTranslation()
-  const { setEditorContent } = useAppStore()
+  const { setEditorContent, selectedDate } = useAppStore()
   const editorFooterRef = useRef<{ triggerSave: () => void }>(null)
 
   // Add Ctrl+S keyboard shortcut
@@ -31,36 +32,41 @@ export const TextEditor = () => {
     return () => document.removeEventListener('keydown', handleSaveShortcut)
   }, [])
 
+  const dateObj = new Date();
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const today = `${year}-${month}-${day}`;
+  
+  const isPreviousDay = selectedDate < today;
+  const isReadOnly = isPreviousDay && hasExistingEntry;
+
   // Load saved content on mount
   useEffect(() => {
     const loadContent = async () => {
-      const savedContent = sessionStorage.getItem(STORAGE_KEY)
-      if (savedContent && editorRef.current) {
-        editorRef.current.innerText = savedContent
-        setContent(savedContent)
-        setEditorContent(savedContent)
-      } else {
         try {
-          const dateObj = new Date();
-          const year = dateObj.getFullYear();
-          const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-          const day = String(dateObj.getDate()).padStart(2, '0');
-          const date = `${year}-${month}-${day}`;
-          
-          const response = await axios.get(`http://localhost:8080/retrieve?date=${date}`);
-          if (response.data && editorRef.current) {
-             editorRef.current.innerText = response.data;
-             setContent(response.data);
-             sessionStorage.setItem(STORAGE_KEY, response.data);
-             setEditorContent(response.data);
+          const response = await axios.get(`http://localhost:8080/retrieve?date=${selectedDate}`);
+          if (editorRef.current) {
+             let data = response.data || "";
+             if (data === "Nothing found") data = "";
+             editorRef.current.innerText = data;
+             setContent(data);
+             setHasExistingEntry(data.trim().length > 0);
+             sessionStorage.setItem(STORAGE_KEY, data);
+             setEditorContent(data);
           }
         } catch (error) {
-          console.error("Error loading today's entry:", error);
+          console.error("Error loading entry:", error);
+          if (editorRef.current) {
+             editorRef.current.innerText = "";
+             setContent("");
+             setHasExistingEntry(false);
+             setEditorContent("");
+          }
         }
-      }
     }
     loadContent();
-  }, [editorRef, setEditorContent])
+  }, [editorRef, setEditorContent, selectedDate])
 
   // Update content when editor changes and save to sessionStorage
   useEffect(() => {
@@ -104,11 +110,11 @@ export const TextEditor = () => {
         >
           <div
             ref={editorRef}
-            contentEditable
+            contentEditable={!isReadOnly}
             onPaste={handlePaste}
             onKeyDown={handleKeyDown}
             data-placeholder={t('textEditor.placeholder')}
-            className="w-full max-w-full p-9 focus:outline-none
+            className={`w-full max-w-full p-9 focus:outline-none
                      prose prose-slate empty:before:content-[attr(data-placeholder)]
                      empty:before:text-[var(--text-muted)] empty:before:pointer-events-none
                      prose-headings:text-[var(--text-main)] prose-ul:text-[var(--text-main)] prose-ol:text-[var(--text-main)]
@@ -116,14 +122,19 @@ export const TextEditor = () => {
                      prose-pre:bg-[var(--hover-bg)] prose-pre:text-[var(--text-main)]
                      prose-strong:text-[var(--text-main)] prose-em:text-[var(--text-muted)]
                      prose-blockquote:text-[var(--text-muted)] prose-blockquote:border-[var(--accent)]
-                     text-lg/7.5 cursor-text min-h-[calc(100vh-12rem)]"
+                     text-lg/7.5 cursor-text min-h-[calc(100vh-12rem)] ${isReadOnly ? 'opacity-70 cursor-not-allowed' : ''}`}
             style={{
               fontFamily: 'serif',
               background: 'repeating-linear-gradient(to bottom, var(--paper-line-bg), var(--paper-line-bg) 28px, var(--paper-line-color) 29px, var(--paper-line-bg) 30px)',
             }}
           />
         </div>
-        <EditorFooter ref={editorFooterRef} content={content} />
+        <EditorFooter 
+          ref={editorFooterRef} 
+          content={content} 
+          isReadOnly={isReadOnly} 
+          onSaveSuccess={() => setHasExistingEntry(true)}
+        />
       </div>
     </div>
   )

@@ -101,6 +101,18 @@ function serverStart(){
     console.error('Failed to start server:', err);
   });
 
+  aiProcess.stdout?.on('data', (data) => {
+    console.log(`AI Server stdout: ${data}`);
+  });
+
+  aiProcess.stderr?.on('data', (data) => {
+    console.error(`AI Server stderr: ${data}`);
+  });
+
+  aiProcess.on('error', (err) => {
+    console.error('Failed to start AI server:', err);
+  });
+
   backendProcess.unref();
   aiProcess.unref();
 }

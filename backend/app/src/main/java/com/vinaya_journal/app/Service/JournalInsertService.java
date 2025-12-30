@@ -11,7 +11,7 @@ public class JournalInsertService {
     public static InsertServiceResultDTO insertJournal(JournalEntryDTO journalEntryDTO){
         String sql = """
         INSERT INTO entries (content, entry_date, created_at, modified_at) 
-        VALUES (?, date('now','localtime'), datetime('now','localtime'), datetime('now','localtime'))
+        VALUES (?, ?, datetime('now','localtime'), datetime('now','localtime'))
         ON CONFLICT(entry_date) DO UPDATE SET
         content = excluded.content,
         modified_at = datetime('now', 'localtime')
@@ -20,6 +20,15 @@ public class JournalInsertService {
         try(Connection conn = JournalDatabase.getConnection()){
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,journalEntryDTO.getContent());
+            
+            String dateToUse;
+            if (journalEntryDTO.getDate() != null && !journalEntryDTO.getDate().isEmpty()) {
+                dateToUse = journalEntryDTO.getDate();
+            } else {
+                dateToUse = java.time.LocalDate.now().toString();
+            }
+            pstmt.setString(2, dateToUse);
+            
             pstmt.executeUpdate();
             return new InsertServiceResultDTO(true, LocalDateTime.now().toString());
         }
