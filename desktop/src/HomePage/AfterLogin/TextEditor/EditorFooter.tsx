@@ -6,13 +6,15 @@ import { useAppStore } from "../../../store";
 
 interface EditorFooterProps {
   content: string;
+  isReadOnly?: boolean;
+  onSaveSuccess?: () => void;
 }
 
 export interface EditorFooterRef {
   triggerSave: () => void;
 }
 
-export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ content }, ref) => {
+export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ content, isReadOnly, onSaveSuccess }, ref) => {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<"success" | "error" | 'idle'>('idle');
   const [saved_at, setSaved_at] = useState<string>("");
@@ -37,13 +39,13 @@ export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ co
     const fetchSaved_at = async () => {
       const response = await axios.get(`http://localhost:8080/lastSavedAt?date=${selectedDate}`);
       if(response.data != "") {
-      setSaved_at(new Date(response.data).toLocaleString(i18n.language));
+        setSaved_at(response.data);
       }else{
         setSaved_at("")
       }
     };
     fetchSaved_at();
-  }, [i18n.language, selectedDate]);
+  }, [selectedDate]);
 
   const handleSave = async () => {
     if (!content.trim()) return;
@@ -67,6 +69,7 @@ export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ co
       });
       setSaved_at(response.data);
       setSaveStatus("success");
+      if (onSaveSuccess) onSaveSuccess();
     } catch (error) {
       console.error('Error saving journal entry:', error);
       setSaveStatus("error");
@@ -100,12 +103,12 @@ export const EditorFooter = forwardRef<EditorFooterRef, EditorFooterProps>(({ co
         <div className="flex items-center gap-4">
           <button
             onClick={handleSave}
-            disabled={isSaving || !content.trim()}
+            disabled={isSaving || !content.trim() || isReadOnly}
             className={`
               flex items-center gap-2 px-6 py-2 rounded-xl
               border border-[var(--accent)] relative cursor-pointer
               transition-all duration-150
-              ${isSaving || !content.trim() ? 'opacity-60 cursor-not-allowed' : 'hover:border-[var(--text-main)] hover:shadow-md active:scale-[0.98]'}
+              ${isSaving || !content.trim() || isReadOnly ? 'opacity-60 cursor-not-allowed' : 'hover:border-[var(--text-main)] hover:shadow-md active:scale-[0.98]'}
               ${saveStatus === 'success' ? 'border-[var(--accent)] text-[var(--text-main)]' : ''}
               ${saveStatus === 'error' ? 'border-red-400 text-red-500' : ''}
             `}

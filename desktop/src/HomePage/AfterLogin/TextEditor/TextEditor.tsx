@@ -13,6 +13,7 @@ const STORAGE_KEY = "text-editor-content"
 export const TextEditor = () => {
   const { editorRef, handlePaste, handleKeyDown, handleContainerClick } = useTextEditor()
   const [content, setContent] = useState<string>("")
+  const [hasExistingEntry, setHasExistingEntry] = useState<boolean>(false)
   const { t } = useTranslation()
   const { setEditorContent, selectedDate } = useAppStore()
   const editorFooterRef = useRef<{ triggerSave: () => void }>(null)
@@ -38,7 +39,7 @@ export const TextEditor = () => {
   const today = `${year}-${month}-${day}`;
   
   const isPreviousDay = selectedDate < today;
-  const isReadOnly = isPreviousDay && content.trim().length > 0;
+  const isReadOnly = isPreviousDay && hasExistingEntry;
 
   // Load saved content on mount
   useEffect(() => {
@@ -50,6 +51,7 @@ export const TextEditor = () => {
              if (data === "Nothing found") data = "";
              editorRef.current.innerText = data;
              setContent(data);
+             setHasExistingEntry(data.trim().length > 0);
              sessionStorage.setItem(STORAGE_KEY, data);
              setEditorContent(data);
           }
@@ -58,6 +60,7 @@ export const TextEditor = () => {
           if (editorRef.current) {
              editorRef.current.innerText = "";
              setContent("");
+             setHasExistingEntry(false);
              setEditorContent("");
           }
         }
@@ -126,7 +129,12 @@ export const TextEditor = () => {
             }}
           />
         </div>
-        <EditorFooter ref={editorFooterRef} content={content} />
+        <EditorFooter 
+          ref={editorFooterRef} 
+          content={content} 
+          isReadOnly={isReadOnly} 
+          onSaveSuccess={() => setHasExistingEntry(true)}
+        />
       </div>
     </div>
   )
