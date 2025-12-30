@@ -10,6 +10,7 @@ export const RetrievePastEntries = () => {
     const { t, i18n } = useTranslation();
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [entries, setEntries] = useState<string>("");
+    const [datesWithEntries, setDatesWithEntries] = useState<Date[]>([]);
 
     // Get previous months' dates
     const previousMonth = new Date(selectedDate);
@@ -24,6 +25,19 @@ export const RetrievePastEntries = () => {
             setSelectedDate(date);
         }
     };
+
+    useEffect(() => {
+        const fetchDatesWithEntries = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/datesWithEntries');
+                const dates = response.data.map((dateString: string) => new Date(dateString));
+                setDatesWithEntries(dates);
+            } catch (error) {
+                console.error("Error fetching dates with entries:", error);
+            }
+        };
+        fetchDatesWithEntries();
+    }, []);
 
     useEffect(() => {
         const fetchEntries = async () => {
@@ -94,6 +108,12 @@ export const RetrievePastEntries = () => {
                     background: var(--hover-bg);
                     color: var(--text-main);
                 }
+                .vinaya-calendar .react-datepicker__day--highlighted {
+                    background-color: var(--accent);
+                    opacity: 0.6;
+                    color: var(--text-on-accent);
+                    border-radius: 50%;
+                }
                 .vinaya-calendar .react-datepicker__month-dropdown-container,
                 .vinaya-calendar .react-datepicker__year-dropdown-container {
                     color: var(--text-main);
@@ -115,32 +135,15 @@ export const RetrievePastEntries = () => {
             <div className="flex gap-6 h-[calc(100%-3rem)]">
                 <div className="w-64 space-y-4">
                     <DatePicker
-                        selected={selectedDate}
-                        onChange={handleDateSelect}
-                        inline
-                        calendarClassName="vinaya-calendar"
-                        locale={i18n.language}
-                    />
-                    <div className="pt-2 border-t border-[var(--border-color)]">
-                        <DatePicker
-                            selected={null}
-                            openToDate={previousMonth}
+                            selected={selectedDate}
                             onChange={handleDateSelect}
                             inline
+                            monthsShown={3}
                             calendarClassName="vinaya-calendar"
                             locale={i18n.language}
+                            maxDate={new Date()}
+                            highlightDates={datesWithEntries}
                         />
-                    </div>
-                    <div className="pt-2 border-t border-[var(--border-color)]">
-                        <DatePicker
-                            selected={null}
-                            openToDate={twoMonthsAgo}
-                            onChange={handleDateSelect}
-                            inline
-                            calendarClassName="vinaya-calendar"
-                            locale={i18n.language}
-                        />
-                    </div>
                 </div>
 
                 <div className="flex-1">
