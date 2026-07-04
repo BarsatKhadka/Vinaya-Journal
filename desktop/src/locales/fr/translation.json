@@ -78,7 +78,8 @@
     "contextualRag": "RAG Contextuel",
     "moodInsights": "Analyses d'humeur",
     "vinayaAI": "IA Vinaya Ollama",
-    "retrieveEntries": "Récupérer les entrées passées"
+    "retrieveEntries": "Récupérer les entrées passées",
+    "reflection": "Réflexion"
   },
   "topBar": {
     "homeTooltip": "Alt + ← (Flèche gauche)"
@@ -155,6 +156,22 @@
     "title": "Réflexions passées",
     "noEntriesFound": "Aucune entrée trouvée pour cette date.",
     "errorRetrieving": "Impossible de récupérer les entrées. Veuillez réessayer."
+  },
+  "reflection": {
+    "title": "Réflexion périodique",
+    "subtitle": "Un regard ancré sur vos entrées récentes — thèmes, humeur et questions à méditer.",
+    "generate": "Générer une réflexion",
+    "regenerate": "Régénérer",
+    "stop": "Arrêter",
+    "emptyTitle": "Prenez du recul avec clarté.",
+    "emptySubtitle": "Choisissez une période et générez une réflexion sur votre journal récent.",
+    "error": "Désolé, une erreur s'est produite pendant la réflexion. Veuillez réessayer.",
+    "stopped": "Réflexion arrêtée.",
+    "period": {
+      "lastWeek": "7 derniers jours",
+      "last2Weeks": "14 derniers jours",
+      "lastMonth": "30 derniers jours"
+    }
   },
   "settings": {
     "back": "Retour",

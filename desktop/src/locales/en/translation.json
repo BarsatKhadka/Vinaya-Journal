@@ -78,7 +78,8 @@
     "contextualRag": "Contextual RAG",
     "moodInsights": "Mood Insights",
     "vinayaAI": "Vinaya Ollama AI",
-    "retrieveEntries": "Retrieve Past Entries"
+    "retrieveEntries": "Retrieve Past Entries",
+    "reflection": "Reflection"
   },
   "topBar": {
     "homeTooltip": "Alt + ← (Left Arrow)"
@@ -155,6 +156,22 @@
     "title": "Past Reflections",
     "noEntriesFound": "No entries found for this date.",
     "errorRetrieving": "Unable to retrieve entries. Please try again."
+  },
+  "reflection": {
+    "title": "Periodic Reflection",
+    "subtitle": "A grounded look back across your recent entries — themes, mood, and questions to sit with.",
+    "generate": "Generate reflection",
+    "regenerate": "Regenerate",
+    "stop": "Stop",
+    "emptyTitle": "Look back with clarity.",
+    "emptySubtitle": "Choose a period and generate a reflection on your recent journaling.",
+    "error": "Sorry, something went wrong while reflecting. Please try again.",
+    "stopped": "Reflection stopped.",
+    "period": {
+      "lastWeek": "Last 7 Days",
+      "last2Weeks": "Last 14 Days",
+      "lastMonth": "Last 30 Days"
+    }
   },
   "settings": {
     "back": "Back",
