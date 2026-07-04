@@ -125,6 +125,67 @@ def generate(request: ChatRequest):
     return StreamingResponse(chat_stream(), media_type="text/event-stream")
 
 
+@app.get("/reflection")
+def reflection(
+    last_n_days: int = Query(default=7),
+    model_name: Optional[str] = Query(default=None),
+    language: str = Query(default="en"),
+):
+    """Streams an AI-generated reflection over the most recent `last_n_days` entries:
+    recurring themes, the mood arc across the period, and a few grounded questions."""
+    from ollama import chat
+    from rag.sqlite_utils import get_recent_entries
+    from rag.reflection import build_mood_arc, build_reflection_system_prompt
+
+    entries = get_recent_entries(last_n_days)
+
+    if not entries:
+        def no_entries():
+            yield "There aren't any journal entries yet to reflect on. Write a few entries and come back."
+        return StreamingResponse(no_entries(), media_type="text/event-stream")
+
+    # Resolve a model: use the requested one, else fall back to the first installed model.
+    if not model_name:
+        try:
+            import ollama
+            available = [m.model for m in ollama.list()["models"]]
+        except Exception:
+            available = []
+        if not available:
+            def no_model():
+                yield "No Ollama model is available. Install Ollama and pull a model (e.g. `ollama pull qwen2.5`) first."
+            return StreamingResponse(no_model(), media_type="text/event-stream")
+        model_name = available[0]
+
+    # Build the mood arc from the same sentiment pipeline the Mood Insights feature uses.
+    try:
+        from rag.embedder import get_all_entries_embeddings_with_sentiment, generate_mood_insights
+        from rag.chromautils import create_collection
+        chunks_info = get_all_entries_embeddings_with_sentiment()
+        collection = create_collection(chunks_info)
+        insights = generate_mood_insights(collection, last_n_days)
+    except Exception:
+        insights = []
+    mood_arc = build_mood_arc(insights)
+
+    system_prompt = build_reflection_system_prompt(entries, mood_arc, language)
+
+    def reflection_stream():
+        response = chat(
+            model=model_name,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": "Reflect on my journal entries for this period."}
+            ],
+            stream=True
+        )
+        for chunk in response:
+            content = chunk.get("message", {}).get("content", "")
+            if content:
+                yield f"{content}"
+    return StreamingResponse(reflection_stream(), media_type="text/event-stream")
+
+
 @app.get("/query")
 def query_rag(query_request: str=Query(...,alias="q")):
     from rag.embedder import get_all_entries_embeddings_with_sentiment, query
