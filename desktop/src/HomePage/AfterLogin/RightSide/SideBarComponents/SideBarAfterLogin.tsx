@@ -1,4 +1,4 @@
-import { LineChart, Bot, SquareTerminal, CalendarClock} from "lucide-react";
+import { LineChart, Bot, SquareTerminal, CalendarClock, Sparkles} from "lucide-react";
 import { useAppStore } from "../../../../store";
 import { OllamaAIModelDropdown } from "./OllamaAIModelDropdown";
 import { motion } from "framer-motion";
@@ -84,6 +84,25 @@ export const SideBarAfterLogin = () => {
                         <CalendarClock className={`w-5 h-5 ${selectedSidebar === 'Retrieve Past Entries' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}`} />
                         <span className={selectedSidebar === 'Retrieve Past Entries' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}>
                             {t('sidebar.retrieveEntries')}
+                        </span>
+                    </span>
+                </button>
+                <button
+                    onClick={() => setSelectedSidebar('Reflection')}
+                    className="relative flex items-center gap-3 px-3 py-2 rounded-md font-serif text-base w-full cursor-pointer"
+                    style={{ WebkitTapHighlightColor: "transparent" }}
+                >
+                    {selectedSidebar === 'Reflection' && (
+                        <motion.div
+                            layoutId="activeTab"
+                            className="absolute inset-0 bg-[var(--accent)] rounded-md"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                    )}
+                    <span className="relative z-10 flex items-center gap-3">
+                        <Sparkles className={`w-5 h-5 ${selectedSidebar === 'Reflection' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}`} />
+                        <span className={selectedSidebar === 'Reflection' ? 'text-[var(--text-on-accent)]' : 'text-[var(--text-main)]'}>
+                            {t('sidebar.reflection')}
                         </span>
                     </span>
                 </button>

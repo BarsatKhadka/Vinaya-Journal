@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type SidebarOption = 'Contextual RAG Memory' | 'Mood Insights' | 'Vinaya Ollama AI' | 'Retrieve Past Entries';
+type SidebarOption = 'Contextual RAG Memory' | 'Mood Insights' | 'Vinaya Ollama AI' | 'Retrieve Past Entries' | 'Reflection';
 // Example: global UI state for sidebar selection
 interface AppState {
   selectedSidebar: SidebarOption;
