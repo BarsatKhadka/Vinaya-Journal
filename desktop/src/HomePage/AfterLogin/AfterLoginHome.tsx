@@ -6,6 +6,7 @@ import { ContextualRAG } from "./RightSide/SideBarComponents/ContextualRAG/Conte
 import { MoodInsights } from "./RightSide/SideBarComponents/MoodInsights/MoodInsights";
 import { VInayaOllamaAI } from "./RightSide/SideBarComponents/VinayaOllamaAI/VInayaOllamaAI";
 import { RetrievePastEntries } from "./RightSide/SideBarComponents/RetrievePastEntries";
+import { Reflection } from "./RightSide/SideBarComponents/Reflection/Reflection";
 
 export const AfterLoginHome = () => {
     const { selectedSidebar } = useAppStore();
@@ -22,6 +23,7 @@ export const AfterLoginHome = () => {
                         {selectedSidebar === 'Mood Insights' && <MoodInsights />}
                         {selectedSidebar === 'Vinaya Ollama AI' && <VInayaOllamaAI />}
                         {selectedSidebar === 'Retrieve Past Entries' && <RetrievePastEntries/>}
+                        {selectedSidebar === 'Reflection' && <Reflection />}
                     </div>
                 </div>
             </div>
